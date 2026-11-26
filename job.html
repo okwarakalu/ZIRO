@@ -1,36 +1,71 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ZIRO - Job Details</title><link rel="stylesheet" href="css/style.css"></head>
-<body>
-<div style="background:var(--green); padding:20px 16px; border-radius:0 0 20px 20px; color:white;">
-<div onclick="window.location.href='index.html'" style="font-size:14px;">← Back to Home</div>
-<h2 style="margin:12px 0 4px;">Job Details</h2><p style="margin:0; color:var(--gold); font-size:13px;">Review before you accept.</p></div>
-<div style="padding:16px; padding-bottom:120px;"><div id="jobDetail" style="background:white; border-radius:16px; padding:18px;"></div>
-<div style="background:white; border-radius:16px; padding:16px; margin-top:12px;"><button class="btn-primary" onclick="acceptThisJob()">Accept This Job</button>
-<button class="btn-secondary" style="margin-top:8px;" onclick="window.location.href='chat.html'">Message Customer</button>
-<p style="font-size:12px; color:var(--muted); text-align:center;">ZIRO does NOT hold job money.<br>You pay / get paid directly after work.</p></div></div>
-<div style="position:fixed; bottom:0; left:0; right:0; background:white; border-top:1px solid #eee; display:flex; justify-content:space-around; padding:10px 0; font-size:11px; text-align:center;"><span onclick="window.location.href='index.html'">🏠<br>Home</span><span onclick="window.location.href='index.html'">🔍<br>Search</span><span onclick="window.location.href='post.html'" style="background:var(--gold); width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:900; margin-top:-24px;">+</span><span onclick="window.location.href='chat.html'">💬<br>Chat</span><span onclick="window.location.href='office.html'">👤<br>My Office</span></div>
-<script src="js/notify.js"></script><script>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>ZIRO - Job Details</title>
+<link rel="stylesheet" href="css/style.css">
+<style>html,body{overflow-x:hidden;} *{box-sizing:border-box;}</style>
+</head>
+<body style="background:#F2F4F2; margin:0;">
+<div style="background:linear-gradient(180deg,#0B6E4F 0%, #0B3D2E 100%); padding:20px 16px; border-radius:0 0 22px 22px; color:white;">
+  <div onclick="window.location.href='index.html'" style="font-size:14px;">← Back to Home</div>
+  <h2 style="margin:12px 0 4px; color:white;">Job Details</h2>
+  <p style="margin:0; color:#F2C94C; font-size:13px;">Review before you accept.</p>
+</div>
+<div style="padding:16px; padding-bottom:110px;">
+  <div id="jobDetail" style="background:white; border-radius:16px; padding:18px; box-shadow:0 1px 4px rgba(0,0,0,0.06);"></div>
+  <div style="background:white; border-radius:16px; padding:16px; margin-top:12px; box-shadow:0 1px 4px rgba(0,0,0,0.06);">
+    <button id="acceptBtn" class="btn-primary" onclick="acceptThisJob()">Accept This Job</button>
+    <button class="btn-secondary" style="margin-top:8px;" onclick="goToChat()">Message Customer</button>
+    <p style="font-size:12px; color:var(--muted); text-align:center; margin:10px 0 0;">ZIRO does NOT hold job money.<br>You pay / get paid directly after work.</p>
+  </div>
+</div>
+<div style="position:fixed; bottom:0; left:0; right:0; background:white; border-top:1px solid #eee; display:flex; justify-content:space-around; padding:10px 0 calc(10px + env(safe-area-inset-bottom)); font-size:11px; text-align:center; z-index:20;"><span onclick="window.location.href='index.html'">🏠<br>Home</span><span onclick="window.location.href='index.html'">🔍<br>Search</span><span onclick="window.location.href='post.html'" style="background:var(--gold); width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:900; margin-top:-24px; box-shadow:0 4px 10px rgba(0,0,0,0.25);">+</span><span onclick="window.location.href='chat.html'">💬<br>Chat</span><span onclick="window.location.href='office.html'">👤<br>My Office</span></div>
+<script src="js/notify.js"></script>
+<script>
 let currentJob = null;
+let currentId = null;
 function loadJob(){
-  const id = new URLSearchParams(window.location.search).get('id');
+  currentId = new URLSearchParams(window.location.search).get('id');
   const jobs = JSON.parse(localStorage.getItem('ziro_jobs') || '[]');
-  currentJob = jobs[Number(id)] || jobs[jobs.length-1];
+  currentJob = jobs[Number(currentId)] || jobs[jobs.length-1];
   if(!currentJob){ document.getElementById('jobDetail').innerHTML = '<p>Job not found.</p>'; return; }
-  document.getElementById('jobDetail').innerHTML = '<span style="background:#FFF8E1; border:1px solid var(--gold); padding:4px 10px; border-radius:999px; font-size:12px; font-weight:700;">OPEN • ' + currentJob.skill + '</span>'
+  const accepted = localStorage.getItem('ziro_accepted_' + currentId) === 'yes';
+  document.getElementById('jobDetail').innerHTML = '<span style="background:#FFF8E1; border:1px solid var(--gold); padding:4px 10px; border-radius:999px; font-size:12px; font-weight:700;">' + (accepted ? 'ACCEPTED • ' : 'OPEN • ') + currentJob.skill + '</span>'
     + '<h3 style="margin:12px 0 6px;">' + currentJob.skill + ' needed</h3>'
-    + '<p style="font-size:14px; color:#333; line-height:1.5;">' + currentJob.desc + '</p>'
+    + '<p style="font-size:14px; color:#333; line-height:1.5; word-break:break-word;">' + currentJob.desc + '</p>'
     + '<hr style="border:none; border-top:1px solid #eee; margin:14px 0;">'
     + '<p style="font-size:14px; margin:6px 0;">📍 <b>Location:</b> ' + currentJob.city + '</p>'
     + '<p style="font-size:14px; margin:6px 0;">💰 <b>Budget:</b> ₦' + Number(currentJob.budget).toLocaleString() + '</p>'
     + '<p style="font-size:14px; margin:6px 0;">👤 <b>Posted by:</b> ' + (currentJob.name || 'Customer') + '</p>'
-    + '<p style="font-size:13px; color:var(--muted);">Posted: Just now • Status: Open</p>';
+    + '<p style="font-size:13px; color:var(--muted);">Posted: Just now • Status: ' + (accepted ? 'Accepted by you' : 'Open') + '</p>'
+    + (accepted ? '<p style="margin:12px 0 0;"><b style="color:var(--success);">✓ You accepted this job</b></p>' : '');
+  if(accepted){
+    const btn = document.getElementById('acceptBtn');
+    btn.textContent = '✓ Job Accepted';
+    btn.style.opacity = '0.5';
+    btn.onclick = function(){ ziroNotify('Already Accepted', 'You already accepted this job.<br>Message the customer in Chat to agree time.'); };
+  }
 }
 function acceptThisJob(){
   if(!currentJob) return;
+  if(localStorage.getItem('ziro_accepted_' + currentId) === 'yes'){ ziroNotify('Already Accepted', 'You already accepted this job.'); return; }
   ziroConfirm('Accept This Job?', currentJob.skill + ' in ' + currentJob.city + ' for ₦' + Number(currentJob.budget).toLocaleString() + '.<br><br>Customer will be notified.', function(){
+    localStorage.setItem('ziro_accepted_' + currentId, 'yes');
+    loadJob();
     ziroNotify('Job Accepted', 'You have accepted the ' + currentJob.skill + ' job.<br>Please message the customer in Chat to agree time.', 'Go to Chat');
-    document.querySelector('#jobDetail').insertAdjacentHTML('beforeend', '<p style="margin-top:12px;"><b style="color:var(--success);">✓ You accepted this job</b></p>');
+    const oldBtn = document.querySelector('#ziroModal button');
+    if(oldBtn) oldBtn.onclick = function(){ closeZiroModal(); goToChat(); };
   });
 }
+function goToChat(){
+  const raw = currentJob && currentJob.name ? currentJob.name : 'Udoka';
+  const name = raw.split('/')[0].split('-')[0].trim() || 'Udoka';
+  localStorage.setItem('ziro_chat_with', name);
+  window.location.href = 'chat-room.html?with=' + encodeURIComponent(name);
+}
 document.addEventListener('DOMContentLoaded', loadJob);
-</script></body></html>
+</script>
+</body>
+</html>
