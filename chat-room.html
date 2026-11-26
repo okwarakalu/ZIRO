@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZIRO - Chat Room</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background:#ECE5DD; margin:0; display:flex; flex-direction:column; height:100dvh;">
+<!-- WhatsApp Header -->
+<div style="background:var(--green); color:white; padding:10px 12px; display:flex; align-items:center; gap:10px; position:sticky; top:0; z-index:10;">
+  <span onclick="window.location.href='chat.html'" style="font-size:22px;">←</span>
+  <div id="avatar" style="width:38px; height:38px; background:white; color:var(--green); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800;">M</div>
+  <div style="flex:1; min-width:0;"><b id="chatName" style="font-size:15px; display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Musa A.</b><span style="font-size:11px; color:#D6EDE3;">Online • Plumber</span></div>
+  <button onclick="startVideoCall()" style="background:none; border:none; font-size:22px;">📹</button>
+  <button onclick="startVoiceCall()" style="background:none; border:none; font-size:22px;">📞</button>
+</div>
+<!-- Messages -->
+<div id="msgs" style="flex:1; overflow-y:auto; padding:12px; display:flex; flex-direction:column; gap:8px;"></div>
+<!-- Input Bar - WhatsApp Style -->
+<div style="background:white; padding:8px; display:flex; gap:8px; align-items:center;">
+  <button onclick="document.getElementById('fileInput').click()" style="background:none; border:none; font-size:22px;">📎</button>
+  <input type="file" id="fileInput" hidden onchange="sendFile(this)">
+  <input id="msgInput" placeholder="Message..." onkeyup="if(event.key==='Enter') sendText()" style="flex:1; border:none; background:#F0F2F5; padding:11px 14px; border-radius:999px; font-size:14px; outline:none;">
+  <button id="micBtn" onmousedown="startRec(event)" onmouseup="stopRec(event)" ontouchstart="startRec(event)" ontouchend="stopRec(event)" style="background:var(--green); color:white; border:none; width:42px; height:42px; min-width:42px; border-radius:50%; font-size:18px;">🎙️</button>
+  <button onclick="sendText()" style="background:var(--green); color:white; border:none; width:42px; height:42px; min-width:42px; border-radius:50%; font-size:18px;">➤</button>
+</div>
+<p style="text-align:center; font-size:11px; color:#666; margin:0; padding:4px; background:#FFF3CD;">🔒 Messages are private. Never send job money in chat. Pay after work.</p>
+<script src="js/notify.js"></script>
+<script>
+let withName = new URLSearchParams(location.search).get('with') || localStorage.getItem('ziro_chat_with') || 'Musa A.';
+document.getElementById('chatName').textContent = withName;
+document.getElementById('avatar').textContent = withName[0];
+let messages = JSON.parse(localStorage.getItem('ziro_room_' + withName) || '[]');
+if(!messages.length){
+  messages = [
+    { me:false, type:'text', text:'Hello, I can fix your tap today. Are you in Wuse 2?', time:'12:19' },
+    { me:true, type:'text', text:'Yes, I am in Wuse 2. How much for today?', time:'12:20' },
+    { me:false, type:'text', text:'₦8,000. I can come by 2pm. Is that okay?', time:'12:21' },
+  ];
+}
+function timeNow(){ const d=new Date(); return d.getHours()+':'+String(d.getMinutes()).padStart(2,'0'); }
+function renderMsgs(){
+  const box = document.getElementById('msgs');
+  box.innerHTML = '<div style="align-self:center; background:#FFF3CD; padding:6px 12px; border-radius:8px; font-size:11px; color:#666; text-align:center;">🔒 Messages are end-to-end encrypted<br>Today</div>'
+    + messages.map(m => {
+    if(m.type === 'voice') return '<div style="align-self:' + (m.me?'flex-end':'flex-start') + '; background:' + (m.me?'#D9FDD3':'white') + '; border-radius:12px; padding:10px 12px; max-width:80%;"><span style="font-size:13px;">🎙️ Voice message • ' + (m.dur||'0:07') + '</span><audio controls src="' + m.src + '" style="display:block; width:200px; margin-top:6px;"></audio><span style="font-size:10px; color:#888; float:right;">' + m.time + ' ✓✓</span></div>';
+    if(m.type === 'file') return '<div style="align-self:' + (m.me?'flex-end':'flex-start') + '; background:' + (m.me?'#D9FDD3':'white') + '; border-radius:12px; padding:10px 12px; max-width:80%;"><span style="font-size:13px;">📎 ' + m.text + '</span><span style="font-size:10px; color:#888; display:block; text-align:right;">' + m.time + ' ✓✓</span></div>';
+    return '<div style="align-self:' + (m.me?'flex-end':'flex-start') + '; background:' + (m.me?'#D9FDD3':'white') + '; border-radius:12px; padding:8px 12px; max-width:80%; font-size:14px; line-height:1.4;">' + m.text + '<span style="font-size:10px; color:#888; float:right; margin-left:8px; margin-top:6px;">' + m.time + ' ✓✓</span></div>';
+  }).join('');
+  box.scrollTop = box.scrollHeight;
+}
+function save(){ localStorage.setItem('ziro_room_' + withName, JSON.stringify(messages)); }
+function sendText(){
+  const inp = document.getElementById('msgInput');
+  const txt = inp.value.trim(); if(!txt) return;
+  messages.push({ me:true, type:'text', text:txt, time:timeNow() }); inp.value=''; save(); renderMsgs();
+  setTimeout(()=>{ messages.push({ me:false, type:'text', text:'Okay, noted. I will confirm the time.', time:timeNow() }); save(); renderMsgs(); }, 1200);
+}
+function sendFile(el){
+  const f = el.files[0]; if(!f) return;
+  messages.push({ me:true, type:'file', text:f.name, time:timeNow() }); save(); renderMsgs();
+}
+let recorder=null, chunks=[], recStart=0;
+async function startRec(e){ e.preventDefault(); try{
+  const stream = await navigator.mediaDevices.getUserMedia({ audio:true });
+  recorder = new MediaRecorder(stream); chunks=[]; recStart=Date.now();
+  recorder.ondataavailable = ev => chunks.push(ev.data);
+  recorder.onstop = ()=>{
+    const blob = new Blob(chunks, { type:'audio/webm' });
+    const url = URL.createObjectURL(blob);
+    const dur = Math.max(1, Math.round((Date.now()-recStart)/1000));
+    messages.push({ me:true, type:'voice', src:url, dur:'0:'+String(dur).padStart(2,'0'), time:timeNow() }); save(); renderMsgs();
+    stream.getTracks().forEach(t=>t.stop());
+  };
+  recorder.start();
+  document.getElementById('micBtn').textContent='🔴';
+  ziroNotify('Recording...', 'Hold to record voice message.<br>Release mic button to send.');
+} catch(err){ ziroNotify('Microphone', 'Please allow microphone permission to send voice message.'); } }
+function stopRec(e){ e.preventDefault(); if(recorder && recorder.state==='recording'){ recorder.stop(); document.getElementById('micBtn').textContent='🎙️'; closeZiroModal(); } }
+function startVideoCall(){ ziroConfirm('Video Call?', 'Start video call with ' + withName + '?<br><br>(Demo) In real app, video will open here.', ()=>{ ziroNotify('Video Call', 'Connecting video call to ' + withName + '...<br>(Demo) Video will start here in real app.'); }); }
+function startVoiceCall(){ ziroConfirm('Voice Call?', 'Call ' + withName + '?', ()=>{ ziroNotify('Calling...', 'Calling ' + withName + '...<br>(Demo) Voice call will start here.'); }); }
+document.addEventListener('DOMContentLoaded', renderMsgs);
+</script>
+</body>
+</html>
