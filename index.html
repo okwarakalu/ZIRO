@@ -45,7 +45,7 @@
     <div class="worker-card" data-search="blessing gardener lekki lagos garden" style="background:white; border-radius:16px; padding:16px;"><h3 style="margin:10px 0 4px;">Blessing I. ✓ Verified</h3><p style="margin:0; color:var(--muted); font-size:13px;">Gardener • Lekki, Lagos</p><p style="font-size:13px;">⭐ 4.7 • Available Now • ₦4,500 / job</p><button class="btn-primary" onclick="hireNow('Blessing I.')">Hire Now</button><button class="btn-secondary" style="margin-top:8px;" onclick="unlockContact()">Unlock Contact • 5 iCoin</button></div>
   </div>
   <div id="noResult" style="display:none; background:white; border-radius:16px; padding:20px; text-align:center; margin-top:12px;"><b>No worker found 😔</b><p style="font-size:13px; color:var(--muted);">Try another skill or city.<br>Or Post a Job and workers will find you.</p><button class="btn-primary" onclick="openPost()">Post a Job • FREE</button></div>
-  <h3 style="margin-top:24px;">📝 Recent Jobs Posted</h3>
+  <h3 style="margin-top:24px;">📝 Recent Jobs</h3>
   <div id="homeJobList" style="display:flex; flex-direction:column; gap:12px;"></div>
   <button class="btn-sos" style="margin-top:16px;" onclick="sosEmergency()">! SOS • Emergency</button>
   <p style="text-align:center; font-size:12px; color:var(--muted);">ZIRO does NOT hold job money. You pay workers directly.<br>Terms • Privacy • iCoin Policy • Refund Policy</p>
@@ -55,6 +55,7 @@
 <div id="chioma-box" style="display:none; position:fixed; bottom:150px; right:16px; left:16px; background:white; border-radius:16px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,0.2); z-index:60;"><b>CHIOMA 🤖</b><div id="chioma-chat"><p style="font-size:13px; color:var(--muted);">Hello! I can show you how to Boost, Buy iCoin, Post a Job, or Accept an Errand.</p></div><div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;"><button onclick="setChiomaLang('English')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">English</button><button onclick="setChiomaLang('Hausa')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Hausa</button><button onclick="setChiomaLang('Yoruba')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Yoruba</button><button onclick="setChiomaLang('Igbo')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Igbo</button><button onclick="setChiomaLang('Pidgin')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Pidgin</button></div><input id="chiomaInput" placeholder="Ask CHIOMA... she understands slang" onkeyup="if(event.key==='Enter') chiomaAsk(this.value)" style="width:100%; box-sizing:border-box; padding:10px; border-radius:12px; border:1px solid #ddd; margin-top:8px;"><button class="btn-primary" onclick="chiomaHelp('boost')" style="margin-top:8px;">How to Boost</button><button class="btn-secondary" onclick="chiomaHelp('icoin')" style="margin-top:8px;">How to Buy iCoin</button><button onclick="toggleChioma()" style="width:100%; margin-top:8px; border:none; background:none;">Close</button></div>
 <script src="js/chioma.js"></script>
 <script src="js/app.js"></script>
+<script src="js/notify.js"></script>
 <script src="js/office.js"></script>
 <script>
 function loadHomeJobs(){
@@ -62,9 +63,12 @@ function loadHomeJobs(){
   if(!list) return;
   const jobs = JSON.parse(localStorage.getItem('ziro_jobs') || '[]');
   if(!jobs.length){ list.innerHTML = '<p style="font-size:13px; color:var(--muted); text-align:center;">No jobs posted yet. Tap + to post the first job.</p>'; return; }
-  list.innerHTML = jobs.slice().reverse().slice(0,5).map(j => '<div style="background:white; border-radius:16px; padding:16px;"><b>' + j.skill + ' needed</b><p style="margin:6px 0; font-size:13px; color:var(--muted);">' + j.desc + '</p><p style="margin:0; font-size:13px;">📍 ' + j.city + ' • 💰 ₦' + Number(j.budget).toLocaleString() + '</p><button class="btn-primary" style="margin-top:10px;" onclick="window.location.href=\'post.html\'">View & Accept Job</button></div>').join('');
+  list.innerHTML = jobs.slice().reverse().map((j, idx) => {
+    const realIdx = jobs.length - 1 - idx;
+    return '<div style="background:white; border-radius:16px; padding:16px;"><b>' + j.skill + ' needed</b><p style="margin:6px 0; font-size:13px; color:var(--muted);">' + j.desc + '</p><p style="margin:0; font-size:13px;">📍 ' + j.city + ' • 💰 ₦' + Number(j.budget).toLocaleString() + '</p><button class="btn-primary" style="margin-top:10px;" onclick="window.location.href=\'job.html?id=' + realIdx + '\'">View Job Details</button></div>';
+  }).slice(0,5).join('');
 }
 document.addEventListener('DOMContentLoaded', loadHomeJobs);
 </script>
 </body>
-                                                                                                                                                             </html>
+                                                                                                                                              </html>
