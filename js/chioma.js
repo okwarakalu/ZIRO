@@ -13,7 +13,6 @@ function setChiomaLang(lang){
 }
 
 function translateChioma(text){
-  // Simple translator - key phrases
   const dict = {
     'Hausa': {
       'Hello! I can show you how to Boost, Buy iCoin, Post a Job, or Accept an Errand.': 'Sannu! Zan iya nuna maka yadda ake Boost, sayen iCoin, saka Aiki, ko karban Errand.',
@@ -47,17 +46,14 @@ function chiomaHelp(topic){
   if(topic === 'boost') reply = 'To Boost: Go to My Office > Boost My Skill. 1 Boost = 1 Skill. Choose 24h, 48h or 1 Week.';
   if(topic === 'icoin') reply = 'To Buy iCoin: Tap Buy iCoin. Pay with Paystack. iCoin shows instantly. ZIRO does NOT hold job money.';
   if(topic === 'post') reply = 'To Post: Tap + button. Choose Job or Errand. Fill Title, Location, Price. Tap Publish.';
-  // Understand slang, reply clean
   const clean = translateChioma(reply);
   chat.innerHTML += '<p style="font-size:13px;"><b>CHIOMA:</b> ' + clean + '</p>';
-  // Voice reply - CHIOMA speaks
   if('speechSynthesis' in window){
     const u = new SpeechSynthesisUtterance(reply);
     window.speechSynthesis.speak(u);
   }
 }
 
-// CHIOMA understands slang - clean reply, no slang
 function chiomaAsk(text){
   const t = text.toLowerCase();
   let reply = 'I can help you with Boost, iCoin, Post a Job, or Errand. What do you need?';
