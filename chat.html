@@ -10,55 +10,45 @@
 <div style="background:var(--green); padding:20px 16px; border-radius:0 0 20px 20px; color:white;">
   <div onclick="window.location.href='index.html'" style="font-size:14px;">← Back to Home</div>
   <h2 style="margin:12px 0 4px;">Chat 💬</h2>
-  <p style="margin:0; color:var(--gold); font-size:13px;">Talk to worker. Agree price. Pay directly.</p>
+  <p style="margin:0; color:var(--gold); font-size:13px;">Talk to worker before you hire.</p>
 </div>
 <div style="padding:16px; padding-bottom:120px;">
-  <div style="background:white; border-radius:16px; padding:12px; display:flex; gap:10px; align-items:center;">
-    <div style="width:44px; height:44px; border-radius:50%; background:var(--gold); display:flex; align-items:center; justify-content:center; font-weight:900;">M</div>
-    <div><b>Musa A. • Plumber</b><br><small style="color:var(--success);">● Available Now • Wuse 2</small></div>
-    <button onclick="unlockContact()" style="margin-left:auto; background:var(--green); color:white; border:none; padding:8px 10px; border-radius:999px; font-size:12px;">Unlock • 5 iCoin</button>
+  <div id="chatList" style="display:flex; flex-direction:column; gap:12px;"></div>
+  <div style="background:white; border-radius:16px; padding:16px; margin-top:12px;">
+    <label style="font-size:13px; font-weight:700;">Send a message</label>
+    <select id="cTo" style="width:100%; padding:12px; border-radius:12px; border:1px solid #ddd; margin:8px 0;">
+      <option>Musa A. - Plumber</option><option>Ada O. - Cleaner</option><option>Tunde B. - Electrician</option><option>Chidi N. - Driver</option>
+    </select>
+    <input id="cMsg" placeholder="Type message e.g. How much for today?" style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:1px solid #ddd; margin-bottom:10px;">
+    <button class="btn-primary" onclick="sendMsg()">Send Message</button>
+    <p style="font-size:12px; color:var(--muted); text-align:center;">Never send job money in chat. Pay worker directly after work.</p>
   </div>
-  <div id="chatList" style="margin-top:14px; display:flex; flex-direction:column; gap:8px;">
-    <div style="background:white; padding:10px 12px; border-radius:12px; max-width:80%; font-size:14px;">Hello, I need a plumber in Wuse 2. Can you fix leaking tap today?</div>
-    <div style="background:var(--green); color:white; padding:10px 12px; border-radius:12px; max-width:80%; align-self:flex-end; font-size:14px;">Yes, I can come today. ₦8,000. When?</div>
-  </div>
-  <div style="display:flex; gap:8px; margin-top:14px; flex-wrap:wrap;">
-    <input id="chatInput" placeholder="Type message..." onkeyup="if(event.key==='Enter') sendChat()" style="flex:1; min-width:160px; padding:12px; border-radius:999px; border:1px solid #ddd;">
-    <button class="btn-primary" onclick="sendChat()" style="width:70px;">Send</button>
-    <button id="voiceBtn" onclick="toggleVoice()" style="background:var(--gold); border:none; padding:12px; border-radius:999px; font-weight:700;">🎤 Voice</button>
-    <button onclick="translateChat()" style="background:white; border:1px solid #ddd; padding:12px; border-radius:999px; font-weight:700;">🌍 Translate</button>
-  </div>
-  <div style="display:flex; gap:8px; margin-top:10px;">
-    <button class="btn-secondary" onclick="quickChat('What is your price?')">What is price?</button>
-    <button class="btn-secondary" onclick="quickChat('Are you available now?')">Available now?</button>
-  </div>
-  <button class="btn-sos" style="margin-top:14px;" onclick="sosEmergency()">! SOS • Emergency</button>
+  <button class="btn-sos" style="margin-top:12px;" onclick="sosEmergency()">! SOS • Emergency</button>
 </div>
-<div style="position:fixed; bottom:0; left:0; right:0; background:white; border-top:1px solid #eee; display:flex; justify-content:space-around; padding:10px 0; font-size:11px; text-align:center;">
-  <span onclick="window.location.href='index.html'">🏠<br>Home</span>
-  <span onclick="window.location.href='index.html'">🔍<br>Search</span>
-  <span onclick="window.location.href='post.html'" style="background:var(--gold); width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:900; margin-top:-24px;">+</span>
-  <span><b>💬<br>Chat</b></span>
-  <span onclick="window.location.href='office.html'">👤<br>My Office</span>
-</div>
-<button class="chioma-float" onclick="toggleChioma()">◉ CHIOMA</button>
-<div id="chioma-box" style="display:none; position:fixed; bottom:150px; right:16px; left:16px; background:white; border-radius:16px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,0.2); z-index:60;">
-  <b>CHIOMA 🤖</b>
-  <div id="chioma-chat"><p style="font-size:13px; color:var(--muted);">Hello! I can show you how to Boost, Buy iCoin, Post a Job, or Accept an Errand.</p></div>
-  <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;">
-    <button onclick="setChiomaLang('English')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">English</button>
-    <button onclick="setChiomaLang('Hausa')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Hausa</button>
-    <button onclick="setChiomaLang('Yoruba')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Yoruba</button>
-    <button onclick="setChiomaLang('Igbo')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Igbo</button>
-    <button onclick="setChiomaLang('Pidgin')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Pidgin</button>
-  </div>
-  <input id="chiomaInput" placeholder="Ask CHIOMA... she understands slang" onkeyup="if(event.key==='Enter') chiomaAsk(this.value)" style="width:100%; box-sizing:border-box; padding:10px; border-radius:12px; border:1px solid #ddd; margin-top:8px;">
-  <button class="btn-primary" onclick="chiomaHelp('boost')" style="margin-top:8px;">How to Boost</button>
-  <button class="btn-secondary" onclick="chiomaHelp('icoin')" style="margin-top:8px;">How to Buy iCoin</button>
-  <button onclick="toggleChioma()" style="width:100%; margin-top:8px; border:none; background:none;">Close</button>
-</div>
-<script src="js/chioma.js"></script>
+<div style="position:fixed; bottom:0; left:0; right:0; background:white; border-top:1px solid #eee; display:flex; justify-content:space-around; padding:10px 0; font-size:11px; text-align:center;"><span onclick="window.location.href='index.html'">🏠<br>Home</span><span onclick="window.location.href='index.html'">🔍<br>Search</span><span onclick="window.location.href='post.html'" style="background:var(--gold); width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:900; margin-top:-24px;">+</span><span><b>💬<br>Chat</b></span><span onclick="window.location.href='office.html'">👤<br>My Office</span></div>
 <script src="js/app.js"></script>
-<script src="js/chat.js"></script>
+<script>
+function loadChat(){
+  const list = document.getElementById('chatList');
+  const msgs = JSON.parse(localStorage.getItem('ziro_chat') || '[]');
+  if(!msgs.length){
+    list.innerHTML = '<div style="background:white; border-radius:16px; padding:16px; text-align:center;"><b>Musa A. - Plumber</b><p style="font-size:13px; color:var(--muted); margin:6px 0 0;">Hello, I can fix your tap today. Are you in Wuse 2?</p></div>';
+    return;
+  }
+  list.innerHTML = msgs.map(m => '<div style="background:white; border-radius:16px; padding:16px;"><b>' + m.to + '</b><p style="font-size:13px; margin:6px 0 0;">' + m.msg + '</p><p style="font-size:11px; color:var(--muted); margin:4px 0 0;">You • Just now</p></div>').join('');
+}
+function sendMsg(){
+  const to = document.getElementById('cTo').value;
+  const msg = document.getElementById('cMsg').value.trim();
+  if(!msg){ alert('Type a message first.'); return; }
+  const msgs = JSON.parse(localStorage.getItem('ziro_chat') || '[]');
+  msgs.push({ to, msg });
+  localStorage.setItem('ziro_chat', JSON.stringify(msgs));
+  document.getElementById('cMsg').value = '';
+  loadChat();
+  alert('Message sent to ' + to + ' ✅\n\n(DEMO) In real app, worker will reply here.');
+}
+document.addEventListener('DOMContentLoaded', loadChat);
+</script>
 </body>
 </html>
