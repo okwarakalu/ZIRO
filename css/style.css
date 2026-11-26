@@ -1,18 +1,93 @@
-/* ZIRO V8 - DESIGN KIT LOCK - DO NOT DELETE */
+/* ZIRO - Main Style - Clean Professional */
 :root{
-  --bg:#F7F7F5;
-  --green:#0A3D2A;
-  --gold:#FFC007;
-  --card:#FFFFFF;
-  --text:#111111;
-  --muted:#666666;
-  --success:#2E7D32;
-  --danger:#D22626;
+  --green:#0B6E4F;
+  --gold:#F2C94C;
+  --text:#1A1A1A;
+  --muted:#777777;
+  --success:#0B6E4F;
+  --danger:#D32F2F;
+  --bg:#F4F4F4;
 }
-body{ background:var(--bg); color:var(--text); font-family: system-ui, sans-serif; margin:0; }
-.btn-primary{ background:var(--green); color:white; border-radius:12px; font-weight:700; padding:12px 16px; width:100%; border:none; }
-.btn-secondary{ background:white; color:#8A6D00; border:1.5px solid var(--gold); border-radius:12px; font-weight:700; padding:12px 16px; width:100%; }
-.btn-sos{ background:var(--danger); color:white; border-radius:12px; font-weight:700; padding:12px 16px; width:100%; border:none; }
-/* CHIOMA = ONLY FLOATING BUTTON */
-.chioma-float{ position:fixed; bottom:90px; right:16px; z-index:50; background:var(--green); color:white; border-radius:999px; padding:10px 16px; font-weight:800; box-shadow:0 8px 20px rgba(0,0,0,0.2); border:none; }
-/* SOS IS INLINE - NEVER FLOATING */
+*{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+body{
+  margin:0;
+  padding:0;
+  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  font-size:15px;
+}
+h2,h3{ color:var(--text); }
+input,select,textarea{
+  font-family:inherit;
+  font-size:14px;
+  outline:none;
+}
+input:focus,select:focus,textarea:focus{
+  border-color:var(--green) !important;
+}
+button{ font-family:inherit; cursor:pointer; }
+button:active{ opacity:0.85; transform:scale(0.98); }
+
+/* Buttons - Clean */
+.btn-primary{
+  display:block;
+  width:100%;
+  background:var(--green);
+  color:white;
+  border:none;
+  padding:13px;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:700;
+}
+.btn-secondary{
+  display:block;
+  width:100%;
+  background:white;
+  color:var(--text);
+  border:1px solid #DDDDDD;
+  padding:13px;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:700;
+}
+.btn-sos{
+  display:block;
+  width:100%;
+  background:var(--danger);
+  color:white;
+  border:none;
+  padding:13px;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:700;
+}
+.filter-btn{
+  font-size:13px;
+  font-weight:600;
+}
+
+/* Worker Cards */
+.worker-card{
+  background:white;
+  border-radius:16px;
+  padding:16px;
+}
+.worker-card h3{ margin:10px 0 4px; }
+
+/* CHIOMA - Clean, no overlap */
+.chioma-float{
+  position:fixed;
+  bottom:84px;
+  right:12px;
+  z-index:50;
+  background:var(--green);
+  color:white;
+  border:none;
+  padding:10px 14px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:700;
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
+}
