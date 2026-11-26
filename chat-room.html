@@ -5,44 +5,67 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>ZIRO - Chat</title>
 <link rel="stylesheet" href="css/style.css">
-<style>html,body{height:100%; overflow:hidden;} *{box-sizing:border-box;}</style>
+<style>
+html,body{height:100%; overflow:hidden;} *{box-sizing:border-box;}
+/* ZIRO Watermark Background - Beautified */
+.ziro-bg{
+  background-color:#0B3D2E;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(242,201,76,0.14) 0, transparent 32%),
+    radial-gradient(circle at 85% 70%, rgba(255,255,255,0.10) 0, transparent 35%),
+    repeating-linear-gradient(115deg, transparent 0 90px, rgba(255,255,255,0.03) 90px 91px);
+}
+.ziro-watermark{
+  position:absolute; inset:0; display:flex; flex-wrap:wrap; align-content:space-around; justify-content:space-around;
+  overflow:hidden; pointer-events:none; opacity:0.10; font-weight:900; color:white; font-size:42px; letter-spacing:2px;
+}
+.ziro-watermark span{ transform:rotate(-18deg); padding:10px 22px; border:1px solid white; border-radius:14px; }
+</style>
 </head>
 <body style="background:#0B3D2E; margin:0; display:flex; flex-direction:column; height:100dvh; width:100%; overflow:hidden;">
-<!-- Header - Fitted -->
-<div style="background:white; padding:10px 12px; padding-top:calc(10px + env(safe-area-inset-top)); display:flex; align-items:center; gap:10px; flex-shrink:0;">
-  <button onclick="window.location.href='chat.html'" style="background:#0B6E4F; color:white; border:none; width:38px; height:38px; min-width:38px; border-radius:50%; font-size:18px;">←</button>
-  <div id="avatar" style="width:40px; height:40px; min-width:40px; background:#F2C94C; color:#0B3D2E; border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:18px;">M</div>
-  <div style="flex:1; min-width:0;"><b id="chatName" style="font-size:15px; display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Musa A.</b><span style="font-size:12px; color:#0B6E4F;">● Available • Plumber</span></div>
-  <button onclick="startVoiceCall()" style="background:#EAF6F0; border:none; padding:9px 12px; border-radius:999px; font-size:13px; font-weight:700; color:#0B6E4F;">Call</button>
-  <button onclick="startVideoCall()" style="background:#0B6E4F; color:white; border:none; padding:9px 12px; border-radius:999px; font-size:13px; font-weight:700;">Video</button>
+<!-- UPPER LAYER - ZIRO Logo + Job + Person -->
+<div style="background:white; padding:10px 12px; padding-top:calc(10px + env(safe-area-inset-top)); flex-shrink:0;">
+  <div style="display:flex; align-items:center; gap:10px;">
+    <button onclick="window.location.href='chat.html'" style="background:#0B6E4F; color:white; border:none; width:38px; height:38px; min-width:38px; border-radius:50%; font-size:18px;">←</button>
+    <!-- ZIRO LOGO -->
+    <div style="background:#0B6E4F; color:white; padding:7px 10px; border-radius:10px; font-weight:900; font-size:15px; letter-spacing:1px; white-space:nowrap;">ZIRO <span style="color:#F2C94C;">●</span></div>
+    <div id="avatar" style="width:40px; height:40px; min-width:40px; background:#F2C94C; color:#0B3D2E; border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:18px;">U</div>
+    <div style="flex:1; min-width:0;"><b id="chatName" style="font-size:15px; display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Udoka</b><span style="font-size:12px; color:#0B6E4F;">● Available • Plumber</span></div>
+    <button onclick="startVoiceCall()" style="background:#EAF6F0; border:none; padding:9px 11px; border-radius:999px; font-size:13px; font-weight:700; color:#0B6E4F;">Call</button>
+    <button onclick="startVideoCall()" style="background:#0B6E4F; color:white; border:none; padding:9px 11px; border-radius:999px; font-size:13px; font-weight:700;">Video</button>
+  </div>
+  <!-- Job Banner - Brick Layer -->
+  <div style="background:#FFF8E1; border:1px solid #F2C94C; border-radius:12px; padding:9px 12px; margin-top:10px; display:flex; justify-content:space-between; align-items:center; gap:8px;">
+    <span style="font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><b>🧱 Job:</b> <span id="jobTag">Brick Layer • ₦12,000 • Apo, Abuja</span></span>
+    <button onclick="window.location.href='job.html'" style="background:#0B6E4F; color:white; border:none; padding:7px 12px; border-radius:999px; font-size:12px; font-weight:700; white-space:nowrap;">View Job</button>
+  </div>
 </div>
-<!-- Job Banner -->
-<div style="background:#FFF8E1; border-bottom:1px solid #F2C94C; padding:9px 12px; display:flex; justify-content:space-between; align-items:center; gap:8px; flex-shrink:0;">
-  <span style="font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><b>Job:</b> <span id="jobTag">Plumber • ₦8,000</span></span>
-  <button onclick="window.location.href='job.html'" style="background:#0B6E4F; color:white; border:none; padding:7px 12px; border-radius:999px; font-size:12px; font-weight:700; white-space:nowrap;">View Job</button>
+<!-- Messages Area - ZIRO Watermark -->
+<div style="position:relative; flex:1; overflow:hidden; display:flex; flex-direction:column;">
+  <div class="ziro-bg" style="position:absolute; inset:0;"></div>
+  <div class="ziro-watermark"><span>ZIRO</span><span>ZIRO</span><span>ZIRO</span><span>ZIRO</span><span>ZIRO</span><span>ZIRO</span><span>ZIRO</span><span>ZIRO</span><span>ZIRO</span></div>
+  <div id="msgs" style="position:relative; flex:1; overflow-y:auto; overflow-x:hidden; padding:12px; display:flex; flex-direction:column; gap:10px;"></div>
 </div>
-<!-- Messages - ZIRO Background, Fitted -->
-<div id="msgs" style="flex:1; overflow-y:auto; overflow-x:hidden; padding:12px; display:flex; flex-direction:column; gap:10px; background:linear-gradient(180deg,#0B3D2E 0%, #0F5A44 40%, #EAF6F0 100%);"></div>
 <!-- Recording Bar -->
 <div id="recBar" style="display:none; background:#D32F2F; color:white; padding:10px 14px; text-align:center; font-size:13px; font-weight:700; flex-shrink:0;">● Recording Voice... <span id="recTime">0:00</span> — Tap STOP to Send</div>
-<!-- Bottom Bar - Fitted, + Button VISIBLE -->
-<div style="background:white; padding:10px 12px calc(10px + env(safe-area-inset-bottom)); flex-shrink:0; border-top:1px solid #eee;">
-  <div style="display:flex; gap:8px; align-items:center; width:100%;">
-    <button onclick="document.getElementById('fileInput').click()" style="background:#0B6E4F; color:white; border:none; width:46px; height:46px; min-width:46px; border-radius:50%; font-size:24px; font-weight:800; box-shadow:0 3px 8px rgba(0,0,0,0.25);">+</button>
+<!-- Bottom Bar - Fitted, No Cut Off -->
+<div style="background:white; padding:10px 10px calc(10px + env(safe-area-inset-bottom)); flex-shrink:0; border-top:1px solid #eee;">
+  <div style="display:flex; gap:6px; align-items:center; width:100%;">
+    <button onclick="document.getElementById('fileInput').click()" style="background:#0B6E4F; color:white; border:none; width:42px; height:42px; min-width:42px; border-radius:50%; font-size:22px; font-weight:800;">+</button>
     <input type="file" id="fileInput" hidden onchange="sendFile(this)">
-    <input id="msgInput" placeholder="Type your message..." onkeyup="if(event.key==='Enter') sendText()" style="flex:1; min-width:0; border:1px solid #ddd; padding:12px 12px; border-radius:12px; font-size:14px; outline:none;">
-    <button id="voiceBtn" onclick="toggleVoice()" style="background:white; border:2px solid #0B6E4F; color:#0B6E4F; padding:0 12px; height:46px; min-width:64px; border-radius:12px; font-size:13px; font-weight:800; white-space:nowrap;">🎙️ Voice</button>
-    <button id="sendBtn" onclick="sendText()" style="background:#F2C94C; color:#0B3D2E; border:none; padding:0 16px; height:46px; min-width:60px; border-radius:12px; font-size:14px; font-weight:800;">Send</button>
+    <input id="msgInput" placeholder="Type message..." onkeyup="if(event.key==='Enter') sendText()" style="flex:1; min-width:0; border:1px solid #ddd; padding:11px 10px; border-radius:12px; font-size:14px; outline:none;">
+    <button id="voiceBtn" onclick="toggleVoice()" style="background:white; border:2px solid #0B6E4F; color:#0B6E4F; padding:0 10px; height:42px; min-width:58px; border-radius:12px; font-size:12px; font-weight:800; white-space:nowrap;">🎙️ Voice</button>
+    <button id="sendBtn" onclick="sendText()" style="background:#F2C94C; color:#0B3D2E; border:none; padding:0 12px; height:42px; min-width:52px; border-radius:12px; font-size:13px; font-weight:800;">Send</button>
   </div>
   <p style="text-align:center; font-size:11px; color:#888; margin:6px 0 0;">ZIRO Chat is private. Never send job money in chat.</p>
 </div>
 <script src="js/notify.js"></script>
 <script>
-let withName = new URLSearchParams(location.search).get('with') || localStorage.getItem('ziro_chat_with') || 'Musa A.';
+let withName = new URLSearchParams(location.search).get('with') || localStorage.getItem('ziro_chat_with') || 'Udoka';
 document.getElementById('chatName').textContent = withName;
 document.getElementById('avatar').textContent = withName[0];
-document.getElementById('jobTag').textContent = withName === 'Udoka' ? 'Brick Layer • ₦12,000' : 'Plumber • ₦8,000';
-let messages = JSON.parse(localStorage.getItem('ziro_room3_' + withName) || '[]');
+document.getElementById('jobTag').textContent = withName === 'Udoka' ? 'Brick Layer • ₦12,000 • Apo, Abuja' : withName + ' • Job';
+let messages = JSON.parse(localStorage.getItem('ziro_room4_' + withName) || '[]');
 if(!messages.length){
   messages = [
     { me:false, type:'text', text:'Hello, I can fix your tap today. Are you in Wuse 2?', time:'12:19' },
@@ -53,18 +76,22 @@ if(!messages.length){
 function timeNow(){ const d=new Date(); return d.getHours()+':'+String(d.getMinutes()).padStart(2,'0'); }
 function renderMsgs(){
   const box = document.getElementById('msgs');
-  box.innerHTML = '<p style="text-align:center; font-size:11px; color:rgba(255,255,255,0.85); background:rgba(0,0,0,0.2); padding:6px 12px; border-radius:999px; margin:0 auto;">Today • Chat started • ZIRO Secure</p>'
+  box.innerHTML = '<p style="text-align:center; font-size:11px; color:white; background:rgba(0,0,0,0.35); padding:6px 12px; border-radius:999px; margin:0 auto;">ZIRO Secure • Today • Chat started</p>'
     + messages.map(m => {
-    const who = m.me ? '<span style="font-size:11px; font-weight:800; color:#0B6E4F;">YOU</span>' : '<span style="font-size:11px; font-weight:800; color:#555;">' + withName.toUpperCase() + '</span>';
-    let inner = '';
-    if(m.type === 'voice') inner = '<div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;"><span>🎙️</span><audio controls src="' + m.src + '" style="width:170px; max-width:100%;"></audio><span style="font-size:12px; color:#555;">' + m.dur + '</span></div>';
-    else if(m.type === 'file') inner = '<span style="font-size:14px;">📎 ' + m.text + '</span>';
-    else inner = '<span style="font-size:14px; line-height:1.5; word-break:break-word;">' + m.text + '</span>';
-    return '<div style="background:white; border-radius:14px; padding:12px; width:100%; box-shadow:0 1px 3px rgba(0,0,0,0.08);">' + who + '<div style="margin-top:4px;">' + inner + '</div><span style="font-size:11px; color:#999; display:block; text-align:right; margin-top:6px;">' + m.time + '</span></div>';
+    // COLOUR DIFFERENCE BETWEEN 2 PARTIES
+    // YOU = Deep Green bubble, white text, right side
+    // THEM = Gold / Cream bubble, dark text, left side
+    if(m.me){
+      const inner = m.type==='voice' ? '<div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;"><span>🎙️</span><audio controls src="'+m.src+'" style="width:160px; max-width:100%;"></audio><span style="font-size:12px;">'+m.dur+'</span></div>' : m.type==='file' ? '<span>📎 '+m.text+'</span>' : '<span style="word-break:break-word;">'+m.text+'</span>';
+      return '<div style="align-self:flex-end; background:#0B6E4F; color:white; border-radius:16px 16px 4px 16px; padding:12px; width:82%; max-width:82%; box-shadow:0 2px 6px rgba(0,0,0,0.2);"><span style="font-size:11px; font-weight:800; color:#F2C94C;">YOU • WORKER</span><div style="margin-top:4px; font-size:14px; line-height:1.5;">'+inner+'</div><span style="font-size:11px; color:#D6EDE3; display:block; text-align:right; margin-top:6px;">'+m.time+' ✓✓</span></div>';
+    } else {
+      const inner = m.type==='voice' ? '<div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;"><span>🎙️</span><audio controls src="'+m.src+'" style="width:160px; max-width:100%;"></audio><span style="font-size:12px;">'+m.dur+'</span></div>' : m.type==='file' ? '<span>📎 '+m.text+'</span>' : '<span style="word-break:break-word;">'+m.text+'</span>';
+      return '<div style="align-self:flex-start; background:#FFF8E1; color:#222; border:1px solid #F2C94C; border-radius:16px 16px 16px 4px; padding:12px; width:82%; max-width:82%; box-shadow:0 2px 6px rgba(0,0,0,0.15);"><span style="font-size:11px; font-weight:800; color:#B77900;">'+withName.toUpperCase()+' • CUSTOMER</span><div style="margin-top:4px; font-size:14px; line-height:1.5;">'+inner+'</div><span style="font-size:11px; color:#888; display:block; text-align:right; margin-top:6px;">'+m.time+'</span></div>';
+    }
   }).join('');
   box.scrollTop = box.scrollHeight;
 }
-function save(){ localStorage.setItem('ziro_room3_' + withName, JSON.stringify(messages)); }
+function save(){ localStorage.setItem('ziro_room4_' + withName, JSON.stringify(messages)); }
 function sendText(){
   if(isRec){ ziroNotify('Voice Recording', 'Tap STOP first to send your voice message.'); return; }
   const inp = document.getElementById('msgInput');
