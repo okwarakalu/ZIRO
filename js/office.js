@@ -1,9 +1,8 @@
-// js/office.js - Boost Custom Days + iCoin - V2
+// js/office.js - Clean Boost - V3
 let myCoin = Number(localStorage.getItem('ziro_coin') || 120);
 function saveCoin(){ localStorage.setItem('ziro_coin', myCoin); }
 function showBalance(){
-  const els = document.querySelectorAll('[data-coin]');
-  els.forEach(e => e.textContent = myCoin + ' iCoin');
+  document.querySelectorAll('[data-coin]').forEach(e => e.textContent = myCoin + ' iCoin');
 }
 function getBoostPrice(days){
   const prices = {1:10, 2:18, 3:25, 4:32, 5:38, 6:44, 7:50, 14:90, 30:160};
@@ -13,20 +12,20 @@ function getBoostPrice(days){
 function updateBoostPrice(){
   const sel = document.getElementById('boostDays');
   const box = document.getElementById('customBoostBox');
-  const label = document.getElementById('boostPriceLabel');
-  if(!sel || !label) return;
+  const btn = document.getElementById('boostBtn');
+  if(!sel || !btn) return;
   let days, cost;
   if(sel.value === 'custom'){
     box.style.display = 'block';
     days = Number(document.getElementById('customDays').value || 0);
-    if(!days){ label.textContent = 'Type days above'; return; }
+    if(!days){ btn.textContent = 'Activate Boost'; return; }
     cost = getBoostPrice(days);
   } else {
     box.style.display = 'none';
     days = Number(sel.value);
     cost = getBoostPrice(days);
   }
-  label.textContent = cost + ' iCoin for ' + days + ' Day' + (days === 1 ? '' : 's');
+  btn.textContent = 'Activate Boost • ' + cost + ' iCoin';
 }
 function buyCustomBoost(){
   const sel = document.getElementById('boostDays');
@@ -38,10 +37,9 @@ function buyCustomBoost(){
   const ok = confirm('Boost ' + days + ' Day' + (days === 1 ? '' : 's') + ' for ' + cost + ' iCoin?');
   if(ok){
     myCoin -= cost; saveCoin(); showBalance();
-    alert('BOOST ACTIVATED ✅\n\n' + days + ' Days Boost ON for Plumber.\nYou now have ' + myCoin + ' iCoin left.\nYou will appear at TOP of Labour Market for ' + days + ' days.');
+    alert('BOOST ACTIVATED ✅\n\n' + days + ' Days Boost ON.\nBalance: ' + myCoin + ' iCoin');
   }
 }
-// Old function kept so nothing breaks
 function buyBoost(period, cost){ buyCustomBoost(); }
 function buyCoin(amount, naira){
   const ok = confirm('Buy ' + amount + ' iCoin for ₦' + naira.toLocaleString() + '?\n\n(DEMO) In real app, Paystack will open here.');
