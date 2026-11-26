@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZIRO - Join as Worker</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div style="background:var(--green); padding:20px 16px; border-radius:0 0 20px 20px; color:white;">
+  <div onclick="window.location.href='index.html'" style="font-size:14px;">← Back to Home</div>
+  <h2 style="margin:12px 0 4px;">Join as Worker 🔧</h2>
+  <p style="margin:0; color:var(--gold); font-size:13px;">Get hired. Get paid directly. No ZIRO cut on job money.</p>
+</div>
+<div style="padding:16px; padding-bottom:120px;">
+  <div style="background:white; border-radius:16px; padding:16px;">
+    <label style="font-size:13px; font-weight:700;">Your Name</label>
+    <input id="jName" placeholder="e.g. John O." style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:1px solid #ddd; margin:6px 0 12px;">
+    <label style="font-size:13px; font-weight:700;">Your Skill</label>
+    <select id="jSkill" style="width:100%; padding:12px; border-radius:12px; border:1px solid #ddd; margin:6px 0 12px;">
+      <option>Plumber</option><option>Cleaner</option><option>Electrician</option><option>Driver</option><option>Carpenter</option><option>Painter</option><option>Mechanic</option><option>Tailor</option><option>Barber</option><option>Cook</option><option>Welder</option><option>Gardener</option><option>Other</option>
+    </select>
+    <label style="font-size:13px; font-weight:700;">City / Area</label>
+    <input id="jCity" placeholder="e.g. Wuse 2, Abuja" style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:1px solid #ddd; margin:6px 0 12px;">
+    <label style="font-size:13px; font-weight:700;">Price Per Job (₦)</label>
+    <input id="jPrice" type="number" placeholder="e.g. 8000" style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:1px solid #ddd; margin:6px 0 12px;">
+    <label style="font-size:13px; font-weight:700;">Phone / WhatsApp</label>
+    <input id="jPhone" placeholder="e.g. 0803..." style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:1px solid #ddd; margin:6px 0 12px;">
+    <button class="btn-primary" onclick="joinWorker()">Join ZIRO • FREE</button>
+    <p style="font-size:12px; color:var(--muted); text-align:center;">By joining, you agree: ZIRO does NOT hold job money.<br>Customers pay you directly.</p>
+  </div>
+</div>
+<div style="position:fixed; bottom:0; left:0; right:0; background:white; border-top:1px solid #eee; display:flex; justify-content:space-around; padding:10px 0; font-size:11px; text-align:center;"><span onclick="window.location.href='index.html'">🏠<br>Home</span><span onclick="window.location.href='index.html'">🔍<br>Search</span><span onclick="window.location.href='post.html'" style="background:var(--gold); width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:900; margin-top:-24px;">+</span><span onclick="window.location.href='chat.html'">💬<br>Chat</span><span onclick="window.location.href='office.html'">👤<br>My Office</span></div>
+<script src="js/app.js"></script>
+<script>
+function joinWorker(){
+  const name = document.getElementById('jName').value.trim();
+  const skill = document.getElementById('jSkill').value;
+  const city = document.getElementById('jCity').value.trim();
+  const price = document.getElementById('jPrice').value.trim() || '5000';
+  const phone = document.getElementById('jPhone').value.trim();
+  if(!name || !city){ alert('Please fill Name and City/Area.'); return; }
+  const workers = JSON.parse(localStorage.getItem('ziro_workers') || '[]');
+  workers.push({ name, skill, city, price, phone });
+  localStorage.setItem('ziro_workers', JSON.stringify(workers));
+  alert('Welcome to ZIRO, ' + name + ' ✅\n\nYou are now in Labour Market as ' + skill + ' in ' + city + '.\nCustomers can now find you when they search.');
+  window.location.href = 'index.html';
+}
+</script>
+</body>
+</html>
