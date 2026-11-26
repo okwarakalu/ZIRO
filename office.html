@@ -12,11 +12,10 @@
   <h2 style="margin:12px 0 4px;">My Office 👤</h2>
   <p style="margin:0; color:var(--gold); font-size:13px;">Musa A. • Plumber • Wuse 2</p>
   <div style="background:white; color:var(--text); border-radius:12px; padding:12px; margin-top:14px; display:flex; justify-content:space-between;">
-    <span><b>🪙 120 iCoin</b><br><small style="color:var(--muted);">Your Balance</small></span>
+    <span><b>🪙 <span data-coin>120 iCoin</span></b><br><small style="color:var(--muted);">Your Balance</small></span>
     <span style="text-align:right;"><b style="color:var(--success);">✓ Verified</b><br><small style="color:var(--muted);">ID + Background Checked</small></span>
   </div>
 </div>
-
 <div style="padding:16px; padding-bottom:120px;">
   <h3>🚀 Boost My Skill</h3>
   <p style="font-size:13px; color:var(--muted);">1 Boost = 1 Skill. Appear at top of Labour Market.</p>
@@ -25,7 +24,6 @@
     <button class="btn-secondary" style="margin-top:8px;" onclick="buyBoost('48 Hours', 18)">Boost 48 Hours • 18 iCoin</button>
     <button class="btn-secondary" style="margin-top:8px;" onclick="buyBoost('1 Week', 50)">Boost 1 Week • 50 iCoin</button>
   </div>
-
   <h3 style="margin-top:20px;">🪙 Buy iCoin</h3>
   <p style="font-size:13px; color:var(--muted);">Pay with Paystack. iCoin shows instantly. For Boost & Unlock only.</p>
   <div style="background:white; border-radius:16px; padding:16px;">
@@ -35,7 +33,6 @@
   </div>
   <p style="text-align:center; font-size:12px; color:var(--muted); margin-top:12px;">ZIRO does NOT hold job money. You pay workers directly.<br>Terms • Privacy • iCoin Policy • Refund Policy</p>
 </div>
-
 <div style="position:fixed; bottom:0; left:0; right:0; background:white; border-top:1px solid #eee; display:flex; justify-content:space-around; padding:10px 0; font-size:11px; text-align:center;">
   <span onclick="window.location.href='index.html'">🏠<br>Home</span>
   <span onclick="window.location.href='index.html'">🔍<br>Search</span>
@@ -43,16 +40,22 @@
   <span onclick="navTo('Chat')">💬<br>Chat</span>
   <span><b>👤<br>My Office</b></span>
 </div>
-
 <button class="chioma-float" onclick="toggleChioma()">◉ CHIOMA</button>
 <div id="chioma-box" style="display:none; position:fixed; bottom:150px; right:16px; left:16px; background:white; border-radius:16px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,0.2); z-index:60;">
   <b>CHIOMA 🤖</b>
-  <div id="chioma-chat"><p style="font-size:13px; color:var(--muted);">Hello! I can show you how to Boost or Buy iCoin.</p></div>
+  <div id="chioma-chat"><p style="font-size:13px; color:var(--muted);">Hello! I can show you how to Boost, Buy iCoin, Post a Job, or Accept an Errand.</p></div>
+  <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;">
+    <button onclick="setChiomaLang('English')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">English</button>
+    <button onclick="setChiomaLang('Hausa')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Hausa</button>
+    <button onclick="setChiomaLang('Yoruba')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Yoruba</button>
+    <button onclick="setChiomaLang('Igbo')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Igbo</button>
+    <button onclick="setChiomaLang('Pidgin')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Pidgin</button>
+  </div>
+  <input id="chiomaInput" placeholder="Ask CHIOMA... she understands slang" onkeyup="if(event.key==='Enter') chiomaAsk(this.value)" style="width:100%; box-sizing:border-box; padding:10px; border-radius:12px; border:1px solid #ddd; margin-top:8px;">
   <button class="btn-primary" onclick="chiomaHelp('boost')" style="margin-top:8px;">How to Boost</button>
   <button class="btn-secondary" onclick="chiomaHelp('icoin')" style="margin-top:8px;">How to Buy iCoin</button>
   <button onclick="toggleChioma()" style="width:100%; margin-top:8px; border:none; background:none;">Close</button>
 </div>
-
 <script src="js/chioma.js"></script>
 <script src="js/app.js"></script>
 <script src="js/office.js"></script>
