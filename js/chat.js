@@ -25,8 +25,6 @@ function addBubble(text, mine){
   d.style.cssText = mine ? 'background:var(--green); color:white; padding:10px 12px; border-radius:12px; max-width:80%; align-self:flex-end; font-size:14px;' : 'background:white; padding:10px 12px; border-radius:12px; max-width:80%; font-size:14px;';
   list.appendChild(d);
 }
-
-// VOICE RECORD - Hold to talk
 async function toggleVoice(){
   const btn = document.getElementById('voiceBtn');
   if(!isRecording){
@@ -57,8 +55,6 @@ async function toggleVoice(){
     btn.style.background = '';
   }
 }
-
-// TRANSLATE CHAT MESSAGE
 function translateChat(){
   const input = document.getElementById('chatInput');
   const text = input.value.trim();
@@ -70,4 +66,4 @@ function translateChat(){
   const translated = translateChioma(text);
   chiomaLang = old;
   addBubble('🌍 Translated to ' + lang + ': ' + translated, true);
-          }
+}
