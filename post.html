@@ -3,61 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZIRO - Post Job / Errand</title>
+<title>ZIRO - Post a Job</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div style="background:var(--green); padding:20px 16px; border-radius:0 0 20px 20px; color:white;">
   <div onclick="window.location.href='index.html'" style="font-size:14px;">← Back to Home</div>
-  <h2 style="margin:12px 0 4px;">Post a Job / Errand</h2>
-  <p style="margin:0; color:var(--gold); font-size:13px;">Workers see it instantly. You pay them directly.</p>
+  <h2 style="margin:12px 0 4px;">Post a Job 📝</h2>
+  <p style="margin:0; color:var(--gold); font-size:13px;">FREE • Workers will find you.</p>
 </div>
 <div style="padding:16px; padding-bottom:120px;">
-  <div style="display:flex; gap:8px;">
-    <button id="btnJob" class="btn-primary" onclick="setType('Job')">🔧 Job</button>
-    <button id="btnErrand" class="btn-secondary" onclick="setType('Errand')">🏃 Errand</button>
+  <div style="background:white; border-radius:16px; padding:16px;">
+    <label style="font-size:13px; font-weight:700;">What work do you need?</label>
+    <select id="pSkill" onchange="checkPostOther()" style="width:100%; padding:12px; border-radius:12px; border:1px solid #ddd; margin:6px 0 12px;">
+      <option>Plumber</option><option>Cleaner</option><option>Electrician</option><option>Driver</option><option>Carpenter</option><option>Painter</option><option>Mechanic</option><option>Tailor</option><option>Barber</option><option>Cook</option><option>Welder</option><option>Gardener</option><option>Other</option>
+    </select>
+    <div id="postOtherBox" style="display:none; margin-bottom:12px;">
+      <input id="pCustom" placeholder="Type work you need e.g. POP Installer" autocomplete="off" style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:1px solid #ddd;">
+    </div>
+    <label style="font-size:13px; font-weight:700;">Describe the work</label>
+    <textarea id="pDesc" placeholder="e.g. My kitchen tap is leaking, need fix today..." style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:1px solid #ddd; margin:6px 0 12px; min-height:70px;"></textarea>
+    <label style="font-size:13px; font-weight:700;">City / Area</label>
+    <input id="pCity" placeholder="e.g. Wuse 2, Abuja" autocomplete="off" style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:1px solid #ddd; margin:6px 0 12px;">
+    <label style="font-size:13px; font-weight:700;">Your Budget (₦)</label>
+    <input id="pBudget" type="number" placeholder="e.g. 8000" style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:1px solid #ddd; margin:6px 0 12px;">
+    <label style="font-size:13px; font-weight:700;">Your Name / Phone</label>
+    <input id="pName" placeholder="e.g. John - 0803..." autocomplete="off" style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:1px solid #ddd; margin:6px 0 12px;">
+    <button class="btn-primary" onclick="postJob()">Post Job • FREE</button>
+    <p style="font-size:12px; color:var(--muted); text-align:center;">ZIRO does NOT hold job money.<br>You pay worker directly after work.</p>
   </div>
-  <div style="background:white; border-radius:16px; padding:16px; margin-top:12px;">
-    <label style="font-size:13px; font-weight:700;">Title</label>
-    <input id="pTitle" placeholder="e.g. Fix leaking tap" style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:1px solid #ddd; margin:6px 0 12px;">
-    <label style="font-size:13px; font-weight:700;">Location</label>
-    <input id="pLocation" placeholder="e.g. Wuse 2, Abuja" style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:1px solid #ddd; margin:6px 0 12px;">
-    <label style="font-size:13px; font-weight:700;">Price You Will Pay (₦)</label>
-    <input id="pPrice" type="number" placeholder="e.g. 8000" style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:1px solid #ddd; margin:6px 0 12px;">
-    <label style="font-size:13px; font-weight:700;">Details</label>
-    <textarea id="pDetails" placeholder="Describe the work..." style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:1px solid #ddd; margin:6px 0 12px; height:80px;"></textarea>
-    <button class="btn-primary" onclick="publishPost()">Publish • FREE</button>
-    <button class="btn-sos" style="margin-top:12px;" onclick="sosEmergency()">! SOS • Emergency</button>
-  </div>
-  <div id="myPosts" style="margin-top:16px;"></div>
-  <p style="text-align:center; font-size:12px; color:var(--muted);">ZIRO does NOT hold job money. Terms • Privacy • Refund Policy</p>
+  <h3 style="margin-top:20px;">Recent Jobs</h3>
+  <div id="jobList" style="display:flex; flex-direction:column; gap:12px;"></div>
 </div>
-<div style="position:fixed; bottom:0; left:0; right:0; background:white; border-top:1px solid #eee; display:flex; justify-content:space-around; padding:10px 0; font-size:11px; text-align:center;">
-  <span onclick="window.location.href='index.html'">🏠<br>Home</span>
-  <span onclick="window.location.href='index.html'">🔍<br>Search</span>
-  <span style="background:var(--gold); width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:900; margin-top:-24px;">+</span>
-  <span onclick="navTo('Chat')">💬<br>Chat</span>
-  <span onclick="window.location.href='office.html'">👤<br>My Office</span>
-</div>
-<button class="chioma-float" onclick="toggleChioma()">◉ CHIOMA</button>
-<div id="chioma-box" style="display:none; position:fixed; bottom:150px; right:16px; left:16px; background:white; border-radius:16px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,0.2); z-index:60;">
-  <b>CHIOMA 🤖</b>
-  <div id="chioma-chat"><p style="font-size:13px; color:var(--muted);">Need help posting? Tell me Job or Errand.</p></div>
-  <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;">
-    <button onclick="setChiomaLang('English')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">English</button>
-    <button onclick="setChiomaLang('Hausa')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Hausa</button>
-    <button onclick="setChiomaLang('Yoruba')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Yoruba</button>
-    <button onclick="setChiomaLang('Igbo')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Igbo</button>
-    <button onclick="setChiomaLang('Pidgin')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Pidgin</button>
-  </div>
-  <input id="chiomaInput" placeholder="Ask CHIOMA... she understands slang" onkeyup="if(event.key==='Enter') chiomaAsk(this.value)" style="width:100%; box-sizing:border-box; padding:10px; border-radius:12px; border:1px solid #ddd; margin-top:8px;">
-  <button class="btn-primary" onclick="chiomaHelp('boost')" style="margin-top:8px;">How to Boost</button>
-  <button class="btn-secondary" onclick="chiomaHelp('icoin')" style="margin-top:8px;">How to Buy iCoin</button>
-  <button onclick="toggleChioma()" style="width:100%; margin-top:8px; border:none; background:none;">Close</button>
-</div>
-<script src="js/chioma.js"></script>
+<div style="position:fixed; bottom:0; left:0; right:0; background:white; border-top:1px solid #eee; display:flex; justify-content:space-around; padding:10px 0; font-size:11px; text-align:center;"><span onclick="window.location.href='index.html'">🏠<br>Home</span><span onclick="window.location.href='index.html'">🔍<br>Search</span><span style="background:var(--gold); width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:900; margin-top:-24px;">+</span><span onclick="window.location.href='chat.html'">💬<br>Chat</span><span onclick="window.location.href='office.html'">👤<br>My Office</span></div>
 <script src="js/app.js"></script>
-<script src="js/post.js"></script>
-<script src="js/office.js"></script>
+<script>
+function checkPostOther(){
+  const v = document.getElementById('pSkill').value;
+  document.getElementById('postOtherBox').style.display = (v === 'Other') ? 'block' : 'none';
+  if(v === 'Other') document.getElementById('pCustom').focus();
+}
+function loadJobs(){
+  const list = document.getElementById('jobList');
+  const jobs = JSON.parse(localStorage.getItem('ziro_jobs') || '[]');
+  if(!jobs.length){ list.innerHTML = '<p style="font-size:13px; color:var(--muted); text-align:center;">No jobs yet. Be the first to post.</p>'; return; }
+  list.innerHTML = jobs.slice().reverse().map(j => '<div style="background:white; border-radius:16px; padding:16px;"><b>' + j.skill + ' needed</b><p style="margin:6px 0; font-size:13px; color:var(--muted);">' + j.desc + '</p><p style="margin:0; font-size:13px;">📍 ' + j.city + ' • 💰 ₦' + Number(j.budget).toLocaleString() + '</p><p style="margin:4px 0 0; font-size:12px; color:var(--muted);">' + j.name + '</p><button class="btn-primary" style="margin-top:10px;" onclick="alert(\'You want this job.\\n\\nIn real app: Chat will open with customer.\')">Accept This Job</button></div>').join('');
+}
+function postJob(){
+  let skill = document.getElementById('pSkill').value;
+  const custom = document.getElementById('pCustom').value.trim();
+  if(skill === 'Other'){
+    if(!custom){ alert('You picked Other. Please type the work you need.'); return; }
+    skill = custom;
+  }
+  const desc = document.getElementById('pDesc').value.trim();
+  const city = document.getElementById('pCity').value.trim();
+  const budget = document.getElementById('pBudget').value.trim() || '0';
+  const name = document.getElementById('pName').value.trim();
+  if(!desc || !city){ alert('Please fill work description and City/Area.'); return; }
+  const jobs = JSON.parse(localStorage.getItem('ziro_jobs') || '[]');
+  jobs.push({ skill, desc, city, budget, name });
+  localStorage.setItem('ziro_jobs', JSON.stringify(jobs));
+  alert('Job Posted ✅\n\n' + skill + ' needed in ' + city + '.\nWorkers will see it now.');
+  loadJobs();
+  document.getElementById('pDesc').value = '';
+}
+document.addEventListener('DOMContentLoaded', loadJobs);
+</script>
 </body>
 </html>
