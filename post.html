@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZIRO - Post Job / Errand</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div style="background:var(--green); padding:20px 16px; border-radius:0 0 20px 20px; color:white;">
+  <div onclick="window.location.href='index.html'" style="font-size:14px;">← Back to Home</div>
+  <h2 style="margin:12px 0 4px;">Post a Job / Errand</h2>
+  <p style="margin:0; color:var(--gold); font-size:13px;">Workers see it instantly. You pay them directly.</p>
+</div>
+<div style="padding:16px; padding-bottom:120px;">
+  <div style="display:flex; gap:8px;">
+    <button id="btnJob" class="btn-primary" onclick="setType('Job')">🔧 Job</button>
+    <button id="btnErrand" class="btn-secondary" onclick="setType('Errand')">🏃 Errand</button>
+  </div>
+  <div style="background:white; border-radius:16px; padding:16px; margin-top:12px;">
+    <label style="font-size:13px; font-weight:700;">Title</label>
+    <input id="pTitle" placeholder="e.g. Fix leaking tap" style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:1px solid #ddd; margin:6px 0 12px;">
+    <label style="font-size:13px; font-weight:700;">Location</label>
+    <input id="pLocation" placeholder="e.g. Wuse 2, Abuja" style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:1px solid #ddd; margin:6px 0 12px;">
+    <label style="font-size:13px; font-weight:700;">Price You Will Pay (₦)</label>
+    <input id="pPrice" type="number" placeholder="e.g. 8000" style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:1px solid #ddd; margin:6px 0 12px;">
+    <label style="font-size:13px; font-weight:700;">Details</label>
+    <textarea id="pDetails" placeholder="Describe the work..." style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:1px solid #ddd; margin:6px 0 12px; height:80px;"></textarea>
+    <button class="btn-primary" onclick="publishPost()">Publish • FREE</button>
+    <button class="btn-sos" style="margin-top:12px;" onclick="sosEmergency()">! SOS • Emergency</button>
+  </div>
+  <div id="myPosts" style="margin-top:16px;"></div>
+  <p style="text-align:center; font-size:12px; color:var(--muted);">ZIRO does NOT hold job money. Terms • Privacy • Refund Policy</p>
+</div>
+<div style="position:fixed; bottom:0; left:0; right:0; background:white; border-top:1px solid #eee; display:flex; justify-content:space-around; padding:10px 0; font-size:11px; text-align:center;">
+  <span onclick="window.location.href='index.html'">🏠<br>Home</span>
+  <span onclick="window.location.href='index.html'">🔍<br>Search</span>
+  <span style="background:var(--gold); width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:900; margin-top:-24px;">+</span>
+  <span onclick="navTo('Chat')">💬<br>Chat</span>
+  <span onclick="window.location.href='office.html'">👤<br>My Office</span>
+</div>
+<button class="chioma-float" onclick="toggleChioma()">◉ CHIOMA</button>
+<div id="chioma-box" style="display:none; position:fixed; bottom:150px; right:16px; left:16px; background:white; border-radius:16px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,0.2); z-index:60;">
+  <b>CHIOMA 🤖</b>
+  <div id="chioma-chat"><p style="font-size:13px; color:var(--muted);">Need help posting? Tell me Job or Errand.</p></div>
+  <button class="btn-primary" onclick="chiomaHelp('boost')" style="margin-top:8px;">How to Boost</button>
+  <button onclick="toggleChioma()" style="width:100%; margin-top:8px; border:none; background:none;">Close</button>
+</div>
+<script src="js/chioma.js"></script>
+<script src="js/app.js"></script>
+<script src="js/post.js"></script>
+</body>
+</html>
