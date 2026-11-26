@@ -14,11 +14,11 @@
   </div>
   <input id="searchInput" placeholder="Search Plumber, Cleaner, Electrician, Driver..." oninput="searchJobs()" style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:none; margin-top:14px;">
   <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:10px;">
-    <button onclick="quickSearch('Plumber')" style="padding:6px 12px; border-radius:999px; border:none; background:var(--gold); font-weight:700;">Plumber</button>
-    <button onclick="quickSearch('Cleaner')" style="padding:6px 12px; border-radius:999px; border:none; background:white;">Cleaner</button>
-    <button onclick="quickSearch('Electrician')" style="padding:6px 12px; border-radius:999px; border:none; background:white;">Electrician</button>
-    <button onclick="quickSearch('Driver')" style="padding:6px 12px; border-radius:999px; border:none; background:white;">Driver</button>
-    <button onclick="quickSearch('')" style="padding:6px 12px; border-radius:999px; border:none; background:white;">All</button>
+    <button class="filter-btn" data-filter="plumber" onclick="quickSearch('Plumber', this)" style="padding:6px 12px; border-radius:999px; border:none; background:var(--gold); font-weight:700;">Plumber</button>
+    <button class="filter-btn" data-filter="cleaner" onclick="quickSearch('Cleaner', this)" style="padding:6px 12px; border-radius:999px; border:none; background:white;">Cleaner</button>
+    <button class="filter-btn" data-filter="electrician" onclick="quickSearch('Electrician', this)" style="padding:6px 12px; border-radius:999px; border:none; background:white;">Electrician</button>
+    <button class="filter-btn" data-filter="driver" onclick="quickSearch('Driver', this)" style="padding:6px 12px; border-radius:999px; border:none; background:white;">Driver</button>
+    <button class="filter-btn" data-filter="" onclick="quickSearch('', this)" style="padding:6px 12px; border-radius:999px; border:none; background:white;">All</button>
   </div>
 </div>
 <div style="padding:16px; padding-bottom:120px;">
