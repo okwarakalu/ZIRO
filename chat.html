@@ -3,52 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZIRO - Chat</title>
+<title>ZIRO - Chats</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-<div style="background:var(--green); padding:20px 16px; border-radius:0 0 20px 20px; color:white;">
-  <div onclick="window.location.href='index.html'" style="font-size:14px;">← Back to Home</div>
-  <h2 style="margin:12px 0 4px;">Chat 💬</h2>
-  <p style="margin:0; color:var(--gold); font-size:13px;">Talk to worker before you hire.</p>
-</div>
-<div style="padding:16px; padding-bottom:120px;">
-  <div id="chatList" style="display:flex; flex-direction:column; gap:12px;"></div>
-  <div style="background:white; border-radius:16px; padding:16px; margin-top:12px;">
-    <label style="font-size:13px; font-weight:700;">Send a message</label>
-    <select id="cTo" style="width:100%; padding:12px; border-radius:12px; border:1px solid #ddd; margin:8px 0;">
-      <option>Musa A. - Plumber</option><option>Ada O. - Cleaner</option><option>Tunde B. - Electrician</option><option>Chidi N. - Driver</option>
-    </select>
-    <input id="cMsg" placeholder="Type message e.g. How much for today?" style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:1px solid #ddd; margin-bottom:10px;">
-    <button class="btn-primary" onclick="sendMsg()">Send Message</button>
-    <p style="font-size:12px; color:var(--muted); text-align:center;">Never send job money in chat. Pay worker directly after work.</p>
+<body style="background:white;">
+<div style="background:var(--green); padding:16px; color:white; position:sticky; top:0; z-index:10;">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h2 style="margin:0; color:white;">Chats</h2>
+    <span onclick="window.location.href='index.html'" style="font-size:22px;">✕</span>
   </div>
-  <button class="btn-sos" style="margin-top:12px;" onclick="sosEmergency()">! SOS • Emergency</button>
+  <input placeholder="Search chats..." oninput="filterChats(this.value)" style="width:100%; box-sizing:border-box; padding:10px 12px; border-radius:999px; border:none; margin-top:12px;">
 </div>
+<div id="chatList" style="padding-bottom:100px;"></div>
 <div style="position:fixed; bottom:0; left:0; right:0; background:white; border-top:1px solid #eee; display:flex; justify-content:space-around; padding:10px 0; font-size:11px; text-align:center;"><span onclick="window.location.href='index.html'">🏠<br>Home</span><span onclick="window.location.href='index.html'">🔍<br>Search</span><span onclick="window.location.href='post.html'" style="background:var(--gold); width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:900; margin-top:-24px;">+</span><span><b>💬<br>Chat</b></span><span onclick="window.location.href='office.html'">👤<br>My Office</span></div>
-<script src="js/app.js"></script>
+<script src="js/notify.js"></script>
 <script>
-function loadChat(){
+const PEOPLE = [
+  { name:'Musa A.', skill:'Plumber', last:'Hello, I can fix your tap today.', time:'12:19', unread:2, color:'#0B6E4F' },
+  { name:'Udoka', skill:'Brick Layer Job', last:'Mend my fence - Apo, ₦12,000', time:'12:06', unread:1, color:'#E67E22' },
+  { name:'Ada O.', skill:'Cleaner', last:'I am available tomorrow morning.', time:'11:42', unread:0, color:'#8E44AD' },
+  { name:'Tunde B.', skill:'Electrician', last:'Send me the photo of the wiring.', time:'Yesterday', unread:0, color:'#2980B9' },
+];
+function render(filter){
   const list = document.getElementById('chatList');
-  const msgs = JSON.parse(localStorage.getItem('ziro_chat') || '[]');
-  if(!msgs.length){
-    list.innerHTML = '<div style="background:white; border-radius:16px; padding:16px; text-align:center;"><b>Musa A. - Plumber</b><p style="font-size:13px; color:var(--muted); margin:6px 0 0;">Hello, I can fix your tap today. Are you in Wuse 2?</p></div>';
-    return;
-  }
-  list.innerHTML = msgs.map(m => '<div style="background:white; border-radius:16px; padding:16px;"><b>' + m.to + '</b><p style="font-size:13px; margin:6px 0 0;">' + m.msg + '</p><p style="font-size:11px; color:var(--muted); margin:4px 0 0;">You • Just now</p></div>').join('');
+  const rows = PEOPLE.filter(p => !filter || p.name.toLowerCase().includes(filter.toLowerCase()));
+  list.innerHTML = rows.map((p,i) => '<div onclick="openChat(\'' + p.name + '\')" style="display:flex; gap:12px; padding:14px 16px; border-bottom:1px solid #f0f0f0; align-items:center;">'
+    + '<div style="width:48px; height:48px; min-width:48px; background:' + p.color + '; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:700;">' + p.name[0] + '</div>'
+    + '<div style="flex:1; min-width:0;"><div style="display:flex; justify-content:space-between;"><b style="font-size:15px;">' + p.name + '</b><span style="font-size:11px; color:#888;">' + p.time + '</span></div>'
+    + '<p style="margin:2px 0 0; font-size:13px; color:#666; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">' + p.last + '</p><p style="margin:2px 0 0; font-size:11px; color:var(--muted);">' + p.skill + '</p></div>'
+    + (p.unread ? '<span style="background:#25D366; color:white; font-size:11px; min-width:20px; height:20px; border-radius:999px; display:flex; align-items:center; justify-content:center; padding:0 5px;">' + p.unread + '</span>' : '')
+    + '</div>').join('');
 }
-function sendMsg(){
-  const to = document.getElementById('cTo').value;
-  const msg = document.getElementById('cMsg').value.trim();
-  if(!msg){ alert('Type a message first.'); return; }
-  const msgs = JSON.parse(localStorage.getItem('ziro_chat') || '[]');
-  msgs.push({ to, msg });
-  localStorage.setItem('ziro_chat', JSON.stringify(msgs));
-  document.getElementById('cMsg').value = '';
-  loadChat();
-  alert('Message sent to ' + to + ' ✅\n\n(DEMO) In real app, worker will reply here.');
-}
-document.addEventListener('DOMContentLoaded', loadChat);
+function filterChats(v){ render(v); }
+function openChat(name){ localStorage.setItem('ziro_chat_with', name); window.location.href = 'chat-room.html?with=' + encodeURIComponent(name); }
+document.addEventListener('DOMContentLoaded', ()=> render(''));
 </script>
 </body>
 </html>
