@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="css/style.css">
 <style>
 html,body{height:100%; overflow:hidden;} *{box-sizing:border-box;}
-/* ZIRO Watermark Background - Beautified */
 .ziro-bg{
   background-color:#0B3D2E;
   background-image:
@@ -23,19 +22,19 @@ html,body{height:100%; overflow:hidden;} *{box-sizing:border-box;}
 </style>
 </head>
 <body style="background:#0B3D2E; margin:0; display:flex; flex-direction:column; height:100dvh; width:100%; overflow:hidden;">
-<!-- UPPER LAYER - ZIRO Logo + Job + Person -->
-<div style="background:white; padding:10px 12px; padding-top:calc(10px + env(safe-area-inset-top)); flex-shrink:0;">
-  <div style="display:flex; align-items:center; gap:10px;">
-    <button onclick="window.location.href='chat.html'" style="background:#0B6E4F; color:white; border:none; width:38px; height:38px; min-width:38px; border-radius:50%; font-size:18px;">←</button>
-    <!-- ZIRO LOGO -->
-    <div style="background:#0B6E4F; color:white; padding:7px 10px; border-radius:10px; font-weight:900; font-size:15px; letter-spacing:1px; white-space:nowrap;">ZIRO <span style="color:#F2C94C;">●</span></div>
+<!-- UPPER LAYER - FULL ZIRO BACKGROUND IMAGE, NO WHITE -->
+<div style="background:#0B3D2E; background-image:url('images/ziro-bg.jpg'); background-size:cover; background-position:center; padding:12px; padding-top:calc(12px + env(safe-area-inset-top)); flex-shrink:0; position:relative;">
+  <!-- Dark overlay so text is readable -->
+  <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.35) 100%);"></div>
+  <div style="position:relative; display:flex; align-items:center; gap:10px;">
+    <button onclick="window.location.href='chat.html'" style="background:rgba(255,255,255,0.25); color:white; border:1px solid rgba(255,255,255,0.4); width:38px; height:38px; min-width:38px; border-radius:50%; font-size:18px;">←</button>
     <div id="avatar" style="width:40px; height:40px; min-width:40px; background:#F2C94C; color:#0B3D2E; border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:18px;">U</div>
-    <div style="flex:1; min-width:0;"><b id="chatName" style="font-size:15px; display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Udoka</b><span style="font-size:12px; color:#0B6E4F;">● Available • Plumber</span></div>
-    <button onclick="startVoiceCall()" style="background:#EAF6F0; border:none; padding:9px 11px; border-radius:999px; font-size:13px; font-weight:700; color:#0B6E4F;">Call</button>
-    <button onclick="startVideoCall()" style="background:#0B6E4F; color:white; border:none; padding:9px 11px; border-radius:999px; font-size:13px; font-weight:700;">Video</button>
+    <div style="flex:1; min-width:0;"><b id="chatName" style="font-size:15px; display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:white;">Udoka</b><span style="font-size:12px; color:#F2C94C;">● Available • Plumber</span></div>
+    <button onclick="startVoiceCall()" style="background:rgba(255,255,255,0.25); border:1px solid rgba(255,255,255,0.4); color:white; padding:9px 11px; border-radius:999px; font-size:13px; font-weight:700;">Call</button>
+    <button onclick="startVideoCall()" style="background:#F2C94C; color:#0B3D2E; border:none; padding:9px 11px; border-radius:999px; font-size:13px; font-weight:700;">Video</button>
   </div>
-  <!-- Job Banner - Brick Layer -->
-  <div style="background:#FFF8E1; border:1px solid #F2C94C; border-radius:12px; padding:9px 12px; margin-top:10px; display:flex; justify-content:space-between; align-items:center; gap:8px;">
+  <!-- Job Banner on top of image -->
+  <div style="position:relative; background:rgba(255,248,225,0.96); border:1px solid #F2C94C; border-radius:12px; padding:9px 12px; margin-top:12px; display:flex; justify-content:space-between; align-items:center; gap:8px;">
     <span style="font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><b>🧱 Job:</b> <span id="jobTag">Brick Layer • ₦12,000 • Apo, Abuja</span></span>
     <button onclick="window.location.href='job.html'" style="background:#0B6E4F; color:white; border:none; padding:7px 12px; border-radius:999px; font-size:12px; font-weight:700; white-space:nowrap;">View Job</button>
   </div>
@@ -78,9 +77,6 @@ function renderMsgs(){
   const box = document.getElementById('msgs');
   box.innerHTML = '<p style="text-align:center; font-size:11px; color:white; background:rgba(0,0,0,0.35); padding:6px 12px; border-radius:999px; margin:0 auto;">ZIRO Secure • Today • Chat started</p>'
     + messages.map(m => {
-    // COLOUR DIFFERENCE BETWEEN 2 PARTIES
-    // YOU = Deep Green bubble, white text, right side
-    // THEM = Gold / Cream bubble, dark text, left side
     if(m.me){
       const inner = m.type==='voice' ? '<div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;"><span>🎙️</span><audio controls src="'+m.src+'" style="width:160px; max-width:100%;"></audio><span style="font-size:12px;">'+m.dur+'</span></div>' : m.type==='file' ? '<span>📎 '+m.text+'</span>' : '<span style="word-break:break-word;">'+m.text+'</span>';
       return '<div style="align-self:flex-end; background:#0B6E4F; color:white; border-radius:16px 16px 4px 16px; padding:12px; width:82%; max-width:82%; box-shadow:0 2px 6px rgba(0,0,0,0.2);"><span style="font-size:11px; font-weight:800; color:#F2C94C;">YOU • WORKER</span><div style="margin-top:4px; font-size:14px; line-height:1.5;">'+inner+'</div><span style="font-size:11px; color:#D6EDE3; display:block; text-align:right; margin-top:6px;">'+m.time+' ✓✓</span></div>';
@@ -136,4 +132,4 @@ function startVoiceCall(){ ziroConfirm('Voice Call?', 'Call ' + withName + '?', 
 document.addEventListener('DOMContentLoaded', renderMsgs);
 </script>
 </body>
-</html>
+  </html>
