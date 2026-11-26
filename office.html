@@ -19,37 +19,31 @@
 <div style="padding:16px; padding-bottom:120px;">
   <button class="btn-primary" onclick="window.location.href='join.html'" style="margin-bottom:16px;">+ Join as Worker • FREE</button>
   <h3>🚀 Boost My Skill</h3>
-  <p style="font-size:13px; color:var(--muted);">1 Boost = 1 Skill. Appear at top of Labour Market. Pick any days you want.</p>
+  <p style="font-size:13px; color:var(--muted); margin:0 0 12px;">Appear at top of Labour Market.</p>
   <div style="background:white; border-radius:16px; padding:16px;">
-    <label style="font-size:13px; font-weight:700;">How many days do you want to Boost?</label>
-    <select id="boostDays" onchange="updateBoostPrice()" style="width:100%; padding:12px; border-radius:12px; border:1px solid #ddd; margin:8px 0;">
-      <option value="1">1 Day (24 Hours) • 10 iCoin</option>
+    <label style="font-size:13px; font-weight:700;">Boost Duration</label>
+    <select id="boostDays" onchange="updateBoostPrice()" style="width:100%; padding:12px; border-radius:12px; border:1px solid #ddd; margin:8px 0 12px; font-size:14px;">
+      <option value="1">1 Day • 10 iCoin</option>
       <option value="2">2 Days • 18 iCoin</option>
       <option value="3">3 Days • 25 iCoin</option>
       <option value="4">4 Days • 32 iCoin</option>
       <option value="5">5 Days • 38 iCoin</option>
       <option value="6">6 Days • 44 iCoin</option>
-      <option value="7" selected>7 Days (1 Week) • 50 iCoin ⭐ Most Popular</option>
-      <option value="14">14 Days (2 Weeks) • 90 iCoin</option>
-      <option value="30">30 Days (1 Month) • 160 iCoin</option>
-      <option value="custom">✍️ Custom - Type Any Days...</option>
+      <option value="7" selected>7 Days • 50 iCoin</option>
+      <option value="14">14 Days • 90 iCoin</option>
+      <option value="30">30 Days • 160 iCoin</option>
+      <option value="custom">Custom Days...</option>
     </select>
-    <div id="customBoostBox" style="display:none; background:#FFF8E1; border:1px solid var(--gold); border-radius:12px; padding:12px; margin-bottom:12px;">
-      <label style="font-size:13px; font-weight:700;">✍️ Type Number of Days</label>
-      <input id="customDays" type="number" min="1" max="90" placeholder="e.g. 10, 21, 45..." oninput="updateBoostPrice()" style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:1px solid #ddd; margin-top:6px;">
-      <p style="font-size:12px; color:var(--muted); margin:6px 0 0;">Custom price: ~7 iCoin per day. Example: 10 days = 68 iCoin.</p>
+    <div id="customBoostBox" style="display:none; margin-bottom:12px;">
+      <input id="customDays" type="number" min="1" max="90" placeholder="Type number of days e.g. 10" oninput="updateBoostPrice()" style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:1px solid #ddd;">
     </div>
-    <div style="background:#E8F5E9; border-radius:12px; padding:12px; text-align:center; margin-bottom:12px;">
-      <span style="font-size:13px; color:var(--muted);">You will pay:</span><br>
-      <b id="boostPriceLabel" style="font-size:22px;">50 iCoin for 7 Days</b>
-    </div>
-    <button class="btn-primary" onclick="buyCustomBoost()">🚀 Activate Boost Now</button>
+    <button id="boostBtn" class="btn-primary" onclick="buyCustomBoost()">Activate Boost • 50 iCoin</button>
   </div>
   <h3 style="margin-top:20px;">🪙 Buy iCoin</h3>
-  <p style="font-size:13px; color:var(--muted);">Pay with Paystack. iCoin shows instantly. For Boost & Unlock only.</p>
+  <p style="font-size:13px; color:var(--muted);">Pay with Paystack. iCoin shows instantly.</p>
   <div style="background:white; border-radius:16px; padding:16px;">
     <button class="btn-primary" onclick="buyCoin(100, 1000)">100 iCoin • ₦1,000</button>
-    <button class="btn-secondary" style="margin-top:8px;" onclick="buyCoin(550, 5000)">550 iCoin • ₦5,000 (Best Value)</button>
+    <button class="btn-secondary" style="margin-top:8px;" onclick="buyCoin(550, 5000)">550 iCoin • ₦5,000</button>
     <button class="btn-secondary" style="margin-top:8px;" onclick="buyCoin(1200, 10000)">1200 iCoin • ₦10,000</button>
   </div>
   <p style="text-align:center; font-size:12px; color:var(--muted); margin-top:12px;">ZIRO does NOT hold job money. You pay workers directly.<br>Terms • Privacy • iCoin Policy • Refund Policy</p>
