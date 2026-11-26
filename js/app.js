@@ -1,4 +1,4 @@
-// js/app.js - ZIRO BUTTONS - V9 - REAL SEARCH
+// js/app.js - ZIRO BUTTONS - V10 - FILTER BUTTON REFLECT
 function hireNow(name){
   alert('You want to hire ' + (name || 'Musa A.') + '.\n\nNext: Unlock Contact to see his phone, or Chat to agree price.\n\nZIRO does NOT hold job money. You pay worker directly.');
 }
@@ -20,13 +20,25 @@ function openPost(){ window.location.href = 'post.html'; }
 function navTo(page){
   if(page === 'My Office'){ window.location.href = 'office.html'; return; }
   if(page === 'Home'){ window.location.href = 'index.html'; return; }
-  if(page === 'Search'){ window.location.href = 'index.html'; document.getElementById('searchInput')?.focus(); return; }
+  if(page === 'Search'){ window.location.href = 'index.html'; return; }
   if(page === 'Chat'){ window.location.href = 'chat.html'; return; }
   alert('Going to: ' + page + '\n\nThis page comes next.');
 }
-function quickSearch(q){
+function setActiveFilter(btn){
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.style.background = 'white';
+    b.style.color = 'black';
+  });
+  if(btn){
+    btn.style.background = 'var(--gold)';
+    btn.style.color = 'black';
+    btn.style.fontWeight = '700';
+  }
+}
+function quickSearch(q, btn){
   const input = document.getElementById('searchInput');
   if(input) input.value = q;
+  setActiveFilter(btn || document.querySelector('[data-filter="' + q + '"]'));
   searchJobs();
 }
 function searchJobs(){
@@ -44,4 +56,7 @@ function searchJobs(){
   if(no) no.style.display = shown === 0 ? 'block' : 'none';
   const count = document.getElementById('resultCount');
   if(count) count.textContent = '• ' + shown + ' worker' + (shown === 1 ? '' : 's') + (q ? ' for "' + q + '"' : '');
-  }
+  // If user typed manually, also reflect button
+  const btn = document.querySelector('[data-filter="' + q + '"]');
+  if(btn) setActiveFilter(btn);
+}
