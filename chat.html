@@ -22,9 +22,11 @@
     <div style="background:white; padding:10px 12px; border-radius:12px; max-width:80%; font-size:14px;">Hello, I need a plumber in Wuse 2. Can you fix leaking tap today?</div>
     <div style="background:var(--green); color:white; padding:10px 12px; border-radius:12px; max-width:80%; align-self:flex-end; font-size:14px;">Yes, I can come today. ₦8,000. When?</div>
   </div>
-  <div style="display:flex; gap:8px; margin-top:14px;">
-    <input id="chatInput" placeholder="Type message..." onkeyup="if(event.key==='Enter') sendChat()" style="flex:1; padding:12px; border-radius:999px; border:1px solid #ddd;">
+  <div style="display:flex; gap:8px; margin-top:14px; flex-wrap:wrap;">
+    <input id="chatInput" placeholder="Type message..." onkeyup="if(event.key==='Enter') sendChat()" style="flex:1; min-width:160px; padding:12px; border-radius:999px; border:1px solid #ddd;">
     <button class="btn-primary" onclick="sendChat()" style="width:70px;">Send</button>
+    <button id="voiceBtn" onclick="toggleVoice()" style="background:var(--gold); border:none; padding:12px; border-radius:999px; font-weight:700;">🎤 Voice</button>
+    <button onclick="translateChat()" style="background:white; border:1px solid #ddd; padding:12px; border-radius:999px; font-weight:700;">🌍 Translate</button>
   </div>
   <div style="display:flex; gap:8px; margin-top:10px;">
     <button class="btn-secondary" onclick="quickChat('What is your price?')">What is price?</button>
@@ -41,12 +43,22 @@
 </div>
 <button class="chioma-float" onclick="toggleChioma()">◉ CHIOMA</button>
 <div id="chioma-box" style="display:none; position:fixed; bottom:150px; right:16px; left:16px; background:white; border-radius:16px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,0.2); z-index:60;">
-  <b>CHIOMA 🤖</b><div id="chioma-chat"><p style="font-size:13px; color:var(--muted);">Need help chatting? Agree price before work starts.</p></div>
+  <b>CHIOMA 🤖</b>
+  <div id="chioma-chat"><p style="font-size:13px; color:var(--muted);">Hello! I can show you how to Boost, Buy iCoin, Post a Job, or Accept an Errand.</p></div>
+  <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;">
+    <button onclick="setChiomaLang('English')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">English</button>
+    <button onclick="setChiomaLang('Hausa')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Hausa</button>
+    <button onclick="setChiomaLang('Yoruba')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Yoruba</button>
+    <button onclick="setChiomaLang('Igbo')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Igbo</button>
+    <button onclick="setChiomaLang('Pidgin')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Pidgin</button>
+  </div>
+  <input id="chiomaInput" placeholder="Ask CHIOMA... she understands slang" onkeyup="if(event.key==='Enter') chiomaAsk(this.value)" style="width:100%; box-sizing:border-box; padding:10px; border-radius:12px; border:1px solid #ddd; margin-top:8px;">
   <button class="btn-primary" onclick="chiomaHelp('boost')" style="margin-top:8px;">How to Boost</button>
+  <button class="btn-secondary" onclick="chiomaHelp('icoin')" style="margin-top:8px;">How to Buy iCoin</button>
   <button onclick="toggleChioma()" style="width:100%; margin-top:8px; border:none; background:none;">Close</button>
 </div>
 <script src="js/chioma.js"></script>
 <script src="js/app.js"></script>
 <script src="js/chat.js"></script>
 </body>
-  </html>
+</html>
