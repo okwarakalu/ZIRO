@@ -1,0 +1,18 @@
+/* ZIRO V8 - DESIGN KIT LOCK - DO NOT DELETE */
+:root{
+  --bg:#F7F7F5;
+  --green:#0A3D2A;
+  --gold:#FFC007;
+  --card:#FFFFFF;
+  --text:#111111;
+  --muted:#666666;
+  --success:#2E7D32;
+  --danger:#D22626;
+}
+body{ background:var(--bg); color:var(--text); font-family: system-ui, sans-serif; margin:0; }
+.btn-primary{ background:var(--green); color:white; border-radius:12px; font-weight:700; padding:12px 16px; width:100%; border:none; }
+.btn-secondary{ background:white; color:#8A6D00; border:1.5px solid var(--gold); border-radius:12px; font-weight:700; padding:12px 16px; width:100%; }
+.btn-sos{ background:var(--danger); color:white; border-radius:12px; font-weight:700; padding:12px 16px; width:100%; border:none; }
+/* CHIOMA = ONLY FLOATING BUTTON */
+.chioma-float{ position:fixed; bottom:90px; right:16px; z-index:50; background:var(--green); color:white; border-radius:999px; padding:10px 16px; font-weight:800; box-shadow:0 8px 20px rgba(0,0,0,0.2); border:none; }
+/* SOS IS INLINE - NEVER FLOATING */
