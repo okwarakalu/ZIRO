@@ -20,11 +20,11 @@
     </div>
     <div style="background:rgba(255,255,255,0.15); padding:6px 12px; border-radius:999px; color:white; font-weight:700; font-size:13px;">🪙 120 iCoin</div>
   </div>
-  <input placeholder="Search Plumber, Cleaner, Electrician..." style="margin-top:14px; width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:none; font-size:14px;">
+  <input id="searchInput" onkeyup="if(event.key==='Enter') searchJobs()" placeholder="Search Plumber, Cleaner, Electrician..." style="margin-top:14px; width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:none; font-size:14px;">
 </div>
 
 <!-- CONTENT -->
-<div style="padding:16px;">
+<div style="padding:16px; padding-bottom:120px;">
   <h2 style="font-size:20px; margin:0 0 12px;">Labour Market</h2>
 
   <div style="background:white; border-radius:16px; padding:16px; box-shadow:0 4px 16px rgba(0,0,0,0.06);">
@@ -32,19 +32,23 @@
     <p style="font-weight:700; margin:10px 0 2px;">Musa A. <span style="color:var(--success); font-size:12px;">✓ Verified • Trusted</span></p>
     <p style="color:var(--muted); font-size:13px; margin:0;">Plumber • Wuse 2, Abuja</p>
     <p style="font-size:13px;">⭐ 4.9 • <span style="color:var(--success); font-weight:700;">● Available Now</span> • ₦8,000 / job</p>
-    <button class="btn-primary">Hire Now</button>
-    <button class="btn-secondary" style="margin-top:8px;">Unlock Contact • 5 iCoin</button>
+    <button class="btn-primary" onclick="hireNow('Musa A.')">Hire Now</button>
+    <button class="btn-secondary" style="margin-top:8px;" onclick="unlockContact()">Unlock Contact • 5 iCoin</button>
   </div>
 
   <!-- SOS IS INLINE - NEVER FLOATING -->
-  <button class="btn-sos" style="margin-top:16px;">! SOS • Emergency</button>
+  <button class="btn-sos" style="margin-top:16px;" onclick="sosEmergency()">! SOS • Emergency</button>
   <p style="text-align:center; font-size:12px; color:var(--muted);">ZIRO does NOT hold job money. You pay workers directly.</p>
   <p style="text-align:center; font-size:12px; color:var(--muted);">Terms • Privacy • iCoin Policy • Refund Policy</p>
 </div>
 
 <!-- BOTTOM NAV - NOT FLOATING -->
-<div style="position:fixed; bottom:0; left:0; right:0; background:white; border-top:1px solid #eee; display:flex; justify-content:space-around; padding:10px 0; font-size:11px; text-align:center;">
-  <span><b>🏠<br>Home</b></span><span>🔍<br>Search</span><span style="background:var(--gold); width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:900; margin-top:-24px;">+</span><span>💬<br>Chat</span><span>👤<br>My Office</span>
+<div style="position:fixed; bottom:0; left:0; right:0; background:white; border-top:1px solid #eee; display:flex; justify-content:space-around; padding:10px 0; font-size:11px; text-align:center; z-index:40;">
+  <span onclick="navTo('Home')"><b>🏠<br>Home</b></span>
+  <span onclick="navTo('Search')">🔍<br>Search</span>
+  <span onclick="openPost()" style="background:var(--gold); width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:900; margin-top:-24px;">+</span>
+  <span onclick="navTo('Chat')">💬<br>Chat</span>
+  <span onclick="navTo('My Office')">👤<br>My Office</span>
 </div>
 
 <!-- CHIOMA - ONLY FLOATING BUTTON -->
@@ -60,5 +64,6 @@
 </div>
 
 <script src="js/chioma.js"></script>
+<script src="js/app.js"></script>
 </body>
-  </html>
+</html>
