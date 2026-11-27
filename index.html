@@ -2,39 +2,14 @@
 <html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ZIRO - Work. Hustle. Get Paid.</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#0A1628;color:#fff;padding-bottom:90px}
-a{color:inherit;text-decoration:none}
-.top{background:#0A3D2A;padding:14px 16px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:50}
-.logo{font-size:24px;font-weight:900}.logo span{color:#FFC107}
-.search{flex:1;background:#fff;color:#333;border-radius:999px;padding:10px 12px;font-size:13px;display:flex;gap:6px;align-items:center;cursor:pointer}
-.pill{background:#FFC107;color:#000;font-weight:800;padding:8px 10px;border-radius:999px;font-size:12px;white-space:nowrap}
-.sos{background:#E53935;color:#fff;border:none;padding:8px 11px;border-radius:999px;font-weight:800;font-size:12px}
-.avatar{width:36px;height:36px;background:#FFC107;color:#000;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;flex-shrink:0}
-.page{padding:16px}
-h1{font-size:28px;line-height:1.15} .sub{color:#B0BEC5;font-size:13px;margin:8px 0 14px}
-.card{background:#132A44;border-radius:16px;padding:16px;margin-bottom:12px}
-.card2{background:#1A365D;border-radius:16px;padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:center}
-.btn-gold{width:100%;background:#FFC107;color:#000;border:none;padding:15px;border-radius:12px;font-weight:900;font-size:16px}
-.btn-green{width:100%;background:#0A3D2A;color:#fff;border:1px solid #FFC107;padding:13px;border-radius:12px;font-weight:800}
-.btn-white{background:#fff;color:#111;border:none;padding:9px 16px;border-radius:999px;font-weight:800}
-.chip{background:#1A365D;color:#fff;border:none;padding:9px 14px;border-radius:999px;font-weight:700}
-.chip.active{background:#FFC107;color:#000}
-.chioma{position:fixed;right:16px;bottom:92px;width:56px;height:56px;border-radius:50%;background:#FFC107;color:#000;border:3px solid #fff;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;z-index:60}
-.nav{position:fixed;bottom:0;left:0;right:0;background:#0A1628;display:flex;border-top:1px solid #333;z-index:50}
-.nav a{flex:1;text-align:center;padding:10px 2px;font-size:11px;font-weight:800;color:#aaa}
-.nav a.active{color:#FFC107}
-.nav .create{background:#FFC107;color:#000;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:24px;margin:-18px auto 0}
-.small{font-size:12px;color:#B0BEC5}
-</style>
+<link rel="stylesheet" href="css/style.css">
 </head><body>
 
 <div class="top">
   <div class="logo">ZIR<span>O</span></div>
-  <div class="search" onclick="location.href='search.html'">🔍 Search Plumber, Cleaner...</div>
+  <div class="search">🔍 <input placeholder="Search Plumber, Cleaner..." onclick="location.href='search.html'"></div>
   <a href="wallet.html" class="pill">🪙 <span id="coinTop">120</span> iCoin</a>
-  <button class="sos" onclick="location.href='office.html#safety'">SOS</button>
+  <button class="sos-inline" onclick="location.href='office.html#safety'">SOS</button>
   <div class="avatar" onclick="location.href='office.html'">A</div>
 </div>
 
@@ -42,49 +17,44 @@ h1{font-size:28px;line-height:1.15} .sub{color:#B0BEC5;font-size:13px;margin:8px
   <h1>Find Trusted Workers<br>Near You, Fast.</h1>
   <p class="sub">Plumber • Electrician • Cleaner • Driver • More — Nigeria • 36 States + FCT</p>
 
-  <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;">
-    <button class="chip active" onclick="location.href='search.html'">All</button>
-    <button class="chip" onclick="location.href='search.html'">Plumber</button>
-    <button class="chip" onclick="location.href='search.html'">Electrician</button>
-    <button class="chip" onclick="location.href='search.html'">Cleaner</button>
-    <button class="chip" onclick="location.href='search.html'">Driver</button>
+  <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;">
+    <button class="chip active">All</button><button class="chip" onclick="location.href='search.html'">Plumber</button><button class="chip" onclick="location.href='search.html'">Electrician</button><button class="chip" onclick="location.href='search.html'">Cleaner</button><button class="chip" onclick="location.href='search.html'">Driver</button>
   </div>
 
   <div class="card">
     <b>CHIOMA — Verified • Abuja • Available</b>
     <p class="small">Your Work Companion. I can help you find work, buy iCoin, post a job, verify.</p>
     <div style="display:flex;gap:8px;margin-top:10px;">
-      <button style="flex:1;background:#FFC107;color:#000;border:none;padding:12px;border-radius:12px;font-weight:900;" onclick="location.href='chat.html'">🎤 Talk • Voice</button>
-      <button style="flex:1;background:#fff;color:#111;border:none;padding:12px;border-radius:12px;font-weight:800;" onclick="location.href='chat.html'">💬 Chat • Text</button>
+      <button class="btn-green" style="flex:1;" onclick="alert('CHIOMA Voice - Coming in Phase 3')">🎤 Talk • Voice</button>
+      <button class="btn-white" style="flex:1;" onclick="alert('CHIOMA Chat - Coming in Phase 3')">💬 Chat • Text</button>
     </div>
   </div>
 
-  <button class="btn-gold" onclick="location.href='search.html'">+ Post Job</button>
-  <div style="height:10px;"></div>
-  <button class="btn-green" onclick="location.href='office.html'">Join as Worker</button>
-  <div style="height:10px;"></div>
-  <button class="btn-green" onclick="location.href='search.html'">See All Workers →</button>
+  <div class="grid3" style="margin-bottom:12px;text-align:center;">
+    <div class="card" onclick="location.href='search.html'">🔍<br><b>Find Work</b></div>
+    <div class="card" onclick="alert('Post Job - Phase 3')">➕<br><b>Post Job</b></div>
+    <div class="card" onclick="alert('Attention Shop - Phase 3')">🏪<br><b>Attention Shop</b></div>
+    <div class="card" onclick="location.href='wallet.html'">🪙<br><b>Buy iCoin</b></div>
+  </div>
 
-  <div style="margin:16px 0 8px;display:flex;justify-content:space-between;align-items:center;"><b>Available Workers Near You</b><a href="search.html" style="color:#FFC107;font-size:12px;">See All →</a></div>
+  <h3>ZIRO Picked For You</h3>
+  <div class="card"><b>Ada Okafor — Driver • Abuja</b><p class="small">92% match • ⭐ 4.9 • Verified • Available Now</p><button class="btn-green" onclick="alert('Apply - Phase 3 - Costs iCoin')">Apply</button></div>
+  <div class="card"><b>Fatima Bello — Designer • Enugu</b><p class="small">95% match • ⭐ 4.8 • Verified • Available Now</p><button class="btn-green" onclick="alert('Apply - Phase 3 - Costs iCoin')">Apply</button></div>
 
-  <div class="card2" onclick="location.href='search.html'"><div style="width:48px;height:48px;background:#FFC107;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#000;font-weight:900;">A</div><div style="flex:1;"><b>Ada Okafor — Driver • Abuja</b><p class="small">92% match • ⭐ 4.9 • Verified</p></div><button class="btn-white" onclick="event.stopPropagation();location.href='chat.html'">Apply</button></div>
-  <div class="card2" onclick="location.href='search.html'"><div style="width:48px;height:48px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#000;font-weight:900;">F</div><div style="flex:1;"><b>Fatima Bello — Designer • Enugu</b><p class="small">95% match • ⭐ 4.8 • Verified</p></div><button class="btn-white" onclick="event.stopPropagation();location.href='chat.html'">Apply</button></div>
-  <div class="card2" onclick="location.href='search.html'"><div style="width:48px;height:48px;background:#0A3D2A;border:1px solid #FFC107;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;">S</div><div style="flex:1;"><b>Segun O. — Barber • Abuja</b><p class="small">⭐ 4.9 • Trust Badge</p></div><button class="btn-white" onclick="event.stopPropagation();location.href='chat.html'">View</button></div>
+  <div class="card"><b>🏆 Merit Wall</b><p class="small">Top Employer this week: Lagos Logistics Co. • 10 hires • 4.9★ • 100% payout</p></div>
 
-  <div class="card"><b>🏆 Merit Wall</b><p class="small">Top Employer: Lagos Logistics Co. • 10 hires • 4.9★ • 100% payout</p></div>
-  <div class="card"><b>🪙 iCoin Price: N50 per iCoin • Min Buy 7</b><p class="small">ZIRO does NOT hold money. No Escrow. Pay each other directly.</p><button class="btn-gold" style="margin-top:10px;" onclick="location.href='wallet.html'">Buy iCoin</button></div>
-  <p class="small" style="text-align:center;">ZIRO TECHNOLOGIES LTD • Terms • Privacy • iCoin Policy • Refund Policy</p>
+  <p class="small" style="text-align:center;">ZIRO TECHNOLOGIES LTD • No Escrow — ZIRO does NOT hold money. Pay each other directly.<br><a href="#">Terms</a> • <a href="#">Privacy</a> • <a href="#">iCoin Policy</a> • <a href="#">Refund Policy</a></p>
 </div>
 
-<!-- CHIOMA - ONLY FLOATING -->
-<div class="chioma" onclick="location.href='chat.html'">C</div>
+<!-- CHIOMA - ONLY FLOATING BUTTON -->
+<div class="chioma-float" onclick="alert('CHIOMA - Phase 3')">C</div>
 
 <div class="nav">
   <a href="index.html" class="active">🏠<br>Home</a>
   <a href="search.html">🔍<br>Search</a>
-  <a href="search.html"><div class="create">+</div><br>Create</a>
+  <a href="#"><div class="create">+</div><br>Create</a>
   <a href="chat.html">💬<br>Chat</a>
   <a href="office.html">👤<br>My Office</a>
 </div>
-<script src="js/wallet.js"></script>
+<script src="js/auth.js"></script><script src="js/wallet.js"></script><script src="js/workers.js"></script><script src="js/notify.js"></script><script src="js/admin.js"></script>
 </body></html>
