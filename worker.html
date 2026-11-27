@@ -6,9 +6,9 @@
 <title>ZIRO - Worker Profile</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body style="background:#0B3D2E; margin:0; padding-bottom:75px;">
+<body style="background:#0B3D2E; margin:0;">
 <div style="background:linear-gradient(180deg,#0B6E4F 0%, #0B3D2E 100%); padding:16px; border-radius:0 0 22px 22px; color:white;">
-  <div onclick="window.history.back()" style="font-size:14px;">← Back</div>
+  <div onclick="window.location.href='index.html'" style="font-size:14px;">← Back to Home</div>
   <div style="display:flex; gap:14px; align-items:center; margin-top:14px;">
     <div id="avatar" style="width:68px; height:68px; min-width:68px; background:#F2C94C; color:#0B3D2E; border-radius:20px; display:flex; align-items:center; justify-content:center; font-size:32px; font-weight:900;">S</div>
     <div style="flex:1; min-width:0;">
@@ -17,31 +17,28 @@
       <p id="wRating" style="margin:2px 0; font-size:13px;">⭐ 4.8 • ✓ Verified • Available Now</p>
     </div>
   </div>
-  <div style="display:flex; gap:8px; margin-top:14px;">
-    <div style="flex:1; background:rgba(255,255,255,0.15); border-radius:12px; padding:10px; text-align:center;"><b id="wJobs" style="font-size:16px;">24</b><p style="margin:2px 0 0; font-size:11px; color:#D6EDE3;">Jobs Done</p></div>
-    <div style="flex:1; background:rgba(255,255,255,0.15); border-radius:12px; padding:10px; text-align:center;"><b id="wPrice" style="font-size:16px;">₦3,000</b><p style="margin:2px 0 0; font-size:11px; color:#D6EDE3;">Per Job</p></div>
-    <div style="flex:1; background:rgba(255,255,255,0.15); border-radius:12px; padding:10px; text-align:center;"><b style="font-size:16px;">98%</b><p style="margin:2px 0 0; font-size:11px; color:#D6EDE3;">On Time</p></div>
+  <!-- ONE ARRANGED FOLDER - Jobs Done | Per Job | On Time - Inside ONE box -->
+  <div style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.25); border-radius:14px; padding:4px 0; margin-top:14px; display:flex;">
+    <div style="flex:1; text-align:center; padding:10px 4px; border-right:1px solid rgba(255,255,255,0.25);"><b id="wJobs" style="font-size:17px; display:block;">24</b><span style="font-size:11px; color:#D6EDE3;">Jobs Done</span></div>
+    <div style="flex:1; text-align:center; padding:10px 4px; border-right:1px solid rgba(255,255,255,0.25);"><b id="wPrice" style="font-size:17px; display:block;">₦3,000</b><span style="font-size:11px; color:#D6EDE3;">Per Job</span></div>
+    <div style="flex:1; text-align:center; padding:10px 4px;"><b style="font-size:17px; display:block;">98%</b><span style="font-size:11px; color:#D6EDE3;">On Time</span></div>
   </div>
 </div>
 <div style="background:#0B3D2E; padding:16px;">
   <div style="background:white; border-radius:16px; padding:18px;">
     <b style="font-size:15px;">About</b>
-    <p id="wAbout" style="font-size:13px; color:#555; line-height:1.6; margin:8px 0 0;">Experienced and trusted worker. Punctual, clean work, fair price. Available today.</p>
+    <p id="wAbout" style="font-size:13px; color:#555; line-height:1.6; margin:8px 0 0;">Experienced and trusted worker.</p>
     <hr style="border:none; border-top:1px solid #eee; margin:14px 0;">
     <b style="font-size:15px;">Reviews</b>
     <div id="reviews"></div>
   </div>
-  <button onclick="hireThis()" style="width:100%; background:#F2C94C; color:#0B3D2E; border:none; padding:15px; border-radius:12px; font-size:15px; font-weight:900; margin-top:12px;">Hire Now</button>
-  <button onclick="chatThis()" style="width:100%; background:#0B6E4F; color:white; border:none; padding:14px; border-radius:12px; font-size:14px; font-weight:800; margin-top:10px;">💬 Chat With Worker</button>
-  <button onclick="unlockThis()" style="width:100%; background:white; color:#0B3D2E; border:1px solid #ddd; padding:13px; border-radius:12px; font-size:13px; font-weight:700; margin-top:10px;">Unlock Contact • 5 iCoin</button>
-  <p style="text-align:center; font-size:11px; color:#B8D8CC; margin-top:10px;">ZIRO does NOT hold job money. You pay workers directly after work.</p>
-</div>
-<div class="ziro-nav">
-  <button class="ziro-nav-item" onclick="window.location.href='index.html'"><span class="nav-icon">🏠</span>Home</button>
-  <button class="ziro-nav-item" onclick="window.location.href='search.html'"><span class="nav-icon">🔍</span>Search</button>
-  <button class="ziro-nav-center" onclick="window.location.href='post.html'">+</button>
-  <button class="ziro-nav-item" onclick="window.location.href='chat.html'"><span class="nav-icon">💬</span>Chat</button>
-  <button class="ziro-nav-item" onclick="window.location.href='office.html'"><span class="nav-icon">👤</span>My Office</button>
+  <!-- ONE ARRANGED FOLDER - All Buttons Together, Well Arranged -->
+  <div style="background:white; border-radius:16px; padding:14px; margin-top:12px; display:flex; flex-direction:column; gap:10px;">
+    <button onclick="hireThis()" style="width:100%; background:#F2C94C; color:#0B3D2E; border:none; padding:15px; border-radius:12px; font-size:15px; font-weight:900;">Hire Now</button>
+    <button onclick="chatThis()" style="width:100%; background:#0B6E4F; color:white; border:none; padding:14px; border-radius:12px; font-size:14px; font-weight:800;">💬 Chat With Worker</button>
+    <button onclick="unlockThis()" style="width:100%; background:#FFF8E1; color:#0B3D2E; border:1px solid #F2C94C; padding:14px; border-radius:12px; font-size:14px; font-weight:800;">🔓 Unlock Contact • 5 iCoin</button>
+    <p style="text-align:center; font-size:11px; color:#888; margin:0;">ZIRO does NOT hold job money. You pay workers directly after work.</p>
+  </div>
 </div>
 <script src="js/notify.js"></script>
 <script>
@@ -66,10 +63,7 @@ function loadWorker(){
   document.getElementById('wJobs').textContent=current.jobs;
   document.getElementById('wPrice').textContent='₦'+current.price.toLocaleString();
   document.getElementById('wAbout').textContent=current.about;
-  document.getElementById('reviews').innerHTML=
-    '<p style="font-size:13px; margin:10px 0 0;">⭐⭐⭐⭐⭐ <b>Chidinma</b> — Very good work, came on time.</p>'+
-    '<p style="font-size:13px; margin:8px 0 0;">⭐⭐⭐⭐⭐ <b>Emeka</b> — Neat work, I will hire again.</p>'+
-    '<p style="font-size:13px; margin:8px 0 0;">⭐⭐⭐⭐ <b>Fatima</b> — Good price, polite.</p>';
+  document.getElementById('reviews').innerHTML='<p style="font-size:13px; margin:10px 0 0;">⭐⭐⭐⭐⭐ <b>Chidinma</b> — Very good work, came on time.</p><p style="font-size:13px; margin:8px 0 0;">⭐⭐⭐⭐⭐ <b>Emeka</b> — Neat work, I will hire again.</p><p style="font-size:13px; margin:8px 0 0;">⭐⭐⭐⭐ <b>Fatima</b> — Good price, polite.</p>';
 }
 function hireThis(){ ziroConfirm('Hire '+current.name+'?', current.skill+' • ₦'+current.price.toLocaleString()+'<br><br>Chat to agree time.', function(){ localStorage.setItem('ziro_chat_with', current.name); window.location.href='chat-room.html?with='+encodeURIComponent(current.name); }); }
 function chatThis(){ localStorage.setItem('ziro_chat_with', current.name); window.location.href='chat-room.html?with='+encodeURIComponent(current.name); }
@@ -77,4 +71,4 @@ function unlockThis(){ ziroConfirm('Unlock Contact?', 'Unlock '+current.name+' c
 document.addEventListener('DOMContentLoaded', loadWorker);
 </script>
 </body>
-  </html>
+</html>
