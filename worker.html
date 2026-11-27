@@ -17,7 +17,6 @@
       <p id="wRating" style="margin:2px 0; font-size:13px;">⭐ 4.8 • ✓ Verified • Available Now</p>
     </div>
   </div>
-  <!-- ONE ARRANGED FOLDER - Jobs Done | Per Job | On Time - Inside ONE box -->
   <div style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.25); border-radius:14px; padding:4px 0; margin-top:14px; display:flex;">
     <div style="flex:1; text-align:center; padding:10px 4px; border-right:1px solid rgba(255,255,255,0.25);"><b id="wJobs" style="font-size:17px; display:block;">24</b><span style="font-size:11px; color:#D6EDE3;">Jobs Done</span></div>
     <div style="flex:1; text-align:center; padding:10px 4px; border-right:1px solid rgba(255,255,255,0.25);"><b id="wPrice" style="font-size:17px; display:block;">₦3,000</b><span style="font-size:11px; color:#D6EDE3;">Per Job</span></div>
@@ -32,7 +31,6 @@
     <b style="font-size:15px;">Reviews</b>
     <div id="reviews"></div>
   </div>
-  <!-- ONE ARRANGED FOLDER - All Buttons Together, Well Arranged -->
   <div style="background:white; border-radius:16px; padding:14px; margin-top:12px; display:flex; flex-direction:column; gap:10px;">
     <button onclick="hireThis()" style="width:100%; background:#F2C94C; color:#0B3D2E; border:none; padding:15px; border-radius:12px; font-size:15px; font-weight:900;">Hire Now</button>
     <button onclick="chatThis()" style="width:100%; background:#0B6E4F; color:white; border:none; padding:14px; border-radius:12px; font-size:14px; font-weight:800;">💬 Chat With Worker</button>
@@ -41,6 +39,7 @@
   </div>
 </div>
 <script src="js/notify.js"></script>
+<script src="js/wallet.js"></script>
 <script>
 let WORKERS=[
   {name:'Segun O.', skill:'Barber', city:'Enugu', rating:'4.8', price:3000, jobs:24, about:'Professional barber with 5 years experience. Clean cuts, home service available.'},
@@ -65,9 +64,22 @@ function loadWorker(){
   document.getElementById('wAbout').textContent=current.about;
   document.getElementById('reviews').innerHTML='<p style="font-size:13px; margin:10px 0 0;">⭐⭐⭐⭐⭐ <b>Chidinma</b> — Very good work, came on time.</p><p style="font-size:13px; margin:8px 0 0;">⭐⭐⭐⭐⭐ <b>Emeka</b> — Neat work, I will hire again.</p><p style="font-size:13px; margin:8px 0 0;">⭐⭐⭐⭐ <b>Fatima</b> — Good price, polite.</p>';
 }
-function hireThis(){ ziroConfirm('Hire '+current.name+'?', current.skill+' • ₦'+current.price.toLocaleString()+'<br><br>Chat to agree time.', function(){ localStorage.setItem('ziro_chat_with', current.name); window.location.href='chat-room.html?with='+encodeURIComponent(current.name); }); }
 function chatThis(){ localStorage.setItem('ziro_chat_with', current.name); window.location.href='chat-room.html?with='+encodeURIComponent(current.name); }
-function unlockThis(){ ziroConfirm('Unlock Contact?', 'Unlock '+current.name+' contact for 5 iCoin?', function(){ ziroNotify('Contact Unlocked','You can now chat with '+current.name+'.','Go to Chat'); const b=document.querySelector('#ziroModal button'); if(b) b.onclick=function(){ closeZiroModal(); chatThis(); }; }); }
+function hireThis(){ ziroConfirm('Hire '+current.name+'?', current.skill+' • ₦'+current.price.toLocaleString()+'<br><br>Chat to agree time.', function(){ chatThis(); }); }
+function unlockThis(){
+  if(localStorage.getItem('ziro_unlocked_'+current.name)==='yes'){
+    ziroNotify('Already Unlocked', 'You already unlocked '+current.name+'.', 'Go to Chat', function(){ chatThis(); });
+    return;
+  }
+  ziroConfirm('Unlock Contact?', 'Unlock '+current.name+' contact for 5 iCoin?', function(){
+    if(typeof ziroSpendIcoin === 'function'){
+      const ok = ziroSpendIcoin(5, 'Unlocked '+current.name+' • -5 iCoin');
+      if(!ok){ ziroNotify('Not Enough iCoin', 'You need 5 iCoin to unlock.<br>Buy iCoin in Wallet.', 'Go to Wallet', function(){ window.location.href='wallet.html'; }); return; }
+    }
+    localStorage.setItem('ziro_unlocked_'+current.name, 'yes');
+    ziroNotify('Contact Unlocked', 'You can now chat with '+current.name+'.<br>5 iCoin used.', 'Go to Chat', function(){ chatThis(); });
+  });
+}
 document.addEventListener('DOMContentLoaded', loadWorker);
 </script>
 </body>
