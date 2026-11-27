@@ -1,20 +1,23 @@
-// ZIRO Workers - Demo + Real signups
+// ZIRO Workers - Shared by Home, Search, Chat, GM, CEO
 function ziroGetWorkers(){
-  const demo=[
-    {name:'Segun O.', skill:'Barber', city:'Enugu', rating:'4.8', price:3000, jobs:24, about:'Professional barber with 5 years experience. Clean cuts, home service available.'},
-    {name:'Grace M.', skill:'Cook / Chef', city:'Wuse, Abuja', rating:'4.9', price:8500, jobs:41, about:'Experienced chef for parties, home cooking and events. Tasty and hygienic.'},
-    {name:'Yusuf A.', skill:'Welder', city:'Kaduna', rating:'4.6', price:11000, jobs:18, about:'Skilled welder for gates, burglary proof, tanks and repairs.'},
-    {name:'Blessing I.', skill:'Gardener', city:'Lekki, Lagos', rating:'4.7', price:4500, jobs:29, about:'Garden cleaning, grass cutting and flower maintenance.'},
-    {name:'Musa A.', skill:'Plumber', city:'Wuse 2, Abuja', rating:'4.8', price:8000, jobs:35, about:'Expert plumber for leaks, taps, tanks and bathroom fittings. Fast response.'},
-    {name:'Udoka', skill:'Brick Layer', city:'Apo, Abuja', rating:'4.7', price:12000, jobs:31, about:'Brick layer for fences, houses and repairs. Strong and neat work.'},
-    {name:'Ada O.', skill:'Cleaner', city:'Garki, Abuja', rating:'4.8', price:6000, jobs:27, about:'Deep cleaning for homes and offices. Reliable and thorough.'},
-    {name:'Tunde B.', skill:'Electrician', city:'Garki, Abuja', rating:'4.7', price:10000, jobs:22, about:'Electrician for wiring, sockets, fans and power issues.'},
+  const saved = JSON.parse(localStorage.getItem('ziro_workers') || 'null');
+  if(saved && saved.length) return saved;
+  const def = [
+    {name:'Segun O.', skill:'Barber', city:'Abuja', rating:'4.8', price:5000, jobs:12, about:'Professional barber. Home service available. Sharp cuts, clean finish.'},
+    {name:'Chinedu O.', skill:'Plumber', city:'Abuja', rating:'4.9', price:8000, jobs:24, about:'Expert plumber. Leaks, installations, tanks. 5 years experience.'},
+    {name:'Adaeze N.', skill:'Cleaner', city:'Lagos', rating:'4.7', price:6000, jobs:18, about:'Deep cleaning, house + office. Neat, fast, trustworthy.'},
+    {name:'Udoka', skill:'Brick Layer', city:'Abuja', rating:'4.7', price:12000, jobs:30, about:'Brick laying, plastering, POP. Strong and neat work.'},
+    {name:'Musa A.', skill:'Electrician', city:'Enugu', rating:'4.8', price:7000, jobs:20, about:'House wiring, solar, inverter installation.'},
   ];
-  const custom = JSON.parse(localStorage.getItem('ziro_custom_workers') || '[]');
-  return [...custom, ...demo];
+  localStorage.setItem('ziro_workers', JSON.stringify(def));
+  return def;
 }
 function ziroAddWorker(w){
-  const custom = JSON.parse(localStorage.getItem('ziro_custom_workers') || '[]');
-  custom.unshift(w);
-  localStorage.setItem('ziro_custom_workers', JSON.stringify(custom));
+  const list = ziroGetWorkers();
+  list.unshift(w);
+  localStorage.setItem('ziro_workers', JSON.stringify(list));
+  ziroAdminLogSafe('New worker joined: ' + w.name + ' - ' + w.skill);
+}
+function ziroAdminLogSafe(text){
+  try{ if(typeof ziroAdminLog === 'function') ziroAdminLog(text); }catch(e){}
 }
