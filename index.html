@@ -25,6 +25,7 @@
 </div>
 <div style="background:#0B3D2E; padding:14px 16px 0;">
   <h3 style="margin:0 0 10px; color:white;">👷 Available Workers</h3>
+  <p style="color:#B8D8CC; font-size:12px; margin:0 0 10px;">Tap any worker to view profile →</p>
   <div id="workerList"></div>
 </div>
 <div style="background:#0B3D2E; padding:6px 16px 20px;">
@@ -44,6 +45,7 @@
 <script>
 function makeStableId(j){ const s=(j.skill||'')+'|'+(j.desc||'')+'|'+(j.budget||'')+'|'+(j.city||'')+'|'+(j.name||''); let h=0; for(let i=0;i<s.length;i++){ h=(h*31 + s.charCodeAt(i)) >>> 0; } return 'job_'+h; }
 function goToJobDetails(job){ window.location.href='job.html?id='+makeStableId(job); }
+function openWorker(name){ localStorage.setItem('ziro_view_worker', name); window.location.href='worker.html?name='+encodeURIComponent(name); }
 let WORKERS=[
   {name:'Segun O.', skill:'Barber', city:'Enugu', rating:'4.8', price:3000},
   {name:'Grace M.', skill:'Cook / Chef', city:'Wuse, Abuja', rating:'4.9', price:8500},
@@ -53,7 +55,12 @@ let WORKERS=[
   {name:'Udoka', skill:'Brick Layer', city:'Apo, Abuja', rating:'4.7', price:12000},
 ];
 function renderWorkers(){
-  document.getElementById('workerList').innerHTML=WORKERS.map(w=>'<div style="background:white; border-radius:16px; padding:16px; margin-bottom:12px;"><b style="font-size:16px;">'+w.name+' ✓ Verified</b><p style="margin:4px 0; font-size:13px; color:#666;">'+w.skill+' • '+w.city+'</p><p style="margin:4px 0; font-size:13px;">⭐ '+w.rating+' • Available Now • ₦'+w.price.toLocaleString()+' / job</p><button onclick="hireWorker(\''+w.name+'\')" style="width:100%; background:#0B6E4F; color:white; border:none; padding:13px; border-radius:12px; font-size:14px; font-weight:800; margin-top:8px;">Hire Now</button><button onclick="unlockContact(\''+w.name+'\')" style="width:100%; background:white; color:#0B3D2E; border:1px solid #ddd; padding:12px; border-radius:12px; font-size:13px; font-weight:700; margin-top:8px;">Unlock Contact • 5 iCoin</button></div>').join('');
+  document.getElementById('workerList').innerHTML=WORKERS.map(w=>'<div style="background:white; border-radius:16px; padding:16px; margin-bottom:12px;">'
+    + '<div onclick="openWorker(\''+w.name+'\')" style="cursor:pointer;"><b style="font-size:16px;">'+w.name+' ✓ Verified <span style="color:#0B6E4F; font-size:12px;">View Profile ›</span></b><p style="margin:4px 0; font-size:13px; color:#666;">'+w.skill+' • '+w.city+'</p><p style="margin:4px 0; font-size:13px;">⭐ '+w.rating+' • Available Now • ₦'+w.price.toLocaleString()+' / job</p></div>'
+    + '<button onclick="hireWorker(\''+w.name+'\')" style="width:100%; background:#0B6E4F; color:white; border:none; padding:13px; border-radius:12px; font-size:14px; font-weight:800; margin-top:8px;">Hire Now</button>'
+    + '<button onclick="unlockContact(\''+w.name+'\')" style="width:100%; background:white; color:#0B3D2E; border:1px solid #ddd; padding:12px; border-radius:12px; font-size:13px; font-weight:700; margin-top:8px;">Unlock Contact • 5 iCoin</button>'
+    + '<button onclick="openWorker(\''+w.name+'\')" style="width:100%; background:white; color:#0B6E4F; border:1px solid #0B6E4F; padding:11px; border-radius:12px; font-size:13px; font-weight:800; margin-top:8px;">👤 View Full Profile</button>'
+    + '</div>').join('');
 }
 function hireWorker(name){ ziroConfirm('Hire '+name+'?', 'Chat with '+name+' to agree time and price.', function(){ localStorage.setItem('ziro_chat_with', name); window.location.href='chat-room.html?with='+encodeURIComponent(name); }); }
 function unlockContact(name){ ziroConfirm('Unlock Contact?', 'Unlock '+name+' contact for 5 iCoin?', function(){ ziroNotify('Contact Unlocked','You can now chat with '+name+'.','Go to Chat'); const b=document.querySelector('#ziroModal button'); if(b) b.onclick=function(){ closeZiroModal(); localStorage.setItem('ziro_chat_with', name); window.location.href='chat-room.html?with='+encodeURIComponent(name); }; }); }
