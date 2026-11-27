@@ -31,6 +31,7 @@
   <div id="results"></div>
 </div>
 <script src="js/notify.js"></script>
+<script src="js/wallet.js"></script>
 <script>
 let WORKERS=[
   {name:'Segun O.', skill:'Barber', city:'Enugu', rating:'4.8', price:3000},
@@ -47,6 +48,7 @@ function setSkill(s){ skillFilter=s; renderSearch(); }
 function setArea(a){ areaFilter=a; renderSearch(); }
 function doSearch(v){ q=v; renderSearch(); }
 function openWorker(name){ localStorage.setItem('ziro_view_worker', name); window.location.href='worker.html?name='+encodeURIComponent(name); }
+function openChatWith(name){ localStorage.setItem('ziro_chat_with', name); window.location.href='chat-room.html?with='+encodeURIComponent(name); }
 function renderSearch(){
   const rows=WORKERS.filter(w=>{ const okQ=!q || (w.name+w.skill+w.city).toLowerCase().includes(q.toLowerCase()); const okS=skillFilter==='All' || w.skill.toLowerCase().includes(skillFilter.toLowerCase()); const okA=areaFilter==='All' || w.city.toLowerCase().includes(areaFilter.toLowerCase()); return okQ && okS && okA; });
   document.getElementById('resultCount').textContent = rows.length + ' worker(s) found' + (skillFilter!=='All' ? ' • '+skillFilter : '') + (areaFilter!=='All' ? ' • '+areaFilter : '');
@@ -55,8 +57,18 @@ function renderSearch(){
     + '<div style="background:#F2F4F2; border-radius:12px; padding:10px; margin-top:10px; display:flex; flex-direction:column; gap:8px;"><button onclick="hireWorker(\''+w.name+'\')" style="width:100%; background:#123A6D; color:white; border:none; padding:13px; border-radius:10px; font-size:14px; font-weight:800;">Hire Now</button><div style="display:flex; gap:8px;"><button onclick="unlockWorker(\''+w.name+'\')" style="flex:1; background:white; border:1px solid #ddd; padding:11px 6px; border-radius:10px; font-size:12px; font-weight:800;">🔓 Unlock • 5 iCoin</button><button onclick="openWorker(\''+w.name+'\')" style="flex:1; background:white; color:#123A6D; border:1px solid #123A6D; padding:11px 6px; border-radius:10px; font-size:12px; font-weight:800;">👤 View Profile</button></div></div>'
     + '</div>').join('') : '<p style="background:white; padding:20px; border-radius:14px; text-align:center; color:#666;">No worker found.</p>';
 }
-function hireWorker(name){ localStorage.setItem('ziro_chat_with', name); window.location.href='chat-room.html?with='+encodeURIComponent(name); }
-function unlockWorker(name){ ziroConfirm('Unlock Contact?', 'Unlock '+name+' for 5 iCoin?', function(){ ziroNotify('Contact Unlocked','You can now chat with '+name+'.'); }); }
+function hireWorker(name){ openChatWith(name); }
+function unlockWorker(name){
+  if(localStorage.getItem('ziro_unlocked_'+name)==='yes'){ ziroNotify('Already Unlocked', 'You already unlocked '+name+'.', 'Go to Chat', function(){ openChatWith(name); }); return; }
+  ziroConfirm('Unlock Contact?', 'Unlock '+name+' contact for 5 iCoin?', function(){
+    if(typeof ziroSpendIcoin === 'function'){
+      const ok = ziroSpendIcoin(5, 'Unlocked '+name+' • -5 iCoin');
+      if(!ok){ ziroNotify('Not Enough iCoin', 'You need 5 iCoin to unlock.', 'Go to Wallet', function(){ window.location.href='wallet.html'; }); return; }
+    }
+    localStorage.setItem('ziro_unlocked_'+name, 'yes');
+    ziroNotify('Contact Unlocked', 'You can now chat with '+name+'.<br>5 iCoin used.', 'Go to Chat', function(){ openChatWith(name); });
+  });
+}
 document.addEventListener('DOMContentLoaded', ()=>{ const s=new URLSearchParams(location.search).get('skill'); if(s && s!=='All') skillFilter=s; renderSearch(); });
 </script>
 </body>
