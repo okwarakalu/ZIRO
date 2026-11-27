@@ -17,4 +17,4 @@ function ziroAddWorker(w){
   const custom = JSON.parse(localStorage.getItem('ziro_custom_workers') || '[]');
   custom.unshift(w);
   localStorage.setItem('ziro_custom_workers', JSON.stringify(custom));
-     }
+}
