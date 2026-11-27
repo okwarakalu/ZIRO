@@ -1,48 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>ZIRO - Post a Job</title>
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body style="background:#F2F4F2; margin:0;">
-<div style="background:linear-gradient(180deg,#0B6E4F 0%, #0B3D2E 100%); padding:20px 16px; border-radius:0 0 22px 22px; color:white;">
-  <div onclick="window.location.href='index.html'" style="font-size:14px;">← Back to Home</div>
-  <h2 style="margin:12px 0 4px; color:white;">Post a Job</h2>
-  <p style="margin:0; color:#F2C94C; font-size:13px;">Workers near you will see it.</p>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ZIRO V8 - Post Job</title><link rel="stylesheet" href="css/style.css"></head>
+<body>
+<div class="z-header">
+<div style="display:flex;justify-content:space-between;align-items:center;">
+<div class="z-logo">ZIRO<span> V8</span> • Post Job</div>
+<button onclick="location.href='index.html'" style="background:#fff;border:none;padding:8px 12px;border-radius:999px;font-weight:800;">← Home</button>
 </div>
+</div>
+
 <div style="padding:16px;">
-  <div style="background:white; border-radius:16px; padding:18px;">
-    <label style="font-size:13px; font-weight:800;">What do you need?</label>
-    <select id="skill" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 14px; font-size:14px;"><option>Plumber</option><option>Electrician</option><option>Cleaner</option><option>Brick Layer</option><option>Carpenter</option><option>Painter</option><option>Welder</option><option>Gardener</option></select>
-    <label style="font-size:13px; font-weight:800;">Describe the job</label>
-    <textarea id="desc" placeholder="Example: Mend my fence..." style="width:100%; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 14px; font-size:14px; min-height:90px;"></textarea>
-    <label style="font-size:13px; font-weight:800;">Budget (₦)</label>
-    <input id="budget" type="number" placeholder="Example: 12000" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 14px; font-size:14px;">
-    <label style="font-size:13px; font-weight:800;">Location</label>
-    <input id="city" placeholder="Example: Apo, Abuja" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 14px; font-size:14px;">
-    <label style="font-size:13px; font-weight:800;">Your Name</label>
-    <input id="name" placeholder="Example: Udoka" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 14px; font-size:14px;">
-    <button class="btn-primary" onclick="submitJob()">Post Job</button>
-    <p style="font-size:12px; color:#888; text-align:center; margin:10px 0 0;">ZIRO does NOT hold job money.<br>You pay workers directly after work.</p>
-  </div>
+<div class="z-card">
+<h2 style="margin:0;">What do you need?</h2>
+<p style="color:#666;">Post in 30 seconds. Workers near you will see it.</p>
+
+<label><b>Job Title</b></label><br>
+<input type="text" placeholder="e.g. I need a Barber" style="width:100%;padding:13px;border:1.5px solid #ddd;border-radius:12px;margin:6px 0 12px;box-sizing:border-box;"><br>
+
+<label><b>Category</b></label><br>
+<select style="width:100%;padding:13px;border:1.5px solid #ddd;border-radius:12px;margin:6px 0 12px;"><option>Barber</option><option>Cleaner</option><option>Plumber</option><option>Electrician</option><option>Other</option></select><br>
+
+<label><b>Location</b></label><br>
+<input type="text" placeholder="e.g. Wuse 2, Abuja" style="width:100%;padding:13px;border:1.5px solid #ddd;border-radius:12px;margin:6px 0 12px;box-sizing:border-box;"><br>
+
+<label><b>Budget (₦)</b></label><br>
+<input type="number" placeholder="e.g. 5000" style="width:100%;padding:13px;border:1.5px solid #ddd;border-radius:12px;margin:6px 0 12px;box-sizing:border-box;"><br>
+
+<label><b>Details</b></label><br>
+<textarea placeholder="Describe the job..." style="width:100%;padding:13px;border:1.5px solid #ddd;border-radius:12px;margin:6px 0 14px;height:90px;box-sizing:border-box;"></textarea>
+
+<button class="z-btn-green">📄 Post Job — Free</button>
+<p style="text-align:center;font-size:12px;color:#888;">You pay only when you hire. • ZIRO protects you.</p>
 </div>
-<script src="js/notify.js"></script>
-<script>
-function submitJob(){
-  const skill=document.getElementById('skill').value;
-  const desc=document.getElementById('desc').value.trim();
-  const budget=document.getElementById('budget').value.trim();
-  const city=document.getElementById('city').value.trim();
-  const name=document.getElementById('name').value.trim() || 'Udoka';
-  if(!desc || !budget || !city){ ziroNotify('Missing Info','Please fill description, budget and location.'); return; }
-  const jobs=JSON.parse(localStorage.getItem('ziro_jobs')||'[]');
-  jobs.push({skill, desc, budget:Number(budget), city, name});
-  localStorage.setItem('ziro_jobs', JSON.stringify(jobs));
-  ziroNotify('Job Posted','Your '+skill+' job is live.','View Home');
-  const b=document.querySelector('#ziroModal button'); if(b) b.onclick=function(){ closeZiroModal(); window.location.href='index.html'; };
-}
-</script>
-</body>
-</html>
+</div>
+
+<div class="z-sos">SOS</div>
+</body></html>
