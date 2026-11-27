@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ZIRO - Join as Worker</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background:#0B3D2E; margin:0;">
+<div style="background:linear-gradient(180deg,#0B6E4F 0%, #0B3D2E 100%); padding:20px 16px; border-radius:0 0 22px 22px; color:white;">
+  <div onclick="window.location.href='index.html'" style="font-size:14px;">← Back to Home</div>
+  <h2 style="margin:12px 0 4px; color:white;">👷 Join as Worker</h2>
+  <p style="margin:0; color:#F2C94C; font-size:13px;">Get jobs near you. Get paid directly.</p>
+</div>
+<div style="background:#0B3D2E; padding:16px;">
+  <div style="background:white; border-radius:16px; padding:18px;">
+    <label style="font-size:13px; font-weight:800;">Your Full Name</label>
+    <input id="wName" placeholder="Example: Chinedu O." style="width:100%; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 14px; font-size:14px;">
+    <label style="font-size:13px; font-weight:800;">Your Skill</label>
+    <select id="wSkill" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 14px; font-size:14px;">
+      <option>Plumber</option><option>Electrician</option><option>Cleaner</option><option>Brick Layer</option><option>Carpenter</option><option>Painter</option><option>Welder</option><option>Gardener</option><option>Barber</option><option>Cook / Chef</option><option>Driver</option><option>Tailor</option>
+    </select>
+    <label style="font-size:13px; font-weight:800;">Your Area / City</label>
+    <input id="wCity" placeholder="Example: Wuse 2, Abuja" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 14px; font-size:14px;">
+    <label style="font-size:13px; font-weight:800;">Your Price Per Job (₦)</label>
+    <input id="wPrice" type="number" placeholder="Example: 8000" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 14px; font-size:14px;">
+    <label style="font-size:13px; font-weight:800;">About You (short)</label>
+    <textarea id="wAbout" placeholder="Example: 5 years experience, fast and neat work..." style="width:100%; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 14px; font-size:14px; min-height:70px;"></textarea>
+    <label style="font-size:13px; font-weight:800;">Phone / WhatsApp</label>
+    <input id="wPhone" placeholder="Example: 08123456789" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 14px; font-size:14px;">
+    <button onclick="joinAsWorker()" style="width:100%; background:#0B6E4F; color:white; border:none; padding:15px; border-radius:12px; font-size:15px; font-weight:900;">Join ZIRO → Start Getting Jobs</button>
+    <p style="font-size:12px; color:#888; text-align:center; margin:10px 0 0;">You will appear on Home + Search immediately.<br>Customers pay you directly after work.</p>
+  </div>
+</div>
+<script src="js/notify.js"></script>
+<script src="js/workers.js"></script>
+<script>
+function joinAsWorker(){
+  const name=document.getElementById('wName').value.trim();
+  const skill=document.getElementById('wSkill').value;
+  const city=document.getElementById('wCity').value.trim();
+  const price=document.getElementById('wPrice').value.trim();
+  const about=document.getElementById('wAbout').value.trim();
+  const phone=document.getElementById('wPhone').value.trim();
+  if(!name || !city || !price){ ziroNotify('Missing Info','Please fill Name, Area and Price.'); return; }
+  ziroAddWorker({name:name, skill:skill, city:city, rating:'5.0', price:Number(price), jobs:0, about:about || 'New trusted worker on ZIRO. Ready to work.', phone:phone});
+  ziroNotify('Welcome to ZIRO!', 'Hi '+name+', your profile is live!<br>Customers can now find you.', 'View My Profile', function(){ localStorage.setItem('ziro_view_worker', name); window.location.href='worker.html?name='+encodeURIComponent(name); });
+}
+</script>
+</body>
+</html>
