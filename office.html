@@ -2,77 +2,49 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>ZIRO - My Office</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-<div style="background:var(--green); padding:20px 16px; border-radius:0 0 20px 20px; color:white;">
-  <div onclick="window.location.href='index.html'" style="font-size:14px;">← Back to Home</div>
-  <h2 style="margin:12px 0 4px;">My Office 👤</h2>
-  <p style="margin:0; color:var(--gold); font-size:13px;">Musa A. • Plumber • Wuse 2</p>
-  <div style="background:white; color:var(--text); border-radius:12px; padding:12px; margin-top:14px; display:flex; justify-content:space-between;">
-    <span><b>🪙 <span data-coin>120 iCoin</span></b><br><small style="color:var(--muted);">Your Balance</small></span>
-    <span style="text-align:right;"><b style="color:var(--success);">✓ Verified</b><br><small style="color:var(--muted);">ID + Background Checked</small></span>
-  </div>
+<body style="background:#F2F4F2; margin:0; padding-bottom:75px;">
+<div style="background:linear-gradient(180deg,#0B6E4F 0%, #0B3D2E 100%); padding:20px 16px; border-radius:0 0 22px 22px; color:white;">
+  <h2 style="margin:0; color:white;">My Office 👤</h2>
+  <p style="margin:4px 0 0; color:#F2C94C; font-size:13px;">Your jobs, wallet, iCoin & profile</p>
 </div>
-<div style="padding:16px; padding-bottom:120px;">
-  <button class="btn-primary" onclick="window.location.href='join.html'" style="margin-bottom:16px;">+ Join as Worker • FREE</button>
-  <h3>🚀 Boost My Skill</h3>
-  <p style="font-size:13px; color:var(--muted); margin:0 0 12px;">Appear at top of Labour Market.</p>
-  <div style="background:white; border-radius:16px; padding:16px;">
-    <label style="font-size:13px; font-weight:700;">Boost Duration</label>
-    <select id="boostDays" onchange="updateBoostPrice()" style="width:100%; padding:12px; border-radius:12px; border:1px solid #ddd; margin:8px 0 12px; font-size:14px;">
-      <option value="1">1 Day • 10 iCoin</option>
-      <option value="2">2 Days • 18 iCoin</option>
-      <option value="3">3 Days • 25 iCoin</option>
-      <option value="4">4 Days • 32 iCoin</option>
-      <option value="5">5 Days • 38 iCoin</option>
-      <option value="6">6 Days • 44 iCoin</option>
-      <option value="7" selected>7 Days • 50 iCoin</option>
-      <option value="14">14 Days • 90 iCoin</option>
-      <option value="30">30 Days • 160 iCoin</option>
-      <option value="custom">Custom Days...</option>
-    </select>
-    <div id="customBoostBox" style="display:none; margin-bottom:12px;">
-      <input id="customDays" type="number" min="1" max="90" placeholder="Type number of days e.g. 10" oninput="updateBoostPrice()" style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:1px solid #ddd;">
-    </div>
-    <button id="boostBtn" class="btn-primary" onclick="buyCustomBoost()">Activate Boost • 50 iCoin</button>
+<div style="padding:16px;">
+  <div style="background:white; border-radius:16px; padding:18px; display:flex; gap:14px; align-items:center;">
+    <div style="width:56px; height:56px; background:#F2C94C; color:#0B3D2E; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:900;">U</div>
+    <div style="flex:1;"><b id="officeName" style="font-size:17px;">Udoka</b><p style="margin:2px 0; font-size:13px; color:#666;">Brick Layer • Apo, Abuja</p><p style="margin:2px 0; font-size:12px; color:#0B6E4F; font-weight:800;">⭐ 4.7 • ✓ Verified</p></div>
+    <button onclick="window.location.href='index.html'" style="background:#0B6E4F; color:white; border:none; padding:9px 12px; border-radius:999px; font-size:12px; font-weight:800;">Edit</button>
   </div>
-  <h3 style="margin-top:20px;">🪙 Buy iCoin</h3>
-  <p style="font-size:13px; color:var(--muted);">Pay with Paystack. iCoin shows instantly.</p>
-  <div style="background:white; border-radius:16px; padding:16px;">
-    <button class="btn-primary" onclick="buyCoin(100, 1000)">100 iCoin • ₦1,000</button>
-    <button class="btn-secondary" style="margin-top:8px;" onclick="buyCoin(550, 5000)">550 iCoin • ₦5,000</button>
-    <button class="btn-secondary" style="margin-top:8px;" onclick="buyCoin(1200, 10000)">1200 iCoin • ₦10,000</button>
+  <div style="display:flex; gap:10px; margin-top:12px;">
+    <div style="flex:1; background:white; border-radius:14px; padding:14px; text-align:center;"><b style="font-size:20px;">₦<span id="walletBal">0</span></b><p style="margin:4px 0 0; font-size:12px; color:#888;">Wallet</p></div>
+    <div style="flex:1; background:#FFF8E1; border:1px solid #F2C94C; border-radius:14px; padding:14px; text-align:center;"><b style="font-size:20px; color:#B77900;">🪙 <span id="icoinBal">50</span></b><p style="margin:4px 0 0; font-size:12px; color:#888;">iCoin</p></div>
+    <div style="flex:1; background:white; border-radius:14px; padding:14px; text-align:center;"><b style="font-size:20px;" id="jobsDone">1</b><p style="margin:4px 0 0; font-size:12px; color:#888;">Jobs Done</p></div>
   </div>
-  <p style="text-align:center; font-size:12px; color:var(--muted); margin-top:12px;">ZIRO does NOT hold job money. You pay workers directly.<br>Terms • Privacy • iCoin Policy • Refund Policy</p>
-</div>
-<div style="position:fixed; bottom:0; left:0; right:0; background:white; border-top:1px solid #eee; display:flex; justify-content:space-around; padding:10px 0; font-size:11px; text-align:center;">
-  <span onclick="window.location.href='index.html'">🏠<br>Home</span>
-  <span onclick="window.location.href='index.html'">🔍<br>Search</span>
-  <span onclick="openPost()" style="background:var(--gold); width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:900; margin-top:-24px;">+</span>
-  <span onclick="navTo('Chat')">💬<br>Chat</span>
-  <span><b>👤<br>My Office</b></span>
-</div>
-<button class="chioma-float" onclick="toggleChioma()">◉ CHIOMA</button>
-<div id="chioma-box" style="display:none; position:fixed; bottom:150px; right:16px; left:16px; background:white; border-radius:16px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,0.2); z-index:60;">
-  <b>CHIOMA 🤖</b>
-  <div id="chioma-chat"><p style="font-size:13px; color:var(--muted);">Hello! I can show you how to Boost, Buy iCoin, Post a Job, or Accept an Errand.</p></div>
-  <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;">
-    <button onclick="setChiomaLang('English')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">English</button>
-    <button onclick="setChiomaLang('Hausa')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Hausa</button>
-    <button onclick="setChiomaLang('Yoruba')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Yoruba</button>
-    <button onclick="setChiomaLang('Igbo')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Igbo</button>
-    <button onclick="setChiomaLang('Pidgin')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Pidgin</button>
+  <div style="background:white; border-radius:16px; padding:8px 16px; margin-top:12px;">
+    <div onclick="window.location.href='chat.html'" style="padding:14px 0; border-bottom:1px solid #eee; display:flex; justify-content:space-between;"><span>💬 My Chats</span><span>›</span></div>
+    <div onclick="window.location.href='index.html'" style="padding:14px 0; border-bottom:1px solid #eee; display:flex; justify-content:space-between;"><span>📋 My Jobs</span><span>›</span></div>
+    <div onclick="window.location.href='post.html'" style="padding:14px 0; border-bottom:1px solid #eee; display:flex; justify-content:space-between;"><span>➕ Post a Job</span><span>›</span></div>
+    <div onclick="window.location.href='index.html'" style="padding:14px 0; display:flex; justify-content:space-between;"><span>⚙️ Settings</span><span>›</span></div>
   </div>
-  <input id="chiomaInput" placeholder="Ask CHIOMA... she understands slang" onkeyup="if(event.key==='Enter') chiomaAsk(this.value)" style="width:100%; box-sizing:border-box; padding:10px; border-radius:12px; border:1px solid #ddd; margin-top:8px;">
-  <button class="btn-primary" onclick="chiomaHelp('boost')" style="margin-top:8px;">How to Boost</button>
-  <button class="btn-secondary" onclick="chiomaHelp('icoin')" style="margin-top:8px;">How to Buy iCoin</button>
-  <button onclick="toggleChioma()" style="width:100%; margin-top:8px; border:none; background:none;">Close</button>
+  <button onclick="logoutZiro()" style="width:100%; background:#D32F2F; color:white; border:none; padding:14px; border-radius:12px; font-size:14px; font-weight:800; margin-top:14px;">Log Out</button>
+  <p style="text-align:center; font-size:11px; color:#999; margin-top:10px;">ZIRO v1.0 • Terms • Privacy • Refund Policy</p>
 </div>
-<script src="js/chioma.js"></script>
-<script src="js/app.js"></script>
-<script src="js/office.js"></script>
+<div class="ziro-nav">
+  <button class="ziro-nav-item" onclick="window.location.href='index.html'"><span class="nav-icon">🏠</span>Home</button>
+  <button class="ziro-nav-item" onclick="window.location.href='index.html'"><span class="nav-icon">🔍</span>Search</button>
+  <button class="ziro-nav-center" onclick="window.location.href='post.html'">+</button>
+  <button class="ziro-nav-item" onclick="window.location.href='chat.html'"><span class="nav-icon">💬</span>Chat</button>
+  <button class="ziro-nav-item active" onclick="window.location.href='office.html'"><span class="nav-icon">👤</span>My Office</button>
+</div>
+<script src="js/notify.js"></script>
+<script>
+function logoutZiro(){ ziroConfirm('Log Out?', 'Are you sure you want to log out?', function(){ ziroNotify('Logged Out','You have been logged out.'); }); }
+document.addEventListener('DOMContentLoaded', ()=>{
+  const jobs=JSON.parse(localStorage.getItem('ziro_jobs')||'[]');
+  document.getElementById('jobsDone').textContent = jobs.length || 1;
+});
+</script>
 </body>
 </html>
