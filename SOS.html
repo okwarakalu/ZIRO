@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ZIRO - SOS Emergency</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background:#F2F4F2; margin:0; padding-bottom:75px;">
+<div style="background:#D32F2F; padding:20px 16px; border-radius:0 0 22px 22px; color:white;">
+  <div onclick="window.location.href='index.html'" style="font-size:14px;">← Back</div>
+  <h2 style="margin:12px 0 4px; color:white;">🚨 SOS Emergency</h2>
+  <p style="margin:0; color:#FFD9D9; font-size:13px;">Need help urgently? We find nearest worker fast.</p>
+</div>
+<div style="padding:16px;">
+  <div style="background:white; border-radius:16px; padding:18px;">
+    <label style="font-size:13px; font-weight:800;">What is the emergency?</label>
+    <select id="sosType" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 14px; font-size:14px;">
+      <option>Plumber - Burst Pipe / Flooding</option>
+      <option>Electrician - No Power / Spark</option>
+      <option>Cleaner - Urgent Cleaning</option>
+      <option>Carpenter - Broken Door / Lock</option>
+      <option>Other Emergency</option>
+    </select>
+    <label style="font-size:13px; font-weight:800;">Your Location</label>
+    <input id="sosLocation" placeholder="Example: Wuse 2, Abuja" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 14px; font-size:14px;">
+    <label style="font-size:13px; font-weight:800;">Your Phone</label>
+    <input id="sosPhone" placeholder="Example: 0803..." style="width:100%; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 14px; font-size:14px;">
+    <button onclick="sendSOS()" style="width:100%; background:#D32F2F; color:white; border:none; padding:14px; border-radius:12px; font-size:14px; font-weight:800;">Send SOS Now</button>
+    <p style="font-size:12px; color:#888; text-align:center; margin:10px 0 0;">Nearest available workers will be notified.<br>ZIRO does NOT hold job money.</p>
+  </div>
+  <div style="background:#FFF8E1; border:1px solid #F2C94C; border-radius:16px; padding:16px; margin-top:12px;">
+    <b style="font-size:14px;">⚡ Fastest Workers Near You</b>
+    <p style="margin:6px 0; font-size:13px;">Musa A. • Plumber • Wuse 2 • ⭐ 4.8 • Available Now</p>
+    <p style="margin:6px 0; font-size:13px;">Tunde B. • Electrician • Garki • ⭐ 4.7 • Available Now</p>
+    <button onclick="window.location.href='chat.html'" style="width:100%; background:#0B6E4F; color:white; border:none; padding:13px; border-radius:12px; font-size:14px; font-weight:800; margin-top:8px;">Chat With Them Now</button>
+  </div>
+</div>
+<div class="ziro-nav">
+  <button class="ziro-nav-item" onclick="window.location.href='index.html'"><span class="nav-icon">🏠</span>Home</button>
+  <button class="ziro-nav-item" onclick="window.location.href='index.html'"><span class="nav-icon">🔍</span>Search</button>
+  <button class="ziro-nav-center" onclick="window.location.href='post.html'">+</button>
+  <button class="ziro-nav-item" onclick="window.location.href='chat.html'"><span class="nav-icon">💬</span>Chat</button>
+  <button class="ziro-nav-item" onclick="window.location.href='office.html'"><span class="nav-icon">👤</span>My Office</button>
+</div>
+<script src="js/notify.js"></script>
+<script>
+function sendSOS(){
+  const loc = document.getElementById('sosLocation').value.trim();
+  if(!loc){ ziroNotify('Location Needed','Please enter your location so workers can find you.'); return; }
+  const type = document.getElementById('sosType').value;
+  ziroNotify('SOS Sent','Your SOS for '+type+' in '+loc+' has been sent.<br>Nearest workers will contact you now.','Go to Chat');
+  const b = document.querySelector('#ziroModal button');
+  if(b) b.onclick = function(){ closeZiroModal(); window.location.href='chat.html'; };
+}
+</script>
+</body>
+</html>
