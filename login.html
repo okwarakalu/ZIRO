@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>ZIRO - Login</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background:#0B3D2E; margin:0; display:flex; flex-direction:column; min-height:100dvh;">
+<div style="padding:30px 20px 10px; text-align:center;">
+  <div style="display:inline-block; background:white; color:#0B3D2E; padding:10px 20px; border-radius:14px; font-weight:900; font-size:26px; letter-spacing:1px;">ZIRO <span style="color:#F2C94C;">●</span></div>
+  <h2 style="color:white; margin:18px 0 4px;">Welcome Back 👋</h2>
+  <p style="color:#F2C94C; margin:0; font-size:13px;">Login to hire workers or get jobs</p>
+</div>
+<div style="background:#F2F4F2; border-radius:24px 24px 0 0; margin-top:20px; padding:22px 18px 30px; flex:1;">
+  <div style="background:white; border-radius:16px; padding:20px;">
+    <label style="font-size:13px; font-weight:800;">Phone Number</label>
+    <div style="display:flex; gap:8px; margin:8px 0 14px;">
+      <span style="background:#F2F4F2; border:1px solid #ddd; border-radius:12px; padding:12px 10px; font-size:14px; font-weight:800;">+234</span>
+      <input id="phone" type="tel" placeholder="803 123 4567" style="flex:1; min-width:0; padding:12px; border:1px solid #ddd; border-radius:12px; font-size:15px;">
+    </div>
+    <label style="font-size:13px; font-weight:800;">Password</label>
+    <div style="position:relative; margin:8px 0 6px;">
+      <input id="password" type="password" placeholder="Enter your password" style="width:100%; box-sizing:border-box; padding:12px; border:1px solid #ddd; border-radius:12px; font-size:14px;">
+      <span onclick="togglePass()" style="position:absolute; right:12px; top:12px; font-size:14px;">👁️</span>
+    </div>
+    <p onclick="forgotPass()" style="text-align:right; font-size:12px; color:#0B6E4F; font-weight:700; margin:6px 0 14px;">Forgot Password?</p>
+    <button class="btn-primary" onclick="doLogin()">Login</button>
+    <button onclick="loginWithOTP()" style="width:100%; background:white; color:#0B3D2E; border:1px solid #0B6E4F; padding:13px; border-radius:12px; font-size:14px; font-weight:800; margin-top:10px;">Login with OTP (SMS)</button>
+  </div>
+  <div id="otpBox" style="display:none; background:#FFF8E1; border:1px solid #F2C94C; border-radius:16px; padding:18px; margin-top:12px;">
+    <b style="font-size:14px;">Enter OTP sent to your phone</b>
+    <p style="font-size:12px; color:#888; margin:4px 0 10px;">Demo OTP is <b style="color:#0B3D2E;">1234</b> — for testing</p>
+    <input id="otpInput" type="tel" placeholder="1234" maxlength="4" style="width:100%; box-sizing:border-box; padding:14px; border:1px solid #ddd; border-radius:12px; font-size:20px; text-align:center; letter-spacing:8px; font-weight:900;">
+    <button class="btn-primary" style="margin-top:12px;" onclick="verifyOTP()">Verify OTP & Login</button>
+  </div>
+  <p style="text-align:center; font-size:13px; color:#555; margin-top:18px;">New to ZIRO? <b onclick="window.location.href='signup.html'" style="color:#0B6E4F;">Create Account →</b></p>
+  <p style="text-align:center; font-size:11px; color:#999; margin-top:8px;">By logging in, you agree to ZIRO Terms & Privacy.<br>ZIRO does NOT hold job money.</p>
+  <button onclick="window.location.href='index.html'" style="width:100%; background:none; border:none; color:#888; padding:12px; font-size:12px; margin-top:6px;">Skip for now → Continue as Guest</button>
+</div>
+<script src="js/notify.js"></script>
+<script src="js/auth.js"></script>
+<script>
+function togglePass(){ const p=document.getElementById('password'); p.type = p.type==='password' ? 'text' : 'password'; }
+function doLogin(){
+  const phone=document.getElementById('phone').value.trim().replace(/\s/g,'');
+  const pass=document.getElementById('password').value.trim();
+  if(phone.length < 10){ ziroNotify('Phone Needed','Please enter a valid phone number. Example: 8031234567'); return; }
+  if(pass.length < 4){ ziroNotify('Password Needed','Please enter your password (min 4 characters).'); return; }
+  const users=JSON.parse(localStorage.getItem('ziro_users')||'[]');
+  const found=users.find(u=>u.phone.replace(/\s/g,'').endsWith(phone.slice(-10)) && u.password===pass);
+  if(found){
+    ziroLogin(found);
+    ziroNotify('Welcome Back','Welcome back, '+found.name+'!','Go to Home');
+    const b=document.querySelector('#ziroModal button'); if(b) b.onclick=function(){ closeZiroModal(); window.location.href='index.html'; };
+  } else if(!users.length){
+    ziroNotify('No Account Yet','No account found for this phone.<br>Please create an account first.','Create Account');
+    const b=document.querySelector('#ziroModal button'); if(b) b.onclick=function(){ closeZiroModal(); window.location.href='signup.html'; };
+  } else {
+    ziroNotify('Wrong Details','Phone or password is wrong.<br>Try again or use Forgot Password.');
+  }
+}
+function loginWithOTP(){
+  const phone=document.getElementById('phone').value.trim();
+  if(phone.length < 10){ ziroNotify('Phone Needed','Enter your phone number first.'); return; }
+  document.getElementById('otpBox').style.display='block';
+  ziroNotify('OTP Sent','OTP sent to +234 '+phone+'.<br>Demo code: <b>1234</b>');
+  document.getElementById('otpBox').scrollIntoView({behavior:'smooth'});
+}
+function verifyOTP(){
+  const code=document.getElementById('otpInput').value.trim();
+  const phone=document.getElementById('phone').value.trim();
+  if(code!=='1234'){ ziroNotify('Wrong OTP','OTP is wrong. Demo code is 1234.'); return; }
+  const users=JSON.parse(localStorage.getItem('ziro_users')||'[]');
+  let user=users.find(u=>u.phone.replace(/\s/g,'').endsWith(phone.slice(-10)));
+  if(!user){ user={name:'ZIRO User', phone:phone, role:'customer', password:'1234'}; users.push(user); localStorage.setItem('ziro_users', JSON.stringify(users)); }
+  ziroLogin(user);
+  ziroNotify('Login Success','Welcome to ZIRO, '+user.name+'!','Go to Home');
+  const b=document.querySelector('#ziroModal button'); if(b) b.onclick=function(){ closeZiroModal(); window.location.href='index.html'; };
+}
+function forgotPass(){
+  const phone=document.getElementById('phone').value.trim();
+  if(phone.length < 10){ ziroNotify('Phone Needed','Enter your phone number first to reset password.'); return; }
+  ziroNotify('Reset Sent','Password reset link sent to +234 '+phone+'.<br>Demo: use OTP 1234 to login.');
+}
+</script>
+</body>
+</html>
