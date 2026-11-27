@@ -18,12 +18,14 @@
     <div style="flex:1;"><b id="officeName" style="font-size:17px;">Udoka</b><p style="margin:2px 0; font-size:13px; color:#666;">Brick Layer • Apo, Abuja</p><p style="margin:2px 0; font-size:12px; color:#6D28D9; font-weight:800;">⭐ 4.7 • ✓ Verified</p></div>
     <button onclick="window.location.href='index.html'" style="background:#6D28D9; color:white; border:none; padding:9px 12px; border-radius:999px; font-size:12px; font-weight:800;">Edit</button>
   </div>
-  <div style="display:flex; gap:10px; margin-top:12px;">
-    <div style="flex:1; background:white; border-radius:14px; padding:14px; text-align:center;"><b style="font-size:20px;">₦<span id="walletBal">0</span></b><p style="margin:4px 0 0; font-size:12px; color:#888;">Wallet</p></div>
-    <div style="flex:1; background:#FFF8E1; border:1px solid #F2C94C; border-radius:14px; padding:14px; text-align:center;"><b style="font-size:20px; color:#B77900;">🪙 <span id="icoinBal">50</span></b><p style="margin:4px 0 0; font-size:12px; color:#888;">iCoin</p></div>
-    <div style="flex:1; background:white; border-radius:14px; padding:14px; text-align:center;"><b style="font-size:20px;" id="jobsDone">1</b><p style="margin:4px 0 0; font-size:12px; color:#888;">Jobs Done</p></div>
+  <!-- ONE ARRANGED FOLDER - Tap to open Wallet -->
+  <div onclick="window.location.href='wallet.html'" style="background:white; border-radius:16px; padding:4px 0; display:flex; margin-top:12px; cursor:pointer;">
+    <div style="flex:1; text-align:center; padding:14px 4px; border-right:1px solid #eee;"><b style="font-size:20px;">₦<span id="walletBal">0</span></b><p style="margin:4px 0 0; font-size:12px; color:#888;">Wallet • Tap ›</p></div>
+    <div style="flex:1; text-align:center; padding:14px 4px; border-right:1px solid #eee;"><b style="font-size:20px; color:#B77900;">🪙 <span id="icoinBal">50</span></b><p style="margin:4px 0 0; font-size:12px; color:#888;">iCoin • Tap ›</p></div>
+    <div style="flex:1; text-align:center; padding:14px 4px;"><b style="font-size:20px;" id="jobsDone">1</b><p style="margin:4px 0 0; font-size:12px; color:#888;">Jobs Done</p></div>
   </div>
   <div style="background:white; border-radius:16px; padding:8px 16px; margin-top:12px;">
+    <div onclick="window.location.href='wallet.html'" style="padding:14px 0; border-bottom:1px solid #eee; display:flex; justify-content:space-between;"><span>💰 Wallet & iCoin</span><span>›</span></div>
     <div onclick="window.location.href='chat.html'" style="padding:14px 0; border-bottom:1px solid #eee; display:flex; justify-content:space-between;"><span>💬 My Chats</span><span>›</span></div>
     <div onclick="window.location.href='index.html'" style="padding:14px 0; border-bottom:1px solid #eee; display:flex; justify-content:space-between;"><span>📋 My Jobs</span><span>›</span></div>
     <div onclick="window.location.href='post.html'" style="padding:14px 0; border-bottom:1px solid #eee; display:flex; justify-content:space-between;"><span>➕ Post a Job</span><span>›</span></div>
@@ -34,11 +36,14 @@
 </div>
 <script src="js/notify.js"></script>
 <script src="js/auth.js"></script>
+<script src="js/wallet.js"></script>
 <script>
 function logoutZiro(){ ziroConfirm('Log Out?', 'Are you sure you want to log out?', function(){ localStorage.removeItem('ziro_current_user'); ziroNotify('Logged Out','You have been logged out.','Login'); const b=document.querySelector('#ziroModal button'); if(b) b.onclick=function(){ closeZiroModal(); window.location.href='login.html'; }; }); }
 document.addEventListener('DOMContentLoaded', ()=>{
   const jobs=JSON.parse(localStorage.getItem('ziro_jobs')||'[]');
   document.getElementById('jobsDone').textContent = jobs.length || 1;
+  document.getElementById('icoinBal').textContent = ziroGetIcoin();
+  document.getElementById('walletBal').textContent = Number(localStorage.getItem('ziro_wallet') || 0).toLocaleString();
   const user=ziroGetUser ? ziroGetUser() : null;
   if(user && user.name){ document.getElementById('officeName').textContent=user.name; }
 });
