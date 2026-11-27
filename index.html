@@ -24,13 +24,14 @@
   </div>
 </div>
 <div style="background:#0B3D2E; padding:14px 16px 0;">
-  <h3 style="margin:0 0 10px; color:white;">👷 Available Workers</h3>
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;"><h3 style="margin:0; color:white;">👷 Available Workers</h3><button onclick="window.location.href='worker-signup.html'" style="background:#F2C94C; color:#0B3D2E; border:none; padding:8px 12px; border-radius:999px; font-size:12px; font-weight:900;">+ Join as Worker</button></div>
   <p style="color:#B8D8CC; font-size:12px; margin:0 0 10px;">Tap any worker to view profile →</p>
   <div id="workerList"></div>
 </div>
 <div style="background:#0B3D2E; padding:6px 16px 20px;">
   <h3 style="margin:14px 0 10px; color:white;">📋 Recent Jobs</h3><div id="jobList"></div>
   <button onclick="window.location.href='post.html'" style="width:100%; background:#F2C94C; color:#0B3D2E; border:none; padding:14px; border-radius:12px; font-size:14px; font-weight:800; margin-top:10px;">+ Post a Job</button>
+  <button onclick="window.location.href='worker-signup.html'" style="width:100%; background:white; color:#0B3D2E; border:none; padding:14px; border-radius:12px; font-size:14px; font-weight:800; margin-top:10px;">👷 Join as Worker - Get Jobs</button>
   <button onclick="window.location.href='sos.html'" style="width:100%; background:#D32F2F; color:white; border:none; padding:14px; border-radius:12px; font-size:14px; font-weight:800; margin-top:10px;">! SOS • Emergency</button>
   <p style="text-align:center; font-size:12px; color:#B8D8CC; margin:12px 0 0;">ZIRO does NOT hold job money. You pay workers directly.</p>
 </div>
@@ -43,22 +44,16 @@
 </div>
 <script src="js/notify.js"></script>
 <script src="js/wallet.js"></script>
+<script src="js/workers.js"></script>
 <script>
 function makeStableId(j){ const s=(j.skill||'')+'|'+(j.desc||'')+'|'+(j.budget||'')+'|'+(j.city||'')+'|'+(j.name||''); let h=0; for(let i=0;i<s.length;i++){ h=(h*31 + s.charCodeAt(i)) >>> 0; } return 'job_'+h; }
 function goToJobDetails(job){ window.location.href='job.html?id='+makeStableId(job); }
 function openWorker(name){ localStorage.setItem('ziro_view_worker', name); window.location.href='worker.html?name='+encodeURIComponent(name); }
 function openChatWith(name){ localStorage.setItem('ziro_chat_with', name); window.location.href='chat-room.html?with='+encodeURIComponent(name); }
-let WORKERS=[
-  {name:'Segun O.', skill:'Barber', city:'Enugu', rating:'4.8', price:3000},
-  {name:'Grace M.', skill:'Cook / Chef', city:'Wuse, Abuja', rating:'4.9', price:8500},
-  {name:'Yusuf A.', skill:'Welder', city:'Kaduna', rating:'4.6', price:11000},
-  {name:'Blessing I.', skill:'Gardener', city:'Lekki, Lagos', rating:'4.7', price:4500},
-  {name:'Musa A.', skill:'Plumber', city:'Wuse 2, Abuja', rating:'4.8', price:8000},
-  {name:'Udoka', skill:'Brick Layer', city:'Apo, Abuja', rating:'4.7', price:12000},
-];
 function renderWorkers(){
+  const WORKERS = ziroGetWorkers();
   document.getElementById('workerList').innerHTML=WORKERS.map(w=>'<div style="background:white; border-radius:16px; padding:16px; margin-bottom:12px;">'
-    + '<div onclick="openWorker(\''+w.name+'\')" style="cursor:pointer;"><b style="font-size:16px;">'+w.name+' ✓ Verified <span style="color:#0B6E4F; font-size:12px;">View Profile ›</span></b><p style="margin:4px 0; font-size:13px; color:#666;">'+w.skill+' • '+w.city+'</p><p style="margin:4px 0; font-size:13px;">⭐ '+w.rating+' • Available Now • ₦'+w.price.toLocaleString()+' / job</p></div>'
+    + '<div onclick="openWorker(\''+w.name+'\')" style="cursor:pointer;"><b style="font-size:16px;">'+w.name+' ✓ Verified <span style="color:#0B6E4F; font-size:12px;">View Profile ›</span></b><p style="margin:4px 0; font-size:13px; color:#666;">'+w.skill+' • '+w.city+'</p><p style="margin:4px 0; font-size:13px;">⭐ '+w.rating+' • Available Now • ₦'+Number(w.price).toLocaleString()+' / job</p></div>'
     + '<div style="background:#F2F4F2; border-radius:12px; padding:10px; margin-top:10px; display:flex; flex-direction:column; gap:8px;">'
     + '<button onclick="hireWorker(\''+w.name+'\')" style="width:100%; background:#0B6E4F; color:white; border:none; padding:13px; border-radius:10px; font-size:14px; font-weight:800;">Hire Now</button>'
     + '<div style="display:flex; gap:8px;"><button onclick="unlockContact(\''+w.name+'\')" style="flex:1; background:white; color:#0B3D2E; border:1px solid #ddd; padding:11px 6px; border-radius:10px; font-size:12px; font-weight:800;">🔓 Unlock • 5 iCoin</button><button onclick="openWorker(\''+w.name+'\')" style="flex:1; background:white; color:#0B6E4F; border:1px solid #0B6E4F; padding:11px 6px; border-radius:10px; font-size:12px; font-weight:800;">👤 View Profile</button></div>'
@@ -66,12 +61,8 @@ function renderWorkers(){
     + '</div>').join('');
 }
 function hireWorker(name){ ziroConfirm('Hire '+name+'?', 'Chat with '+name+' to agree time and price.', function(){ openChatWith(name); }); }
-// FIXED: Unlock now deducts 5 iCoin AND Go to Chat really opens chat
 function unlockContact(name){
-  if(localStorage.getItem('ziro_unlocked_'+name)==='yes'){
-    ziroNotify('Already Unlocked', 'You already unlocked '+name+'.', 'Go to Chat', function(){ openChatWith(name); });
-    return;
-  }
+  if(localStorage.getItem('ziro_unlocked_'+name)==='yes'){ ziroNotify('Already Unlocked', 'You already unlocked '+name+'.', 'Go to Chat', function(){ openChatWith(name); }); return; }
   ziroConfirm('Unlock Contact?', 'Unlock '+name+' contact for 5 iCoin?', function(){
     if(typeof ziroSpendIcoin === 'function'){
       const ok = ziroSpendIcoin(5, 'Unlocked '+name+' • -5 iCoin');
