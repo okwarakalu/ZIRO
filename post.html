@@ -1,37 +1,10 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ZIRO V8 - Post Job</title><link rel="stylesheet" href="css/style.css"></head>
-<body>
-<div class="z-header">
-<div style="display:flex;justify-content:space-between;align-items:center;">
-<div class="z-logo">ZIRO<span> V8</span> • Post Job</div>
-<button onclick="location.href='index.html'" style="background:#fff;border:none;padding:8px 12px;border-radius:999px;font-weight:800;">← Home</button>
-</div>
-</div>
-
-<div style="padding:16px;">
-<div class="z-card">
-<h2 style="margin:0;">What do you need?</h2>
-<p style="color:#666;">Post in 30 seconds. Workers near you will see it.</p>
-
-<label><b>Job Title</b></label><br>
-<input type="text" placeholder="e.g. I need a Barber" style="width:100%;padding:13px;border:1.5px solid #ddd;border-radius:12px;margin:6px 0 12px;box-sizing:border-box;"><br>
-
-<label><b>Category</b></label><br>
-<select style="width:100%;padding:13px;border:1.5px solid #ddd;border-radius:12px;margin:6px 0 12px;"><option>Barber</option><option>Cleaner</option><option>Plumber</option><option>Electrician</option><option>Other</option></select><br>
-
-<label><b>Location</b></label><br>
-<input type="text" placeholder="e.g. Wuse 2, Abuja" style="width:100%;padding:13px;border:1.5px solid #ddd;border-radius:12px;margin:6px 0 12px;box-sizing:border-box;"><br>
-
-<label><b>Budget (₦)</b></label><br>
-<input type="number" placeholder="e.g. 5000" style="width:100%;padding:13px;border:1.5px solid #ddd;border-radius:12px;margin:6px 0 12px;box-sizing:border-box;"><br>
-
-<label><b>Details</b></label><br>
-<textarea placeholder="Describe the job..." style="width:100%;padding:13px;border:1.5px solid #ddd;border-radius:12px;margin:6px 0 14px;height:90px;box-sizing:border-box;"></textarea>
-
-<button class="z-btn-green">📄 Post Job — Free</button>
-<p style="text-align:center;font-size:12px;color:#888;">You pay only when you hire. • ZIRO protects you.</p>
-</div>
-</div>
-
-<div class="z-sos">SOS</div>
-</body></html>
+<!-- ZIRO POST - Post Job only - NOT FREE - Pay iCoin -->
+<h2>What do you need?</h2>
+<p>Post in 30 seconds. Workers near you will see it.</p>
+<input id="jobTitle" placeholder="e.g. I need a Barber">
+<select id="jobCat"><option>Barber</option><option>Plumber</option><option>Electrician</option><option>Cleaner</option><option>Driver</option></select>
+<input id="jobLoc" placeholder="e.g. Wuse 2, Abuja">
+<input id="jobPrice" type="number" placeholder="Budget (₦) e.g. 5000">
+<textarea id="jobDesc" placeholder="Describe the job..."></textarea>
+<button class="btn-green" onclick="ZIRO.postJob()">Post Job — Pay 10 iCoin</button>
+<p style="font-size:12px;color:#666">You pay iCoin to post. You pay Worker DIRECTLY after work. ZIRO does not hold money.</p>
