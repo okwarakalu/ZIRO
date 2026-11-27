@@ -6,16 +6,16 @@
 <title>ZIRO - My Office</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body style="background:#F2F4F2; margin:0; padding-bottom:75px;">
-<div style="background:linear-gradient(180deg,#0B6E4F 0%, #0B3D2E 100%); padding:20px 16px; border-radius:0 0 22px 22px; color:white;">
-  <h2 style="margin:0; color:white;">My Office 👤</h2>
-  <p style="margin:4px 0 0; color:#F2C94C; font-size:13px;">Your jobs, wallet, iCoin & profile</p>
+<body style="background:#2E1065; margin:0; padding-bottom:75px;">
+<div style="background:linear-gradient(180deg,#6D28D9 0%, #2E1065 100%); padding:20px 16px; border-radius:0 0 22px 22px; color:white;">
+  <h2 style="margin:0; color:white;">👤 My Office</h2>
+  <p style="margin:4px 0 0; color:#DDD6FE; font-size:13px;">Your jobs, wallet, iCoin & profile</p>
 </div>
-<div style="padding:16px;">
+<div style="background:#2E1065; padding:16px;">
   <div style="background:white; border-radius:16px; padding:18px; display:flex; gap:14px; align-items:center;">
-    <div style="width:56px; height:56px; background:#F2C94C; color:#0B3D2E; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:900;">U</div>
-    <div style="flex:1;"><b id="officeName" style="font-size:17px;">Udoka</b><p style="margin:2px 0; font-size:13px; color:#666;">Brick Layer • Apo, Abuja</p><p style="margin:2px 0; font-size:12px; color:#0B6E4F; font-weight:800;">⭐ 4.7 • ✓ Verified</p></div>
-    <button onclick="window.location.href='index.html'" style="background:#0B6E4F; color:white; border:none; padding:9px 12px; border-radius:999px; font-size:12px; font-weight:800;">Edit</button>
+    <div style="width:56px; height:56px; background:#F2C94C; color:#2E1065; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:900;">U</div>
+    <div style="flex:1;"><b id="officeName" style="font-size:17px;">Udoka</b><p style="margin:2px 0; font-size:13px; color:#666;">Brick Layer • Apo, Abuja</p><p style="margin:2px 0; font-size:12px; color:#6D28D9; font-weight:800;">⭐ 4.7 • ✓ Verified</p></div>
+    <button onclick="window.location.href='index.html'" style="background:#6D28D9; color:white; border:none; padding:9px 12px; border-radius:999px; font-size:12px; font-weight:800;">Edit</button>
   </div>
   <div style="display:flex; gap:10px; margin-top:12px;">
     <div style="flex:1; background:white; border-radius:14px; padding:14px; text-align:center;"><b style="font-size:20px;">₦<span id="walletBal">0</span></b><p style="margin:4px 0 0; font-size:12px; color:#888;">Wallet</p></div>
@@ -26,24 +26,27 @@
     <div onclick="window.location.href='chat.html'" style="padding:14px 0; border-bottom:1px solid #eee; display:flex; justify-content:space-between;"><span>💬 My Chats</span><span>›</span></div>
     <div onclick="window.location.href='index.html'" style="padding:14px 0; border-bottom:1px solid #eee; display:flex; justify-content:space-between;"><span>📋 My Jobs</span><span>›</span></div>
     <div onclick="window.location.href='post.html'" style="padding:14px 0; border-bottom:1px solid #eee; display:flex; justify-content:space-between;"><span>➕ Post a Job</span><span>›</span></div>
-    <div onclick="window.location.href='index.html'" style="padding:14px 0; display:flex; justify-content:space-between;"><span>⚙️ Settings</span><span>›</span></div>
+    <div onclick="window.location.href='search.html'" style="padding:14px 0; display:flex; justify-content:space-between;"><span>🔍 Search Workers</span><span>›</span></div>
   </div>
   <button onclick="logoutZiro()" style="width:100%; background:#D32F2F; color:white; border:none; padding:14px; border-radius:12px; font-size:14px; font-weight:800; margin-top:14px;">Log Out</button>
-  <p style="text-align:center; font-size:11px; color:#999; margin-top:10px;">ZIRO v1.0 • Terms • Privacy • Refund Policy</p>
+  <p style="text-align:center; font-size:11px; color:#C4B5FD; margin-top:10px;">ZIRO v1.0 • Terms • Privacy • Refund Policy</p>
 </div>
 <div class="ziro-nav">
   <button class="ziro-nav-item" onclick="window.location.href='index.html'"><span class="nav-icon">🏠</span>Home</button>
-  <button class="ziro-nav-item" onclick="window.location.href='index.html'"><span class="nav-icon">🔍</span>Search</button>
+  <button class="ziro-nav-item" onclick="window.location.href='search.html'"><span class="nav-icon">🔍</span>Search</button>
   <button class="ziro-nav-center" onclick="window.location.href='post.html'">+</button>
   <button class="ziro-nav-item" onclick="window.location.href='chat.html'"><span class="nav-icon">💬</span>Chat</button>
   <button class="ziro-nav-item active" onclick="window.location.href='office.html'"><span class="nav-icon">👤</span>My Office</button>
 </div>
 <script src="js/notify.js"></script>
+<script src="js/auth.js"></script>
 <script>
-function logoutZiro(){ ziroConfirm('Log Out?', 'Are you sure you want to log out?', function(){ ziroNotify('Logged Out','You have been logged out.'); }); }
+function logoutZiro(){ ziroConfirm('Log Out?', 'Are you sure you want to log out?', function(){ localStorage.removeItem('ziro_current_user'); ziroNotify('Logged Out','You have been logged out.','Login'); const b=document.querySelector('#ziroModal button'); if(b) b.onclick=function(){ closeZiroModal(); window.location.href='login.html'; }; }); }
 document.addEventListener('DOMContentLoaded', ()=>{
   const jobs=JSON.parse(localStorage.getItem('ziro_jobs')||'[]');
   document.getElementById('jobsDone').textContent = jobs.length || 1;
+  const user=ziroGetUser ? ziroGetUser() : null;
+  if(user && user.name){ document.getElementById('officeName').textContent=user.name; }
 });
 </script>
 </body>
