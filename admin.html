@@ -1,22 +1,18 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"><title>ZIRO - Admin Hub</title></head>
-<body style="background:#111; margin:0; font-family:sans-serif;">
-<div style="background:#0B3D2E; padding:20px 16px; color:white;"><div onclick="window.location.href='office.html'">← Back to My Office</div><h2 style="margin:12px 0 4px;">🛠 ZIRO Admin Hub</h2><p style="margin:0; color:#F2C94C; font-size:13px;">7 Departments • CEO Sees All • GM Sees All Except CEO</p></div>
-<div style="padding:16px;">
-<div style="background:white; border-radius:16px; padding:18px;"><b>Live Price:</b> <span id="livePrice">₦50</span> • GM: <b id="gmPrice">₦50</b> • CEO Override: <b id="ceoPrice">None</b><p style="font-size:12px; color:#666; margin:6px 0 0;">CEO price overrides GM. GM monitors 5 depts. CEO monitors all.</p></div>
-<div style="background:white; border-radius:16px; padding:18px; margin-top:12px;"><b>Top Management</b>
-<button onclick="enterAdmin('ceo')" style="width:100%; background:#111; color:#F2C94C; border:2px solid #F2C94C; padding:16px; border-radius:12px; font-size:15px; font-weight:900; margin-top:10px;">👑 CEO Dashboard<br><span style="font-size:12px; color:white; font-weight:400;">ALL + Override GM + Control ALL Depts</span></button>
-<button onclick="enterAdmin('gm')" style="width:100%; background:#0B6E4F; color:white; border:none; padding:16px; border-radius:12px; font-size:15px; font-weight:900; margin-top:10px;">👔 GM Dashboard<br><span style="font-size:12px; font-weight:400;">Day-to-Day • Price • Monitors 5 Depts (Not CEO)</span></button></div>
-<div style="background:white; border-radius:16px; padding:18px; margin-top:12px;"><b>Other 5 Departments</b>
-<button onclick="goDept('support','support.html')" style="width:100%; background:#F2F4F2; border:none; padding:13px; border-radius:10px; font-weight:800; margin-top:8px; text-align:left;">💬 Customer Support →</button>
-<button onclick="goDept('finance','finance.html')" style="width:100%; background:#F2F4F2; border:none; padding:13px; border-radius:10px; font-weight:800; margin-top:8px; text-align:left;">💰 Finance / Payments →</button>
-<button onclick="goDept('verification','verification.html')" style="width:100%; background:#F2F4F2; border:none; padding:13px; border-radius:10px; font-weight:800; margin-top:8px; text-align:left;">✅ Verification / Trust →</button>
-<button onclick="goDept('moderation','moderation.html')" style="width:100%; background:#F2F4F2; border:none; padding:13px; border-radius:10px; font-weight:800; margin-top:8px; text-align:left;">🛡 Moderation / Safety →</button>
-<button onclick="goDept('marketing','marketing.html')" style="width:100%; background:#F2F4F2; border:none; padding:13px; border-radius:10px; font-weight:800; margin-top:8px; text-align:left;">📣 Marketing / Growth →</button></div>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ZIRO Admin</title>
+<style>body{margin:0;font-family:Arial;background:#F6F6F6}header{background:#123A2B;color:#fff;padding:18px}header span{color:#C9A227}.card{background:#fff;margin:14px;padding:16px;border-radius:14px}.btn{background:#0B6E4F;color:#fff;border:none;padding:12px;width:100%;border-radius:10px;font-weight:800}input{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:6px 0}</style></head>
+<body>
+<header><h2 style="margin:0;">ZIRO <span>V8</span> - ADMIN ONLY</h2><p style="margin:4px 0;color:#D6E8DD;">Boss Dashboard - Do Not Share This Link</p></header>
+<div id="lock" class="card" style="text-align:center;"><h3>Enter Admin PIN</h3><input id="pin" type="password" placeholder="PIN is 1234"><button class="btn" onclick="unlock()">Unlock Admin</button><p style="font-size:12px;color:#888;">Default PIN: 1234 - Change it later</p></div>
+<div id="dash" style="display:none;">
+<div class="card"><h3>📊 Today</h3><p>Total Users Coins: <b id="aCoins">-</b></p><p>Total Jobs Posted: <b id="aJobs">-</b></p><p>SOS Alerts: <b id="aSOS">-</b> <span style="color:red;">Check below!</span></p></div>
+<div class="card"><h3>🚨 SOS Alerts</h3><div id="sosList">No SOS yet.</div></div>
+<div class="card"><h3>📄 All Jobs (From Users)</h3><div id="jobList">No jobs yet.</div></div>
+<div class="card"><h3>🪙 Give Free Coins</h3><input id="giveAmt" type="number" placeholder="e.g. 100"><button class="btn" onclick="give()">Give Coins To This Phone</button><p style="font-size:12px;color:#888;">This adds coins to whoever is logged in on this phone. For real users, you will upgrade later to server.</p></div>
+<button class="btn" style="background:#fff;color:#222;border:1px solid #ddd;margin:0 14px;width:calc(100% - 28px);" onclick="location.href='index.html'">← Back to Main App</button><br><br>
 </div>
-<script src="js/wallet.js"></script><script src="js/admin.js"></script>
 <script>
-function enterAdmin(r){ ziroSetAdminRole(r); window.location.href=r==='ceo'?'ceo.html':'gm.html'; }
-function goDept(dept, file){ localStorage.setItem('ziro_admin_role', dept); localStorage.setItem('ziro_current_dept', dept); window.location.href=file; }
-document.addEventListener('DOMContentLoaded', ()=>{ document.getElementById('livePrice').textContent='₦'+ziroGetCoinPrice(); document.getElementById('gmPrice').textContent='₦'+ziroGetGMPrice(); const c=ziroGetCEOPrice(); document.getElementById('ceoPrice').textContent=c===null?'None - GM active':'₦'+c+' OVERRIDING'; });
-</script></body></html>
+function unlock(){if(document.getElementById('pin').value==='1234'){document.getElementById('lock').style.display='none';document.getElementById('dash').style.display='block';load();}else{alert('Wrong PIN');}}
+function load(){let coins=localStorage.getItem('ziro_coins')||'0';let jobs=JSON.parse(localStorage.getItem('ziro_all_jobs')||'[]');let sos=JSON.parse(localStorage.getItem('ziro_sos')||'[]');document.getElementById('aCoins').textContent=coins;document.getElementById('aJobs').textContent=jobs.length;document.getElementById('aSOS').textContent=sos.length;document.getElementById('jobList').innerHTML=jobs.length?jobs.map(j=>`<p><b>${j.title}</b> - ${j.user} - ${j.loc} - ₦${j.budget} - ${j.date}</p>`).join(''):'No jobs yet.';document.getElementById('sosList').innerHTML=sos.length?sos.map(s=>`<p style="color:red;"><b>${s.user}</b> - ${s.loc} - ${s.time}</p>`).join(''):'No SOS yet.';}
+function give(){let a=parseInt(document.getElementById('giveAmt').value||'0');let c=parseInt(localStorage.getItem('ziro_coins')||'0');localStorage.setItem('ziro_coins',c+a);alert('Gave '+a+' coins!');load();}
+</script>
+</body></html>
