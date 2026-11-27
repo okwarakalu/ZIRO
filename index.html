@@ -1,86 +1,65 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ZIRO</title>
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZIRO - Work. Hustle. Get Paid.</title>
+<link rel="stylesheet" href="css/style.css">
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#0A2342;color:#fff;padding-bottom:70px}
-button{cursor:pointer}.top{padding:16px;display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:26px;font-weight:900}.logo i{color:#FFC107;font-style:normal}
-.pill{background:#FFC107;color:#000;font-weight:800;padding:7px 14px;border-radius:999px}
-.office-btn{background:#1E3A5F;color:#fff;border:none;padding:7px 14px;border-radius:999px;font-weight:700}
-.page{display:none;padding:0 16px 20px}.page.active{display:block}
-h1{font-size:27px;line-height:1.2;margin:14px 0 4px}h1+p{color:#B8C6D6;margin:0 0 14px;font-size:13px}
-.search{background:#fff;border-radius:999px;padding:13px 14px;color:#666;display:flex;gap:8px;margin:12px 0}.search input{border:none;outline:none;flex:1;font-size:14px}
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.chip{border:none;padding:9px 14px;border-radius:999px;font-weight:700;background:#1E3A5F;color:#fff}.chip.sel{background:#FFC107;color:#000}
-.icoin{background:#FFF8E1;color:#222;border-radius:14px;padding:12px;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:13px;margin-bottom:12px}.buy{background:#FFC107;border:none;padding:7px 14px;border-radius:999px;font-weight:800}
-.row2{display:flex;gap:10px;margin-bottom:16px}.btn-green{flex:1;background:#0B6E4F;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:800}.btn-white{flex:1;background:#fff;color:#222;border:none;padding:14px;border-radius:12px;font-weight:800}
-.card{background:#fff;color:#222;border-radius:16px;padding:16px;margin-bottom:12px}.card h3{margin:0}.card p{margin:4px 0;color:#555;font-size:13px}
-.btn-row{display:flex;gap:10px;margin-top:12px}.hire{flex:1;background:#1E3A5F;color:#fff;border:none;padding:12px;border-radius:10px;font-weight:800}.unlock{flex:1;background:#fff;border:1px solid #ddd;padding:12px;border-radius:10px;font-weight:700}
-.back{color:#fff;font-size:13px;margin:14px 0;display:block}.sub{color:#B8C6D6;font-size:13px;margin:0 0 12px}
-.area{border:none;padding:8px 13px;border-radius:999px;background:#1E3A5F;color:#fff;font-weight:700}.area.sel{background:#FFC107;color:#000}
-.profile-bg{background:#0F5132;padding:16px;margin:0 -16px 14px}.avatar-big{width:64px;height:64px;background:#FFC107;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:900;color:#000}
-.stats{background:#145A3A;border-radius:14px;display:flex;text-align:center;padding:14px 0;margin-top:14px}.stats div{flex:1}.stats b{font-size:18px}.stats span{font-size:11px;color:#C8E6C9}
-.btn-yellow{width:100%;background:#FFC107;border:none;padding:14px;border-radius:12px;font-weight:800;margin-top:10px}.btn-chat-green{width:100%;background:#0B6E4F;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:800;margin-top:10px}.btn-cream{width:100%;background:#FFF8E1;border:none;padding:14px;border-radius:12px;font-weight:800;margin-top:10px}.note{font-size:11px;color:#D6E8DD;text-align:center;margin-top:8px}
-.chat-bg{background:#0F766E;min-height:100vh;margin:0 -16px;padding:0 16px 16px}.chat-head{background:#0F5132;margin:0 -16px;padding:14px 16px;display:flex;align-items:center;gap:10px}.chat-head .av{width:44px;height:44px;background:#FFC107;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#000;font-size:20px}.call{border:none;padding:7px 12px;border-radius:999px;background:#2A4A3A;color:#fff}.video{border:none;padding:7px 12px;border-radius:999px;background:#FFC107;font-weight:800}
-.jobbar{background:#fff;color:#222;border-radius:999px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;margin:12px 0;font-size:13px}.jobbar button{background:#0B6E4F;color:#fff;border:none;padding:7px 12px;border-radius:999px}
-.secure{background:#0B6E4F;text-align:center;padding:7px;border-radius:999px;font-size:11px;margin-bottom:10px}
-.bubble{max-width:85%;padding:12px 14px;border-radius:16px;margin:8px 0;font-size:14px;line-height:1.4;color:#222}.b-left{background:#FFF8D6}.b-right{background:#0F5132;color:#fff;margin-left:auto}.bubble small{display:block;font-size:10px;opacity:.7;margin-top:6px}
-.chat-input{display:flex;gap:8px;align-items:center;padding:10px 0}.chat-input input{flex:1;border:none;border-radius:999px;padding:12px;outline:none}.plus{width:38px;height:38px;border-radius:50%;border:none;background:#fff;font-size:18px}.voice-btn{border:none;border-radius:999px;padding:11px 12px;background:#D6F0E6;font-weight:700}.send-btn{border:none;border-radius:999px;padding:11px 16px;background:#FFC107;font-weight:800}
-.mychat-bg{background:#0F766E;min-height:100vh;margin:0 -16px;padding:0 16px 16px}.chat-item{background:#fff;color:#222;border-radius:14px;padding:12px;display:flex;gap:12px;align-items:center;margin-bottom:10px}.ci-av{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;color:#000}
-.office-bg{background:#2E1065;min-height:100vh;margin:0 -16px;padding:0 16px 16px}.office-card{background:#fff;color:#222;border-radius:16px;padding:14px;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.menu{background:#fff;color:#222;border-radius:16px;padding:6px 14px}.menu div{padding:13px 0;border-bottom:1px solid #eee;display:flex;justify-content:space-between}.logout{width:100%;background:#EF4444;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:800;margin-top:12px}
-.admin-bg{background:#000;min-height:100vh;margin:0 -16px;padding:0 16px 16px}.admin-card{background:#fff;color:#222;border-radius:16px;padding:14px;margin-bottom:12px}.dept{padding:12px;background:#F3F4F6;border-radius:10px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:99}.modal>div{background:#fff;color:#222;margin:20px;padding:20px;border-radius:16px;text-align:center;width:90%;max-width:380px}
-input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:6px 0}
-.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;border-top:1px solid #ddd;z-index:50}.nav button{flex:1;border:none;background:#fff;padding:10px 2px;font-size:11px;font-weight:800;color:#666}
-.call-full{position:fixed;inset:0;background:#0F5132;z-index:200;display:none;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center}.call-full .big-av{width:110px;height:110px;background:#FFC107;border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:50px;font-weight:900;color:#000}
-.ok{color:green;font-weight:700}
-</style></head><body>
+/* PHASE 0 HEADER FIX - If css/style.css fails, this keeps header correct */
+body{background:#F7F7F5 !important;color:#111 !important}
+.top{background:#0A3D2A !important}
+</style>
+</head><body>
 
-<div id="p-home" class="page active">
-<div class="top"><div class="logo">ZIRO <i>●</i></div><div style="display:flex;gap:8px;"><span class="pill">🪙 <span id="coinTop">40</span></span><button class="office-btn" onclick="show('p-office')">Office</button></div></div>
-<h1>Find Trusted Workers<br>Near You, Fast.</h1><p>Plumber • Electrician • Cleaner • Brick Layer • More</p>
-<div class="search">🔍 <input placeholder="Search Plumber, Cleaner, Wuse..." onclick="show('p-search')"></div>
-<div class="chips"><button class="chip sel" onclick="show('p-search')">🔧 Plumber</button><button class="chip" onclick="show('p-search')">⚡ Electrician</button><button class="chip" onclick="show('p-search')">🧹 Cleaner</button><button class="chip" onclick="show('p-search')">🧱 Brick Layer</button></div>
-<div class="icoin"><span>🪙 iCoin Price: <b>₦<span class="price">50</span> per iCoin</b> • Min Buy 7</span><button class="buy" onclick="show('p-wallet')">Buy ›</button></div>
-<div class="row2"><button class="btn-green" onclick="show('p-post')">+ Post a Job</button><button class="btn-white" onclick="show('p-join')">👷 Join as Worker</button></div>
-<h3>Available Workers Near You</h3>
-<div id="homeWorkers"></div>
-<button class="btn-white" style="width:100%;" onclick="show('p-search')">See All Workers →</button>
-<p style="text-align:center;font-size:11px;color:#B8C6D6;margin-top:12px;">ZIRO v1.0 • Abuja • Lagos • Enugu</p></div>
+<!-- TOP HEADER - LOCKED -->
+<div class="top" style="display:flex;align-items:center;gap:10px;background:#0A3D2A;color:#fff;padding:14px 16px;">
+  <div style="font-size:22px;font-weight:900;">ZIR<span style="color:#FFC107;">O</span><span style="color:#FFC107;">•</span></div>
+  <div style="flex:1;background:#fff;border-radius:999px;padding:9px 12px;color:#666;font-size:13px;">🔍 Search Plumber, Cleaner...</div>
+  <a href="wallet.html" style="background:#FFC107;color:#000;font-weight:800;padding:7px 10px;border-radius:999px;font-size:12px;text-decoration:none;white-space:nowrap;">🪙 <span id="coinTop">120</span> iCoin</a>
+  <!-- SOS INLINE ONLY - NEVER FLOATING -->
+  <button onclick="location.href='office.html#safety'" style="background:#E53935;color:#fff;border:none;padding:7px 10px;border-radius:999px;font-weight:800;font-size:12px;">SOS</button>
+  <div onclick="location.href='office.html'" style="width:34px;height:34px;background:#FFC107;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:#000;flex-shrink:0;">A</div>
+</div>
 
-<div id="p-search" class="page"><span class="back" onclick="show('p-home')">← Back to Home</span><h2>🔍 Search ZIRO</h2><p class="sub">Find any worker, skill or area fast</p>
-<div class="search">🔍 <input id="searchInput" placeholder="Type Plumber, Cleaner, Wuse..." oninput="doFilter()"></div>
-<div class="chips"><button class="chip sel" onclick="setFilter('All',this,'cat')">All</button><button class="chip" onclick="setFilter('Plumber',this,'cat')">Plumber</button><button class="chip" onclick="setFilter('Electrician',this,'cat')">Electrician</button><button class="chip" onclick="setFilter('Cleaner',this,'cat')">Cleaner</button><button class="chip" onclick="setFilter('Brick Layer',this,'cat')">Brick Layer</button><button class="chip" onclick="setFilter('Barber',this,'cat')">Barber</button></div>
-<div class="chips"><button class="area sel" onclick="setFilter('All',this,'area')">📍 All Areas</button><button class="area" onclick="setFilter('Abuja',this,'area')">Abuja</button><button class="area" onclick="setFilter('Lagos',this,'area')">Lagos</button><button class="area" onclick="setFilter('Enugu',this,'area')">Enugu</button></div>
-<p id="searchCount">5 worker(s) found</p><div id="searchResults"></div></div>
+<div style="padding:16px;">
+  <h1 style="font-size:24px;line-height:1.2;">Find Trusted Workers<br>Near You, Fast.</h1>
+  <p style="color:#666;font-size:13px;margin:6px 0 14px;">Plumber • Electrician • Cleaner • Driver • More — Nigeria • 36 States + FCT</p>
 
-<div id="p-worker" class="page"><span class="back" onclick="show('p-home')">← Back to Home</span><div class="profile-bg"><div style="display:flex;gap:12px;align-items:center;"><div class="avatar-big" id="wAvatar">C</div><div><h2 id="wName" style="margin:0;">Chinedu O.</h2><p style="margin:2px 0;color:#D6E8DD;" id="wMeta">Plumber • Abuja</p><p style="margin:0;color:#FFC107;" id="wStars">⭐ 4.9 • ✓ Verified • Available Now</p></div></div><div class="stats"><div><b id="wJobs">24</b><br><span>Jobs Done</span></div><div style="border-left:1px solid #2A7A52;border-right:1px solid #2A7A52;"><b id="wPrice">₦8,000</b><br><span>Per Job</span></div><div><b>98%</b><br><span>On Time</span></div></div></div>
-<div class="card"><b>About</b><p id="wAbout">Expert plumber. Leaks, installations, tanks. 5 years experience.</p><b>Reviews</b><p>⭐⭐⭐⭐⭐ Chidinma — Very good work, came on time.<br>⭐⭐⭐⭐⭐ Emeka — Neat work, I will hire again.<br>⭐⭐⭐⭐⭐ Fatima — Good price, polite.</p></div>
-<button class="btn-yellow" onclick="hireNow()">Hire Now</button><button class="btn-chat-green" onclick="openChat()">💬 Chat With Worker</button><button class="btn-cream" onclick="unlockContact()">🔒 Unlock Contact • 5 iCoin</button><p class="note">ZIRO does NOT hold job money. You pay workers directly after work.</p></div>
+  <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;">
+    <button style="background:#0A3D2A;color:#fff;border:none;padding:9px 14px;border-radius:999px;font-weight:700;">All</button>
+    <button style="background:#fff;border:none;padding:9px 14px;border-radius:999px;font-weight:700;" onclick="location.href='search.html'">Plumber</button>
+    <button style="background:#fff;border:none;padding:9px 14px;border-radius:999px;font-weight:700;" onclick="location.href='search.html'">Electrician</button>
+    <button style="background:#fff;border:none;padding:9px 14px;border-radius:999px;font-weight:700;" onclick="location.href='search.html'">Cleaner</button>
+  </div>
 
-<div id="p-post" class="page"><span class="back" onclick="show('p-home')">← Back to Home</span><h2>Post a Job</h2><p class="sub">Tell workers what you need</p><div class="card"><p style="font-weight:700;">1. Choose type:</p><div class="chips"><button class="chip sel" onclick="pickCat('Plumber',this)">Plumber</button><button class="chip" onclick="pickCat('Electrician',this)">Electrician</button><button class="chip" onclick="pickCat('Cleaner',this)">Cleaner</button><button class="chip" onclick="pickCat('Brick Layer',this)">Brick Layer</button><button class="chip" onclick="pickCat('Barber',this)">Barber</button><button class="chip" onclick="pickCat('Other',this)">Other</button></div><p>Selected: <b id="selCat">Plumber</b></p><input id="jobTitle" placeholder="Type your job e.g. Fix leaking tap in Wuse 2"><input id="jobLoc" placeholder="Location e.g. Wuse 2, Abuja"><input id="jobBudget" type="number" placeholder="Budget ₦ e.g. 8000"><textarea id="jobDesc" placeholder="Describe the job..."></textarea><button class="btn-green" style="width:100%;" onclick="postJob()">Post Job — Free</button><p id="postMsg" class="ok"></p></div></div>
+  <div style="background:#fff;border-radius:16px;padding:16px;margin:12px 0;box-shadow:0 2px 10px rgba(0,0,0,.06);">
+    <b>CHIOMA — Verified • Abuja • Available</b>
+    <p style="color:#666;font-size:12px;margin:6px 0;">Your Work Companion. I can help you find work, buy iCoin, post a job, verify.</p>
+    <div style="display:flex;gap:8px;">
+      <button style="flex:1;background:#0A3D2A;color:#fff;border:none;padding:13px;border-radius:12px;font-weight:800;" onclick="alert('CHIOMA Voice - Phase 3')">🎤 Talk • Voice</button>
+      <button style="flex:1;background:#fff;color:#0A3D2A;border:1px solid #FFC107;padding:13px;border-radius:12px;font-weight:800;" onclick="alert('CHIOMA Chat - Phase 3')">💬 Chat • Text</button>
+    </div>
+  </div>
 
-<div id="p-join" class="page"><span class="back" onclick="show('p-home')">← Back to Home</span><h2>Join as Worker</h2><p class="sub">Get jobs near you. Get paid directly.</p><div class="card"><input id="joinName" placeholder="Your Name e.g. Tunde"><input id="joinSkill" placeholder="Skill e.g. Plumber"><input id="joinArea" placeholder="Area e.g. Abuja"><input id="joinPrice" type="number" placeholder="Price per job ₦ e.g. 8000"><button class="btn-green" style="width:100%;" onclick="joinWorker()">Join & Start Getting Jobs →</button><p id="joinMsg" class="ok"></p><p style="font-size:12px;color:#666;">After joining, you will appear in Home + Search immediately.</p></div></div>
+  <div style="background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;"><b>🏆 Merit Wall</b><p style="color:#666;font-size:12px;">Top Employer: Lagos Logistics Co. • 10 hires • 4.9★ • 100% payout</p></div>
 
-<div id="p-jobs" class="page"><span class="back" onclick="show('p-home')">← Back to Home</span><h2>My Jobs</h2><div id="jobsList"><div class="card">No jobs yet. Post your first job.</div></div><button class="btn-green" style="width:100%;margin-top:10px;" onclick="show('p-post')">+ Post New Job</button></div>
+  <div style="background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;"><b>Ada Okafor — Driver • Abuja</b><p style="color:#666;font-size:12px;">92% match • ⭐ 4.9 • Verified • Available Now</p><button style="width:100%;background:#0A3D2A;color:#fff;border:none;padding:13px;border-radius:12px;font-weight:800;" onclick="alert('Apply - Phase 3')">Apply</button></div>
+  <div style="background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;"><b>Fatima Bello — Designer • Enugu</b><p style="color:#666;font-size:12px;">95% match • ⭐ 4.8 • Verified • Available Now</p><button style="width:100%;background:#0A3D2A;color:#fff;border:none;padding:13px;border-radius:12px;font-weight:800;" onclick="alert('Apply - Phase 3')">Apply</button></div>
 
-<div id="p-wallet" class="page"><span class="back" onclick="show('p-home')">← Back to Home</span><h2>iCoin Wallet & Shop</h2><div class="card" style="text-align:center;"><p>Your Balance</p><h1 style="color:#000;">🪙 <span id="coin2">40</span> iCoin</h1><p>Price: ₦<span class="price">50</span> per iCoin • Min Buy 7</p></div><div class="card"><b>Buy iCoin — CONNECTED</b><p>7 iCoin = ₦<span id="p7">350</span> • 50 iCoin = ₦<span id="p50">2500</span> • 100 iCoin = ₦<span id="p100">5000</span></p><div style="display:flex;gap:8px;"><button class="hire" style="background:#FFC107;color:#000;" onclick="buyCoins(7)">Buy 7</button><button class="hire" onclick="buyCoins(50)">Buy 50</button><button class="hire" onclick="buyCoins(100)">Buy 100</button></div><p id="buyMsg" class="ok"></p><p style="font-size:11px;color:#888;">Demo payment now. To go live, paste your Flutterwave Payment Link in the code where it says YOUR_FLUTTERWAVE_LINK — I will do it for you if you send the link.</p></div></div>
+  <p style="font-size:12px;color:#666;text-align:center;">ZIRO TECHNOLOGIES LTD • No Escrow — ZIRO does NOT hold money. Pay each other directly.<br>Terms • Privacy • iCoin Policy • Refund Policy</p>
+  <p style="font-size:12px;color:#666;text-align:center;">iCoin Price: N50 per iCoin • Min Buy 7</p>
+</div>
 
-<div id="p-chats" class="page"><div class="mychat-bg"><span class="back" onclick="show('p-home')">← Back to Home</span><h2>💬 My Chat</h2><p class="sub">Talk • Agree • Work • Get Paid</p><div class="search">🔍 <input placeholder="Search chats..."></div><div id="chatList"></div></div></div>
+<!-- CHIOMA - ONLY FLOATING BUTTON -->
+<div onclick="alert('CHIOMA - Phase 3')" style="position:fixed;right:16px;bottom:88px;width:56px;height:56px;border-radius:50%;background:#FFC107;border:3px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;z-index:60;">C</div>
 
-<div id="p-chat" class="page"><div class="chat-bg"><div class="chat-head"><span style="color:#fff;" onclick="show('p-chats')">←</span><div class="av" id="chatAv">C</div><div style="flex:1;"><b id="chatName" style="color:#fff;">Chinedu O.</b><br><span style="font-size:11px;color:#C8E8D0;">● Available • <span id="chatMeta">Plumber • ₦8,000</span></span></div><button class="call" onclick="startCall('Voice')">📞 Call</button><button class="video" onclick="startCall('Video')">📹 Video</button></div>
-<div class="jobbar"><span>📄 Job: <span id="chatJob">Chinedu O. • Plumber Job</span></span><button onclick="show('p-jobs')">View Job</button></div><div class="secure">ZIRO Secure • Today • Chat started</div><div id="chatBox"></div>
-<div class="chat-input"><button class="plus" onclick="pickPhoto()">+</button><input id="chatInput" placeholder="Type message..."><button class="voice-btn" id="voiceBtn" onclick="toggleVoice()">🎤 Voice</button><button class="send-btn" onclick="sendMsg()">Send</button></div><input type="file" id="photoInput" accept="image/*" style="display:none;" onchange="sendPhoto(this)"></div></div>
+<!-- BOTTOM NAV - LOCKED -->
+<div style="position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;border-top:1px solid #eee;z-index:50;">
+  <a href="index.html" style="flex:1;text-align:center;padding:10px 2px;font-size:11px;font-weight:800;color:#0A3D2A;text-decoration:none;">🏠<br>Home</a>
+  <a href="search.html" style="flex:1;text-align:center;padding:10px 2px;font-size:11px;font-weight:800;color:#666;text-decoration:none;">🔍<br>Search</a>
+  <a href="office.html" style="flex:1;text-align:center;padding:10px 2px;font-size:11px;font-weight:800;color:#666;text-decoration:none;"><span style="background:#FFC107;color:#000;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:22px;margin:-18px auto 0;">+</span><br>Create</a>
+  <a href="chat.html" style="flex:1;text-align:center;padding:10px 2px;font-size:11px;font-weight:800;color:#666;text-decoration:none;">💬<br>Chat</a>
+  <a href="office.html" style="flex:1;text-align:center;padding:10px 2px;font-size:11px;font-weight:800;color:#666;text-decoration:none;">👤<br>My Office</a>
+</div>
 
-<div id="p-office" class="page"><div class="office-bg"><span class="back" onclick="show('p-home')">← Back to Home</span><h2>👤 My Office</h2><p class="sub">Your jobs, wallet, iCoin & profile</p>
-<div class="office-card"><div style="display:flex;gap:12px;align-items:center;"><div class="avatar-big" style="width:56px;height:56px;">U</div><div><b id="officeName">Udoka</b><br><span style="font-size:12px;color:#666;">Brick Layer • Apo, Abuja</span><br><span style="font-size:12px;">⭐ 4.7 • ✓ Verified</span><br><span style="font-size:11px;color:#888;">Wallet ID: ZIRO-9266-4402</span></div></div><button class="buy" onclick="editProfile()">Edit</button></div>
-<div class="office-card"><div style="text-align:center;"><b>₦0</b><br><span style="font-size:11px;color:#888;">Wallet • Tap ›</span></div><div style="text-align:center;"><b>🪙 <span id="coin3">40</span></b><br><span style="font-size:11px;color:#888;">iCoin • Tap ›</span></div><div style="text-align:center;"><b id="jobCount">1</b><br><span style="font-size:11px;color:#888;">Jobs Done</span></div></div>
-<div class="icoin"><span>🪙 iCoin Price: ₦<span class="price">50</span> per iCoin • Min Buy 7</span><button class="buy" onclick="show('p-wallet')">Buy ›</button></div>
-<div class="menu"><div onclick="show('p-wallet')">🪙 iCoin Wallet & Shop <span>›</span></div><div onclick="show('p-chats')">💬 My Chats <span>›</span></div><div onclick="show('p-jobs')">📄 My Jobs <span>›</span></div><div onclick="show('p-post')">+ Post a Job <span>›</span></div><div onclick="show('p-search')">🔍 Search Workers <span>›</span></div><div onclick="show('p-join')">👷 Join as Worker <span>›</span></div><div onclick="show('p-admin')">🛠️ Admin Hub • 7 Departments <span>›</span></div></div>
-<button class="logout" onclick="logout()">Log Out</button><p style="text-align:center;font-size:11px;color:#C4B5FD;">ZIRO v1.0 • Terms • Privacy • Refund Policy</p></div></div>
-
-<div id="p-admin" class="page"><div class="admin-bg"><span class="back" onclick="show('p-office')">← Back to My Office</span><h2>🛠️ ZIRO Admin Hub</h2><p class="sub">7 Departments • CEO Sees All • GM Sees All Except CEO</p>
-<div class="admin-card"><b>Live Price: ₦<span class="price">50</span> • GM: ₦<span id="gmPrice">50</span> • CEO Override: <span id="ceoState">None - GM active</span></b></div>
-<div class="admin-card"><b>Top Management</b><div style="background:#000;color:#fff;padding:14px;border-radius:12px;margin-top:10px;text-align:center;" onclick="show('p-ceo')"><b>👑 CEO Dashboard</b><br><span style="font-size:12px;">ALL • Override GM • Control ALL Depts</span></div><div style="background:#0B6E4F;color:#fff;padding:14px;border-radius:12px;margin-top:10px;text-align:center;" onclick="show('p-gm')"><b>🧑‍💼 GM Dashboard</b><br><span style="font-size:12px;">Day-to-Day • Price • Monitors 5 Depts (Not CEO)</span></div></div>
-<div class="admin-card"><b>Other 5 Departments</b><div class="dept" onclick="alert('Customer Support Dept')">💬 Customer Support <span>→</span></div><div class="dept" onclick="alert('Finance / Payments')">💰 Finance / Payments <span>→</span></div><div class="dept" onclick="alert('Verification / Trust')">✅ Verification / Trust <span>→</span></div><div class="dept" onclick="alert('Moderation / Safety')">🛡️ Moderation / Safety <span>→</span></div><div class="dept" onclick="alert('Marketing / Growth')">📣 Marketing / Growth <span>→</span></div></div></div></div>
-
-<div id="p-ceo" class="page"><div class="admin-bg"><span class="back" onclick="show('p-admin')">← Admin Hub</span><h2 style="color:#FFC107;">👑 CEO Dashboard</h2><p class="sub">ALL GM Powers + Override GM + Control ALL Departments</p>
-<div style="display:flex;gap:8px;"><div class="admin-card" style="flex:1;text-align:center;"><b>Live Price</b><h2>₦<span class="price">50</span></h2><span style="font-size:11px;">CEO wins</span></div><div class="admin-card" style="flex:1;text-align:center;"><b>GM Price</b><h2>₦<span id="gmPrice2">50</span></h2></div><div class="admin-card" style="flex:1;text-align:center;"><b>Workers</b><h2 id="ceoWorkers">5</h2></div></div>
-<div class="admin-card" style="background:#FFF8E1;"><b>👑 CEO Override — Set iCoin Price (Overrides GM)</b><input id="ceoInput" type="number" value="50"><p id="ceoPreview">7 = ₦350 • 50 = ₦2,500 • 100 = ₦5,000</p><div style="display:flex;gap:8px;"><button class="hire" style="background:#000;" onclick="saveCEO()">👑 Save CEO Override</button><button class="unlock" onclick="clearCEO()">Clear — Res
+<script src="js/wallet.js"></script>
+</body></html>
