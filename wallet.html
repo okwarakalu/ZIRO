@@ -13,16 +13,21 @@
   <p style="margin:0; color:#DDD6FE; font-size:13px;">iCoin • Wallet • History</p>
 </div>
 <div style="background:#2E1065; padding:16px;">
-  <!-- ONE ARRANGED FOLDER - Wallet + iCoin -->
   <div style="background:white; border-radius:16px; padding:4px 0; display:flex;">
     <div style="flex:1; text-align:center; padding:16px 4px; border-right:1px solid #eee;"><span style="font-size:12px; color:#888;">Wallet Balance</span><b id="walletBal" style="font-size:22px; display:block; margin-top:4px;">₦0</b></div>
     <div style="flex:1; text-align:center; padding:16px 4px;"><span style="font-size:12px; color:#888;">iCoin Balance</span><b id="icoinBal" style="font-size:22px; display:block; margin-top:4px; color:#B77900;">🪙 50</b></div>
   </div>
 
+  <!-- CLAIM FREE BUTTON - Only shows if balance is 0 -->
+  <div id="claimBox" style="display:none; background:#FFF8E1; border:1px solid #F2C94C; border-radius:16px; padding:16px; margin-top:12px; text-align:center;">
+    <b style="font-size:15px;">Your iCoin is 0</b>
+    <p style="font-size:13px; color:#666; margin:6px 0 12px;">Claim your free 50 iCoin welcome bonus now.</p>
+    <button onclick="claimFree()" style="width:100%; background:#F2C94C; color:#2E1065; border:none; padding:14px; border-radius:12px; font-size:14px; font-weight:900;">🎁 Claim 50 Free iCoin</button>
+  </div>
+
   <div style="background:white; border-radius:16px; padding:18px; margin-top:12px;">
     <b style="font-size:15px;">Buy iCoin</b>
     <p style="font-size:12px; color:#888; margin:4px 0 12px;">Use iCoin to unlock worker contacts. 1 Unlock = 5 iCoin.</p>
-    <!-- ONE ARRANGED FOLDER - Buy Packs -->
     <div style="background:#F2F4F2; border-radius:12px; padding:10px; display:flex; flex-direction:column; gap:8px;">
       <button onclick="buyIcoin(10,500)" style="background:white; border:1px solid #ddd; padding:14px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; font-weight:800;"> <span>🪙 10 iCoin</span> <span>₦500</span> </button>
       <button onclick="buyIcoin(50,2000)" style="background:#FFF8E1; border:1px solid #F2C94C; padding:14px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; font-weight:800;"> <span>🪙 50 iCoin <span style="background:#F2C94C; font-size:10px; padding:2px 6px; border-radius:999px;">POPULAR</span></span> <span>₦2,000</span> </button>
@@ -45,8 +50,15 @@ function renderWallet(){
   const wallet = Number(localStorage.getItem('ziro_wallet') || 0);
   document.getElementById('icoinBal').textContent = '🪙 ' + bal;
   document.getElementById('walletBal').textContent = '₦' + wallet.toLocaleString();
+  // Show Claim button only if 0
+  document.getElementById('claimBox').style.display = (bal === 0) ? 'block' : 'none';
   const hist = JSON.parse(localStorage.getItem('ziro_history') || '[]');
   document.getElementById('history').innerHTML = hist.length ? hist.slice().reverse().map(h=>'<p style="font-size:13px; margin:10px 0 0; display:flex; justify-content:space-between;"><span>'+h.text+'</span><span style="color:#888;">'+h.time+'</span></p>').join('') : '<p style="font-size:13px; color:#888; margin:10px 0 0;">No transactions yet.<br>You got 50 free iCoin on signup.</p>';
+}
+function claimFree(){
+  const bal = ziroClaimFree();
+  renderWallet();
+  ziroNotify('50 iCoin Added', 'Your balance is now '+bal+' iCoin.<br>You can unlock 10 contacts.', 'Go to Home', function(){ window.location.href='index.html'; });
 }
 function buyIcoin(amount, price){
   ziroConfirm('Buy '+amount+' iCoin?', 'Pay ₦'+price.toLocaleString()+' for '+amount+' iCoin?', function(){
