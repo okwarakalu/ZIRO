@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ZIRO - Admin Dashboard</title>
+</head>
+<body style="background:#111; margin:0; font-family:sans-serif;">
+<div style="background:#0B6E4F; padding:20px 16px; color:white;"><div onclick="window.location.href='index.html'">← Back to Home</div><h2 style="margin:12px 0 4px;">🛠 GM / CEO Dashboard</h2><p style="margin:0; color:#F2C94C; font-size:13px;">Only for ZIRO Management</p></div>
+<div style="padding:16px;">
+  <div style="background:white; border-radius:16px; padding:18px;">
+    <b style="font-size:16px;">💰 Set iCoin Price</b>
+    <p style="font-size:13px; color:#666; margin:6px 0 12px;">This price shows in Wallet Shop for ALL users.<br>Minimum buy is fixed at 7 iCoin. Max is unlimited.</p>
+    <label style="font-size:13px; font-weight:800;">Price Per 1 iCoin (₦)</label>
+    <input id="priceInput" type="number" style="width:100%; box-sizing:border-box; padding:13px; border:1px solid #ddd; border-radius:12px; margin:8px 0; font-size:16px;">
+    <p style="font-size:13px; background:#F2F4F2; padding:10px; border-radius:10px;">Example: If price = ₦50 → 7 iCoin = ₦350 • 100 iCoin = ₦5,000</p>
+    <button onclick="savePrice()" style="width:100%; background:#0B6E4F; color:white; border:none; padding:15px; border-radius:12px; font-size:15px; font-weight:900;">Save New Price</button>
+    <p id="savedMsg" style="text-align:center; font-size:13px; color:#0B6E4F; font-weight:800;"></p>
+  </div>
+  <div style="background:white; border-radius:16px; padding:18px; margin-top:12px;">
+    <b>Quick Prices</b>
+    <div style="display:flex; gap:8px; margin-top:10px;"><button onclick="setQuick(30)" style="flex:1; padding:12px; border:1px solid #ddd; border-radius:10px; background:white; font-weight:800;">₦30 / coin</button><button onclick="setQuick(50)" style="flex:1; padding:12px; border:1px solid #ddd; border-radius:10px; background:white; font-weight:800;">₦50 / coin</button><button onclick="setQuick(100)" style="flex:1; padding:12px; border:1px solid #ddd; border-radius:10px; background:white; font-weight:800;">₦100 / coin</button></div>
+  </div>
+</div>
+<script src="js/notify.js"></script>
+<script src="js/wallet.js"></script>
+<script>
+function setQuick(p){ document.getElementById('priceInput').value=p; savePrice(); }
+function savePrice(){ const p=Number(document.getElementById('priceInput').value); if(!p || p<=0){ ziroNotify('Invalid Price','Enter a price above 0.'); return; } ziroSetCoinPrice(p); document.getElementById('savedMsg').textContent='✅ Saved! New price: ₦'+p+' per iCoin. Wallet Shop updated for all users.'; ziroNotify('Price Saved','New iCoin price: ₦'+p+' per coin.<br>7 iCoin now = ₦'+(p*7).toLocaleString()); }
+document.addEventListener('DOMContentLoaded', ()=>{ document.getElementById('priceInput').value = ziroGetCoinPrice(); });
+</script>
+</body>
+</html>
