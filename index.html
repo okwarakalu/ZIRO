@@ -2,82 +2,69 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>ZIRO - Home</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ZIRO - Find Workers Near You</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body style="background:#0B3D2E; margin:0; padding-bottom:75px;">
-<div style="background:linear-gradient(180deg,#0B6E4F 0%, #0B3D2E 100%); padding:18px 16px 20px; border-radius:0 0 22px 22px; color:white;">
+<body style="background:#0A2540; margin:0;">
+<div style="background:linear-gradient(180deg,#123A6D 0%, #0A2540 100%); padding:20px 16px; border-radius:0 0 22px 22px; color:white;">
   <div style="display:flex; justify-content:space-between; align-items:center;">
-    <div style="background:white; color:#0B3D2E; padding:6px 12px; border-radius:10px; font-weight:900; font-size:18px;">ZIRO <span style="color:#F2C94C;">●</span></div>
-    <span onclick="window.location.href='office.html'" style="background:rgba(255,255,255,0.2); width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px;">👤</span>
+    <b style="font-size:22px;">ZIRO <span style="color:#F2C94C;">🪙</span></b>
+    <div style="display:flex; gap:8px;">
+      <button onclick="window.location.href='wallet.html'" style="background:#F2C94C; color:#0A2540; border:none; padding:8px 12px; border-radius:999px; font-size:12px; font-weight:900;">🪙 <span id="topIcoin">50</span></button>
+      <button onclick="window.location.href='office.html'" style="background:rgba(255,255,255,0.15); color:white; border:none; padding:8px 12px; border-radius:999px; font-size:12px;">👤 Office</button>
+    </div>
   </div>
-  <h2 style="margin:14px 0 4px; color:white;">Find Workers Near You</h2>
-  <p style="margin:0; color:#F2C94C; font-size:13px;">Plumber • Electrician • Cleaner • Brick Layer</p>
-  <input onclick="window.location.href='search.html'" readonly placeholder="🔍 Search worker, skill, area... Tap to Search" style="width:100%; box-sizing:border-box; padding:12px 14px; border-radius:999px; border:none; margin-top:14px; font-size:14px; background:white;">
+  <h2 style="margin:14px 0 4px; color:white;">Find Trusted Workers<br>Near You, Fast.</h2>
+  <p style="margin:0; color:#8EC8FF; font-size:13px;">Plumber • Electrician • Cleaner • Brick Layer • More</p>
+  <div onclick="window.location.href='search.html'" style="background:white; border-radius:999px; padding:13px 14px; margin-top:14px; color:#888; font-size:14px;">🔍 Search Plumber, Cleaner, Wuse...</div>
   <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
-    <button onclick="window.location.href='search.html?skill=All'" style="background:#F2C94C; color:#0B3D2E; border:none; padding:8px 14px; border-radius:999px; font-size:12px; font-weight:800;">All</button>
-    <button onclick="window.location.href='search.html?skill=Plumber'" style="background:rgba(255,255,255,0.2); color:white; border:1px solid rgba(255,255,255,0.3); padding:8px 14px; border-radius:999px; font-size:12px; font-weight:700;">Plumber</button>
-    <button onclick="window.location.href='search.html?skill=Electrician'" style="background:rgba(255,255,255,0.2); color:white; border:1px solid rgba(255,255,255,0.3); padding:8px 14px; border-radius:999px; font-size:12px; font-weight:700;">Electrician</button>
-    <button onclick="window.location.href='search.html?skill=Cleaner'" style="background:rgba(255,255,255,0.2); color:white; border:1px solid rgba(255,255,255,0.3); padding:8px 14px; border-radius:999px; font-size:12px; font-weight:700;">Cleaner</button>
-    <button onclick="window.location.href='search.html?skill=Brick Layer'" style="background:rgba(255,255,255,0.2); color:white; border:1px solid rgba(255,255,255,0.3); padding:8px 14px; border-radius:999px; font-size:12px; font-weight:700;">Brick Layer</button>
+    <button onclick="window.location.href='search.html?skill=Plumber'" style="background:#F2C94C; color:#0A2540; border:none; padding:9px 14px; border-radius:999px; font-size:12px; font-weight:800;">🔧 Plumber</button>
+    <button onclick="window.location.href='search.html?skill=Electrician'" style="background:rgba(255,255,255,0.15); color:white; border:none; padding:9px 14px; border-radius:999px; font-size:12px;">⚡ Electrician</button>
+    <button onclick="window.location.href='search.html?skill=Cleaner'" style="background:rgba(255,255,255,0.15); color:white; border:none; padding:9px 14px; border-radius:999px; font-size:12px;">🧹 Cleaner</button>
+    <button onclick="window.location.href='search.html?skill=Brick Layer'" style="background:rgba(255,255,255,0.15); color:white; border:none; padding:9px 14px; border-radius:999px; font-size:12px;">🧱 Brick Layer</button>
   </div>
 </div>
-<div style="background:#0B3D2E; padding:14px 16px 0;">
-  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;"><h3 style="margin:0; color:white;">👷 Available Workers</h3><button onclick="window.location.href='worker-signup.html'" style="background:#F2C94C; color:#0B3D2E; border:none; padding:8px 12px; border-radius:999px; font-size:12px; font-weight:900;">+ Join as Worker</button></div>
-  <p style="color:#B8D8CC; font-size:12px; margin:0 0 10px;">Tap any worker to view profile →</p>
-  <div id="workerList"></div>
-</div>
-<div style="background:#0B3D2E; padding:6px 16px 20px;">
-  <h3 style="margin:14px 0 10px; color:white;">📋 Recent Jobs</h3><div id="jobList"></div>
-  <button onclick="window.location.href='post.html'" style="width:100%; background:#F2C94C; color:#0B3D2E; border:none; padding:14px; border-radius:12px; font-size:14px; font-weight:800; margin-top:10px;">+ Post a Job</button>
-  <button onclick="window.location.href='worker-signup.html'" style="width:100%; background:white; color:#0B3D2E; border:none; padding:14px; border-radius:12px; font-size:14px; font-weight:800; margin-top:10px;">👷 Join as Worker - Get Jobs</button>
-  <button onclick="window.location.href='sos.html'" style="width:100%; background:#D32F2F; color:white; border:none; padding:14px; border-radius:12px; font-size:14px; font-weight:800; margin-top:10px;">! SOS • Emergency</button>
-  <p style="text-align:center; font-size:12px; color:#B8D8CC; margin:12px 0 0;">ZIRO does NOT hold job money. You pay workers directly.</p>
-</div>
-<div class="ziro-nav">
-  <button class="ziro-nav-item active" onclick="window.location.href='index.html'"><span class="nav-icon">🏠</span>Home</button>
-  <button class="ziro-nav-item" onclick="window.location.href='search.html'"><span class="nav-icon">🔍</span>Search</button>
-  <button class="ziro-nav-center" onclick="window.location.href='post.html'">+</button>
-  <button class="ziro-nav-item" onclick="window.location.href='chat.html'"><span class="nav-icon">💬</span>Chat</button>
-  <button class="ziro-nav-item" onclick="window.location.href='office.html'"><span class="nav-icon">👤</span>My Office</button>
+<div style="background:#0A2540; padding:14px 16px;">
+  <div style="background:#FFF8E1; border:1px solid #F2C94C; border-radius:14px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;">
+    <span style="font-size:13px;">🪙 iCoin Price: <b id="homePrice">₦50 per iCoin</b> • Min Buy 7</span>
+    <button onclick="window.location.href='wallet.html'" style="background:#F2C94C; color:#0A2540; border:none; padding:8px 12px; border-radius:999px; font-size:12px; font-weight:900;">Buy ›</button>
+  </div>
+  <div style="display:flex; gap:10px; margin-top:12px;">
+    <button onclick="window.location.href='post.html'" style="flex:1; background:#0B6E4F; color:white; border:none; padding:14px; border-radius:12px; font-weight:900;">➕ Post a Job</button>
+    <button onclick="window.location.href='worker-signup.html'" style="flex:1; background:white; color:#0A2540; border:none; padding:14px; border-radius:12px; font-weight:900;">👷 Join as Worker</button>
+  </div>
+  <h3 style="color:white; margin:16px 0 10px; font-size:16px;">Available Workers Near You</h3>
+  <div id="homeWorkers"></div>
+  <button onclick="window.location.href='search.html'" style="width:100%; background:white; border:none; padding:13px; border-radius:12px; font-weight:800; margin-top:6px;">See All Workers →</button>
+  <p style="text-align:center; font-size:11px; color:#8EC8FF; margin-top:12px;">ZIRO v1.0 • Abuja • Lagos • Enugu</p>
 </div>
 <script src="js/notify.js"></script>
 <script src="js/wallet.js"></script>
+<script src="js/admin.js"></script>
 <script src="js/workers.js"></script>
 <script>
-function makeStableId(j){ const s=(j.skill||'')+'|'+(j.desc||'')+'|'+(j.budget||'')+'|'+(j.city||'')+'|'+(j.name||''); let h=0; for(let i=0;i<s.length;i++){ h=(h*31 + s.charCodeAt(i)) >>> 0; } return 'job_'+h; }
-function goToJobDetails(job){ window.location.href='job.html?id='+makeStableId(job); }
 function openWorker(name){ localStorage.setItem('ziro_view_worker', name); window.location.href='worker.html?name='+encodeURIComponent(name); }
 function openChatWith(name){ localStorage.setItem('ziro_chat_with', name); window.location.href='chat-room.html?with='+encodeURIComponent(name); }
-function renderWorkers(){
-  const WORKERS = ziroGetWorkers();
-  document.getElementById('workerList').innerHTML=WORKERS.map(w=>'<div style="background:white; border-radius:16px; padding:16px; margin-bottom:12px;">'
-    + '<div onclick="openWorker(\''+w.name+'\')" style="cursor:pointer;"><b style="font-size:16px;">'+w.name+' ✓ Verified <span style="color:#0B6E4F; font-size:12px;">View Profile ›</span></b><p style="margin:4px 0; font-size:13px; color:#666;">'+w.skill+' • '+w.city+'</p><p style="margin:4px 0; font-size:13px;">⭐ '+w.rating+' • Available Now • ₦'+Number(w.price).toLocaleString()+' / job</p></div>'
-    + '<div style="background:#F2F4F2; border-radius:12px; padding:10px; margin-top:10px; display:flex; flex-direction:column; gap:8px;">'
-    + '<button onclick="hireWorker(\''+w.name+'\')" style="width:100%; background:#0B6E4F; color:white; border:none; padding:13px; border-radius:10px; font-size:14px; font-weight:800;">Hire Now</button>'
-    + '<div style="display:flex; gap:8px;"><button onclick="unlockContact(\''+w.name+'\')" style="flex:1; background:white; color:#0B3D2E; border:1px solid #ddd; padding:11px 6px; border-radius:10px; font-size:12px; font-weight:800;">🔓 Unlock • 5 iCoin</button><button onclick="openWorker(\''+w.name+'\')" style="flex:1; background:white; color:#0B6E4F; border:1px solid #0B6E4F; padding:11px 6px; border-radius:10px; font-size:12px; font-weight:800;">👤 View Profile</button></div>'
-    + '</div>'
-    + '</div>').join('');
-}
-function hireWorker(name){ ziroConfirm('Hire '+name+'?', 'Chat with '+name+' to agree time and price.', function(){ openChatWith(name); }); }
-function unlockContact(name){
+function unlockWorker(name){
   if(localStorage.getItem('ziro_unlocked_'+name)==='yes'){ ziroNotify('Already Unlocked', 'You already unlocked '+name+'.', 'Go to Chat', function(){ openChatWith(name); }); return; }
   ziroConfirm('Unlock Contact?', 'Unlock '+name+' contact for 5 iCoin?', function(){
-    if(typeof ziroSpendIcoin === 'function'){
-      const ok = ziroSpendIcoin(5, 'Unlocked '+name+' • -5 iCoin');
-      if(!ok){ ziroNotify('Not Enough iCoin', 'You need 5 iCoin to unlock.<br>Buy iCoin in Wallet.', 'Go to Wallet', function(){ window.location.href='wallet.html'; }); return; }
-    }
+    const ok = ziroSpendIcoin(5, 'Unlocked '+name+' • -5 iCoin');
+    if(!ok){ ziroNotify('Not Enough iCoin', 'You need 5 iCoin to unlock.', 'Go to Wallet', function(){ window.location.href='wallet.html'; }); return; }
     localStorage.setItem('ziro_unlocked_'+name, 'yes');
+    document.getElementById('topIcoin').textContent = ziroGetIcoin();
     ziroNotify('Contact Unlocked', 'You can now chat with '+name+'.<br>5 iCoin used.', 'Go to Chat', function(){ openChatWith(name); });
   });
 }
-function renderJobs(){
-  const list=document.getElementById('jobList'); let jobs=JSON.parse(localStorage.getItem('ziro_jobs')||'[]');
-  if(!jobs.length){ jobs=[{skill:'Brick Layer', desc:'Mend my fence', city:'Apo NEPA, Fct Abuja', budget:12000, name:'Udoka/0814638963'}]; localStorage.setItem('ziro_jobs', JSON.stringify(jobs)); }
-  list.innerHTML=jobs.slice().reverse().map((j)=>{ const sid=makeStableId(j); const accepted=localStorage.getItem('ziro_accepted_'+sid)==='yes'; return '<div style="background:white; border-radius:16px; padding:16px; margin-bottom:12px;"><div style="display:flex; justify-content:space-between; align-items:center; gap:8px;"><b style="font-size:15px;">'+j.skill+' needed</b><span style="background:#FFF8E1; border:1px solid #F2C94C; padding:3px 10px; border-radius:999px; font-size:11px; font-weight:700;">'+(accepted?'✓ ACCEPTED':'OPEN')+'</span></div><p style="margin:6px 0; font-size:13px; color:#555;">'+j.desc+'</p><p style="margin:4px 0; font-size:13px;">📍 '+j.city+' • 💰 ₦'+Number(j.budget).toLocaleString()+'</p><button onclick=\'goToJobDetails('+JSON.stringify(j).replace(/'/g,"&#39;")+')\' style="width:100%; background:#0B6E4F; color:white; border:none; padding:13px; border-radius:12px; font-size:14px; font-weight:800; margin-top:8px;">'+(accepted?'View Job Details • Accepted':'View Job Details')+'</button></div>'; }).join('');
-}
-document.addEventListener('DOMContentLoaded', ()=>{ renderWorkers(); renderJobs(); });
+document.addEventListener('DOMContentLoaded', ()=>{
+  document.getElementById('topIcoin').textContent = ziroGetIcoin();
+  document.getElementById('homePrice').textContent = '₦' + ziroGetCoinPrice().toLocaleString() + ' per iCoin';
+  const list = ziroGetWorkers();
+  document.getElementById('homeWorkers').innerHTML = list.slice(0,5).map(w=>'<div style="background:white; border-radius:16px; padding:16px; margin-bottom:12px;">'
+    + '<div onclick="openWorker(\''+w.name+'\')" style="cursor:pointer;"><b style="font-size:16px;">'+w.name+' ✓ Verified <span style="color:#123A6D; font-size:12px;">View ›</span></b><p style="margin:4px 0; font-size:13px; color:#666;">'+w.skill+' • '+w.city+'</p><p style="margin:4px 0; font-size:13px;">⭐ '+w.rating+' • Available Now • ₦'+Number(w.price).toLocaleString()+' / job</p></div>'
+    + '<div style="display:flex; gap:8px; margin-top:10px;"><button onclick="openChatWith(\''+w.name+'\')" style="flex:1; background:#123A6D; color:white; border:none; padding:12px; border-radius:10px; font-weight:800; font-size:13px;">Hire Now</button><button onclick="unlockWorker(\''+w.name+'\')" style="flex:1; background:white; border:1px solid #ddd; padding:12px; border-radius:10px; font-weight:800; font-size:13px;">🔓 Unlock • 5 iCoin</button></div>'
+    + '</div>').join('');
+});
 </script>
 </body>
 </html>
