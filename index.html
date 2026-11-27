@@ -1,66 +1,114 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ZIRO V8</title>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>ZIRO V8 FIXED</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#F6F6F6;color:#222;padding-bottom:80px}
-.page{display:none;padding:16px}.page.active{display:block}
-.z-header{background:#123A2B;color:#fff;padding:18px 16px;border-bottom:3px solid #C9A227}
+*{box-sizing:border-box}html,body{margin:0;padding:0;font-family:Arial,sans-serif;background:#F6F6F6;color:#222}
+body{padding-bottom:75px}
+.z-header{background:#123A2B;color:#fff;padding:16px;position:sticky;top:0;z-index:50;border-bottom:3px solid #C9A227}
 .z-logo{font-size:22px;font-weight:900}.z-logo span{color:#C9A227}
+.page{display:none !important;padding:16px;min-height:60vh}.page.active{display:block !important}
 .z-card{background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:12px}
 .z-badge-gold{background:#FFF3CD;color:#7A5A00;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:800;display:inline-block}
 .z-btn-green{background:#0B6E4F;color:#fff;border:none;width:100%;padding:14px;border-radius:12px;font-weight:800;font-size:15px;cursor:pointer}
 .z-btn-gold{background:#C9A227;color:#fff;border:none;width:100%;padding:14px;border-radius:12px;font-weight:800;font-size:15px;cursor:pointer}
 .z-btn-outline{background:#fff;border:1.5px solid #ddd;width:100%;padding:12px;border-radius:12px;font-weight:700;cursor:pointer}
-input,select,textarea{width:100%;padding:13px;border:1.5px solid #ddd;border-radius:12px;margin:6px 0 12px}
-.z-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;border-top:1px solid #ddd;z-index:99}
-.z-nav button{flex:1;border:none;background:#fff;padding:12px 2px;font-size:12px;font-weight:800;cursor:pointer}
-.z-sos{position:fixed;right:14px;bottom:70px;background:#D32F2F;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;box-shadow:0 4px 12px rgba(0,0,0,.3);cursor:pointer}
-.flex{display:flex;gap:10px;align-items:center}.avatar{width:56px;height:56px;border-radius:50%;object-fit:cover}
+input,select,textarea{width:100%;padding:13px;border:1.5px solid #ddd;border-radius:12px;margin:6px 0 12px;font-size:15px;background:#fff}
+.z-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;border-top:1px solid #ddd;z-index:100;height:65px}
+.z-nav button{flex:1;border:none;background:#fff;padding:8px 2px;font-size:12px;font-weight:800;cursor:pointer;color:#666}
+.z-nav button.active{color:#0B6E4F;background:#E8F5E9}
+.z-sos{position:fixed;right:14px;bottom:80px;background:#D32F2F;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;box-shadow:0 4px 12px rgba(0,0,0,.3);cursor:pointer;z-index:90}
+.flex{display:flex;gap:10px;align-items:center}.avatar{width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0}
+/* CHAT FIX */
+.chat-box{background:#fff;border-radius:16px;padding:12px;min-height:220px;max-height:320px;overflow-y:auto;margin-bottom:12px}
+.msg{padding:10px 12px;border-radius:14px;margin:6px 0;max-width:85%;font-size:14px;line-height:1.4}
+.msg-me{background:#0B6E4F;color:#fff;margin-left:auto;text-align:right}
+.msg-them{background:#EEE;color:#222}
+.chat-bar{display:flex;gap:8px;align-items:center;background:#fff;padding:8px;border-radius:999px;box-shadow:0 2px 10px rgba(0,0,0,.1);position:sticky;bottom:75px;z-index:60}
+.chat-bar input{margin:0;border:none;outline:none;flex:1;padding:10px}
+.chat-icon{width:42px;height:42px;border-radius:50%;border:none;background:#EEE;font-size:18px;cursor:pointer;flex-shrink:0}
+.chat-send{width:48px;height:48px;border-radius:50%;border:none;background:#0B6E4F;color:#fff;font-size:20px;cursor:pointer;flex-shrink:0}
+.rec-on{background:#D32F2F !important;color:#fff !important;animation:blink 1s infinite}@keyframes blink{50%{opacity:.5}}
 </style></head>
 <body>
-<div class="z-header"><div style="display:flex;justify-content:space-between;align-items:center;"><div class="z-logo">ZIRO <span>V8</span></div><b>🪙 <span id="coinTop">120</span> Coins</b></div></div>
+<div class="z-header"><div style="display:flex;justify-content:space-between;align-items:center;"><div class="z-logo">ZIRO <span>V8</span> <span style="font-size:11px;background:#fff;color:#123A2B;padding:3px 7px;border-radius:999px;">FIXED</span></div><b>🪙 <span id="coinTop">120</span></b></div></div>
 
+<!-- HOME -->
 <div id="p-home" class="page active">
-<div class="z-card" style="background:#123A2B;color:#fff;text-align:center;"><h2 style="margin:0;">Welcome, <span id="userName">Guest</span> 👋</h2><p style="color:#D6E8DD;">Find Work. Hire Fast. Get Paid.</p><div class="flex"><button class="z-btn-gold" onclick="show('p-search')">🔍 Find Work</button><button class="z-btn-green" onclick="show('p-post')" style="background:#fff;color:#123A2B;">+ Post Job</button></div></div>
+<div class="z-card" style="background:#123A2B;color:#fff;text-align:center;"><h2 style="margin:0;">Welcome, <span id="userName">Guest</span> 👋</h2><p style="color:#D6E8DD;margin:6px 0 12px;">Find Work. Hire Fast. Get Paid.</p><div class="flex"><button class="z-btn-gold" onclick="show('p-search')">🔍 Find Work</button><button class="z-btn-green" onclick="show('p-post')" style="background:#fff;color:#123A2B;">+ Post Job</button></div></div>
 <div class="flex"><div class="z-card" style="flex:1;text-align:center;" onclick="show('p-wallet')">🪙<br><b>Wallet</b><br><span id="coin1">120 Coins</span></div><div class="z-card" style="flex:1;text-align:center;" onclick="show('p-shop')">🛒<br><b>Coin Shop</b><br>Buy Coins</div><div class="z-card" style="flex:1;text-align:center;" onclick="show('p-jobs')">📄<br><b>My Jobs</b><br><span id="jobCount">0 Jobs</span></div></div>
 <h3>Workers Near You - Abuja</h3>
 <div class="z-card flex" onclick="show('p-worker')"><img class="avatar" src="https://i.pravatar.cc/100?u=Segun"><div style="flex:1;"><b>Segun O. - Barber</b><br>⭐ 4.9 • Abuja • <span class="z-badge-gold">✓ Trust Badge</span></div><b>View →</b></div>
 <div class="z-card flex" onclick="show('p-worker')"><img class="avatar" src="https://i.pravatar.cc/100?u=Chinedu"><div style="flex:1;"><b>Chinedu O. - Plumber</b><br>⭐ 4.8 • Abuja • <span class="z-badge-gold">✓ Trust Badge</span></div><b>View →</b></div>
 </div>
 
-<div id="p-search" class="page"><h2>Search / Find Work</h2><input id="searchInput" placeholder="🔍 Search jobs, services, people..." oninput="doSearch()"><div id="searchResults"><div class="z-card flex"><img class="avatar" src="https://i.pravatar.cc/100?u=Segun"><div style="flex:1;"><b>Segun O.</b><br>Barber • Abuja • ⭐ 4.9</div><button class="z-btn-green" style="width:auto;" onclick="show('p-worker')">View</button></div><div class="z-card flex"><img class="avatar" src="https://i.pravatar.cc/100?u=Chinedu"><div style="flex:1;"><b>Chinedu O.</b><br>Plumber • Abuja • ⭐ 4.8</div><button class="z-btn-green" style="width:auto;" onclick="show('p-worker')">View</button></div></div></div>
+<!-- SEARCH -->
+<div id="p-search" class="page"><h2>Search / Find Work</h2><input id="searchInput" placeholder="🔍 Search e.g. electrician, barber..." oninput="doSearch()"><div id="searchResults"><div class="z-card flex"><img class="avatar" src="https://i.pravatar.cc/100?u=Segun"><div style="flex:1;"><b>Segun O.</b><br>Barber • Abuja • ⭐ 4.9</div><button class="z-btn-green" style="width:auto;" onclick="show('p-worker')">View</button></div><div class="z-card flex"><img class="avatar" src="https://i.pravatar.cc/100?u=Chinedu"><div style="flex:1;"><b>Chinedu O.</b><br>Plumber • Abuja • ⭐ 4.8</div><button class="z-btn-green" style="width:auto;" onclick="show('p-worker')">View</button></div><div class="z-card flex"><img class="avatar" src="https://i.pravatar.cc/100?img=32"><div style="flex:1;"><b>Ada O.</b><br>Cleaner • Abuja • ⭐ 5.0</div><button class="z-btn-green" style="width:auto;" onclick="show('p-worker')">View</button></div></div></div>
+
+<!-- WORKER -->
 <div id="p-worker" class="page"><div class="z-card" style="text-align:center;"><img src="https://i.pravatar.cc/150?u=Segun" style="width:100px;height:100px;border-radius:50%;border:3px solid #C9A227;"><h2>Segun O.</h2><p>Barber • Abuja • ⭐ 4.9 (128 jobs)</p><span class="z-badge-gold">✓ Trust Badge</span></div><div class="z-card"><b>About</b><p>Professional barber in Abuja. 5 years experience. Home service available.</p><p><b>Price:</b> From ₦5,000 • <b>Available:</b> Today</p></div><div class="flex"><button class="z-btn-green" onclick="show('p-chat')">💬 Chat Now</button><button class="z-btn-gold" onclick="show('p-post')">📄 Hire Now</button></div></div>
+
+<!-- POST -->
 <div id="p-post" class="page"><div class="z-card"><h2>Post a Job</h2><input id="jobTitle" placeholder="Job Title e.g. I need a Barber"><select id="jobCat"><option>Barber</option><option>Cleaner</option><option>Plumber</option><option>Electrician</option></select><input id="jobLoc" placeholder="Location e.g. Wuse 2, Abuja"><input id="jobBudget" type="number" placeholder="Budget ₦ e.g. 5000"><textarea id="jobDesc" placeholder="Describe the job..."></textarea><button class="z-btn-green" onclick="postJob()">📄 Post Job — Free</button></div></div>
+
+<!-- JOBS -->
 <div id="p-jobs" class="page"><h2>My Jobs</h2><div id="jobsList"></div><button class="z-btn-green" onclick="show('p-post')">+ Post New Job</button></div>
+
+<!-- WALLET -->
 <div id="p-wallet" class="page"><div class="z-card" style="text-align:center;background:#123A2B;color:#fff;"><p>Total Balance</p><h1>🪙 <span id="coin2">120</span> Coins</h1><span class="z-badge-gold">Gold Tier</span><div class="flex" style="margin-top:14px;"><button class="z-btn-gold" onclick="show('p-shop')">↓ Buy Coins</button><button class="z-btn-outline" onclick="sendCoins()">→ Send Coins</button></div></div><h3>Recent Activity</h3><div class="z-card flex"><div style="flex:1;"><b>Received from Segun O.</b><br>Today • Job Completed</div><b style="color:#0B6E4F;">+20 Coins</b></div></div>
 
-<div id="p-shop" class="page"><h2>Coin Shop - Buy Coins</h2><p><span class="z-badge-gold">ℹ️ Minimum Purchase 50 Coins • Secure Payment via Flutterwave</span></p><div class="z-card"><b>Starter</b> - 50 Coins • ₦7,500<br><button class="z-btn-green" style="margin-top:8px;" onclick="payReal(7500,50)">💳 Pay ₦7,500 with Flutterwave</button></div><div class="z-card" style="border:2px solid #C9A227;"><b>Popular • +10 Bonus</b> - 130 Coins • ₦15,000<br><button class="z-btn-gold" style="margin-top:8px;" onclick="payReal(15000,130)">💳 Pay ₦15,000 with Flutterwave</button></div><div class="z-card"><b>Pro • +50 Bonus</b> - 450 Coins • ₦45,000<br><button class="z-btn-green" style="margin-top:8px;" onclick="payReal(45000,450)">💳 Pay ₦45,000 with Flutterwave</button></div><div class="z-card"><b>Business • +150 Bonus</b> - 1150 Coins • ₦97,500<br><button class="z-btn-green" style="margin-top:8px;" onclick="payReal(97500,1150)">💳 Pay ₦97,500 with Flutterwave</button></div><p style="font-size:12px;color:#888;text-align:center;">To activate real payment: Replace YOUR_FLUTTERWAVE_LINK below with your own Flutterwave Payment Link from dashboard.flutterwave.com</p></div>
+<!-- SHOP -->
+<div id="p-shop" class="page"><h2>Coin Shop - Buy Coins</h2><p><span class="z-badge-gold">ℹ️ Minimum 50 Coins • Secure via Flutterwave</span></p><div class="z-card"><b>Starter</b> - 50 Coins • ₦7,500<br><button class="z-btn-green" style="margin-top:8px;" onclick="payReal(7500,50)">💳 Pay ₦7,500</button></div><div class="z-card" style="border:2px solid #C9A227;"><b>Popular • +10 Bonus</b> - 130 Coins • ₦15,000<br><button class="z-btn-gold" style="margin-top:8px;" onclick="payReal(15000,130)">💳 Pay ₦15,000</button></div><div class="z-card"><b>Pro • +50 Bonus</b> - 450 Coins • ₦45,000<br><button class="z-btn-green" style="margin-top:8px;" onclick="payReal(45000,450)">💳 Pay ₦45,000</button></div><div class="z-card"><b>Business • +150 Bonus</b> - 1150 Coins • ₦97,500<br><button class="z-btn-green" style="margin-top:8px;" onclick="payReal(97500,1150)">💳 Pay ₦97,500</button></div></div>
 
-<div id="p-chat" class="page"><h2>My Chats</h2><div class="z-card flex"><img class="avatar" src="https://i.pravatar.cc/100?u=Segun"><div style="flex:1;"><b>Segun O.</b><br><span id="lastMsg">I can come today by 2pm...</span></div><span class="z-badge-gold">2</span></div><input id="chatInput" placeholder="Type message..."><button class="z-btn-green" onclick="sendMsg()">Send 💬</button></div>
+<!-- CHAT - FIXED WITH SEND + VOICE + PHOTO -->
+<div id="p-chat" class="page"><h2 style="margin-top:0;">My Chats - Segun O.</h2>
+<div class="z-card flex" style="margin-bottom:10px;"><img class="avatar" src="https://i.pravatar.cc/100?u=Segun"><div style="flex:1;"><b>Segun O.</b><br><span style="color:green;font-size:12px;">● Online Now</span></div><span class="z-badge-gold">2</span></div>
+<div class="chat-box" id="chatBox"><div class="msg msg-them">Hello, I can come today by 2pm. Is that ok?</div><div class="msg msg-me">Yes, please come. Wuse 2.</div><div class="msg msg-them">Alright, I am on my way 👍</div></div>
+<div id="voiceNote" style="display:none;text-align:center;background:#FFF3CD;padding:10px;border-radius:12px;margin-bottom:8px;">🔴 Recording... <span id="recTime">0s</span> - Tap Mic again to STOP & SEND</div>
+<div class="chat-bar"><button class="chat-icon" onclick="pickPhoto()">📷</button><input id="chatInput" placeholder="Type message..." enterkeyhint="send"><button class="chat-icon" id="micBtn" onclick="toggleVoice()">🎤</button><button class="chat-send" onclick="sendMsg()">➤</button></div>
+<p style="text-align:center;font-size:12px;color:#888;">Tap 🎤 to record voice • Tap 📷 to send photo • Tap ➤ to SEND</p>
+<input type="file" id="photoInput" accept="image/*" style="display:none;" onchange="sendPhoto(this)">
+</div>
+
+<!-- OFFICE -->
 <div id="p-office" class="page"><div class="z-card" style="text-align:center;"><img src="https://i.pravatar.cc/150?u=me" style="width:90px;height:90px;border-radius:50%;"><h2 id="profileName">Guest User</h2><p>Abuja • ⭐ 4.9 • <span class="z-badge-gold">Gold Tier</span></p></div><div class="z-card"><b>Wallet:</b> 🪙 <span id="coin3">120</span> Coins<br><b>Jobs Done:</b> 12<br><b>Member Since:</b> 2026</div><button class="z-btn-outline" onclick="show('p-login')">Login / Switch Account</button><button class="z-btn-outline" style="margin-top:10px;" onclick="location.href='admin.html'">🔐 Admin Dashboard (You Only)</button></div>
+
+<!-- LOGIN -->
 <div id="p-login" class="page"><div class="z-card" style="text-align:center;"><h2>Welcome Back</h2><input id="loginName" placeholder="Your Name e.g. Tunde"><input id="loginPhone" placeholder="Phone / Email"><button class="z-btn-green" onclick="doLogin()">Login →</button><button class="z-btn-outline" style="margin-top:10px;" onclick="doLogin()">Create Free Account</button></div></div>
 
-<!-- SOS POPUP -->
-<div id="sosBox" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);z-index:200;align-items:center;justify-content:center;"><div style="background:#fff;margin:20px;padding:20px;border-radius:16px;text-align:center;width:90%;max-width:400px;"><h2 style="color:#D32F2F;">🚨 SOS EMERGENCY</h2><p>Are you in danger? ZIRO will alert your emergency contact and show your location.</p><p><b>Your Location:</b> <span id="sosLoc">Abuja, Nigeria (Getting GPS...)</span></p><button class="z-btn-green" style="background:#D32F2F;" onclick="confirmSOS()">🚨 YES, SEND SOS NOW</button><button class="z-btn-outline" style="margin-top:10px;" onclick="closeSOS()">Cancel - I'm Safe</button></div></div>
+<!-- SOS -->
+<div id="sosBox" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.75);z-index:300;align-items:center;justify-content:center;"><div style="background:#fff;margin:20px;padding:20px;border-radius:16px;text-align:center;width:90%;max-width:400px;"><h2 style="color:#D32F2F;">🚨 SOS EMERGENCY</h2><p>Are you in danger?</p><p><b>Location:</b> <span id="sosLoc">Abuja, Nigeria</span></p><button class="z-btn-green" style="background:#D32F2F;" onclick="confirmSOS()">🚨 YES, SEND SOS NOW</button><button class="z-btn-outline" style="margin-top:10px;" onclick="closeSOS()">Cancel - I'm Safe</button></div></div>
 
 <div class="z-sos" onclick="openSOS()">SOS</div>
-<div class="z-nav"><button onclick="show('p-home')">🏠<br>Home</button><button onclick="show('p-search')">🔍<br>Search</button><button onclick="show('p-post')">➕<br>Post</button><button onclick="show('p-chat')">💬<br>Chats</button><button onclick="show('p-office')">👤<br>Office</button></div>
+<div class="z-nav"><button id="btn-home" class="active" onclick="show('p-home')">🏠<br>Home</button><button id="btn-search" onclick="show('p-search')">🔍<br>Search</button><button id="btn-post" onclick="show('p-post')">➕<br>Post</button><button id="btn-chat" onclick="show('p-chat')">💬<br>Chats</button><button id="btn-office" onclick="show('p-office')">👤<br>Office</button></div>
 
 <script>
 let coins = parseInt(localStorage.getItem('ziro_coins')||'120');
 let jobs = JSON.parse(localStorage.getItem('ziro_jobs')||'[]');
 let user = localStorage.getItem('ziro_name')||'Guest';
-function show(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
-function updateUI(){['coinTop','coin1','coin2','coin3'].forEach(i=>{let e=document.getElementById(i);if(e)e.textContent=coins;});document.getElementById('userName').textContent=user;document.getElementById('profileName').textContent=user;document.getElementById('jobCount').textContent=jobs.length+' Jobs';renderJobs();}
+let mediaRecorder=null, audioChunks=[], recTimer=null, recSec=0;
+function show(id){
+  document.querySelectorAll('.page').forEach(p=>{p.classList.remove('active'); p.style.display='none';});
+  let el=document.getElementById(id); if(el){el.classList.add('active'); el.style.display='block';}
+  document.querySelectorAll('.z-nav button').forEach(b=>b.classList.remove('active'));
+  let map={'p-home':'btn-home','p-search':'btn-search','p-post':'btn-post','p-chat':'btn-chat','p-office':'btn-office'};
+  let btn=document.getElementById(map[id]); if(btn) btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+function updateUI(){['coinTop','coin1','coin2','coin3'].forEach(i=>{let e=document.getElementById(i);if(e)e.textContent=coins+(i==='coinTop'?' Coins':' Coins');});document.getElementById('userName').textContent=user;document.getElementById('profileName').textContent=user;document.getElementById('jobCount').textContent=jobs.length+' Jobs';renderJobs();}
 function renderJobs(){let l=document.getElementById('jobsList');if(!jobs.length){l.innerHTML='<p style="color:#888;">No jobs yet. Post your first job.</p>';return;}l.innerHTML=jobs.map(j=>`<div class="z-card"><b>${j.title}</b> <span class="z-badge-gold">Active</span><p>${j.cat} • ${j.loc} • ₦${j.budget}</p><button class="z-btn-green" onclick="show('p-chat')">💬 Chat</button></div>`).join('');}
-function postJob(){let t=document.getElementById('jobTitle').value;if(!t){alert('Please enter Job Title');return;}let job={title:t,cat:document.getElementById('jobCat').value,loc:document.getElementById('jobLoc').value||'Abuja',budget:document.getElementById('jobBudget').value||'5000',user:user,date:new Date().toLocaleString()};jobs.unshift(job);localStorage.setItem('ziro_jobs',JSON.stringify(jobs));let all=JSON.parse(localStorage.getItem('ziro_all_jobs')||'[]');all.unshift(job);localStorage.setItem('ziro_all_jobs',JSON.stringify(all));updateUI();alert('Job Posted!');show('p-jobs');}
-function payReal(amount,coinAmount){let link="YOUR_FLUTTERWAVE_LINK";if(link==="YOUR_FLUTTERWAVE_LINK"){if(confirm('Demo Mode: No real link yet. Add '+coinAmount+' Coins for testing?')){coins+=coinAmount;localStorage.setItem('ziro_coins',coins);updateUI();alert('Demo: +'+coinAmount+' Coins added');}}else{window.open(link,'_blank');}}
+function postJob(){let t=document.getElementById('jobTitle').value;if(!t){alert('Please enter Job Title');return;}let job={title:t,cat:document.getElementById('jobCat').value,loc:document.getElementById('jobLoc').value||'Abuja',budget:document.getElementById('jobBudget').value||'5000'};jobs.unshift(job);localStorage.setItem('ziro_jobs',JSON.stringify(jobs));let all=JSON.parse(localStorage.getItem('ziro_all_jobs')||'[]');all.unshift(job);localStorage.setItem('ziro_all_jobs',JSON.stringify(all));updateUI();alert('Job Posted!');show('p-jobs');}
+function payReal(amount,coinAmount){if(confirm('Buy '+coinAmount+' Coins for ₦'+amount+'? (Demo - add coins now)')){coins+=coinAmount;localStorage.setItem('ziro_coins',coins);updateUI();alert('Success! +'+coinAmount+' Coins');}}
 function sendCoins(){let amt=prompt('How many coins to send?');if(amt){coins-=parseInt(amt);if(coins<0)coins=0;localStorage.setItem('ziro_coins',coins);updateUI();alert('Sent '+amt+' Coins!');}}
-function sendMsg(){let v=document.getElementById('chatInput').value;if(!v)return;document.getElementById('lastMsg').textContent='You: '+v;document.getElementById('chatInput').value='';alert('Message sent!');}
+function addMsg(text,me){let b=document.getElementById('chatBox');let d=document.createElement('div');d.className='msg '+(me?'msg-me':'msg-them');d.textContent=text;b.appendChild(d);b.scrollTop=b.scrollHeight;}
+function sendMsg(){let inp=document.getElementById('chatInput');let v=inp.value.trim();if(!v)return;addMsg(v,true);inp.value='';setTimeout(()=>addMsg('Okay, noted. I will reply soon 👍',false),800);}
+document.getElementById('chatInput').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();sendMsg();}});
+function pickPhoto(){document.getElementById('photoInput').click();}
+function sendPhoto(input){if(input.files&&input.files[0]){addMsg('📷 Photo sent: '+input.files[0].name,true);setTimeout(()=>addMsg('Nice photo, I have seen it 👍',false),800);}}
+async function toggleVoice(){let btn=document.getElementById('micBtn');if(mediaRecorder && mediaRecorder.state==='recording'){mediaRecorder.stop();return;}try{let stream=await navigator.mediaDevices.getUserMedia({audio:true});mediaRecorder=new MediaRecorder(stream);audioChunks=[];mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);mediaRecorder.onstop=()=>{let blob=new Blob(audioChunks,{type:'audio/webm'});let url=URL.createObjectURL(blob);let b=document.getElementById('chatBox');let d=document.createElement('div');d.className='msg msg-me';d.innerHTML='🎤 Voice Message <br><audio controls src="'+url+'" style="width:100%;margin-top:5px;"></audio>';b.appendChild(d);b.scrollTop=b.scrollHeight;document.getElementById('voiceNote').style.display='none';btn.classList.remove('rec-on');clearInterval(recTimer);stream.getTracks().forEach(t=>t.stop());setTimeout(()=>addMsg('🎤 Voice received, thanks!',false),800);};mediaRecorder.start();btn.classList.add('rec-on');document.getElementById('voiceNote').style.display='block';recSec=0;recTimer=setInterval(()=>{recSec++;document.getElementById('recTime').textContent=recSec+'s';},1000);}catch(err){alert('Please allow microphone to record voice.');}}
 function doLogin(){let n=document.getElementById('loginName').value||'Guest';user=n;localStorage.setItem('ziro_name',n);updateUI();alert('Welcome '+n+'!');show('p-home');}
-function doSearch(){let q=document.getElementById('searchInput').value.toLowerCase();let r=document.getElementById('searchResults');if(!q)return;r.innerHTML='<div class="z-card">Results for: <b>'+q+'</b><br>3 workers found in Abuja.</div>';}
-function openSOS(){document.getElementById('sosBox').style.display='flex';if(navigator.geolocation){navigator.geolocation.getCurrentPosition(p=>{document.getElementById('sosLoc').textContent='Lat: '+p.coords.latitude.toFixed(4)+', Lng: '+p.coords.longitude.toFixed(4)+' (Abuja Area)';});}}
+function doSearch(){let q=document.getElementById('searchInput').value.toLowerCase();let r=document.getElementById('searchResults');if(!q)return;r.innerHTML='<div class="z-card">Results for: <b>'+q+'</b><br>3 workers found in Abuja. Tap View to hire.</div>';}
+function openSOS(){document.getElementById('sosBox').style.display='flex';if(navigator.geolocation){navigator.geolocation.getCurrentPosition(p=>{document.getElementById('sosLoc').textContent='Lat: '+p.coords.latitude.toFixed(4)+', Lng: '+p.coords.longitude.toFixed(4);});}}
 function closeSOS(){document.getElementById('sosBox').style.display='none';}
-function confirmSOS(){let sos={user:user,loc:document.getElementById('sosLoc').textContent,time:new Date().toLocaleString()};let arr=JSON.parse(localStorage.getItem('ziro_sos')||'[]');arr.unshift(sos);localStorage.setItem('ziro_sos',JSON.stringify(arr));alert('SOS SENT! ZIRO Admin has been alerted. Stay safe, help is coming.');closeSOS();}
-updateUI();renderJobs();
+function confirmSOS(){let sos={user:user,loc:document.getElementById('sosLoc').textContent,time:new Date().toLocaleString()};let arr=JSON.parse(localStorage.getItem('ziro_sos')||'[]');arr.unshift(sos);localStorage.setItem('ziro_sos',JSON.stringify(arr));alert('SOS SENT! Admin alerted. Stay safe.');closeSOS();}
+show('p-home');updateUI();
 </script>
 </body></html>
