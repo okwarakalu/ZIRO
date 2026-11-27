@@ -3,58 +3,63 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ZIRO - Work. Hustle. Get Paid.</title>
 <link rel="stylesheet" href="css/style.css">
+<style>
+/* PHASE 0 HEADER FIX - If css/style.css fails, this keeps header correct */
+body{background:#F7F7F5 !important;color:#111 !important}
+.top{background:#0A3D2A !important}
+</style>
 </head><body>
 
-<div class="top">
-  <div class="logo">ZIR<span>O</span></div>
-  <div class="search">🔍 <input placeholder="Search Plumber, Cleaner..." onclick="location.href='search.html'"></div>
-  <a href="wallet.html" class="pill">🪙 <span id="coinTop">120</span> iCoin</a>
-  <button class="sos-inline" onclick="location.href='office.html#safety'">SOS</button>
-  <div class="avatar" onclick="location.href='office.html'">A</div>
+<!-- TOP HEADER - LOCKED -->
+<div class="top" style="display:flex;align-items:center;gap:10px;background:#0A3D2A;color:#fff;padding:14px 16px;">
+  <div style="font-size:22px;font-weight:900;">ZIR<span style="color:#FFC107;">O</span><span style="color:#FFC107;">•</span></div>
+  <div style="flex:1;background:#fff;border-radius:999px;padding:9px 12px;color:#666;font-size:13px;">🔍 Search Plumber, Cleaner...</div>
+  <a href="wallet.html" style="background:#FFC107;color:#000;font-weight:800;padding:7px 10px;border-radius:999px;font-size:12px;text-decoration:none;white-space:nowrap;">🪙 <span id="coinTop">120</span> iCoin</a>
+  <!-- SOS INLINE ONLY - NEVER FLOATING -->
+  <button onclick="location.href='office.html#safety'" style="background:#E53935;color:#fff;border:none;padding:7px 10px;border-radius:999px;font-weight:800;font-size:12px;">SOS</button>
+  <div onclick="location.href='office.html'" style="width:34px;height:34px;background:#FFC107;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:#000;flex-shrink:0;">A</div>
 </div>
 
-<div class="page">
-  <h1>Find Trusted Workers<br>Near You, Fast.</h1>
-  <p class="sub">Plumber • Electrician • Cleaner • Driver • More — Nigeria • 36 States + FCT</p>
+<div style="padding:16px;">
+  <h1 style="font-size:24px;line-height:1.2;">Find Trusted Workers<br>Near You, Fast.</h1>
+  <p style="color:#666;font-size:13px;margin:6px 0 14px;">Plumber • Electrician • Cleaner • Driver • More — Nigeria • 36 States + FCT</p>
 
   <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;">
-    <button class="chip active">All</button><button class="chip" onclick="location.href='search.html'">Plumber</button><button class="chip" onclick="location.href='search.html'">Electrician</button><button class="chip" onclick="location.href='search.html'">Cleaner</button><button class="chip" onclick="location.href='search.html'">Driver</button>
+    <button style="background:#0A3D2A;color:#fff;border:none;padding:9px 14px;border-radius:999px;font-weight:700;">All</button>
+    <button style="background:#fff;border:none;padding:9px 14px;border-radius:999px;font-weight:700;" onclick="location.href='search.html'">Plumber</button>
+    <button style="background:#fff;border:none;padding:9px 14px;border-radius:999px;font-weight:700;" onclick="location.href='search.html'">Electrician</button>
+    <button style="background:#fff;border:none;padding:9px 14px;border-radius:999px;font-weight:700;" onclick="location.href='search.html'">Cleaner</button>
   </div>
 
-  <div class="card">
+  <div style="background:#fff;border-radius:16px;padding:16px;margin:12px 0;box-shadow:0 2px 10px rgba(0,0,0,.06);">
     <b>CHIOMA — Verified • Abuja • Available</b>
-    <p class="small">Your Work Companion. I can help you find work, buy iCoin, post a job, verify.</p>
-    <div style="display:flex;gap:8px;margin-top:10px;">
-      <button class="btn-green" style="flex:1;" onclick="alert('CHIOMA Voice - Coming in Phase 3')">🎤 Talk • Voice</button>
-      <button class="btn-white" style="flex:1;" onclick="alert('CHIOMA Chat - Coming in Phase 3')">💬 Chat • Text</button>
+    <p style="color:#666;font-size:12px;margin:6px 0;">Your Work Companion. I can help you find work, buy iCoin, post a job, verify.</p>
+    <div style="display:flex;gap:8px;">
+      <button style="flex:1;background:#0A3D2A;color:#fff;border:none;padding:13px;border-radius:12px;font-weight:800;" onclick="alert('CHIOMA Voice - Phase 3')">🎤 Talk • Voice</button>
+      <button style="flex:1;background:#fff;color:#0A3D2A;border:1px solid #FFC107;padding:13px;border-radius:12px;font-weight:800;" onclick="alert('CHIOMA Chat - Phase 3')">💬 Chat • Text</button>
     </div>
   </div>
 
-  <div class="grid3" style="margin-bottom:12px;text-align:center;">
-    <div class="card" onclick="location.href='search.html'">🔍<br><b>Find Work</b></div>
-    <div class="card" onclick="alert('Post Job - Phase 3')">➕<br><b>Post Job</b></div>
-    <div class="card" onclick="alert('Attention Shop - Phase 3')">🏪<br><b>Attention Shop</b></div>
-    <div class="card" onclick="location.href='wallet.html'">🪙<br><b>Buy iCoin</b></div>
-  </div>
+  <div style="background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;"><b>🏆 Merit Wall</b><p style="color:#666;font-size:12px;">Top Employer: Lagos Logistics Co. • 10 hires • 4.9★ • 100% payout</p></div>
 
-  <h3>ZIRO Picked For You</h3>
-  <div class="card"><b>Ada Okafor — Driver • Abuja</b><p class="small">92% match • ⭐ 4.9 • Verified • Available Now</p><button class="btn-green" onclick="alert('Apply - Phase 3 - Costs iCoin')">Apply</button></div>
-  <div class="card"><b>Fatima Bello — Designer • Enugu</b><p class="small">95% match • ⭐ 4.8 • Verified • Available Now</p><button class="btn-green" onclick="alert('Apply - Phase 3 - Costs iCoin')">Apply</button></div>
+  <div style="background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;"><b>Ada Okafor — Driver • Abuja</b><p style="color:#666;font-size:12px;">92% match • ⭐ 4.9 • Verified • Available Now</p><button style="width:100%;background:#0A3D2A;color:#fff;border:none;padding:13px;border-radius:12px;font-weight:800;" onclick="alert('Apply - Phase 3')">Apply</button></div>
+  <div style="background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;"><b>Fatima Bello — Designer • Enugu</b><p style="color:#666;font-size:12px;">95% match • ⭐ 4.8 • Verified • Available Now</p><button style="width:100%;background:#0A3D2A;color:#fff;border:none;padding:13px;border-radius:12px;font-weight:800;" onclick="alert('Apply - Phase 3')">Apply</button></div>
 
-  <div class="card"><b>🏆 Merit Wall</b><p class="small">Top Employer this week: Lagos Logistics Co. • 10 hires • 4.9★ • 100% payout</p></div>
-
-  <p class="small" style="text-align:center;">ZIRO TECHNOLOGIES LTD • No Escrow — ZIRO does NOT hold money. Pay each other directly.<br><a href="#">Terms</a> • <a href="#">Privacy</a> • <a href="#">iCoin Policy</a> • <a href="#">Refund Policy</a></p>
+  <p style="font-size:12px;color:#666;text-align:center;">ZIRO TECHNOLOGIES LTD • No Escrow — ZIRO does NOT hold money. Pay each other directly.<br>Terms • Privacy • iCoin Policy • Refund Policy</p>
+  <p style="font-size:12px;color:#666;text-align:center;">iCoin Price: N50 per iCoin • Min Buy 7</p>
 </div>
 
 <!-- CHIOMA - ONLY FLOATING BUTTON -->
-<div class="chioma-float" onclick="alert('CHIOMA - Phase 3')">C</div>
+<div onclick="alert('CHIOMA - Phase 3')" style="position:fixed;right:16px;bottom:88px;width:56px;height:56px;border-radius:50%;background:#FFC107;border:3px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;z-index:60;">C</div>
 
-<div class="nav">
-  <a href="index.html" class="active">🏠<br>Home</a>
-  <a href="search.html">🔍<br>Search</a>
-  <a href="#"><div class="create">+</div><br>Create</a>
-  <a href="chat.html">💬<br>Chat</a>
-  <a href="office.html">👤<br>My Office</a>
+<!-- BOTTOM NAV - LOCKED -->
+<div style="position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;border-top:1px solid #eee;z-index:50;">
+  <a href="index.html" style="flex:1;text-align:center;padding:10px 2px;font-size:11px;font-weight:800;color:#0A3D2A;text-decoration:none;">🏠<br>Home</a>
+  <a href="search.html" style="flex:1;text-align:center;padding:10px 2px;font-size:11px;font-weight:800;color:#666;text-decoration:none;">🔍<br>Search</a>
+  <a href="office.html" style="flex:1;text-align:center;padding:10px 2px;font-size:11px;font-weight:800;color:#666;text-decoration:none;"><span style="background:#FFC107;color:#000;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:22px;margin:-18px auto 0;">+</span><br>Create</a>
+  <a href="chat.html" style="flex:1;text-align:center;padding:10px 2px;font-size:11px;font-weight:800;color:#666;text-decoration:none;">💬<br>Chat</a>
+  <a href="office.html" style="flex:1;text-align:center;padding:10px 2px;font-size:11px;font-weight:800;color:#666;text-decoration:none;">👤<br>My Office</a>
 </div>
-<script src="js/auth.js"></script><script src="js/wallet.js"></script><script src="js/workers.js"></script><script src="js/notify.js"></script><script src="js/admin.js"></script>
+
+<script src="js/wallet.js"></script>
 </body></html>
