@@ -1,0 +1,6 @@
+<!-- ZIRO WALLET - Buy iCoin only. No Send. -->
+<div class="card" style="background:#0A3D2A;color:#fff;text-align:center"><small>Total Balance</small><h2>🪙 <span data-bal>120</span> iCoin</h2><small>Gold Tier • ₦50 per iCoin • Min Buy 7</small></div>
+<div class="card"><b>Starter — 7 iCoin</b><p>₦350 • Min Buy</p><button class="btn-green" onclick="ZIRO.buyCoin(7)">Buy with Paystack / Flutterwave</button></div>
+<div class="card"><b>Popular — 120 iCoin</b><p>₦6,000 • +10 Bonus</p><button class="btn-green" onclick="ZIRO.buyCoin(120)">Buy with Paystack / Flutterwave</button></div>
+<div class="card"><b>Business — 1000 iCoin</b><p>₦50,000 • +150 Bonus</p><button class="btn-green" onclick="ZIRO.buyCoin(1000)">Buy with Paystack / Flutterwave</button></div>
+<div class="card"><b>History</b><div id="walletHistory">No history yet. iCoin purchases only.</div></div>
