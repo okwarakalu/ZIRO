@@ -15,15 +15,27 @@
 </div>
 <div style="background:#0F766E; padding:10px 0 20px; min-height:60vh;"><div id="chatList"></div></div>
 <script>
-const PEOPLE=[
+const BASE=[
   {name:'Musa A.', skill:'Plumber • ₦8,000', last:'Hello, I can fix your tap today.', time:'12:19', unread:2, color:'#0B6E4F'},
   {name:'Udoka', skill:'Brick Layer • ₦12,000', last:'Mend my fence - Apo', time:'12:06', unread:1, color:'#E67E22'},
   {name:'Ada O.', skill:'Cleaner • ₦6,000', last:'I am available tomorrow morning.', time:'11:42', unread:0, color:'#8E44AD'},
   {name:'Tunde B.', skill:'Electrician • ₦10,000', last:'Send me the photo of the wiring.', time:'Yesterday', unread:0, color:'#2980B9'},
 ];
+const SKILLS={ 'Segun O.':'Barber • ₦3,000', 'Grace M.':'Cook / Chef • ₦8,500', 'Yusuf A.':'Welder • ₦11,000', 'Blessing I.':'Gardener • ₦4,500', 'Musa A.':'Plumber • ₦8,000', 'Udoka':'Brick Layer • ₦12,000', 'Ada O.':'Cleaner • ₦6,000', 'Tunde B.':'Electrician • ₦10,000' };
+const COLORS={ 'Segun O.':'#F2C94C', 'Grace M.':'#E74C3C', 'Yusuf A.':'#F39C12', 'Blessing I.':'#27AE60', 'Musa A.':'#0B6E4F', 'Udoka':'#E67E22', 'Ada O.':'#8E44AD', 'Tunde B.':'#2980B9' };
+function getAll(){
+  const saved = JSON.parse(localStorage.getItem('ziro_chats') || '[]');
+  const all = [...BASE];
+  saved.forEach(n=>{
+    if(!all.find(p=>p.name===n)){
+      all.unshift({name:n, skill:SKILLS[n]||'Worker', last:'Chat started — say hello.', time:'Now', unread:0, color:COLORS[n]||'#0B6E4F'});
+    }
+  });
+  return all;
+}
 function render(filter){
   const list=document.getElementById('chatList');
-  const rows=PEOPLE.filter(p=>!filter||p.name.toLowerCase().includes(filter.toLowerCase()));
+  const rows=getAll().filter(p=>!filter||p.name.toLowerCase().includes(filter.toLowerCase()));
   list.innerHTML=rows.map(p=>'<div onclick="openChat(\''+p.name+'\')" style="display:flex; gap:12px; padding:14px 16px; align-items:center; background:white; margin:8px 12px; border-radius:14px;"><div style="width:48px; height:48px; min-width:48px; background:'+p.color+'; color:white; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:800;">'+p.name[0]+'</div><div style="flex:1; min-width:0;"><div style="display:flex; justify-content:space-between; gap:8px;"><b style="font-size:15px;">'+p.name+'</b><span style="font-size:11px; color:#888; white-space:nowrap;">'+p.time+'</span></div><p style="margin:2px 0 0; font-size:13px; color:#666; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">'+p.last+'</p><p style="margin:2px 0 0; font-size:11px; color:#999;">'+p.skill+'</p></div>'+(p.unread?'<span style="background:#0F766E; color:white; font-size:11px; min-width:22px; height:22px; border-radius:999px; display:flex; align-items:center; justify-content:center; padding:0 5px;">'+p.unread+'</span>':'')+'</div>').join('');
 }
 function filterChats(v){ render(v); }
