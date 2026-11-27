@@ -3,42 +3,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>ZIRO - Wallet</title>
+<title>ZIRO - iCoin Wallet</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body style="background:#2E1065; margin:0;">
 <div style="background:linear-gradient(180deg,#6D28D9 0%, #2E1065 100%); padding:20px 16px; border-radius:0 0 22px 22px; color:white;">
   <div onclick="window.location.href='index.html'" style="font-size:14px;">← Back to Home</div>
-  <h2 style="margin:12px 0 4px; color:white;">💰 My Wallet</h2>
-  <p style="margin:0; color:#DDD6FE; font-size:13px;">iCoin • Wallet • History</p>
+  <h2 style="margin:12px 0 4px; color:white;">🪙 iCoin Wallet</h2>
+  <p style="margin:0; color:#DDD6FE; font-size:13px;">Buy • Gift • Unlock • Earn</p>
 </div>
 <div style="background:#2E1065; padding:16px;">
-  <div style="background:white; border-radius:16px; padding:4px 0; display:flex;">
-    <div style="flex:1; text-align:center; padding:16px 4px; border-right:1px solid #eee;"><span style="font-size:12px; color:#888;">Wallet Balance</span><b id="walletBal" style="font-size:22px; display:block; margin-top:4px;">₦0</b></div>
-    <div style="flex:1; text-align:center; padding:16px 4px;"><span style="font-size:12px; color:#888;">iCoin Balance</span><b id="icoinBal" style="font-size:22px; display:block; margin-top:4px; color:#B77900;">🪙 50</b></div>
+  <div style="background:white; border-radius:16px; padding:18px; text-align:center;">
+    <span style="font-size:12px; color:#888;">Your iCoin Wallet ID — Share to receive gifts</span>
+    <b id="myWalletId" style="font-size:16px; display:block; margin:6px 0; letter-spacing:1px;">ZIRO-0000-0000</b>
+    <button onclick="copyId()" style="background:#F2C94C; color:#2E1065; border:none; padding:9px 18px; border-radius:999px; font-size:12px; font-weight:900;">📋 Copy My Wallet ID</button>
+    <div style="display:flex; margin-top:16px; border-top:1px solid #eee; padding-top:14px;">
+      <div style="flex:1; border-right:1px solid #eee;"><span style="font-size:12px; color:#888;">Wallet Balance</span><b id="walletBal" style="font-size:20px; display:block; margin-top:4px;">₦0</b></div>
+      <div style="flex:1;"><span style="font-size:12px; color:#888;">iCoin Balance</span><b id="icoinBal" style="font-size:20px; display:block; margin-top:4px; color:#B77900;">🪙 50</b></div>
+    </div>
+    <p style="font-size:12px; color:#888; margin:10px 0 0;">Price: <b id="priceLabel">₦50 per iCoin</b> • Set by ZIRO Management • Min Buy: <b>7 iCoin</b> • Max: Unlimited</p>
   </div>
-
-  <!-- CLAIM FREE BUTTON - Only shows if balance is 0 -->
   <div id="claimBox" style="display:none; background:#FFF8E1; border:1px solid #F2C94C; border-radius:16px; padding:16px; margin-top:12px; text-align:center;">
     <b style="font-size:15px;">Your iCoin is 0</b>
     <p style="font-size:13px; color:#666; margin:6px 0 12px;">Claim your free 50 iCoin welcome bonus now.</p>
     <button onclick="claimFree()" style="width:100%; background:#F2C94C; color:#2E1065; border:none; padding:14px; border-radius:12px; font-size:14px; font-weight:900;">🎁 Claim 50 Free iCoin</button>
   </div>
 
+  <!-- iCOIN SHOP -->
   <div style="background:white; border-radius:16px; padding:18px; margin-top:12px;">
-    <b style="font-size:15px;">Buy iCoin</b>
-    <p style="font-size:12px; color:#888; margin:4px 0 12px;">Use iCoin to unlock worker contacts. 1 Unlock = 5 iCoin.</p>
-    <div style="background:#F2F4F2; border-radius:12px; padding:10px; display:flex; flex-direction:column; gap:8px;">
-      <button onclick="buyIcoin(10,500)" style="background:white; border:1px solid #ddd; padding:14px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; font-weight:800;"> <span>🪙 10 iCoin</span> <span>₦500</span> </button>
-      <button onclick="buyIcoin(50,2000)" style="background:#FFF8E1; border:1px solid #F2C94C; padding:14px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; font-weight:800;"> <span>🪙 50 iCoin <span style="background:#F2C94C; font-size:10px; padding:2px 6px; border-radius:999px;">POPULAR</span></span> <span>₦2,000</span> </button>
-      <button onclick="buyIcoin(100,3500)" style="background:white; border:1px solid #ddd; padding:14px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; font-weight:800;"> <span>🪙 100 iCoin</span> <span>₦3,500</span> </button>
+    <b style="font-size:16px;">🛒 iCoin Shop</b>
+    <p style="font-size:12px; color:#888; margin:4px 0 12px;">Buy any amount. Minimum 7 iCoin. Unlimited.</p>
+    <div style="display:flex; gap:8px; margin-bottom:12px;">
+      <button onclick="setShopAmount(7)" style="flex:1; background:#FFF8E1; border:1px solid #F2C94C; padding:12px 4px; border-radius:10px; font-weight:800; font-size:13px;">7 iCoin<br><span style="font-size:11px; color:#888;">Min Buy</span></button>
+      <button onclick="setShopAmount(20)" style="flex:1; background:white; border:1px solid #ddd; padding:12px 4px; border-radius:10px; font-weight:800; font-size:13px;">20 iCoin</button>
+      <button onclick="setShopAmount(50)" style="flex:1; background:white; border:1px solid #ddd; padding:12px 4px; border-radius:10px; font-weight:800; font-size:13px;">50 iCoin</button>
+      <button onclick="setShopAmount(100)" style="flex:1; background:white; border:1px solid #ddd; padding:12px 4px; border-radius:10px; font-weight:800; font-size:13px;">100 iCoin</button>
     </div>
-    <p style="font-size:11px; color:#888; text-align:center; margin:10px 0 0;">Demo payment — no real money is charged in this version.</p>
+    <label style="font-size:13px; font-weight:800;">Enter Any Amount (Unlimited)</label>
+    <input id="shopAmount" type="number" min="7" value="7" oninput="updateShopTotal()" style="width:100%; box-sizing:border-box; padding:13px; border:1px solid #ddd; border-radius:12px; margin:8px 0; font-size:16px;">
+    <div style="background:#F2F4F2; border-radius:12px; padding:12px; display:flex; justify-content:space-between; font-size:14px;"><span>Total to Pay:</span><b id="shopTotal" style="font-size:18px;">₦350</b></div>
+    <p style="font-size:13px; font-weight:800; margin:14px 0 8px;">Payment Method</p>
+    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+      <label style="flex:1; background:#F2F4F2; padding:11px; border-radius:10px; font-size:13px; font-weight:700; text-align:center;"><input type="radio" name="pay" value="Bank Transfer" checked> 🏦 Bank Transfer</label>
+      <label style="flex:1; background:#F2F4F2; padding:11px; border-radius:10px; font-size:13px; font-weight:700; text-align:center;"><input type="radio" name="pay" value="Card"> 💳 Card</label>
+      <label style="flex:1; background:#F2F4F2; padding:11px; border-radius:10px; font-size:13px; font-weight:700; text-align:center;"><input type="radio" name="pay" value="USSD"> 📱 USSD</label>
+    </div>
+    <button onclick="buyShop()" style="width:100%; background:#6D28D9; color:white; border:none; padding:15px; border-radius:12px; font-size:15px; font-weight:900; margin-top:14px;">Buy iCoin Now</button>
+    <p style="font-size:11px; color:#888; text-align:center; margin:8px 0 0;">Demo payment — no real money charged in this version. Real Paystack / Flutterwave connects in launch version.</p>
+  </div>
+
+  <!-- GIFT iCOIN -->
+  <div style="background:white; border-radius:16px; padding:18px; margin-top:12px;">
+    <b style="font-size:16px;">🎁 Gift iCoin</b>
+    <p style="font-size:12px; color:#888; margin:4px 0 12px;">Send iCoin to another user by their ZIRO Wallet ID.</p>
+    <label style="font-size:13px; font-weight:800;">Recipient ZIRO Wallet ID</label>
+    <input id="giftTo" placeholder="Example: ZIRO-1234-5678" style="width:100%; box-sizing:border-box; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 12px; font-size:14px;">
+    <label style="font-size:13px; font-weight:800;">Amount to Gift</label>
+    <input id="giftAmount" type="number" placeholder="Example: 10" style="width:100%; box-sizing:border-box; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 12px; font-size:14px;">
+    <button onclick="giftCoin()" style="width:100%; background:#F2C94C; color:#2E1065; border:none; padding:14px; border-radius:12px; font-size:14px; font-weight:900;">🎁 Send Gift</button>
   </div>
 
   <div style="background:white; border-radius:16px; padding:18px; margin-top:12px;">
-    <b style="font-size:15px;">History</b>
-    <div id="history"></div>
+    <b style="font-size:15px;">History</b><div id="history"></div>
   </div>
   <button onclick="window.location.href='office.html'" style="width:100%; background:#6D28D9; color:white; border:none; padding:14px; border-radius:12px; font-size:14px; font-weight:800; margin-top:14px;">Back to My Office</button>
 </div>
@@ -47,25 +73,38 @@
 <script>
 function renderWallet(){
   const bal = ziroGetIcoin();
-  const wallet = Number(localStorage.getItem('ziro_wallet') || 0);
+  document.getElementById('myWalletId').textContent = ziroGetWalletId();
   document.getElementById('icoinBal').textContent = '🪙 ' + bal;
-  document.getElementById('walletBal').textContent = '₦' + wallet.toLocaleString();
-  // Show Claim button only if 0
+  document.getElementById('walletBal').textContent = '₦' + Number(localStorage.getItem('ziro_wallet') || 0).toLocaleString();
+  document.getElementById('priceLabel').textContent = '₦' + ziroGetCoinPrice().toLocaleString() + ' per iCoin';
   document.getElementById('claimBox').style.display = (bal === 0) ? 'block' : 'none';
+  updateShopTotal();
   const hist = JSON.parse(localStorage.getItem('ziro_history') || '[]');
-  document.getElementById('history').innerHTML = hist.length ? hist.slice().reverse().map(h=>'<p style="font-size:13px; margin:10px 0 0; display:flex; justify-content:space-between;"><span>'+h.text+'</span><span style="color:#888;">'+h.time+'</span></p>').join('') : '<p style="font-size:13px; color:#888; margin:10px 0 0;">No transactions yet.<br>You got 50 free iCoin on signup.</p>';
+  document.getElementById('history').innerHTML = hist.length ? hist.slice().reverse().map(h=>'<p style="font-size:13px; margin:10px 0 0; display:flex; justify-content:space-between;"><span>'+h.text+'</span><span style="color:#888;">'+h.time+'</span></p>').join('') : '<p style="font-size:13px; color:#888; margin:10px 0 0;">No transactions yet.</p>';
 }
-function claimFree(){
-  const bal = ziroClaimFree();
-  renderWallet();
-  ziroNotify('50 iCoin Added', 'Your balance is now '+bal+' iCoin.<br>You can unlock 10 contacts.', 'Go to Home', function(){ window.location.href='index.html'; });
-}
-function buyIcoin(amount, price){
-  ziroConfirm('Buy '+amount+' iCoin?', 'Pay ₦'+price.toLocaleString()+' for '+amount+' iCoin?', function(){
-    ziroAddIcoin(amount, 'Bought '+amount+' iCoin');
+function copyId(){ const id=ziroGetWalletId(); if(navigator.clipboard) navigator.clipboard.writeText(id); ziroNotify('Wallet ID Copied', 'Your ID: <b>'+id+'</b><br>Share it to receive iCoin gifts.'); }
+function claimFree(){ const bal = ziroClaimFree(); renderWallet(); ziroNotify('50 iCoin Added', 'Your balance is now '+bal+' iCoin.', 'Go to Home', function(){ window.location.href='index.html'; }); }
+function setShopAmount(n){ document.getElementById('shopAmount').value=n; updateShopTotal(); }
+function updateShopTotal(){ const amt = Number(document.getElementById('shopAmount').value || 0); document.getElementById('shopTotal').textContent = '₦' + (amt * ziroGetCoinPrice()).toLocaleString(); }
+function buyShop(){
+  const amt = Number(document.getElementById('shopAmount').value || 0);
+  if(amt < 7){ ziroNotify('Minimum 7 iCoin', 'Minimum purchase is 7 iCoin.<br>Please enter 7 or more.'); return; }
+  const method = document.querySelector('input[name="pay"]:checked')?.value || 'Bank Transfer';
+  const total = amt * ziroGetCoinPrice();
+  ziroConfirm('Buy '+amt+' iCoin?', 'Pay ₦'+total.toLocaleString()+' via '+method+' for '+amt+' iCoin?', function(){
+    ziroAddIcoin(amt, 'Bought '+amt+' iCoin via '+method);
     renderWallet();
-    ziroNotify('iCoin Added', '+'+amount+' iCoin added.<br>New balance: '+ziroGetIcoin()+' iCoin.', 'Done');
+    ziroNotify('iCoin Added', '+'+amt+' iCoin added via '+method+'.<br>New balance: '+ziroGetIcoin()+' iCoin.', 'Done');
   });
+}
+function giftCoin(){
+  const to=document.getElementById('giftTo').value.trim();
+  const amt=Number(document.getElementById('giftAmount').value || 0);
+  const r=ziroGiftIcoin(to, amt);
+  if(!r.ok){ ziroNotify('Cannot Gift', r.msg); return; }
+  document.getElementById('giftTo').value=''; document.getElementById('giftAmount').value='';
+  renderWallet();
+  ziroNotify('Gift Sent!', r.msg + '<br>Your new balance: '+ziroGetIcoin()+' iCoin.');
 }
 document.addEventListener('DOMContentLoaded', renderWallet);
 </script>
