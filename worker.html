@@ -40,37 +40,26 @@
 </div>
 <script src="js/notify.js"></script>
 <script src="js/wallet.js"></script>
+<script src="js/workers.js"></script>
 <script>
-let WORKERS=[
-  {name:'Segun O.', skill:'Barber', city:'Enugu', rating:'4.8', price:3000, jobs:24, about:'Professional barber with 5 years experience. Clean cuts, home service available.'},
-  {name:'Grace M.', skill:'Cook / Chef', city:'Wuse, Abuja', rating:'4.9', price:8500, jobs:41, about:'Experienced chef for parties, home cooking and events. Tasty and hygienic.'},
-  {name:'Yusuf A.', skill:'Welder', city:'Kaduna', rating:'4.6', price:11000, jobs:18, about:'Skilled welder for gates, burglary proof, tanks and repairs.'},
-  {name:'Blessing I.', skill:'Gardener', city:'Lekki, Lagos', rating:'4.7', price:4500, jobs:29, about:'Garden cleaning, grass cutting and flower maintenance.'},
-  {name:'Musa A.', skill:'Plumber', city:'Wuse 2, Abuja', rating:'4.8', price:8000, jobs:35, about:'Expert plumber for leaks, taps, tanks and bathroom fittings. Fast response.'},
-  {name:'Udoka', skill:'Brick Layer', city:'Apo, Abuja', rating:'4.7', price:12000, jobs:31, about:'Brick layer for fences, houses and repairs. Strong and neat work.'},
-  {name:'Ada O.', skill:'Cleaner', city:'Garki, Abuja', rating:'4.8', price:6000, jobs:27, about:'Deep cleaning for homes and offices. Reliable and thorough.'},
-  {name:'Tunde B.', skill:'Electrician', city:'Garki, Abuja', rating:'4.7', price:10000, jobs:22, about:'Electrician for wiring, sockets, fans and power issues.'},
-];
 let current=null;
 function loadWorker(){
+  const WORKERS = ziroGetWorkers();
   const name=new URLSearchParams(location.search).get('name') || localStorage.getItem('ziro_view_worker') || 'Segun O.';
   current=WORKERS.find(w=>w.name===name) || WORKERS[0];
   document.getElementById('avatar').textContent=current.name[0];
   document.getElementById('wName').textContent=current.name;
   document.getElementById('wSkill').textContent=current.skill+' • '+current.city;
   document.getElementById('wRating').textContent='⭐ '+current.rating+' • ✓ Verified • Available Now';
-  document.getElementById('wJobs').textContent=current.jobs;
-  document.getElementById('wPrice').textContent='₦'+current.price.toLocaleString();
-  document.getElementById('wAbout').textContent=current.about;
+  document.getElementById('wJobs').textContent=current.jobs || 0;
+  document.getElementById('wPrice').textContent='₦'+Number(current.price).toLocaleString();
+  document.getElementById('wAbout').textContent=current.about || 'New trusted worker on ZIRO. Ready to work.';
   document.getElementById('reviews').innerHTML='<p style="font-size:13px; margin:10px 0 0;">⭐⭐⭐⭐⭐ <b>Chidinma</b> — Very good work, came on time.</p><p style="font-size:13px; margin:8px 0 0;">⭐⭐⭐⭐⭐ <b>Emeka</b> — Neat work, I will hire again.</p><p style="font-size:13px; margin:8px 0 0;">⭐⭐⭐⭐ <b>Fatima</b> — Good price, polite.</p>';
 }
 function chatThis(){ localStorage.setItem('ziro_chat_with', current.name); window.location.href='chat-room.html?with='+encodeURIComponent(current.name); }
-function hireThis(){ ziroConfirm('Hire '+current.name+'?', current.skill+' • ₦'+current.price.toLocaleString()+'<br><br>Chat to agree time.', function(){ chatThis(); }); }
+function hireThis(){ ziroConfirm('Hire '+current.name+'?', current.skill+' • ₦'+Number(current.price).toLocaleString()+'<br><br>Chat to agree time.', function(){ chatThis(); }); }
 function unlockThis(){
-  if(localStorage.getItem('ziro_unlocked_'+current.name)==='yes'){
-    ziroNotify('Already Unlocked', 'You already unlocked '+current.name+'.', 'Go to Chat', function(){ chatThis(); });
-    return;
-  }
+  if(localStorage.getItem('ziro_unlocked_'+current.name)==='yes'){ ziroNotify('Already Unlocked', 'You already unlocked '+current.name+'.', 'Go to Chat', function(){ chatThis(); }); return; }
   ziroConfirm('Unlock Contact?', 'Unlock '+current.name+' contact for 5 iCoin?', function(){
     if(typeof ziroSpendIcoin === 'function'){
       const ok = ziroSpendIcoin(5, 'Unlocked '+current.name+' • -5 iCoin');
