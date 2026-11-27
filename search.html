@@ -1,71 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>ZIRO - Search</title>
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body style="background:#0A2540; margin:0;">
-<div style="background:linear-gradient(180deg,#123A6D 0%, #0A2540 100%); padding:20px 16px; border-radius:0 0 22px 22px; color:white;">
-  <div onclick="window.location.href='index.html'" style="font-size:14px;">← Back to Home</div>
-  <h2 style="margin:12px 0 4px; color:white;">🔍 Search ZIRO</h2>
-  <p style="margin:0; color:#8EC8FF; font-size:13px;">Find any worker, skill or area fast</p>
-  <input id="searchInput" placeholder="🔍 Type Plumber, Cleaner, Wuse..." oninput="doSearch(this.value)" style="width:100%; box-sizing:border-box; padding:14px; border-radius:999px; border:none; margin-top:14px; font-size:15px;">
-  <div id="skillPills" style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;"></div>
-  <div id="areaPills" style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;"></div>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ZIRO V8 - Search</title><link rel="stylesheet" href="css/style.css"></head>
+<body>
+<div class="z-header">
+<div style="display:flex;justify-content:space-between;align-items:center;">
+<div class="z-logo">ZIRO<span> V8</span> • Search</div>
+<button onclick="location.href='index.html'" style="background:#fff;border:none;padding:8px 12px;border-radius:999px;font-weight:800;">← Home</button>
 </div>
-<div style="background:#0A2540; padding:14px 16px;">
-  <p id="resultCount" style="color:#8EC8FF; font-size:13px; margin:0 0 10px;">Showing all workers</p>
-  <div id="results"></div>
+<div style="background:#fff;border-radius:999px;padding:13px 14px;color:#888;margin-top:16px;">🔍 Search jobs, services, people...</div>
 </div>
-<script src="js/notify.js"></script>
-<script src="js/wallet.js"></script>
-<script src="js/workers.js"></script>
-<script>
-let WORKERS=[];
-let q='', skillFilter='All', areaFilter='All';
-const SKILLS=['All','Plumber','Electrician','Cleaner','Brick Layer'];
-const AREAS=['All','Abuja','Lagos','Enugu'];
-function pill(label, active, onclick){
-  const bg = active ? '#F2C94C' : 'rgba(255,255,255,0.15)';
-  const col = active ? '#0A2540' : 'white';
-  return '<button onclick="'+onclick+'" style="background:'+bg+'; color:'+col+'; border:1px solid '+(active?'#F2C94C':'rgba(255,255,255,0.3)')+'; padding:9px 14px; border-radius:999px; font-size:12px; font-weight:'+(active?'900':'700')+';">'+label+'</button>';
-}
-function renderPills(){
-  document.getElementById('skillPills').innerHTML = SKILLS.map(s=>pill(s, skillFilter===s, "setSkill('"+s+"')")).join('');
-  document.getElementById('areaPills').innerHTML = AREAS.map(a=>pill(a==='All'?'📍 All Areas':a, areaFilter===a, "setArea('"+a+"')")).join('');
-}
-function setSkill(s){ skillFilter=s; renderPills(); renderSearch(); }
-function setArea(a){ areaFilter=a; renderPills(); renderSearch(); }
-function doSearch(v){ q=v; renderSearch(); }
-function openWorker(name){ localStorage.setItem('ziro_view_worker', name); window.location.href='worker.html?name='+encodeURIComponent(name); }
-function openChatWith(name){ localStorage.setItem('ziro_chat_with', name); window.location.href='chat-room.html?with='+encodeURIComponent(name); }
-function renderSearch(){
-  const rows=WORKERS.filter(w=>{ const okQ=!q || (w.name+w.skill+w.city).toLowerCase().includes(q.toLowerCase()); const okS=skillFilter==='All' || w.skill.toLowerCase().includes(skillFilter.toLowerCase()); const okA=areaFilter==='All' || w.city.toLowerCase().includes(areaFilter.toLowerCase()); return okQ && okS && okA; });
-  document.getElementById('resultCount').textContent = rows.length + ' worker(s) found' + (skillFilter!=='All' ? ' • '+skillFilter : '') + (areaFilter!=='All' ? ' • '+areaFilter : '');
-  document.getElementById('results').innerHTML = rows.length ? rows.map(w=>'<div style="background:white; border-radius:16px; padding:16px; margin-bottom:12px;">'
-    + '<div onclick="openWorker(\''+w.name+'\')" style="cursor:pointer;"><b style="font-size:16px;">'+w.name+' ✓ Verified <span style="color:#123A6D; font-size:12px;">View Profile ›</span></b><p style="margin:4px 0; font-size:13px; color:#666;">'+w.skill+' • '+w.city+'</p><p style="margin:4px 0; font-size:13px;">⭐ '+w.rating+' • Available Now • ₦'+Number(w.price).toLocaleString()+' / job</p></div>'
-    + '<div style="background:#F2F4F2; border-radius:12px; padding:10px; margin-top:10px; display:flex; flex-direction:column; gap:8px;"><button onclick="hireWorker(\''+w.name+'\')" style="width:100%; background:#123A6D; color:white; border:none; padding:13px; border-radius:10px; font-size:14px; font-weight:800;">Hire Now</button><div style="display:flex; gap:8px;"><button onclick="unlockWorker(\''+w.name+'\')" style="flex:1; background:white; border:1px solid #ddd; padding:11px 6px; border-radius:10px; font-size:12px; font-weight:800;">🔓 Unlock • 5 iCoin</button><button onclick="openWorker(\''+w.name+'\')" style="flex:1; background:white; color:#123A6D; border:1px solid #123A6D; padding:11px 6px; border-radius:10px; font-size:12px; font-weight:800;">👤 View Profile</button></div></div>'
-    + '</div>').join('') : '<p style="background:white; padding:20px; border-radius:14px; text-align:center; color:#666;">No worker found.</p>';
-}
-function hireWorker(name){ openChatWith(name); }
-function unlockWorker(name){
-  if(localStorage.getItem('ziro_unlocked_'+name)==='yes'){ ziroNotify('Already Unlocked', 'You already unlocked '+name+'.', 'Go to Chat', function(){ openChatWith(name); }); return; }
-  ziroConfirm('Unlock Contact?', 'Unlock '+name+' contact for 5 iCoin?', function(){
-    if(typeof ziroSpendIcoin === 'function'){
-      const ok = ziroSpendIcoin(5, 'Unlocked '+name+' • -5 iCoin');
-      if(!ok){ ziroNotify('Not Enough iCoin', 'You need 5 iCoin to unlock.', 'Go to Wallet', function(){ window.location.href='wallet.html'; }); return; }
-    }
-    localStorage.setItem('ziro_unlocked_'+name, 'yes');
-    ziroNotify('Contact Unlocked', 'You can now chat with '+name+'.<br>5 iCoin used.', 'Go to Chat', function(){ openChatWith(name); });
-  });
-}
-document.addEventListener('DOMContentLoaded', ()=>{
-  WORKERS = ziroGetWorkers();
-  const s=new URLSearchParams(location.search).get('skill'); if(s && s!=='All') skillFilter=s;
-  renderPills(); renderSearch();
-});
-</script>
-</body>
-</html>
+
+<div style="padding:16px;">
+<div style="display:flex;gap:8px;flex-wrap:wrap;">
+<span class="z-badge-gold" style="padding:8px 12px;">All</span>
+<span class="z-badge-gold" style="padding:8px 12px;background:#fff;">💈 Barber</span>
+<span class="z-badge-gold" style="padding:8px 12px;background:#fff;">🧹 Cleaner</span>
+<span class="z-badge-gold" style="padding:8px 12px;background:#fff;">🔧 Plumber</span>
+<span class="z-badge-gold" style="padding:8px 12px;background:#fff;">📍 Abuja</span>
+</div>
+
+<h3>3 Workers in Abuja</h3>
+
+<div class="z-card" style="display:flex;gap:12px;align-items:center;margin-bottom:12px;cursor:pointer;" onclick="location.href='worker.html?name=Segun O.'">
+<img src="https://i.pravatar.cc/100?u=Segun" style="width:64px;height:64px;border-radius:50%;">
+<div style="flex:1;"><b>Segun O.</b><p style="margin:2px 0;color:#555;">Barber • Abuja • ⭐ 4.9</p><span class="z-badge-gold">✓ Trust Badge</span></div>
+<button class="z-btn-green" style="width:auto;padding:10px 14px;">View</button>
+</div>
+
+<div class="z-card" style="display:flex;gap:12px;align-items:center;margin-bottom:12px;cursor:pointer;" onclick="location.href='worker.html?name=Chinedu O.'">
+<img src="https://i.pravatar.cc/100?u=Chinedu" style="width:64px;height:64px;border-radius:50%;">
+<div style="flex:1;"><b>Chinedu O.</b><p style="margin:2px 0;color:#555;">Plumber • Abuja • ⭐ 4.8</p><span class="z-badge-gold">✓ Trust Badge</span></div>
+<button class="z-btn-green" style="width:auto;padding:10px 14px;">View</button>
+</div>
+
+<div class="z-card" style="display:flex;gap:12px;align-items:center;cursor:pointer;" onclick="location.href='worker.html?name=Ada O.'">
+<img src="https://i.pravatar.cc/100?img=32" style="width:64px;height:64px;border-radius:50%;">
+<div style="flex:1;"><b>Ada O.</b><p style="margin:2px 0;color:#555;">Cleaner • Abuja • ⭐ 5.0</p><span class="z-badge-gold">✓ Trust Badge</span></div>
+<button class="z-btn-green" style="width:auto;padding:10px 14px;">View</button>
+</div>
+
+<button class="z-btn-outline" style="margin-top:16px;" onclick="location.href='post.html'">📄 Post a Job</button>
+</div>
+
+<div class="z-sos">SOS</div>
+</body></html>
