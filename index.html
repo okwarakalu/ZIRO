@@ -1,70 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>ZIRO - Find Workers Near You</title>
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body style="background:#0A2540; margin:0;">
-<div style="background:linear-gradient(180deg,#123A6D 0%, #0A2540 100%); padding:20px 16px; border-radius:0 0 22px 22px; color:white;">
-  <div style="display:flex; justify-content:space-between; align-items:center;">
-    <b style="font-size:22px;">ZIRO <span style="color:#F2C94C;">🪙</span></b>
-    <div style="display:flex; gap:8px;">
-      <button onclick="window.location.href='wallet.html'" style="background:#F2C94C; color:#0A2540; border:none; padding:8px 12px; border-radius:999px; font-size:12px; font-weight:900;">🪙 <span id="topIcoin">50</span></button>
-      <button onclick="window.location.href='office.html'" style="background:rgba(255,255,255,0.15); color:white; border:none; padding:8px 12px; border-radius:999px; font-size:12px;">👤 Office</button>
-    </div>
-  </div>
-  <h2 style="margin:14px 0 4px; color:white;">Find Trusted Workers<br>Near You, Fast.</h2>
-  <p style="margin:0; color:#8EC8FF; font-size:13px;">Plumber • Electrician • Cleaner • Brick Layer • More</p>
-  <div onclick="window.location.href='search.html'" style="background:white; border-radius:999px; padding:13px 14px; margin-top:14px; color:#888; font-size:14px;">🔍 Search Plumber, Cleaner, Wuse...</div>
-  <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
-    <button onclick="window.location.href='search.html?skill=Plumber'" style="background:#F2C94C; color:#0A2540; border:none; padding:9px 14px; border-radius:999px; font-size:12px; font-weight:800;">🔧 Plumber</button>
-    <button onclick="window.location.href='search.html?skill=Electrician'" style="background:rgba(255,255,255,0.15); color:white; border:none; padding:9px 14px; border-radius:999px; font-size:12px;">⚡ Electrician</button>
-    <button onclick="window.location.href='search.html?skill=Cleaner'" style="background:rgba(255,255,255,0.15); color:white; border:none; padding:9px 14px; border-radius:999px; font-size:12px;">🧹 Cleaner</button>
-    <button onclick="window.location.href='search.html?skill=Brick Layer'" style="background:rgba(255,255,255,0.15); color:white; border:none; padding:9px 14px; border-radius:999px; font-size:12px;">🧱 Brick Layer</button>
-  </div>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ZIRO V8 - Home</title><link rel="stylesheet" href="css/style.css"></head>
+<body>
+<div class="z-header">
+<div style="display:flex;justify-content:space-between;align-items:center;">
+<div class="z-logo">🟡 ZIRO<span> V8</span></div>
+<div style="display:flex;gap:10px;align-items:center;"><span style="background:#C9A227;color:#123A2B;padding:7px 12px;border-radius:999px;font-weight:900;">🪙 120</span><span style="font-size:22px;">🔔</span></div>
 </div>
-<div style="background:#0A2540; padding:14px 16px;">
-  <div style="background:#FFF8E1; border:1px solid #F2C94C; border-radius:14px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;">
-    <span style="font-size:13px;">🪙 iCoin Price: <b id="homePrice">₦50 per iCoin</b> • Min Buy 7</span>
-    <button onclick="window.location.href='wallet.html'" style="background:#F2C94C; color:#0A2540; border:none; padding:8px 12px; border-radius:999px; font-size:12px; font-weight:900;">Buy ›</button>
-  </div>
-  <div style="display:flex; gap:10px; margin-top:12px;">
-    <button onclick="window.location.href='post.html'" style="flex:1; background:#0B6E4F; color:white; border:none; padding:14px; border-radius:12px; font-weight:900;">➕ Post a Job</button>
-    <button onclick="window.location.href='worker-signup.html'" style="flex:1; background:white; color:#0A2540; border:none; padding:14px; border-radius:12px; font-weight:900;">👷 Join as Worker</button>
-  </div>
-  <h3 style="color:white; margin:16px 0 10px; font-size:16px;">Available Workers Near You</h3>
-  <div id="homeWorkers"></div>
-  <button onclick="window.location.href='search.html'" style="width:100%; background:white; border:none; padding:13px; border-radius:12px; font-weight:800; margin-top:6px;">See All Workers →</button>
-  <p style="text-align:center; font-size:11px; color:#8EC8FF; margin-top:12px;">ZIRO v1.0 • Abuja • Lagos • Enugu</p>
+<div style="background:#fff;border-radius:999px;padding:13px 14px;color:#888;margin-top:16px;" onclick="location.href='search.html'">🔍 Search jobs, services, people...</div>
+<div style="display:flex;gap:10px;margin-top:14px;align-items:center;"><img src="https://i.pravatar.cc/100?img=47" style="width:52px;height:52px;border-radius:50%;border:3px solid #C9A227;"><div><b>CHIOMA</b><p style="margin:0;font-size:13px;color:#D6E8DD;">Hello Ada I am Chioma.</p></div></div>
 </div>
-<script src="js/notify.js"></script>
-<script src="js/wallet.js"></script>
-<script src="js/admin.js"></script>
-<script src="js/workers.js"></script>
-<script>
-function openWorker(name){ localStorage.setItem('ziro_view_worker', name); window.location.href='worker.html?name='+encodeURIComponent(name); }
-function openChatWith(name){ localStorage.setItem('ziro_chat_with', name); window.location.href='chat-room.html?with='+encodeURIComponent(name); }
-function unlockWorker(name){
-  if(localStorage.getItem('ziro_unlocked_'+name)==='yes'){ ziroNotify('Already Unlocked', 'You already unlocked '+name+'.', 'Go to Chat', function(){ openChatWith(name); }); return; }
-  ziroConfirm('Unlock Contact?', 'Unlock '+name+' contact for 5 iCoin?', function(){
-    const ok = ziroSpendIcoin(5, 'Unlocked '+name+' • -5 iCoin');
-    if(!ok){ ziroNotify('Not Enough iCoin', 'You need 5 iCoin to unlock.', 'Go to Wallet', function(){ window.location.href='wallet.html'; }); return; }
-    localStorage.setItem('ziro_unlocked_'+name, 'yes');
-    document.getElementById('topIcoin').textContent = ziroGetIcoin();
-    ziroNotify('Contact Unlocked', 'You can now chat with '+name+'.<br>5 iCoin used.', 'Go to Chat', function(){ openChatWith(name); });
-  });
-}
-document.addEventListener('DOMContentLoaded', ()=>{
-  document.getElementById('topIcoin').textContent = ziroGetIcoin();
-  document.getElementById('homePrice').textContent = '₦' + ziroGetCoinPrice().toLocaleString() + ' per iCoin';
-  const list = ziroGetWorkers();
-  document.getElementById('homeWorkers').innerHTML = list.slice(0,5).map(w=>'<div style="background:white; border-radius:16px; padding:16px; margin-bottom:12px;">'
-    + '<div onclick="openWorker(\''+w.name+'\')" style="cursor:pointer;"><b style="font-size:16px;">'+w.name+' ✓ Verified <span style="color:#123A6D; font-size:12px;">View ›</span></b><p style="margin:4px 0; font-size:13px; color:#666;">'+w.skill+' • '+w.city+'</p><p style="margin:4px 0; font-size:13px;">⭐ '+w.rating+' • Available Now • ₦'+Number(w.price).toLocaleString()+' / job</p></div>'
-    + '<div style="display:flex; gap:8px; margin-top:10px;"><button onclick="openChatWith(\''+w.name+'\')" style="flex:1; background:#123A6D; color:white; border:none; padding:12px; border-radius:10px; font-weight:800; font-size:13px;">Hire Now</button><button onclick="unlockWorker(\''+w.name+'\')" style="flex:1; background:white; border:1px solid #ddd; padding:12px; border-radius:10px; font-weight:800; font-size:13px;">🔓 Unlock • 5 iCoin</button></div>'
-    + '</div>').join('');
-});
-</script>
-</body>
-</html>
+
+<div style="padding:16px;">
+<h3>Quick actions</h3>
+<div style="display:flex;gap:8px;">
+<div class="z-card" style="flex:1;text-align:center;cursor:pointer;" onclick="location.href='search.html'">💼<br><b>Find Work</b></div>
+<div class="z-card" style="flex:1;text-align:center;cursor:pointer;" onclick="location.href='post.html'">📄<br><b>Post Job</b></div>
+<div class="z-card" style="flex:1;text-align:center;cursor:pointer;" onclick="location.href='chat.html'">💬<br><b>My Chats</b></div>
+<div class="z-card" style="flex:1;text-align:center;cursor:pointer;" onclick="location.href='coin-shop.html'">🛍️<br><b>Shop</b></div>
+<div class="z-card" style="flex:1;text-align:center;cursor:pointer;" onclick="location.href='coin-shop.html'">💲<br><b>Buy Coins</b></div>
+</div>
+
+<div style="display:flex;justify-content:space-between;margin:18px 0 10px;"><h3 style="margin:0;">ZERO jobs</h3><span style="color:#0B6E4F;font-weight:800;">3 available</span></div>
+
+<div class="z-card" style="display:flex;gap:12px;align-items:center;margin-bottom:12px;cursor:pointer;" onclick="location.href='worker.html?name=Segun O.'">
+<div style="position:relative;"><img src="https://i.pravatar.cc/100?u=Segun" style="width:64px;height:64px;border-radius:50%;"><span style="position:absolute;top:-4px;right:-4px;">👑</span><span style="background:#0B6E4F;color:#fff;padding:4px 10px;border-radius:999px;font-size:12px;position:absolute;bottom:-8px;left:0;white-space:nowrap;">✓ Trust Badge</span></div>
+<div style="flex:1;"><b>Segun O.</b><p style="margin:2px 0;color:#555;">Barber • Abuja</p></div>
+<span class="z-badge-gold" style="font-size:14px;padding:8px 12px;">92%</span>
+</div>
+
+<div class="z-card" style="display:flex;gap:12px;align-items:center;margin-bottom:12px;cursor:pointer;" onclick="location.href='worker.html?name=Chinedu O.'">
+<div style="position:relative;"><img src="https://i.pravatar.cc/100?u=Chinedu" style="width:64px;height:64px;border-radius:50%;"><span style="position:absolute;top:-4px;right:-4px;">👑</span><span style="background:#0B6E4F;color:#fff;padding:4px 10px;border-radius:999px;font-size:12px;position:absolute;bottom:-8px;left:0;white-space:nowrap;">✓ Trust Badge</span></div>
+<div style="flex:1;"><b>Chinedu O.</b><p style="margin:2px 0;color:#555;">Plumber • Abuja</p></div>
+<span class="z-badge-gold" style="font-size:14px;padding:8px 12px;">92%</span>
+</div>
+</div>
+
+<div class="z-sos">SOS</div>
+</body></html>
