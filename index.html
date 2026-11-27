@@ -13,16 +13,12 @@
 input,select,textarea{width:100%;padding:13px;border:1.5px solid #ddd;border-radius:12px;margin:6px 0 12px}
 .z-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;border-top:1px solid #ddd;z-index:99}
 .z-nav button{flex:1;border:none;background:#fff;padding:12px 2px;font-size:12px;font-weight:800;cursor:pointer}
-.z-nav button.active{color:#0B6E4F}
 .z-sos{position:fixed;right:14px;bottom:70px;background:#D32F2F;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;box-shadow:0 4px 12px rgba(0,0,0,.3);cursor:pointer}
 .flex{display:flex;gap:10px;align-items:center}.avatar{width:56px;height:56px;border-radius:50%;object-fit:cover}
 </style></head>
 <body>
-
-<!-- TOP -->
 <div class="z-header"><div style="display:flex;justify-content:space-between;align-items:center;"><div class="z-logo">ZIRO <span>V8</span></div><b>🪙 <span id="coinTop">120</span> Coins</b></div></div>
 
-<!-- HOME -->
 <div id="p-home" class="page active">
 <div class="z-card" style="background:#123A2B;color:#fff;text-align:center;"><h2 style="margin:0;">Welcome, <span id="userName">Guest</span> 👋</h2><p style="color:#D6E8DD;">Find Work. Hire Fast. Get Paid.</p><div class="flex"><button class="z-btn-gold" onclick="show('p-search')">🔍 Find Work</button><button class="z-btn-green" onclick="show('p-post')" style="background:#fff;color:#123A2B;">+ Post Job</button></div></div>
 <div class="flex"><div class="z-card" style="flex:1;text-align:center;" onclick="show('p-wallet')">🪙<br><b>Wallet</b><br><span id="coin1">120 Coins</span></div><div class="z-card" style="flex:1;text-align:center;" onclick="show('p-shop')">🛒<br><b>Coin Shop</b><br>Buy Coins</div><div class="z-card" style="flex:1;text-align:center;" onclick="show('p-jobs')">📄<br><b>My Jobs</b><br><span id="jobCount">0 Jobs</span></div></div>
@@ -31,42 +27,23 @@ input,select,textarea{width:100%;padding:13px;border:1.5px solid #ddd;border-rad
 <div class="z-card flex" onclick="show('p-worker')"><img class="avatar" src="https://i.pravatar.cc/100?u=Chinedu"><div style="flex:1;"><b>Chinedu O. - Plumber</b><br>⭐ 4.8 • Abuja • <span class="z-badge-gold">✓ Trust Badge</span></div><b>View →</b></div>
 </div>
 
-<!-- SEARCH -->
-<div id="p-search" class="page"><h2>Search / Find Work</h2><input id="searchInput" placeholder="🔍 Search jobs, services, people..." oninput="doSearch()"><div id="searchResults"><div class="z-card flex"><img class="avatar" src="https://i.pravatar.cc/100?u=Segun"><div style="flex:1;"><b>Segun O.</b><br>Barber • Abuja • ⭐ 4.9</div><button class="z-btn-green" style="width:auto;" onclick="show('p-worker')">View</button></div><div class="z-card flex"><img class="avatar" src="https://i.pravatar.cc/100?u=Chinedu"><div style="flex:1;"><b>Chinedu O.</b><br>Plumber • Abuja • ⭐ 4.8</div><button class="z-btn-green" style="width:auto;" onclick="show('p-worker')">View</button></div><div class="z-card flex"><img class="avatar" src="https://i.pravatar.cc/100?img=32"><div style="flex:1;"><b>Ada O.</b><br>Cleaner • Abuja • ⭐ 5.0</div><button class="z-btn-green" style="width:auto;" onclick="show('p-worker')">View</button></div></div></div>
-
-<!-- WORKER -->
-<div id="p-worker" class="page"><div class="z-card" style="text-align:center;"><img src="https://i.pravatar.cc/150?u=Segun" style="width:100px;height:100px;border-radius:50%;border:3px solid #C9A227;"><h2>Segun O.</h2><p>Barber • Abuja • ⭐ 4.9 (128 jobs)</p><span class="z-badge-gold">✓ Trust Badge</span> <span class="z-badge-gold">⭐ Top Worker</span></div><div class="z-card"><b>About</b><p>Professional barber in Abuja. 5 years experience. Home service available.</p><p><b>Price:</b> From ₦5,000 • <b>Available:</b> Today</p></div><div class="flex"><button class="z-btn-green" onclick="show('p-chat')">💬 Chat Now</button><button class="z-btn-gold" onclick="show('p-post')">📄 Hire Now</button></div></div>
-
-<!-- POST -->
+<div id="p-search" class="page"><h2>Search / Find Work</h2><input id="searchInput" placeholder="🔍 Search jobs, services, people..." oninput="doSearch()"><div id="searchResults"><div class="z-card flex"><img class="avatar" src="https://i.pravatar.cc/100?u=Segun"><div style="flex:1;"><b>Segun O.</b><br>Barber • Abuja • ⭐ 4.9</div><button class="z-btn-green" style="width:auto;" onclick="show('p-worker')">View</button></div><div class="z-card flex"><img class="avatar" src="https://i.pravatar.cc/100?u=Chinedu"><div style="flex:1;"><b>Chinedu O.</b><br>Plumber • Abuja • ⭐ 4.8</div><button class="z-btn-green" style="width:auto;" onclick="show('p-worker')">View</button></div></div></div>
+<div id="p-worker" class="page"><div class="z-card" style="text-align:center;"><img src="https://i.pravatar.cc/150?u=Segun" style="width:100px;height:100px;border-radius:50%;border:3px solid #C9A227;"><h2>Segun O.</h2><p>Barber • Abuja • ⭐ 4.9 (128 jobs)</p><span class="z-badge-gold">✓ Trust Badge</span></div><div class="z-card"><b>About</b><p>Professional barber in Abuja. 5 years experience. Home service available.</p><p><b>Price:</b> From ₦5,000 • <b>Available:</b> Today</p></div><div class="flex"><button class="z-btn-green" onclick="show('p-chat')">💬 Chat Now</button><button class="z-btn-gold" onclick="show('p-post')">📄 Hire Now</button></div></div>
 <div id="p-post" class="page"><div class="z-card"><h2>Post a Job</h2><input id="jobTitle" placeholder="Job Title e.g. I need a Barber"><select id="jobCat"><option>Barber</option><option>Cleaner</option><option>Plumber</option><option>Electrician</option></select><input id="jobLoc" placeholder="Location e.g. Wuse 2, Abuja"><input id="jobBudget" type="number" placeholder="Budget ₦ e.g. 5000"><textarea id="jobDesc" placeholder="Describe the job..."></textarea><button class="z-btn-green" onclick="postJob()">📄 Post Job — Free</button></div></div>
+<div id="p-jobs" class="page"><h2>My Jobs</h2><div id="jobsList"></div><button class="z-btn-green" onclick="show('p-post')">+ Post New Job</button></div>
+<div id="p-wallet" class="page"><div class="z-card" style="text-align:center;background:#123A2B;color:#fff;"><p>Total Balance</p><h1>🪙 <span id="coin2">120</span> Coins</h1><span class="z-badge-gold">Gold Tier</span><div class="flex" style="margin-top:14px;"><button class="z-btn-gold" onclick="show('p-shop')">↓ Buy Coins</button><button class="z-btn-outline" onclick="sendCoins()">→ Send Coins</button></div></div><h3>Recent Activity</h3><div class="z-card flex"><div style="flex:1;"><b>Received from Segun O.</b><br>Today • Job Completed</div><b style="color:#0B6E4F;">+20 Coins</b></div></div>
 
-<!-- JOBS -->
-<div id="p-jobs" class="page"><h2>My Jobs</h2><div id="jobsList"><p style="color:#888;">No jobs yet. Post your first job.</p></div><button class="z-btn-green" onclick="show('p-post')">+ Post New Job</button></div>
+<div id="p-shop" class="page"><h2>Coin Shop - Buy Coins</h2><p><span class="z-badge-gold">ℹ️ Minimum Purchase 50 Coins • Secure Payment via Flutterwave</span></p><div class="z-card"><b>Starter</b> - 50 Coins • ₦7,500<br><button class="z-btn-green" style="margin-top:8px;" onclick="payReal(7500,50)">💳 Pay ₦7,500 with Flutterwave</button></div><div class="z-card" style="border:2px solid #C9A227;"><b>Popular • +10 Bonus</b> - 130 Coins • ₦15,000<br><button class="z-btn-gold" style="margin-top:8px;" onclick="payReal(15000,130)">💳 Pay ₦15,000 with Flutterwave</button></div><div class="z-card"><b>Pro • +50 Bonus</b> - 450 Coins • ₦45,000<br><button class="z-btn-green" style="margin-top:8px;" onclick="payReal(45000,450)">💳 Pay ₦45,000 with Flutterwave</button></div><div class="z-card"><b>Business • +150 Bonus</b> - 1150 Coins • ₦97,500<br><button class="z-btn-green" style="margin-top:8px;" onclick="payReal(97500,1150)">💳 Pay ₦97,500 with Flutterwave</button></div><p style="font-size:12px;color:#888;text-align:center;">To activate real payment: Replace YOUR_FLUTTERWAVE_LINK below with your own Flutterwave Payment Link from dashboard.flutterwave.com</p></div>
 
-<!-- WALLET -->
-<div id="p-wallet" class="page"><div class="z-card" style="text-align:center;background:#123A2B;color:#fff;"><p>Total Balance</p><h1>🪙 <span id="coin2">120</span> Coins</h1><span class="z-badge-gold">Gold Tier</span><div class="flex" style="margin-top:14px;"><button class="z-btn-gold" onclick="show('p-shop')">↓ Buy Coins</button><button class="z-btn-outline" onclick="sendCoins()">→ Send Coins</button></div></div><h3>Recent Activity</h3><div class="z-card flex"><div style="flex:1;"><b>Received from Segun O.</b><br>Today • Job Completed</div><b style="color:#0B6E4F;">+20 Coins</b></div><div class="z-card flex"><div style="flex:1;"><b>Bought Popular Pack</b><br>Yesterday • Flutterwave</div><b style="color:#0B6E4F;">+120 Coins</b></div></div>
-
-<!-- SHOP -->
-<div id="p-shop" class="page"><h2>Coin Shop - Buy Coins</h2><p><span class="z-badge-gold">ℹ️ Minimum Purchase 50 Coins</span></p><div class="z-card" onclick="buyCoins(50,7500)"><b>Starter</b> - 50 Coins • ₦7,500<br><button class="z-btn-green" style="margin-top:8px;">Buy Starter</button></div><div class="z-card" style="border:2px solid #C9A227;" onclick="buyCoins(130,15000)"><b>Popular • +10 Bonus</b> - 130 Coins • ₦15,000<br><button class="z-btn-gold" style="margin-top:8px;">Buy Popular</button></div><div class="z-card" onclick="buyCoins(450,45000)"><b>Pro • +50 Bonus</b> - 450 Coins • ₦45,000<br><button class="z-btn-green" style="margin-top:8px;">Buy Pro</button></div><div class="z-card" onclick="buyCoins(1150,97500)"><b>Business • +150 Bonus</b> - 1150 Coins • ₦97,500<br><button class="z-btn-green" style="margin-top:8px;">Buy Business</button></div></div>
-
-<!-- CHAT -->
 <div id="p-chat" class="page"><h2>My Chats</h2><div class="z-card flex"><img class="avatar" src="https://i.pravatar.cc/100?u=Segun"><div style="flex:1;"><b>Segun O.</b><br><span id="lastMsg">I can come today by 2pm...</span></div><span class="z-badge-gold">2</span></div><input id="chatInput" placeholder="Type message..."><button class="z-btn-green" onclick="sendMsg()">Send 💬</button></div>
-
-<!-- OFFICE / PROFILE -->
-<div id="p-office" class="page"><div class="z-card" style="text-align:center;"><img src="https://i.pravatar.cc/150?u=me" style="width:90px;height:90px;border-radius:50%;"><h2 id="profileName">Guest User</h2><p>Abuja • ⭐ 4.9 • <span class="z-badge-gold">Gold Tier</span></p></div><div class="z-card"><b>Wallet:</b> 🪙 <span id="coin3">120</span> Coins<br><b>Jobs Done:</b> 12<br><b>Member Since:</b> 2026</div><button class="z-btn-outline" onclick="show('p-login')">Login / Switch Account</button></div>
-
-<!-- LOGIN -->
+<div id="p-office" class="page"><div class="z-card" style="text-align:center;"><img src="https://i.pravatar.cc/150?u=me" style="width:90px;height:90px;border-radius:50%;"><h2 id="profileName">Guest User</h2><p>Abuja • ⭐ 4.9 • <span class="z-badge-gold">Gold Tier</span></p></div><div class="z-card"><b>Wallet:</b> 🪙 <span id="coin3">120</span> Coins<br><b>Jobs Done:</b> 12<br><b>Member Since:</b> 2026</div><button class="z-btn-outline" onclick="show('p-login')">Login / Switch Account</button><button class="z-btn-outline" style="margin-top:10px;" onclick="location.href='admin.html'">🔐 Admin Dashboard (You Only)</button></div>
 <div id="p-login" class="page"><div class="z-card" style="text-align:center;"><h2>Welcome Back</h2><input id="loginName" placeholder="Your Name e.g. Tunde"><input id="loginPhone" placeholder="Phone / Email"><button class="z-btn-green" onclick="doLogin()">Login →</button><button class="z-btn-outline" style="margin-top:10px;" onclick="doLogin()">Create Free Account</button></div></div>
 
-<div class="z-sos" onclick="alert('SOS Activated! Help is on the way. ZIRO will call you.')">SOS</div>
+<!-- SOS POPUP -->
+<div id="sosBox" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);z-index:200;align-items:center;justify-content:center;"><div style="background:#fff;margin:20px;padding:20px;border-radius:16px;text-align:center;width:90%;max-width:400px;"><h2 style="color:#D32F2F;">🚨 SOS EMERGENCY</h2><p>Are you in danger? ZIRO will alert your emergency contact and show your location.</p><p><b>Your Location:</b> <span id="sosLoc">Abuja, Nigeria (Getting GPS...)</span></p><button class="z-btn-green" style="background:#D32F2F;" onclick="confirmSOS()">🚨 YES, SEND SOS NOW</button><button class="z-btn-outline" style="margin-top:10px;" onclick="closeSOS()">Cancel - I'm Safe</button></div></div>
 
-<div class="z-nav">
-<button id="nav-home" class="active" onclick="show('p-home')">🏠<br>Home</button>
-<button onclick="show('p-search')">🔍<br>Search</button>
-<button onclick="show('p-post')">➕<br>Post</button>
-<button onclick="show('p-chat')">💬<br>Chats</button>
-<button onclick="show('p-office')">👤<br>Office</button>
-</div>
+<div class="z-sos" onclick="openSOS()">SOS</div>
+<div class="z-nav"><button onclick="show('p-home')">🏠<br>Home</button><button onclick="show('p-search')">🔍<br>Search</button><button onclick="show('p-post')">➕<br>Post</button><button onclick="show('p-chat')">💬<br>Chats</button><button onclick="show('p-office')">👤<br>Office</button></div>
 
 <script>
 let coins = parseInt(localStorage.getItem('ziro_coins')||'120');
@@ -75,12 +52,15 @@ let user = localStorage.getItem('ziro_name')||'Guest';
 function show(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
 function updateUI(){['coinTop','coin1','coin2','coin3'].forEach(i=>{let e=document.getElementById(i);if(e)e.textContent=coins;});document.getElementById('userName').textContent=user;document.getElementById('profileName').textContent=user;document.getElementById('jobCount').textContent=jobs.length+' Jobs';renderJobs();}
 function renderJobs(){let l=document.getElementById('jobsList');if(!jobs.length){l.innerHTML='<p style="color:#888;">No jobs yet. Post your first job.</p>';return;}l.innerHTML=jobs.map(j=>`<div class="z-card"><b>${j.title}</b> <span class="z-badge-gold">Active</span><p>${j.cat} • ${j.loc} • ₦${j.budget}</p><button class="z-btn-green" onclick="show('p-chat')">💬 Chat</button></div>`).join('');}
-function postJob(){let t=document.getElementById('jobTitle').value;if(!t){alert('Please enter Job Title');return;}let job={title:t,cat:document.getElementById('jobCat').value,loc:document.getElementById('jobLoc').value||'Abuja',budget:document.getElementById('jobBudget').value||'5000'};jobs.unshift(job);localStorage.setItem('ziro_jobs',JSON.stringify(jobs));updateUI();alert('Job Posted! Workers will see it.');show('p-jobs');}
-function buyCoins(n,price){if(confirm('Buy '+n+' Coins for ₦'+price+' with Flutterwave?')){coins+=n;localStorage.setItem('ziro_coins',coins);updateUI();alert('Success! +'+n+' Coins added. New balance: '+coins);show('p-wallet');}}
+function postJob(){let t=document.getElementById('jobTitle').value;if(!t){alert('Please enter Job Title');return;}let job={title:t,cat:document.getElementById('jobCat').value,loc:document.getElementById('jobLoc').value||'Abuja',budget:document.getElementById('jobBudget').value||'5000',user:user,date:new Date().toLocaleString()};jobs.unshift(job);localStorage.setItem('ziro_jobs',JSON.stringify(jobs));let all=JSON.parse(localStorage.getItem('ziro_all_jobs')||'[]');all.unshift(job);localStorage.setItem('ziro_all_jobs',JSON.stringify(all));updateUI();alert('Job Posted!');show('p-jobs');}
+function payReal(amount,coinAmount){let link="YOUR_FLUTTERWAVE_LINK";if(link==="YOUR_FLUTTERWAVE_LINK"){if(confirm('Demo Mode: No real link yet. Add '+coinAmount+' Coins for testing?')){coins+=coinAmount;localStorage.setItem('ziro_coins',coins);updateUI();alert('Demo: +'+coinAmount+' Coins added');}}else{window.open(link,'_blank');}}
 function sendCoins(){let amt=prompt('How many coins to send?');if(amt){coins-=parseInt(amt);if(coins<0)coins=0;localStorage.setItem('ziro_coins',coins);updateUI();alert('Sent '+amt+' Coins!');}}
 function sendMsg(){let v=document.getElementById('chatInput').value;if(!v)return;document.getElementById('lastMsg').textContent='You: '+v;document.getElementById('chatInput').value='';alert('Message sent!');}
 function doLogin(){let n=document.getElementById('loginName').value||'Guest';user=n;localStorage.setItem('ziro_name',n);updateUI();alert('Welcome '+n+'!');show('p-home');}
-function doSearch(){let q=document.getElementById('searchInput').value.toLowerCase();let r=document.getElementById('searchResults');if(!q){r.innerHTML='';return;}r.innerHTML='<div class="z-card">Results for: <b>'+q+'</b><br>3 workers found in Abuja. Tap View to hire.</div>';}
+function doSearch(){let q=document.getElementById('searchInput').value.toLowerCase();let r=document.getElementById('searchResults');if(!q)return;r.innerHTML='<div class="z-card">Results for: <b>'+q+'</b><br>3 workers found in Abuja.</div>';}
+function openSOS(){document.getElementById('sosBox').style.display='flex';if(navigator.geolocation){navigator.geolocation.getCurrentPosition(p=>{document.getElementById('sosLoc').textContent='Lat: '+p.coords.latitude.toFixed(4)+', Lng: '+p.coords.longitude.toFixed(4)+' (Abuja Area)';});}}
+function closeSOS(){document.getElementById('sosBox').style.display='none';}
+function confirmSOS(){let sos={user:user,loc:document.getElementById('sosLoc').textContent,time:new Date().toLocaleString()};let arr=JSON.parse(localStorage.getItem('ziro_sos')||'[]');arr.unshift(sos);localStorage.setItem('ziro_sos',JSON.stringify(arr));alert('SOS SENT! ZIRO Admin has been alerted. Stay safe, help is coming.');closeSOS();}
 updateUI();renderJobs();
 </script>
 </body></html>
