@@ -1,77 +1,69 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ZIRO - Work. Hustle. Get Paid.</title>
-<link rel="stylesheet" href="css/style.css"></head>
+<meta name="description" content="Find Trusted Workers Near You, Fast. Nigeria - 36 States + FCT. No Escrow.">
+<meta name="theme-color" content="#0A3D2A">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/home.css">
+<link rel="stylesheet" href="css/wallet.css">
+<link rel="stylesheet" href="css/office.css">
+</head>
 <body>
-<!-- HEADER - FOREST GREEN #0A3D2A -->
+
+<!-- HEADER - LOCKED: Forest Green, SOS INLINE ONLY -->
 <header class="top">
-  <div class="logo"><span class="o">Z</span> ZIRO</div>
-  <div class="search"><input id="q" placeholder="Search Plumber, Driver, Cleaner..."><button onclick="doSearch()">🔍</button></div>
-  <div class="head-right">
-    <a href="wallet.html" class="icoin">🪙 <b id="bal">120</b> iCoin</a>
-    <button class="sos-inline" onclick="sendSOS()">SOS</button>
-    <a href="office.html" class="avatar">A</a>
+  <div class="logo"><b>Z</b> ZIRO</div>
+  <div class="search">
+    <input id="globalSearch" placeholder="Search Plumber, Driver, Cleaner...">
+    <button onclick="ZIRO.go('search')">🔍</button>
   </div>
+  <button class="icoin" onclick="ZIRO.go('wallet')">🪙 <span data-bal>120</span> iCoin</button>
+  <button class="sos-inline" onclick="ZIRO.sos()">SOS</button>
+  <button class="avatar" onclick="ZIRO.go('office')">A</button>
 </header>
 
-<main>
-  <div class="hero"><h1>Find Trusted Workers Near You, Fast.</h1><p>Plumber • Electrician • Cleaner • Driver • More — Nigeria • 36 States + FCT</p>
-    <div class="row">
-      <button class="btn-green" onclick="go('post')">+ Post Job</button>
-      <button class="btn-gold" onclick="go('join')">Join as Worker</button>
-      <button class="btn-white" onclick="location.href='search.html'">See All Workers</button>
-    </div>
+<!-- PAGES LOAD HERE - From /pages/ folder -->
+<main id="app">
+  <div id="p-home" class="page on">
+    <p style="text-align:center;padding:30px">Loading ZIRO...</p>
   </div>
-
-  <!-- QUICK ACTIONS - 4 IN A ROW -->
-  <div class="quick">
-    <button onclick="location.href='search.html'">🔍<span>Find Work</span></button>
-    <button onclick="openPost()">📝<span>Post Job</span></button>
-    <button onclick="location.href='chat.html'">🏪<span>Attention Shop</span></button>
-    <button onclick="location.href='wallet.html'">🪙<span>Buy iCoin</span></button>
-  </div>
-
-  <!-- CHIOMA CARD - FROM PHOTO -->
-  <div class="card chioma-card">
-    <div class="flex"><b>CHIOMA — Verified • Abuja • Available</b><span class="badge">AI</span></div>
-    <p>Your Work Companion. I can help you find work, buy iCoin, post a job, verify.</p>
-    <div class="row"><button class="btn-green" onclick="chiomaTalk()">🎙 Talk • Voice</button><button class="btn-white" onclick="chiomaChat()">💬 Chat • Text</button></div>
-    <div id="chiomaBox" class="chioma-box">Hello Ada, I found 5 driver jobs for you...</div>
-  </div>
-
-  <!-- ZIRO PICKED FOR YOU - FROM PHOTO -->
-  <h2>ZIRO Picked For You</h2>
-  <div id="jobs"></div>
-
-  <!-- MERIT WALL -->
-  <div class="card"><b>⭐ Merit Wall</b><p>Top Employer this week: <b>Lagos Logistics Co.</b> • 10 hires • 4.9★ • 100% payout</p></div>
-
-  <!-- WORKERS -->
-  <h2>Available Workers Near You</h2>
-  <div id="workers"></div>
-
-  <!-- LEGAL FOOTER -->
-  <p class="legal">ZIRO TECHNOLOGIES LTD • No Escrow • ZIRO does not hold money • <a href="legal.html">Terms • Privacy • iCoin • Refund</a><br>iCoin Price: ₦50 per iCoin • Min Buy 7 • Price set by CEO</p>
+  <div id="p-search" class="page"></div>
+  <div id="p-post" class="page"></div>
+  <div id="p-wallet" class="page"></div>
+  <div id="p-office" class="page"></div>
+  <div id="p-chat" class="page"></div>
 </main>
 
 <!-- BOTTOM NAV - LOCKED -->
 <nav class="bottom">
-  <a href="index.html">🏠 Home</a><a href="search.html">🔍 Search</a><a href="post.html" class="plus">+</a><a href="chat.html">💬 Chat</a><a href="office.html">👤 My Office</a>
+  <button onclick="ZIRO.go('home')">🏠<br>Home</button>
+  <button onclick="ZIRO.go('search')">🔍<br>Search</button>
+  <button onclick="ZIRO.go('post')" class="plus">+</button>
+  <button onclick="ZIRO.go('chat')">💬<br>Chat</button>
+  <button onclick="ZIRO.go('office')">👤<br>My Office</button>
 </nav>
 
-<!-- ONLY FLOATING BUTTON - CHIOMA GOLD -->
-<button id="chiomaFloat" onclick="chiomaChat()">C</button>
+<!-- ONLY FLOATING BUTTON IN WHOLE APP - CHIOMA -->
+<button id="chiomaFloat" onclick="ZIRO.chioma()">C</button>
 
-<!-- POST MODAL -->
-<div id="postModal" class="modal"><div class="modal-box">
-  <h3>Post Job / Errand</h3>
-  <input id="jobTitle" placeholder="e.g. Need Plumber in Abuja">
-  <input id="jobPrice" type="number" placeholder="Price ₦ e.g. 50000">
-  <select id="jobType"><option>Job</option><option>Errand</option><option>Property</option></select>
-  <button class="btn-green" onclick="postJob()">Post — Pay iCoin</button>
-  <button class="btn-white" onclick="closePost()">Cancel</button>
-</div></div>
-
+<!-- MODULAR JS - ORDER MATTERS, DO NOT REORDER -->
+<script src="js/config.js"></script>
+<script src="js/core.js"></script>
 <script src="js/wallet.js"></script>
-</body></html>
+<script src="js/jobs.js"></script>
+<script src="js/chat.js"></script>
+<script src="js/sos.js"></script>
+<script src="js/chioma.js"></script>
+<script src="js/admin.js"></script>
+<script>
+  // Register PWA Service Worker for App conversion later
+  if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
+  // Load pages on start
+  window.addEventListener('DOMContentLoaded', ()=> ZIRO.init());
+</script>
+</body>
+</html>
