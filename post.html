@@ -6,20 +6,18 @@
 <title>ZIRO - Post a Job</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body style="background:#F2F4F2; margin:0; padding-bottom:75px;">
+<body style="background:#F2F4F2; margin:0;">
 <div style="background:linear-gradient(180deg,#0B6E4F 0%, #0B3D2E 100%); padding:20px 16px; border-radius:0 0 22px 22px; color:white;">
-  <div onclick="window.location.href='index.html'" style="font-size:14px;">← Back</div>
+  <div onclick="window.location.href='index.html'" style="font-size:14px;">← Back to Home</div>
   <h2 style="margin:12px 0 4px; color:white;">Post a Job</h2>
   <p style="margin:0; color:#F2C94C; font-size:13px;">Workers near you will see it.</p>
 </div>
 <div style="padding:16px;">
   <div style="background:white; border-radius:16px; padding:18px;">
     <label style="font-size:13px; font-weight:800;">What do you need?</label>
-    <select id="skill" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 14px; font-size:14px;">
-      <option>Plumber</option><option>Electrician</option><option>Cleaner</option><option>Brick Layer</option><option>Carpenter</option><option>Painter</option><option>Welder</option><option>Gardener</option>
-    </select>
+    <select id="skill" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 14px; font-size:14px;"><option>Plumber</option><option>Electrician</option><option>Cleaner</option><option>Brick Layer</option><option>Carpenter</option><option>Painter</option><option>Welder</option><option>Gardener</option></select>
     <label style="font-size:13px; font-weight:800;">Describe the job</label>
-    <textarea id="desc" placeholder="Example: Mend my fence, fix leaking tap..." style="width:100%; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 14px; font-size:14px; min-height:90px;"></textarea>
+    <textarea id="desc" placeholder="Example: Mend my fence..." style="width:100%; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 14px; font-size:14px; min-height:90px;"></textarea>
     <label style="font-size:13px; font-weight:800;">Budget (₦)</label>
     <input id="budget" type="number" placeholder="Example: 12000" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 14px; font-size:14px;">
     <label style="font-size:13px; font-weight:800;">Location</label>
@@ -29,13 +27,6 @@
     <button class="btn-primary" onclick="submitJob()">Post Job</button>
     <p style="font-size:12px; color:#888; text-align:center; margin:10px 0 0;">ZIRO does NOT hold job money.<br>You pay workers directly after work.</p>
   </div>
-</div>
-<div class="ziro-nav">
-  <button class="ziro-nav-item" onclick="window.location.href='index.html'"><span class="nav-icon">🏠</span>Home</button>
-  <button class="ziro-nav-item" onclick="window.location.href='index.html'"><span class="nav-icon">🔍</span>Search</button>
-  <button class="ziro-nav-center" onclick="window.location.href='post.html'">+</button>
-  <button class="ziro-nav-item" onclick="window.location.href='chat.html'"><span class="nav-icon">💬</span>Chat</button>
-  <button class="ziro-nav-item" onclick="window.location.href='office.html'"><span class="nav-icon">👤</span>My Office</button>
 </div>
 <script src="js/notify.js"></script>
 <script>
@@ -49,7 +40,7 @@ function submitJob(){
   const jobs=JSON.parse(localStorage.getItem('ziro_jobs')||'[]');
   jobs.push({skill, desc, budget:Number(budget), city, name});
   localStorage.setItem('ziro_jobs', JSON.stringify(jobs));
-  ziroNotify('Job Posted','Your '+skill+' job is live. Workers will see it now.','View Home');
+  ziroNotify('Job Posted','Your '+skill+' job is live.','View Home');
   const b=document.querySelector('#ziroModal button'); if(b) b.onclick=function(){ closeZiroModal(); window.location.href='index.html'; };
 }
 </script>
