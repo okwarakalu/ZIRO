@@ -32,17 +32,9 @@
 </div>
 <script src="js/notify.js"></script>
 <script src="js/wallet.js"></script>
+<script src="js/workers.js"></script>
 <script>
-let WORKERS=[
-  {name:'Segun O.', skill:'Barber', city:'Enugu', rating:'4.8', price:3000},
-  {name:'Grace M.', skill:'Cook / Chef', city:'Wuse, Abuja', rating:'4.9', price:8500},
-  {name:'Yusuf A.', skill:'Welder', city:'Kaduna', rating:'4.6', price:11000},
-  {name:'Blessing I.', skill:'Gardener', city:'Lekki, Lagos', rating:'4.7', price:4500},
-  {name:'Musa A.', skill:'Plumber', city:'Wuse 2, Abuja', rating:'4.8', price:8000},
-  {name:'Udoka', skill:'Brick Layer', city:'Apo, Abuja', rating:'4.7', price:12000},
-  {name:'Ada O.', skill:'Cleaner', city:'Garki, Abuja', rating:'4.8', price:6000},
-  {name:'Tunde B.', skill:'Electrician', city:'Garki, Abuja', rating:'4.7', price:10000},
-];
+let WORKERS = [];
 let q='', skillFilter='All', areaFilter='All';
 function setSkill(s){ skillFilter=s; renderSearch(); }
 function setArea(a){ areaFilter=a; renderSearch(); }
@@ -53,7 +45,7 @@ function renderSearch(){
   const rows=WORKERS.filter(w=>{ const okQ=!q || (w.name+w.skill+w.city).toLowerCase().includes(q.toLowerCase()); const okS=skillFilter==='All' || w.skill.toLowerCase().includes(skillFilter.toLowerCase()); const okA=areaFilter==='All' || w.city.toLowerCase().includes(areaFilter.toLowerCase()); return okQ && okS && okA; });
   document.getElementById('resultCount').textContent = rows.length + ' worker(s) found' + (skillFilter!=='All' ? ' • '+skillFilter : '') + (areaFilter!=='All' ? ' • '+areaFilter : '');
   document.getElementById('results').innerHTML = rows.length ? rows.map(w=>'<div style="background:white; border-radius:16px; padding:16px; margin-bottom:12px;">'
-    + '<div onclick="openWorker(\''+w.name+'\')" style="cursor:pointer;"><b style="font-size:16px;">'+w.name+' ✓ Verified <span style="color:#123A6D; font-size:12px;">View Profile ›</span></b><p style="margin:4px 0; font-size:13px; color:#666;">'+w.skill+' • '+w.city+'</p><p style="margin:4px 0; font-size:13px;">⭐ '+w.rating+' • Available Now • ₦'+w.price.toLocaleString()+' / job</p></div>'
+    + '<div onclick="openWorker(\''+w.name+'\')" style="cursor:pointer;"><b style="font-size:16px;">'+w.name+' ✓ Verified <span style="color:#123A6D; font-size:12px;">View Profile ›</span></b><p style="margin:4px 0; font-size:13px; color:#666;">'+w.skill+' • '+w.city+'</p><p style="margin:4px 0; font-size:13px;">⭐ '+w.rating+' • Available Now • ₦'+Number(w.price).toLocaleString()+' / job</p></div>'
     + '<div style="background:#F2F4F2; border-radius:12px; padding:10px; margin-top:10px; display:flex; flex-direction:column; gap:8px;"><button onclick="hireWorker(\''+w.name+'\')" style="width:100%; background:#123A6D; color:white; border:none; padding:13px; border-radius:10px; font-size:14px; font-weight:800;">Hire Now</button><div style="display:flex; gap:8px;"><button onclick="unlockWorker(\''+w.name+'\')" style="flex:1; background:white; border:1px solid #ddd; padding:11px 6px; border-radius:10px; font-size:12px; font-weight:800;">🔓 Unlock • 5 iCoin</button><button onclick="openWorker(\''+w.name+'\')" style="flex:1; background:white; color:#123A6D; border:1px solid #123A6D; padding:11px 6px; border-radius:10px; font-size:12px; font-weight:800;">👤 View Profile</button></div></div>'
     + '</div>').join('') : '<p style="background:white; padding:20px; border-radius:14px; text-align:center; color:#666;">No worker found.</p>';
 }
@@ -69,7 +61,11 @@ function unlockWorker(name){
     ziroNotify('Contact Unlocked', 'You can now chat with '+name+'.<br>5 iCoin used.', 'Go to Chat', function(){ openChatWith(name); });
   });
 }
-document.addEventListener('DOMContentLoaded', ()=>{ const s=new URLSearchParams(location.search).get('skill'); if(s && s!=='All') skillFilter=s; renderSearch(); });
+document.addEventListener('DOMContentLoaded', ()=>{
+  WORKERS = ziroGetWorkers();
+  const s=new URLSearchParams(location.search).get('skill'); if(s && s!=='All') skillFilter=s;
+  renderSearch();
+});
 </script>
 </body>
 </html>
