@@ -24,7 +24,6 @@ html,body{height:100%; overflow:hidden;} *{box-sizing:border-box;}
 <body style="background:#0B3D2E; margin:0; display:flex; flex-direction:column; height:100dvh; width:100%; overflow:hidden;">
 <!-- UPPER LAYER - FULL ZIRO BACKGROUND IMAGE, NO WHITE -->
 <div style="background:#0B3D2E; background-image:url('images/ziro-bg.jpg'); background-size:cover; background-position:center; padding:12px; padding-top:calc(12px + env(safe-area-inset-top)); flex-shrink:0; position:relative;">
-  <!-- Dark overlay so text is readable -->
   <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.35) 100%);"></div>
   <div style="position:relative; display:flex; align-items:center; gap:10px;">
     <button onclick="window.location.href='chat.html'" style="background:rgba(255,255,255,0.25); color:white; border:1px solid rgba(255,255,255,0.4); width:38px; height:38px; min-width:38px; border-radius:50%; font-size:18px;">←</button>
@@ -33,7 +32,6 @@ html,body{height:100%; overflow:hidden;} *{box-sizing:border-box;}
     <button onclick="startVoiceCall()" style="background:rgba(255,255,255,0.25); border:1px solid rgba(255,255,255,0.4); color:white; padding:9px 11px; border-radius:999px; font-size:13px; font-weight:700;">Call</button>
     <button onclick="startVideoCall()" style="background:#F2C94C; color:#0B3D2E; border:none; padding:9px 11px; border-radius:999px; font-size:13px; font-weight:700;">Video</button>
   </div>
-  <!-- Job Banner on top of image -->
   <div style="position:relative; background:rgba(255,248,225,0.96); border:1px solid #F2C94C; border-radius:12px; padding:9px 12px; margin-top:12px; display:flex; justify-content:space-between; align-items:center; gap:8px;">
     <span style="font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><b>🧱 Job:</b> <span id="jobTag">Brick Layer • ₦12,000 • Apo, Abuja</span></span>
     <button onclick="window.location.href='job.html'" style="background:#0B6E4F; color:white; border:none; padding:7px 12px; border-radius:999px; font-size:12px; font-weight:700; white-space:nowrap;">View Job</button>
@@ -45,9 +43,7 @@ html,body{height:100%; overflow:hidden;} *{box-sizing:border-box;}
   <div class="ziro-watermark"><span>ZIRO</span><span>ZIRO</span><span>ZIRO</span><span>ZIRO</span><span>ZIRO</span><span>ZIRO</span><span>ZIRO</span><span>ZIRO</span><span>ZIRO</span></div>
   <div id="msgs" style="position:relative; flex:1; overflow-y:auto; overflow-x:hidden; padding:12px; display:flex; flex-direction:column; gap:10px;"></div>
 </div>
-<!-- Recording Bar -->
 <div id="recBar" style="display:none; background:#D32F2F; color:white; padding:10px 14px; text-align:center; font-size:13px; font-weight:700; flex-shrink:0;">● Recording Voice... <span id="recTime">0:00</span> — Tap STOP to Send</div>
-<!-- Bottom Bar - Fitted, No Cut Off -->
 <div style="background:white; padding:10px 10px calc(10px + env(safe-area-inset-bottom)); flex-shrink:0; border-top:1px solid #eee;">
   <div style="display:flex; gap:6px; align-items:center; width:100%;">
     <button onclick="document.getElementById('fileInput').click()" style="background:#0B6E4F; color:white; border:none; width:42px; height:42px; min-width:42px; border-radius:50%; font-size:22px; font-weight:800;">+</button>
@@ -132,4 +128,4 @@ function startVoiceCall(){ ziroConfirm('Voice Call?', 'Call ' + withName + '?', 
 document.addEventListener('DOMContentLoaded', renderMsgs);
 </script>
 </body>
-  </html>
+</html>
