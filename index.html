@@ -32,8 +32,9 @@
   <h3 style="margin:14px 0 10px; color:white;">📋 Recent Jobs</h3><div id="jobList"></div>
   <button onclick="window.location.href='post.html'" style="width:100%; background:#F2C94C; color:#0B3D2E; border:none; padding:14px; border-radius:12px; font-size:14px; font-weight:800; margin-top:10px;">+ Post a Job</button>
   <button onclick="window.location.href='sos.html'" style="width:100%; background:#D32F2F; color:white; border:none; padding:14px; border-radius:12px; font-size:14px; font-weight:800; margin-top:10px;">! SOS • Emergency</button>
-  <p style="text-align:center; font-size:12px; color:#B8D8CC; margin:12px 0 0;">ZIRO does NOT hold job money. You pay workers directly.<br>Terms • Privacy • iCoin Policy • Refund Policy</p>
+  <p style="text-align:center; font-size:12px; color:#B8D8CC; margin:12px 0 0;">ZIRO does NOT hold job money. You pay workers directly.</p>
 </div>
+<!-- BOTTOM NAV - ONLY ON HOME -->
 <div class="ziro-nav">
   <button class="ziro-nav-item active" onclick="window.location.href='index.html'"><span class="nav-icon">🏠</span>Home</button>
   <button class="ziro-nav-item" onclick="window.location.href='search.html'"><span class="nav-icon">🔍</span>Search</button>
@@ -57,9 +58,11 @@ let WORKERS=[
 function renderWorkers(){
   document.getElementById('workerList').innerHTML=WORKERS.map(w=>'<div style="background:white; border-radius:16px; padding:16px; margin-bottom:12px;">'
     + '<div onclick="openWorker(\''+w.name+'\')" style="cursor:pointer;"><b style="font-size:16px;">'+w.name+' ✓ Verified <span style="color:#0B6E4F; font-size:12px;">View Profile ›</span></b><p style="margin:4px 0; font-size:13px; color:#666;">'+w.skill+' • '+w.city+'</p><p style="margin:4px 0; font-size:13px;">⭐ '+w.rating+' • Available Now • ₦'+w.price.toLocaleString()+' / job</p></div>'
-    + '<button onclick="hireWorker(\''+w.name+'\')" style="width:100%; background:#0B6E4F; color:white; border:none; padding:13px; border-radius:12px; font-size:14px; font-weight:800; margin-top:8px;">Hire Now</button>'
-    + '<button onclick="unlockContact(\''+w.name+'\')" style="width:100%; background:white; color:#0B3D2E; border:1px solid #ddd; padding:12px; border-radius:12px; font-size:13px; font-weight:700; margin-top:8px;">Unlock Contact • 5 iCoin</button>'
-    + '<button onclick="openWorker(\''+w.name+'\')" style="width:100%; background:white; color:#0B6E4F; border:1px solid #0B6E4F; padding:11px; border-radius:12px; font-size:13px; font-weight:800; margin-top:8px;">👤 View Full Profile</button>'
+  // ONE ARRANGED FOLDER FOR ACTIONS - Not scattered
+    + '<div style="background:#F2F4F2; border-radius:12px; padding:10px; margin-top:10px; display:flex; flex-direction:column; gap:8px;">'
+    + '<button onclick="hireWorker(\''+w.name+'\')" style="width:100%; background:#0B6E4F; color:white; border:none; padding:13px; border-radius:10px; font-size:14px; font-weight:800;">Hire Now</button>'
+    + '<div style="display:flex; gap:8px;"><button onclick="unlockContact(\''+w.name+'\')" style="flex:1; background:white; color:#0B3D2E; border:1px solid #ddd; padding:11px 6px; border-radius:10px; font-size:12px; font-weight:800;">🔓 Unlock • 5 iCoin</button><button onclick="openWorker(\''+w.name+'\')" style="flex:1; background:white; color:#0B6E4F; border:1px solid #0B6E4F; padding:11px 6px; border-radius:10px; font-size:12px; font-weight:800;">👤 View Profile</button></div>'
+    + '</div>'
     + '</div>').join('');
 }
 function hireWorker(name){ ziroConfirm('Hire '+name+'?', 'Chat with '+name+' to agree time and price.', function(){ localStorage.setItem('ziro_chat_with', name); window.location.href='chat-room.html?with='+encodeURIComponent(name); }); }
