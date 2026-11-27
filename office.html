@@ -6,10 +6,11 @@
 <title>ZIRO - My Office</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body style="background:#2E1065; margin:0; padding-bottom:75px;">
+<body style="background:#2E1065; margin:0;">
 <div style="background:linear-gradient(180deg,#6D28D9 0%, #2E1065 100%); padding:20px 16px; border-radius:0 0 22px 22px; color:white;">
-  <h2 style="margin:0; color:white;">👤 My Office</h2>
-  <p style="margin:4px 0 0; color:#DDD6FE; font-size:13px;">Your jobs, wallet, iCoin & profile</p>
+  <div onclick="window.location.href='index.html'" style="font-size:14px;">← Back to Home</div>
+  <h2 style="margin:12px 0 4px; color:white;">👤 My Office</h2>
+  <p style="margin:0; color:#DDD6FE; font-size:13px;">Your jobs, wallet, iCoin & profile</p>
 </div>
 <div style="background:#2E1065; padding:16px;">
   <div style="background:white; border-radius:16px; padding:18px; display:flex; gap:14px; align-items:center;">
@@ -30,13 +31,6 @@
   </div>
   <button onclick="logoutZiro()" style="width:100%; background:#D32F2F; color:white; border:none; padding:14px; border-radius:12px; font-size:14px; font-weight:800; margin-top:14px;">Log Out</button>
   <p style="text-align:center; font-size:11px; color:#C4B5FD; margin-top:10px;">ZIRO v1.0 • Terms • Privacy • Refund Policy</p>
-</div>
-<div class="ziro-nav">
-  <button class="ziro-nav-item" onclick="window.location.href='index.html'"><span class="nav-icon">🏠</span>Home</button>
-  <button class="ziro-nav-item" onclick="window.location.href='search.html'"><span class="nav-icon">🔍</span>Search</button>
-  <button class="ziro-nav-center" onclick="window.location.href='post.html'">+</button>
-  <button class="ziro-nav-item" onclick="window.location.href='chat.html'"><span class="nav-icon">💬</span>Chat</button>
-  <button class="ziro-nav-item active" onclick="window.location.href='office.html'"><span class="nav-icon">👤</span>My Office</button>
 </div>
 <script src="js/notify.js"></script>
 <script src="js/auth.js"></script>
