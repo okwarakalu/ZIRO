@@ -13,11 +13,11 @@
   <p style="margin:0; color:#8EC8FF; font-size:13px;">Find any worker, skill or area fast</p>
   <input id="searchInput" placeholder="🔍 Type Plumber, Cleaner, Wuse..." oninput="doSearch(this.value)" style="width:100%; box-sizing:border-box; padding:14px; border-radius:999px; border:none; margin-top:14px; font-size:15px;">
   <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
-    <button onclick="setSkill('All')" class="skillBtn" data-s="All" style="background:white; color:#0A2540; border:none; padding:9px 14px; border-radius:999px; font-size:12px; font-weight:800;">All</button>
-    <button onclick="setSkill('Plumber')" class="skillBtn" data-s="Plumber" style="background:rgba(255,255,255,0.15); color:white; border:1px solid rgba(255,255,255,0.3); padding:9px 14px; border-radius:999px; font-size:12px; font-weight:700;">Plumber</button>
-    <button onclick="setSkill('Electrician')" class="skillBtn" data-s="Electrician" style="background:rgba(255,255,255,0.15); color:white; border:1px solid rgba(255,255,255,0.3); padding:9px 14px; border-radius:999px; font-size:12px; font-weight:700;">Electrician</button>
-    <button onclick="setSkill('Cleaner')" class="skillBtn" data-s="Cleaner" style="background:rgba(255,255,255,0.15); color:white; border:1px solid rgba(255,255,255,0.3); padding:9px 14px; border-radius:999px; font-size:12px; font-weight:700;">Cleaner</button>
-    <button onclick="setSkill('Brick Layer')" class="skillBtn" data-s="Brick Layer" style="background:rgba(255,255,255,0.15); color:white; border:1px solid rgba(255,255,255,0.3); padding:9px 14px; border-radius:999px; font-size:12px; font-weight:700;">Brick Layer</button>
+    <button onclick="setSkill('All')" style="background:white; color:#0A2540; border:none; padding:9px 14px; border-radius:999px; font-size:12px; font-weight:800;">All</button>
+    <button onclick="setSkill('Plumber')" style="background:rgba(255,255,255,0.15); color:white; border:1px solid rgba(255,255,255,0.3); padding:9px 14px; border-radius:999px; font-size:12px; font-weight:700;">Plumber</button>
+    <button onclick="setSkill('Electrician')" style="background:rgba(255,255,255,0.15); color:white; border:1px solid rgba(255,255,255,0.3); padding:9px 14px; border-radius:999px; font-size:12px; font-weight:700;">Electrician</button>
+    <button onclick="setSkill('Cleaner')" style="background:rgba(255,255,255,0.15); color:white; border:1px solid rgba(255,255,255,0.3); padding:9px 14px; border-radius:999px; font-size:12px; font-weight:700;">Cleaner</button>
+    <button onclick="setSkill('Brick Layer')" style="background:rgba(255,255,255,0.15); color:white; border:1px solid rgba(255,255,255,0.3); padding:9px 14px; border-radius:999px; font-size:12px; font-weight:700;">Brick Layer</button>
   </div>
   <div style="display:flex; gap:8px; margin-top:12px;">
     <button onclick="setArea('All')" style="background:#F2C94C; color:#0A2540; border:none; padding:8px 12px; border-radius:999px; font-size:11px; font-weight:800;">📍 All Areas</button>
@@ -28,6 +28,7 @@
 </div>
 <div style="background:#0A2540; padding:14px 16px;">
   <p id="resultCount" style="color:#8EC8FF; font-size:13px; margin:0 0 10px;">Showing all workers</p>
+  <p style="color:#8EC8FF; font-size:12px; margin:0 0 10px;">Tap any worker to view profile →</p>
   <div id="results"></div>
 </div>
 <div class="ziro-nav">
@@ -53,6 +54,7 @@ let q='', skillFilter='All', areaFilter='All';
 function setSkill(s){ skillFilter=s; renderSearch(); }
 function setArea(a){ areaFilter=a; renderSearch(); }
 function doSearch(v){ q=v; renderSearch(); }
+function openWorker(name){ localStorage.setItem('ziro_view_worker', name); window.location.href='worker.html?name='+encodeURIComponent(name); }
 function renderSearch(){
   const rows=WORKERS.filter(w=>{
     const okQ=!q || (w.name+w.skill+w.city).toLowerCase().includes(q.toLowerCase());
@@ -61,7 +63,11 @@ function renderSearch(){
     return okQ && okS && okA;
   });
   document.getElementById('resultCount').textContent = rows.length + ' worker(s) found' + (skillFilter!=='All' ? ' • '+skillFilter : '') + (areaFilter!=='All' ? ' • '+areaFilter : '');
-  document.getElementById('results').innerHTML = rows.length ? rows.map(w=>'<div style="background:white; border-radius:16px; padding:16px; margin-bottom:12px;"><b style="font-size:16px;">'+w.name+' ✓ Verified</b><p style="margin:4px 0; font-size:13px; color:#666;">'+w.skill+' • '+w.city+'</p><p style="margin:4px 0; font-size:13px;">⭐ '+w.rating+' • Available Now • ₦'+w.price.toLocaleString()+' / job</p><button onclick="hireWorker(\''+w.name+'\')" style="width:100%; background:#123A6D; color:white; border:none; padding:13px; border-radius:12px; font-size:14px; font-weight:800; margin-top:8px;">Hire Now</button></div>').join('') : '<p style="background:white; padding:20px; border-radius:14px; text-align:center; color:#666;">No worker found.<br>Try another skill or area.</p>';
+  document.getElementById('results').innerHTML = rows.length ? rows.map(w=>'<div style="background:white; border-radius:16px; padding:16px; margin-bottom:12px;">'
+    + '<div onclick="openWorker(\''+w.name+'\')" style="cursor:pointer;"><b style="font-size:16px;">'+w.name+' ✓ Verified <span style="color:#123A6D; font-size:12px;">View Profile ›</span></b><p style="margin:4px 0; font-size:13px; color:#666;">'+w.skill+' • '+w.city+'</p><p style="margin:4px 0; font-size:13px;">⭐ '+w.rating+' • Available Now • ₦'+w.price.toLocaleString()+' / job</p></div>'
+    + '<button onclick="hireWorker(\''+w.name+'\')" style="width:100%; background:#123A6D; color:white; border:none; padding:13px; border-radius:12px; font-size:14px; font-weight:800; margin-top:8px;">Hire Now</button>'
+    + '<button onclick="openWorker(\''+w.name+'\')" style="width:100%; background:white; color:#123A6D; border:1px solid #123A6D; padding:11px; border-radius:12px; font-size:13px; font-weight:800; margin-top:8px;">👤 View Full Profile</button>'
+    + '</div>').join('') : '<p style="background:white; padding:20px; border-radius:14px; text-align:center; color:#666;">No worker found.<br>Try another skill or area.</p>';
 }
 function hireWorker(name){ localStorage.setItem('ziro_chat_with', name); window.location.href='chat-room.html?with='+encodeURIComponent(name); }
 document.addEventListener('DOMContentLoaded', ()=>{
