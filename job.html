@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>ZIRO - Job Details</title>
 <link rel="stylesheet" href="css/style.css">
-<style>html,body{overflow-x:hidden;} *{box-sizing:border-box;}</style>
 </head>
 <body style="background:#F2F4F2; margin:0; padding-bottom:75px;">
 <div style="background:linear-gradient(180deg,#0B6E4F 0%, #0B3D2E 100%); padding:20px 16px; border-radius:0 0 22px 22px; color:white;">
@@ -18,7 +17,7 @@
   <div id="actionBox" style="background:white; border-radius:16px; padding:16px; margin-top:12px; box-shadow:0 1px 4px rgba(0,0,0,0.06); visibility:hidden;">
     <button id="acceptBtn" class="btn-primary" onclick="acceptThisJob()">Accept This Job</button>
     <button class="btn-secondary" style="margin-top:8px;" onclick="goToChat()">Message Customer</button>
-    <p style="font-size:12px; color:var(--muted); text-align:center; margin:10px 0 0;">ZIRO does NOT hold job money.<br>You pay / get paid directly after work.</p>
+    <p style="font-size:12px; color:#888; text-align:center; margin:10px 0 0;">ZIRO does NOT hold job money.<br>You pay / get paid directly after work.</p>
   </div>
 </div>
 <div class="ziro-nav">
@@ -30,63 +29,33 @@
 </div>
 <script src="js/notify.js"></script>
 <script>
-let currentJob = null;
-let stableId = '';
-function makeStableId(j){
-  const s = (j.skill||'')+'|'+(j.desc||'')+'|'+(j.budget||'')+'|'+(j.city||'')+'|'+(j.name||'');
-  let h=0; for(let i=0;i<s.length;i++){ h=(h*31 + s.charCodeAt(i)) >>> 0; }
-  return 'job_'+h;
-}
-function cleanName(raw){
-  if(!raw) return 'Udoka';
-  return raw.split('/')[0].split('-')[0].trim() || 'Udoka';
-}
+let currentJob=null, stableId='';
+function makeStableId(j){ const s=(j.skill||'')+'|'+(j.desc||'')+'|'+(j.budget||'')+'|'+(j.city||'')+'|'+(j.name||''); let h=0; for(let i=0;i<s.length;i++){ h=(h*31 + s.charCodeAt(i)) >>> 0; } return 'job_'+h; }
+function cleanName(raw){ if(!raw) return 'Udoka'; return raw.split('/')[0].split('-')[0].trim() || 'Udoka'; }
 function loadJob(){
-  const paramId = new URLSearchParams(window.location.search).get('id');
-  const jobs = JSON.parse(localStorage.getItem('ziro_jobs') || '[]');
-  currentJob = jobs.find(j => makeStableId(j) === paramId) || jobs[Number(paramId)] || jobs[jobs.length-1];
+  const paramId=new URLSearchParams(window.location.search).get('id');
+  const jobs=JSON.parse(localStorage.getItem('ziro_jobs')||'[]');
+  currentJob=jobs.find(j=>makeStableId(j)===paramId) || jobs[Number(paramId)] || jobs[jobs.length-1];
   if(!currentJob){ document.getElementById('jobDetail').innerHTML='<p>Job not found.</p>'; document.getElementById('jobDetail').style.visibility='visible'; return; }
-  stableId = makeStableId(currentJob);
-  const accepted = localStorage.getItem('ziro_accepted_' + stableId) === 'yes';
-  const nameOnly = cleanName(currentJob.name);
-  document.getElementById('jobDetail').innerHTML = '<span style="background:#FFF8E1; border:1px solid var(--gold); padding:4px 10px; border-radius:999px; font-size:12px; font-weight:700;">' + (accepted ? 'ACCEPTED • ' : 'OPEN • ') + currentJob.skill + '</span>'
-    + '<h3 style="margin:12px 0 6px;">' + currentJob.skill + ' needed</h3>'
-    + '<p style="font-size:14px; color:#333; line-height:1.5; word-break:break-word;">' + currentJob.desc + '</p>'
-    + '<hr style="border:none; border-top:1px solid #eee; margin:14px 0;">'
-    + '<p style="font-size:14px; margin:6px 0;">📍 <b>Location:</b> ' + currentJob.city + '</p>'
-    + '<p style="font-size:14px; margin:6px 0;">💰 <b>Budget:</b> ₦' + Number(currentJob.budget).toLocaleString() + '</p>'
-    + '<p style="font-size:14px; margin:6px 0;">👤 <b>Posted by:</b> ' + nameOnly + '</p>'
-    + '<p style="font-size:13px; color:var(--muted);">Status: ' + (accepted ? 'Accepted by you' : 'Open') + '</p>'
-    + (accepted ? '<p style="margin:12px 0 0;"><b style="color:var(--success);">✓ You accepted this job</b></p>' : '');
-  const btn = document.getElementById('acceptBtn');
-  if(accepted){
-    btn.textContent = '✓ Job Accepted';
-    btn.style.opacity = '0.5';
-    btn.onclick = function(){ ziroNotify('Already Accepted', 'You already accepted this job.<br>Message the customer in Chat to agree time.'); };
-  } else {
-    btn.textContent = 'Accept This Job';
-    btn.style.opacity = '1';
-    btn.onclick = acceptThisJob;
-  }
-  document.getElementById('jobDetail').style.visibility='visible';
-  document.getElementById('actionBox').style.visibility='visible';
+  stableId=makeStableId(currentJob);
+  const accepted=localStorage.getItem('ziro_accepted_'+stableId)==='yes';
+  const nameOnly=cleanName(currentJob.name);
+  document.getElementById('jobDetail').innerHTML='<span style="background:#FFF8E1; border:1px solid #F2C94C; padding:4px 10px; border-radius:999px; font-size:12px; font-weight:700;">'+(accepted?'ACCEPTED • ':'OPEN • ')+currentJob.skill+'</span><h3 style="margin:12px 0 6px;">'+currentJob.skill+' needed</h3><p style="font-size:14px; color:#333; line-height:1.5; word-break:break-word;">'+currentJob.desc+'</p><hr style="border:none; border-top:1px solid #eee; margin:14px 0;"><p style="font-size:14px; margin:6px 0;">📍 <b>Location:</b> '+currentJob.city+'</p><p style="font-size:14px; margin:6px 0;">💰 <b>Budget:</b> ₦'+Number(currentJob.budget).toLocaleString()+'</p><p style="font-size:14px; margin:6px 0;">👤 <b>Posted by:</b> '+nameOnly+'</p><p style="font-size:13px; color:#888;">Status: '+(accepted?'Accepted by you':'Open')+'</p>'+(accepted?'<p style="margin:12px 0 0;"><b style="color:#0B6E4F;">✓ You accepted this job</b></p>':'');
+  const btn=document.getElementById('acceptBtn');
+  if(accepted){ btn.textContent='✓ Job Accepted'; btn.style.opacity='0.5'; btn.onclick=function(){ ziroNotify('Already Accepted','You already accepted this job.<br>Message the customer in Chat to agree time.'); }; }
+  else{ btn.textContent='Accept This Job'; btn.style.opacity='1'; btn.onclick=acceptThisJob; }
+  document.getElementById('jobDetail').style.visibility='visible'; document.getElementById('actionBox').style.visibility='visible';
 }
 function acceptThisJob(){
   if(!currentJob) return;
-  if(localStorage.getItem('ziro_accepted_' + stableId) === 'yes'){ ziroNotify('Already Accepted', 'You already accepted this job.'); return; }
-  ziroConfirm('Accept This Job?', currentJob.skill + ' in ' + currentJob.city + ' for ₦' + Number(currentJob.budget).toLocaleString() + '.<br><br>Customer will be notified.', function(){
-    localStorage.setItem('ziro_accepted_' + stableId, 'yes');
-    loadJob();
-    ziroNotify('Job Accepted', 'You have accepted the ' + currentJob.skill + ' job.<br>Please message the customer in Chat to agree time.', 'Go to Chat');
-    const oldBtn = document.querySelector('#ziroModal button');
-    if(oldBtn) oldBtn.onclick = function(){ closeZiroModal(); goToChat(); };
+  if(localStorage.getItem('ziro_accepted_'+stableId)==='yes'){ ziroNotify('Already Accepted','You already accepted this job.'); return; }
+  ziroConfirm('Accept This Job?', currentJob.skill+' in '+currentJob.city+' for ₦'+Number(currentJob.budget).toLocaleString()+'.<br><br>Customer will be notified.', function(){
+    localStorage.setItem('ziro_accepted_'+stableId,'yes'); loadJob();
+    ziroNotify('Job Accepted','You have accepted the '+currentJob.skill+' job.<br>Please message the customer in Chat to agree time.','Go to Chat');
+    const b=document.querySelector('#ziroModal button'); if(b) b.onclick=function(){ closeZiroModal(); goToChat(); };
   });
 }
-function goToChat(){
-  const name = cleanName(currentJob && currentJob.name ? currentJob.name : 'Udoka');
-  localStorage.setItem('ziro_chat_with', name);
-  window.location.href = 'chat-room.html?with=' + encodeURIComponent(name);
-}
+function goToChat(){ const name=cleanName(currentJob && currentJob.name ? currentJob.name : 'Udoka'); localStorage.setItem('ziro_chat_with', name); window.location.href='chat-room.html?with='+encodeURIComponent(name); }
 document.addEventListener('DOMContentLoaded', loadJob);
 </script>
 </body>
