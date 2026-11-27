@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ZIRO - Wallet</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background:#2E1065; margin:0;">
+<div style="background:linear-gradient(180deg,#6D28D9 0%, #2E1065 100%); padding:20px 16px; border-radius:0 0 22px 22px; color:white;">
+  <div onclick="window.location.href='index.html'" style="font-size:14px;">← Back to Home</div>
+  <h2 style="margin:12px 0 4px; color:white;">💰 My Wallet</h2>
+  <p style="margin:0; color:#DDD6FE; font-size:13px;">iCoin • Wallet • History</p>
+</div>
+<div style="background:#2E1065; padding:16px;">
+  <!-- ONE ARRANGED FOLDER - Wallet + iCoin -->
+  <div style="background:white; border-radius:16px; padding:4px 0; display:flex;">
+    <div style="flex:1; text-align:center; padding:16px 4px; border-right:1px solid #eee;"><span style="font-size:12px; color:#888;">Wallet Balance</span><b id="walletBal" style="font-size:22px; display:block; margin-top:4px;">₦0</b></div>
+    <div style="flex:1; text-align:center; padding:16px 4px;"><span style="font-size:12px; color:#888;">iCoin Balance</span><b id="icoinBal" style="font-size:22px; display:block; margin-top:4px; color:#B77900;">🪙 50</b></div>
+  </div>
+
+  <div style="background:white; border-radius:16px; padding:18px; margin-top:12px;">
+    <b style="font-size:15px;">Buy iCoin</b>
+    <p style="font-size:12px; color:#888; margin:4px 0 12px;">Use iCoin to unlock worker contacts. 1 Unlock = 5 iCoin.</p>
+    <!-- ONE ARRANGED FOLDER - Buy Packs -->
+    <div style="background:#F2F4F2; border-radius:12px; padding:10px; display:flex; flex-direction:column; gap:8px;">
+      <button onclick="buyIcoin(10,500)" style="background:white; border:1px solid #ddd; padding:14px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; font-weight:800;"> <span>🪙 10 iCoin</span> <span>₦500</span> </button>
+      <button onclick="buyIcoin(50,2000)" style="background:#FFF8E1; border:1px solid #F2C94C; padding:14px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; font-weight:800;"> <span>🪙 50 iCoin <span style="background:#F2C94C; font-size:10px; padding:2px 6px; border-radius:999px;">POPULAR</span></span> <span>₦2,000</span> </button>
+      <button onclick="buyIcoin(100,3500)" style="background:white; border:1px solid #ddd; padding:14px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; font-weight:800;"> <span>🪙 100 iCoin</span> <span>₦3,500</span> </button>
+    </div>
+    <p style="font-size:11px; color:#888; text-align:center; margin:10px 0 0;">Demo payment — no real money is charged in this version.</p>
+  </div>
+
+  <div style="background:white; border-radius:16px; padding:18px; margin-top:12px;">
+    <b style="font-size:15px;">History</b>
+    <div id="history"></div>
+  </div>
+  <button onclick="window.location.href='office.html'" style="width:100%; background:#6D28D9; color:white; border:none; padding:14px; border-radius:12px; font-size:14px; font-weight:800; margin-top:14px;">Back to My Office</button>
+</div>
+<script src="js/notify.js"></script>
+<script src="js/wallet.js"></script>
+<script>
+function renderWallet(){
+  const bal = ziroGetIcoin();
+  const wallet = Number(localStorage.getItem('ziro_wallet') || 0);
+  document.getElementById('icoinBal').textContent = '🪙 ' + bal;
+  document.getElementById('walletBal').textContent = '₦' + wallet.toLocaleString();
+  const hist = JSON.parse(localStorage.getItem('ziro_history') || '[]');
+  document.getElementById('history').innerHTML = hist.length ? hist.slice().reverse().map(h=>'<p style="font-size:13px; margin:10px 0 0; display:flex; justify-content:space-between;"><span>'+h.text+'</span><span style="color:#888;">'+h.time+'</span></p>').join('') : '<p style="font-size:13px; color:#888; margin:10px 0 0;">No transactions yet.<br>You got 50 free iCoin on signup.</p>';
+}
+function buyIcoin(amount, price){
+  ziroConfirm('Buy '+amount+' iCoin?', 'Pay ₦'+price.toLocaleString()+' for '+amount+' iCoin?', function(){
+    ziroAddIcoin(amount, 'Bought '+amount+' iCoin');
+    renderWallet();
+    ziroNotify('iCoin Added', '+'+amount+' iCoin added.<br>New balance: '+ziroGetIcoin()+' iCoin.', 'Done');
+  });
+}
+document.addEventListener('DOMContentLoaded', renderWallet);
+</script>
+</body>
+</html>
