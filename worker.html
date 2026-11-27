@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ZIRO - Worker Profile</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background:#0B3D2E; margin:0; padding-bottom:75px;">
+<div style="background:linear-gradient(180deg,#0B6E4F 0%, #0B3D2E 100%); padding:16px; border-radius:0 0 22px 22px; color:white;">
+  <div onclick="window.history.back()" style="font-size:14px;">← Back</div>
+  <div style="display:flex; gap:14px; align-items:center; margin-top:14px;">
+    <div id="avatar" style="width:68px; height:68px; min-width:68px; background:#F2C94C; color:#0B3D2E; border-radius:20px; display:flex; align-items:center; justify-content:center; font-size:32px; font-weight:900;">S</div>
+    <div style="flex:1; min-width:0;">
+      <b id="wName" style="font-size:20px; display:block;">Segun O.</b>
+      <p id="wSkill" style="margin:2px 0; color:#F2C94C; font-size:13px;">Barber • Enugu</p>
+      <p id="wRating" style="margin:2px 0; font-size:13px;">⭐ 4.8 • ✓ Verified • Available Now</p>
+    </div>
+  </div>
+  <div style="display:flex; gap:8px; margin-top:14px;">
+    <div style="flex:1; background:rgba(255,255,255,0.15); border-radius:12px; padding:10px; text-align:center;"><b id="wJobs" style="font-size:16px;">24</b><p style="margin:2px 0 0; font-size:11px; color:#D6EDE3;">Jobs Done</p></div>
+    <div style="flex:1; background:rgba(255,255,255,0.15); border-radius:12px; padding:10px; text-align:center;"><b id="wPrice" style="font-size:16px;">₦3,000</b><p style="margin:2px 0 0; font-size:11px; color:#D6EDE3;">Per Job</p></div>
+    <div style="flex:1; background:rgba(255,255,255,0.15); border-radius:12px; padding:10px; text-align:center;"><b style="font-size:16px;">98%</b><p style="margin:2px 0 0; font-size:11px; color:#D6EDE3;">On Time</p></div>
+  </div>
+</div>
+<div style="background:#0B3D2E; padding:16px;">
+  <div style="background:white; border-radius:16px; padding:18px;">
+    <b style="font-size:15px;">About</b>
+    <p id="wAbout" style="font-size:13px; color:#555; line-height:1.6; margin:8px 0 0;">Experienced and trusted worker. Punctual, clean work, fair price. Available today.</p>
+    <hr style="border:none; border-top:1px solid #eee; margin:14px 0;">
+    <b style="font-size:15px;">Reviews</b>
+    <div id="reviews"></div>
+  </div>
+  <button onclick="hireThis()" style="width:100%; background:#F2C94C; color:#0B3D2E; border:none; padding:15px; border-radius:12px; font-size:15px; font-weight:900; margin-top:12px;">Hire Now</button>
+  <button onclick="chatThis()" style="width:100%; background:#0B6E4F; color:white; border:none; padding:14px; border-radius:12px; font-size:14px; font-weight:800; margin-top:10px;">💬 Chat With Worker</button>
+  <button onclick="unlockThis()" style="width:100%; background:white; color:#0B3D2E; border:1px solid #ddd; padding:13px; border-radius:12px; font-size:13px; font-weight:700; margin-top:10px;">Unlock Contact • 5 iCoin</button>
+  <p style="text-align:center; font-size:11px; color:#B8D8CC; margin-top:10px;">ZIRO does NOT hold job money. You pay workers directly after work.</p>
+</div>
+<div class="ziro-nav">
+  <button class="ziro-nav-item" onclick="window.location.href='index.html'"><span class="nav-icon">🏠</span>Home</button>
+  <button class="ziro-nav-item" onclick="window.location.href='search.html'"><span class="nav-icon">🔍</span>Search</button>
+  <button class="ziro-nav-center" onclick="window.location.href='post.html'">+</button>
+  <button class="ziro-nav-item" onclick="window.location.href='chat.html'"><span class="nav-icon">💬</span>Chat</button>
+  <button class="ziro-nav-item" onclick="window.location.href='office.html'"><span class="nav-icon">👤</span>My Office</button>
+</div>
+<script src="js/notify.js"></script>
+<script>
+let WORKERS=[
+  {name:'Segun O.', skill:'Barber', city:'Enugu', rating:'4.8', price:3000, jobs:24, about:'Professional barber with 5 years experience. Clean cuts, home service available.'},
+  {name:'Grace M.', skill:'Cook / Chef', city:'Wuse, Abuja', rating:'4.9', price:8500, jobs:41, about:'Experienced chef for parties, home cooking and events. Tasty and hygienic.'},
+  {name:'Yusuf A.', skill:'Welder', city:'Kaduna', rating:'4.6', price:11000, jobs:18, about:'Skilled welder for gates, burglary proof, tanks and repairs.'},
+  {name:'Blessing I.', skill:'Gardener', city:'Lekki, Lagos', rating:'4.7', price:4500, jobs:29, about:'Garden cleaning, grass cutting and flower maintenance.'},
+  {name:'Musa A.', skill:'Plumber', city:'Wuse 2, Abuja', rating:'4.8', price:8000, jobs:35, about:'Expert plumber for leaks, taps, tanks and bathroom fittings. Fast response.'},
+  {name:'Udoka', skill:'Brick Layer', city:'Apo, Abuja', rating:'4.7', price:12000, jobs:31, about:'Brick layer for fences, houses and repairs. Strong and neat work.'},
+  {name:'Ada O.', skill:'Cleaner', city:'Garki, Abuja', rating:'4.8', price:6000, jobs:27, about:'Deep cleaning for homes and offices. Reliable and thorough.'},
+  {name:'Tunde B.', skill:'Electrician', city:'Garki, Abuja', rating:'4.7', price:10000, jobs:22, about:'Electrician for wiring, sockets, fans and power issues.'},
+];
+let current=null;
+function loadWorker(){
+  const name=new URLSearchParams(location.search).get('name') || localStorage.getItem('ziro_view_worker') || 'Segun O.';
+  current=WORKERS.find(w=>w.name===name) || WORKERS[0];
+  document.getElementById('avatar').textContent=current.name[0];
+  document.getElementById('wName').textContent=current.name;
+  document.getElementById('wSkill').textContent=current.skill+' • '+current.city;
+  document.getElementById('wRating').textContent='⭐ '+current.rating+' • ✓ Verified • Available Now';
+  document.getElementById('wJobs').textContent=current.jobs;
+  document.getElementById('wPrice').textContent='₦'+current.price.toLocaleString();
+  document.getElementById('wAbout').textContent=current.about;
+  document.getElementById('reviews').innerHTML=
+    '<p style="font-size:13px; margin:10px 0 0;">⭐⭐⭐⭐⭐ <b>Chidinma</b> — Very good work, came on time.</p>'+
+    '<p style="font-size:13px; margin:8px 0 0;">⭐⭐⭐⭐⭐ <b>Emeka</b> — Neat work, I will hire again.</p>'+
+    '<p style="font-size:13px; margin:8px 0 0;">⭐⭐⭐⭐ <b>Fatima</b> — Good price, polite.</p>';
+}
+function hireThis(){ ziroConfirm('Hire '+current.name+'?', current.skill+' • ₦'+current.price.toLocaleString()+'<br><br>Chat to agree time.', function(){ localStorage.setItem('ziro_chat_with', current.name); window.location.href='chat-room.html?with='+encodeURIComponent(current.name); }); }
+function chatThis(){ localStorage.setItem('ziro_chat_with', current.name); window.location.href='chat-room.html?with='+encodeURIComponent(current.name); }
+function unlockThis(){ ziroConfirm('Unlock Contact?', 'Unlock '+current.name+' contact for 5 iCoin?', function(){ ziroNotify('Contact Unlocked','You can now chat with '+current.name+'.','Go to Chat'); const b=document.querySelector('#ziroModal button'); if(b) b.onclick=function(){ closeZiroModal(); chatThis(); }; }); }
+document.addEventListener('DOMContentLoaded', loadWorker);
+</script>
+</body>
+  </html>
