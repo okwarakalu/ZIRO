@@ -1,45 +1,5 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ZIRO V8 - Search</title><link rel="stylesheet" href="css/style.css"></head>
-<body>
-<div class="z-header">
-<div style="display:flex;justify-content:space-between;align-items:center;">
-<div class="z-logo">ZIRO<span> V8</span> • Search</div>
-<button onclick="location.href='index.html'" style="background:#fff;border:none;padding:8px 12px;border-radius:999px;font-weight:800;">← Home</button>
-</div>
-<div style="background:#fff;border-radius:999px;padding:13px 14px;color:#888;margin-top:16px;">🔍 Search jobs, services, people...</div>
-</div>
-
-<div style="padding:16px;">
-<div style="display:flex;gap:8px;flex-wrap:wrap;">
-<span class="z-badge-gold" style="padding:8px 12px;">All</span>
-<span class="z-badge-gold" style="padding:8px 12px;background:#fff;">💈 Barber</span>
-<span class="z-badge-gold" style="padding:8px 12px;background:#fff;">🧹 Cleaner</span>
-<span class="z-badge-gold" style="padding:8px 12px;background:#fff;">🔧 Plumber</span>
-<span class="z-badge-gold" style="padding:8px 12px;background:#fff;">📍 Abuja</span>
-</div>
-
-<h3>3 Workers in Abuja</h3>
-
-<div class="z-card" style="display:flex;gap:12px;align-items:center;margin-bottom:12px;cursor:pointer;" onclick="location.href='worker.html?name=Segun O.'">
-<img src="https://i.pravatar.cc/100?u=Segun" style="width:64px;height:64px;border-radius:50%;">
-<div style="flex:1;"><b>Segun O.</b><p style="margin:2px 0;color:#555;">Barber • Abuja • ⭐ 4.9</p><span class="z-badge-gold">✓ Trust Badge</span></div>
-<button class="z-btn-green" style="width:auto;padding:10px 14px;">View</button>
-</div>
-
-<div class="z-card" style="display:flex;gap:12px;align-items:center;margin-bottom:12px;cursor:pointer;" onclick="location.href='worker.html?name=Chinedu O.'">
-<img src="https://i.pravatar.cc/100?u=Chinedu" style="width:64px;height:64px;border-radius:50%;">
-<div style="flex:1;"><b>Chinedu O.</b><p style="margin:2px 0;color:#555;">Plumber • Abuja • ⭐ 4.8</p><span class="z-badge-gold">✓ Trust Badge</span></div>
-<button class="z-btn-green" style="width:auto;padding:10px 14px;">View</button>
-</div>
-
-<div class="z-card" style="display:flex;gap:12px;align-items:center;cursor:pointer;" onclick="location.href='worker.html?name=Ada O.'">
-<img src="https://i.pravatar.cc/100?img=32" style="width:64px;height:64px;border-radius:50%;">
-<div style="flex:1;"><b>Ada O.</b><p style="margin:2px 0;color:#555;">Cleaner • Abuja • ⭐ 5.0</p><span class="z-badge-gold">✓ Trust Badge</span></div>
-<button class="z-btn-green" style="width:auto;padding:10px 14px;">View</button>
-</div>
-
-<button class="z-btn-outline" style="margin-top:16px;" onclick="location.href='post.html'">📄 Post a Job</button>
-</div>
-
-<div class="z-sos">SOS</div>
-</body></html>
+<!-- ZIRO SEARCH - Search only -->
+<h2>Search</h2>
+<input id="searchInput" placeholder="Search Jobs, services, people..." oninput="ZIRO.renderWorkers(this.value)">
+<div id="searchWorkers"></div>
+<button class="btn-green" onclick="ZIRO.go('post')">+ Post a Job</button>
