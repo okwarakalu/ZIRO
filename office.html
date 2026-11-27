@@ -1,60 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>ZIRO - My Office</title>
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body style="background:#2E1065; margin:0;">
-<div style="background:linear-gradient(180deg,#6D28D9 0%, #2E1065 100%); padding:20px 16px; border-radius:0 0 22px 22px; color:white;">
-  <div onclick="window.location.href='index.html'" style="font-size:14px;">← Back to Home</div>
-  <h2 style="margin:12px 0 4px; color:white;">👤 My Office</h2>
-  <p style="margin:0; color:#DDD6FE; font-size:13px;">Your jobs, wallet, iCoin & profile</p>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ZIRO V8 - Profile</title><link rel="stylesheet" href="css/style.css"></head>
+<body>
+<div class="z-header">
+<div style="display:flex;justify-content:space-between;align-items:center;">
+<div><div class="z-logo">ZIRO V8</div><p style="margin:2px 0;color:#D6E8DD;">User Profile Homepage</p></div>
+<div style="text-align:center;"><img src="https://i.pravatar.cc/100?img=47" style="width:52px;height:52px;border-radius:50%;border:3px solid #C9A227;"><p style="margin:2px 0;font-size:11px;">CHIOMA</p></div>
 </div>
-<div style="background:#2E1065; padding:16px;">
-  <div style="background:white; border-radius:16px; padding:18px; display:flex; gap:14px; align-items:center;">
-    <div id="officeAvatar" style="width:56px; height:56px; min-width:56px; background:#F2C94C; color:#2E1065; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:900;">U</div>
-    <div style="flex:1; min-width:0;"><b id="officeName" style="font-size:17px;">Udoka</b><p style="margin:2px 0; font-size:13px; color:#666;">Brick Layer • Apo, Abuja</p><p style="margin:2px 0; font-size:12px; color:#6D28D9; font-weight:800;">⭐ 4.7 • ✓ Verified</p><p id="officeWalletId" style="margin:2px 0 0; font-size:11px; color:#888;">Wallet ID: ZIRO-0000-0000</p></div>
-    <button onclick="window.location.href='index.html'" style="background:#6D28D9; color:white; border:none; padding:9px 12px; border-radius:999px; font-size:12px; font-weight:800;">Edit</button>
-  </div>
-  <div onclick="window.location.href='wallet.html'" style="background:white; border-radius:16px; padding:4px 0; display:flex; margin-top:12px; cursor:pointer;">
-    <div style="flex:1; text-align:center; padding:14px 4px; border-right:1px solid #eee;"><b style="font-size:20px;">₦<span id="walletBal">0</span></b><p style="margin:4px 0 0; font-size:12px; color:#888;">Wallet • Tap ›</p></div>
-    <div style="flex:1; text-align:center; padding:14px 4px; border-right:1px solid #eee;"><b style="font-size:20px; color:#B77900;">🪙 <span id="icoinBal">50</span></b><p style="margin:4px 0 0; font-size:12px; color:#888;">iCoin • Tap ›</p></div>
-    <div style="flex:1; text-align:center; padding:14px 4px;"><b style="font-size:20px;" id="jobsDone">1</b><p style="margin:4px 0 0; font-size:12px; color:#888;">Jobs Done</p></div>
-  </div>
-  <div style="background:#FFF8E1; border:1px solid #F2C94C; border-radius:12px; padding:12px 14px; margin-top:12px; display:flex; justify-content:space-between; align-items:center;">
-    <span style="font-size:13px;">🪙 iCoin Price: <b id="coinPriceLabel">₦50 per iCoin</b> • Min Buy 7</span>
-    <button onclick="window.location.href='wallet.html'" style="background:#F2C94C; color:#2E1065; border:none; padding:8px 12px; border-radius:999px; font-size:12px; font-weight:900;">Buy ›</button>
-  </div>
-  <div style="background:white; border-radius:16px; padding:8px 16px; margin-top:12px;">
-    <div onclick="window.location.href='wallet.html'" style="padding:14px 0; border-bottom:1px solid #eee; display:flex; justify-content:space-between;"><span>🪙 iCoin Wallet & Shop</span><span>›</span></div>
-    <div onclick="window.location.href='chat.html'" style="padding:14px 0; border-bottom:1px solid #eee; display:flex; justify-content:space-between;"><span>💬 My Chats</span><span>›</span></div>
-    <div onclick="window.location.href='index.html'" style="padding:14px 0; border-bottom:1px solid #eee; display:flex; justify-content:space-between;"><span>📋 My Jobs</span><span>›</span></div>
-    <div onclick="window.location.href='post.html'" style="padding:14px 0; border-bottom:1px solid #eee; display:flex; justify-content:space-between;"><span>➕ Post a Job</span><span>›</span></div>
-    <div onclick="window.location.href='search.html'" style="padding:14px 0; border-bottom:1px solid #eee; display:flex; justify-content:space-between;"><span>🔍 Search Workers</span><span>›</span></div>
-    <div onclick="window.location.href='worker-signup.html'" style="padding:14px 0; border-bottom:1px solid #eee; display:flex; justify-content:space-between;"><span>👷 Join as Worker</span><span>›</span></div>
-    <div onclick="window.location.href='admin.html'" style="padding:14px 0; display:flex; justify-content:space-between; background:#F2F4F2; margin:0 -16px; padding-left:16px; padding-right:16px; border-radius:0 0 16px 16px;"><span>🛠 Admin Hub • 7 Departments</span><span>›</span></div>
-  </div>
-  <button onclick="logoutZiro()" style="width:100%; background:#D32F2F; color:white; border:none; padding:14px; border-radius:12px; font-size:14px; font-weight:800; margin-top:14px;">Log Out</button>
-  <p style="text-align:center; font-size:11px; color:#C4B5FD; margin-top:10px;">ZIRO v1.0 • Terms • Privacy • Refund Policy</p>
 </div>
-<script src="js/notify.js"></script>
-<script src="js/auth.js"></script>
-<script src="js/wallet.js"></script>
-<script src="js/admin.js"></script>
-<script>
-function logoutZiro(){ ziroConfirm('Log Out?', 'Are you sure you want to log out?', function(){ localStorage.removeItem('ziro_current_user'); ziroNotify('Logged Out','You have been logged out.','Login', function(){ window.location.href='login.html'; }); }); }
-document.addEventListener('DOMContentLoaded', ()=>{
-  const jobs=JSON.parse(localStorage.getItem('ziro_jobs')||'[]');
-  document.getElementById('jobsDone').textContent = jobs.length || 1;
-  document.getElementById('icoinBal').textContent = ziroGetIcoin();
-  document.getElementById('walletBal').textContent = Number(localStorage.getItem('ziro_wallet') || 0).toLocaleString();
-  document.getElementById('officeWalletId').textContent = 'Wallet ID: ' + ziroGetWalletId();
-  document.getElementById('coinPriceLabel').textContent = '₦' + ziroGetCoinPrice().toLocaleString() + ' per iCoin';
-  const user = (typeof ziroGetUser === 'function') ? ziroGetUser() : null;
-  if(user && user.name){ document.getElementById('officeName').textContent = user.name; document.getElementById('officeAvatar').textContent = user.name[0]; }
-});
-</script>
-</body>
-</html>
+
+<div style="padding:16px;">
+<div class="z-card" style="display:flex;gap:14px;">
+<div style="position:relative;"><img src="https://i.pravatar.cc/150?img=32" style="width:96px;height:96px;border-radius:50%;object-fit:cover;"><span style="position:absolute;bottom:0;right:0;background:#0B6E4F;color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;">✓ 👑</span></div>
+<div><h2 style="margin:0;">Ada Okafor</h2><p style="margin:4px 0;color:#333;">Cleaner • Abuja</p><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;"><span class="z-badge-gold">🛡️ Verified • Gold Elite</span><span class="z-badge-gold">⭐ Trust Score 850</span></div><p style="font-size:12px;color:#666;margin:8px 0 0;">Work Passport • ZIRO-NG-004872</p></div>
+</div>
+
+<div class="z-card" style="margin-top:14px;">
+<div style="display:flex;justify-content:space-between;align-items:center;"><b style="font-size:18px;">💳 Wallet</b><b style="color:#0B6E4F;font-size:20px;">120 coins</b></div>
+<div style="display:flex;gap:8px;margin-top:12px;">
+<button class="z-btn-outline" style="flex:1;" onclick="location.href='coin-shop.html'">↓ Buy</button>
+<button class="z-btn-outline" style="flex:1;" onclick="location.href='wallet.html'">→ Send</button>
+<button class="z-btn-outline" style="flex:1;" onclick="location.href='wallet.html'">🕒 History</button>
+</div>
+<div style="display:flex;gap:8px;margin-top:10px;">
+<button class="z-btn-green" style="flex:1;">↗ Share Merit</button>
+<button class="z-btn-outline" style="flex:1.4;" onclick="location.href='id-card.html'">📓 Order Physical ID Card • 100 Coins</button>
+</div>
+</div>
+
+<h3 style="margin:18px 0 8px;">Merits <span class="z-badge-gold">⭐ Top Worker</span> <span class="z-badge-gold">🛡️ Safety Hero</span> <span class="z-badge-gold">✨ 5-Star Streak</span></h3>
+
+<h3>Folders</h3>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+<div class="z-card" style="text-align:center;cursor:pointer;" onclick="location.href='wallet.html'">💳<br><b>My Wallet</b></div>
+<div class="z-card" style="text-align:center;cursor:pointer;" onclick="location.href='coin-shop.html'">🛍️<br><b>Coin Shop</b></div>
+<div class="z-card" style="text-align:center;cursor:pointer;" onclick="location.href='index.html'">💼<br><b>My Jobs</b></div>
+<div class="z-card" style="text-align:center;cursor:pointer;" onclick="location.href='chat.html'">💬<br><b>My Chats</b></div>
+<div class="z-card" style="text-align:center;cursor:pointer;" onclick="location.href='chat.html'">🔗<br><b>My Network</b></div>
+<div class="z-card" style="text-align:center;cursor:pointer;" onclick="location.href='office.html'">🛡️<br><b>My Reputation</b></div>
+<div class="z-card" style="text-align:center;cursor:pointer;" onclick="location.href='office.html'">🏅<br><b>My Merits</b></div>
+<div class="z-card" style="text-align:center;cursor:pointer;" onclick="location.href='safety.html'">🛡️<br><b>My Safety</b></div>
+<div class="z-card" style="text-align:center;cursor:pointer;" onclick="location.href='id-card.html'">🪪<br><b>My ID Card</b></div>
+<div class="z-card" style="text-align:center;cursor:pointer;" onclick="location.href='id-card.html'">🏆<br><b>My Certificate</b></div>
+<div class="z-card" style="text-align:center;cursor:pointer;" onclick="location.href='settings.html'">⚙️<br><b>My Settings</b></div>
+<div class="z-card" style="text-align:center;cursor:pointer;" onclick="location.href='support.html'">🎧<br><b>Help / Support</b></div>
+</div>
+
+<button class="z-btn-outline" style="margin-top:16px;" onclick="location.href='admin-login.html'">🔐 Admin Login (Private)</button>
+<button class="z-btn-outline" style="margin-top:10px;" onclick="location.href='index.html'">🏠 Back Home</button>
+</div>
+
+<div class="z-sos">SOS</div>
+</body></html>
