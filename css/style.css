@@ -1,114 +1,37 @@
-/* ZIRO - Main Style - Clean Professional */
-:root{
-  --green:#0B6E4F;
-  --gold:#F2C94C;
-  --text:#1A1A1A;
-  --muted:#777777;
-  --success:#0B6E4F;
-  --danger:#D32F2F;
-  --bg:#F4F4F4;
-}
-*{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-body{
-  margin:0;
-  padding:0;
-  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  font-size:15px;
-}
-h2,h3{ color:var(--text); }
-input,select,textarea{
-  font-family:inherit;
-  font-size:14px;
-  outline:none;
-}
-input:focus,select:focus,textarea:focus{
-  border-color:var(--green) !important;
-}
-button{ font-family:inherit; cursor:pointer; }
-button:active{ opacity:0.85; transform:scale(0.98); }
-
-/* Buttons - Clean */
-.btn-primary{
-  display:block;
-  width:100%;
-  background:var(--green);
-  color:white;
-  border:none;
-  padding:13px;
-  border-radius:12px;
-  font-size:14px;
-  font-weight:700;
-}
-.btn-secondary{
-  display:block;
-  width:100%;
-  background:white;
-  color:var(--text);
-  border:1px solid #DDDDDD;
-  padding:13px;
-  border-radius:12px;
-  font-size:14px;
-  font-weight:700;
-}
-.btn-sos{
-  display:block;
-  width:100%;
-  background:var(--danger);
-  color:white;
-  border:none;
-  padding:13px;
-  border-radius:12px;
-  font-size:14px;
-  font-weight:700;
-}
-.filter-btn{
-  font-size:13px;
-  font-weight:600;
-}
-
-/* Worker Cards */
-.worker-card{
-  background:white;
-  border-radius:16px;
-  padding:16px;
-}
-.worker-card h3{ margin:10px 0 4px; }
-
-/* CHIOMA - Clean, no overlap */
-.chioma-float{
-  position:fixed;
-  bottom:84px;
-  right:12px;
-  z-index:50;
-  background:var(--green);
-  color:white;
-  border:none;
-  padding:10px 14px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:700;
-  box-shadow:0 4px 12px rgba(0,0,0,0.2);
-}/* ZIRO STANDARD BOTTOM NAV - Big, Standard, Finger-Friendly */
-.ziro-nav{
-  position:fixed; bottom:0; left:0; right:0; z-index:50;
-  background:white; border-top:1px solid #E5E5E5;
-  display:flex; justify-content:space-around; align-items:flex-start;
-  padding:8px 6px calc(8px + env(safe-area-inset-bottom));
-  height:68px; box-shadow:0 -2px 10px rgba(0,0,0,0.06);
-}
-.ziro-nav-item{
-  flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:2px; background:none; border:none; cursor:pointer; padding:4px 2px;
-  color:#666; font-size:11px; font-weight:600; line-height:1.2; text-align:center;
-}
-.ziro-nav-item .nav-icon{ font-size:24px; line-height:1; display:block; }
-.ziro-nav-item.active{ color:#0B6E4F; font-weight:800; }
-.ziro-nav-center{
-  width:56px; height:56px; min-width:56px; border-radius:50%;
-  background:#F2C94C; color:#0B3D2E; border:3px solid white;
-  display:flex; align-items:center; justify-content:center;
-  font-size:28px; font-weight:900; margin-top:-26px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.25);
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,sans-serif;background:#FAF6EC;color:#111}
+a{color:inherit;text-decoration:none}
+.z-header{background:#0B6E4F;color:#fff;padding:18px 16px 22px;border-radius:0 0 22px 22px;position:relative}
+.z-header-dark{background:#123A2B;color:#fff;padding:18px 16px;border-bottom:3px solid #C9A227}
+.z-logo{font-size:24px;font-weight:900;letter-spacing:.5px}
+.z-logo span{color:#C9A227}
+.z-gold{color:#C9A227}
+.z-coin{background:#C9A227;color:#123A2B;padding:7px 12px;border-radius:999px;font-weight:900;font-size:13px}
+.z-search{background:#fff;border-radius:999px;padding:13px 14px;box-shadow:0 2px 10px rgba(0,0,0,.06);display:flex;gap:8px;align-items:center;color:#888}
+.z-card{background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.z-btn-green{background:#0B6E4F;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:900;width:100%;cursor:pointer}
+.z-btn-gold{background:#C9A227;color:#123A2B;border:none;padding:13px;border-radius:12px;font-weight:900;width:100%;cursor:pointer}
+.z-btn-outline{background:#fff;border:1.5px solid #0B6E4F;color:#0B6E4F;padding:12px;border-radius:12px;font-weight:800;cursor:pointer}
+.z-btn-red{background:#D32F2F;color:#fff;border:none;padding:12px 16px;border-radius:999px;font-weight:900;cursor:pointer}
+.z-sos{position:fixed;right:16px;bottom:20px;background:#D32F2F;color:#fff;width:68px;height:68px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;box-shadow:0 6px 18px rgba(211,47,47,.4);z-index:99;border:3px solid #fff;cursor:pointer}
+.z-badge-gold{background:#FDEEB8;border:1px solid #C9A227;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:800}
+.z-badge-green{background:#0B6E4F;color:#fff;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:800}
+.z-badge-trust{background:#0B6E4F;color:#fff;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700}
+.z-folder{background:#fff;border-radius:14px;padding:16px 6px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.05);cursor:pointer}
+.z-folder b{display:block;font-size:13px;margin-top:8px;font-weight:700}
+.z-input{width:100%;box-sizing:border-box;padding:13px;border:1px solid #ddd;border-radius:12px;font-size:14px}
+.z-label{font-size:13px;font-weight:800}
+.z-quick{display:flex;gap:8px}
+.z-quick div{flex:1;background:#fff;border-radius:14px;padding:12px 4px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.05);cursor:pointer;font-size:12px;font-weight:700}
+.z-quick span{font-size:22px;display:block;margin-bottom:4px}
+.z-admin-layout{display:flex;min-height:100vh}
+.z-sidebar{width:240px;background:#123A2B;color:#fff;padding:20px 14px;flex-shrink:0}
+.z-sidebar a{display:block;padding:12px 12px;border-radius:10px;margin:6px 0;color:#D6E8DD;font-weight:700}
+.z-sidebar a.active{background:#C9A227;color:#123A2B}
+.z-main{flex:1;padding:20px}
+.z-stat{background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.z-stat b{font-size:28px;display:block}
+.z-table{width:100%;border-collapse:collapse;font-size:13px}
+.z-table th{text-align:left;color:#666;padding:10px 6px;border-bottom:1px solid #eee}
+.z-table td{padding:12px 6px;border-bottom:1px solid #f0f0f0;vertical-align:middle}
+@media(max-width:760px){.z-admin-layout{flex-direction:column}.z-sidebar{width:100%;display:flex;overflow:auto;gap:6px;padding:12px}.z-sidebar a{white-space:nowrap;margin:0}.z-main{padding:14px}}
