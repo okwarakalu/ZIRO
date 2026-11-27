@@ -1,46 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>ZIRO - My Chat</title>
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body style="background:#0F766E; margin:0;">
-<div style="background:linear-gradient(180deg,#14B8A6 0%, #0F766E 100%); padding:18px 16px; border-radius:0 0 22px 22px; color:white;">
-  <div onclick="window.location.href='index.html'" style="font-size:14px;">← Back to Home</div>
-  <h2 style="margin:12px 0 2px; color:white;">💬 My Chat</h2>
-  <p style="margin:0; color:#CCFBF1; font-size:12px;">Talk • Agree • Work • Get Paid</p>
-  <input placeholder="🔍 Search chats..." oninput="filterChats(this.value)" style="width:100%; box-sizing:border-box; padding:12px 14px; border-radius:999px; border:none; margin-top:14px; font-size:14px;">
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ZIRO V8 - Chats</title><link rel="stylesheet" href="css/style.css"></head>
+<body>
+<div class="z-header">
+<div style="display:flex;justify-content:space-between;align-items:center;">
+<div class="z-logo">ZIRO<span> V8</span> • My Chats</div>
+<button onclick="location.href='index.html'" style="background:#fff;border:none;padding:8px 12px;border-radius:999px;font-weight:800;">← Home</button>
 </div>
-<div style="background:#0F766E; padding:10px 0 20px; min-height:60vh;"><div id="chatList"></div></div>
-<script>
-const BASE=[
-  {name:'Musa A.', skill:'Plumber • ₦8,000', last:'Hello, I can fix your tap today.', time:'12:19', unread:2, color:'#0B6E4F'},
-  {name:'Udoka', skill:'Brick Layer • ₦12,000', last:'Mend my fence - Apo', time:'12:06', unread:1, color:'#E67E22'},
-  {name:'Ada O.', skill:'Cleaner • ₦6,000', last:'I am available tomorrow morning.', time:'11:42', unread:0, color:'#8E44AD'},
-  {name:'Tunde B.', skill:'Electrician • ₦10,000', last:'Send me the photo of the wiring.', time:'Yesterday', unread:0, color:'#2980B9'},
-];
-const SKILLS={ 'Segun O.':'Barber • ₦3,000', 'Grace M.':'Cook / Chef • ₦8,500', 'Yusuf A.':'Welder • ₦11,000', 'Blessing I.':'Gardener • ₦4,500', 'Musa A.':'Plumber • ₦8,000', 'Udoka':'Brick Layer • ₦12,000', 'Ada O.':'Cleaner • ₦6,000', 'Tunde B.':'Electrician • ₦10,000' };
-const COLORS={ 'Segun O.':'#F2C94C', 'Grace M.':'#E74C3C', 'Yusuf A.':'#F39C12', 'Blessing I.':'#27AE60', 'Musa A.':'#0B6E4F', 'Udoka':'#E67E22', 'Ada O.':'#8E44AD', 'Tunde B.':'#2980B9' };
-function getAll(){
-  const saved = JSON.parse(localStorage.getItem('ziro_chats') || '[]');
-  const all = [...BASE];
-  saved.forEach(n=>{
-    if(!all.find(p=>p.name===n)){
-      all.unshift({name:n, skill:SKILLS[n]||'Worker', last:'Chat started — say hello.', time:'Now', unread:0, color:COLORS[n]||'#0B6E4F'});
-    }
-  });
-  return all;
-}
-function render(filter){
-  const list=document.getElementById('chatList');
-  const rows=getAll().filter(p=>!filter||p.name.toLowerCase().includes(filter.toLowerCase()));
-  list.innerHTML=rows.map(p=>'<div onclick="openChat(\''+p.name+'\')" style="display:flex; gap:12px; padding:14px 16px; align-items:center; background:white; margin:8px 12px; border-radius:14px;"><div style="width:48px; height:48px; min-width:48px; background:'+p.color+'; color:white; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:800;">'+p.name[0]+'</div><div style="flex:1; min-width:0;"><div style="display:flex; justify-content:space-between; gap:8px;"><b style="font-size:15px;">'+p.name+'</b><span style="font-size:11px; color:#888; white-space:nowrap;">'+p.time+'</span></div><p style="margin:2px 0 0; font-size:13px; color:#666; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">'+p.last+'</p><p style="margin:2px 0 0; font-size:11px; color:#999;">'+p.skill+'</p></div>'+(p.unread?'<span style="background:#0F766E; color:white; font-size:11px; min-width:22px; height:22px; border-radius:999px; display:flex; align-items:center; justify-content:center; padding:0 5px;">'+p.unread+'</span>':'')+'</div>').join('');
-}
-function filterChats(v){ render(v); }
-function openChat(name){ localStorage.setItem('ziro_chat_with', name); window.location.href='chat-room.html?with='+encodeURIComponent(name); }
-document.addEventListener('DOMContentLoaded', ()=>render(''));
-</script>
-</body>
-</html>
+<div style="background:#fff;border-radius:999px;padding:12px 14px;color:#888;margin-top:14px;">🔍 Search chats...</div>
+</div>
+
+<div style="padding:16px;">
+<div class="z-card" style="display:flex;gap:12px;align-items:center;margin-bottom:12px;cursor:pointer;">
+<img src="https://i.pravatar.cc/100?u=Segun" style="width:56px;height:56px;border-radius:50%;">
+<div style="flex:1;"><b>Segun O.</b><p style="margin:2px 0;color:#666;font-size:13px;">I can come today by 2pm...</p></div>
+<span class="z-badge-gold">2</span>
+</div>
+
+<div class="z-card" style="display:flex;gap:12px;align-items:center;margin-bottom:12px;cursor:pointer;">
+<img src="https://i.pravatar.cc/100?u=Chinedu" style="width:56px;height:56px;border-radius:50%;">
+<div style="flex:1;"><b>Chinedu O.</b><p style="margin:2px 0;color:#666;font-size:13px;">Job done, thank you 🙏</p></div>
+<span style="font-size:12px;color:#999;">Yesterday</span>
+</div>
+
+<div class="z-card" style="display:flex;gap:12px;align-items:center;cursor:pointer;">
+<img src="https://i.pravatar.cc/100?img=32" style="width:56px;height:56px;border-radius:50%;">
+<div style="flex:1;"><b>Ada O.</b><p style="margin:2px 0;color:#666;font-size:13px;">Hello, are you available?</p></div>
+<span style="font-size:12px;color:#999;">2 days ago</span>
+</div>
+
+<button class="z-btn-outline" style="margin-top:16px;" onclick="location.href='index.html'">🏠 Back Home</button>
+</div>
+
+<div class="z-sos">SOS</div>
+</body></html>
