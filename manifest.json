@@ -1,0 +1,13 @@
+{
+  "name": "ZIRO - Work. Hustle. Get Paid.",
+  "short_name": "ZIRO",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0A3D2A",
+  "theme_color": "#0A3D2A",
+  "description": "Find Trusted Workers Near You, Fast. Nigeria - 36 States + FCT. No Escrow.",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
