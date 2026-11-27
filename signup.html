@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>ZIRO - Create Account</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background:#0B3D2E; margin:0; display:flex; flex-direction:column; min-height:100dvh;">
+<div style="padding:26px 20px 10px; text-align:center;">
+  <div style="display:inline-block; background:white; color:#0B3D2E; padding:10px 20px; border-radius:14px; font-weight:900; font-size:26px;">ZIRO <span style="color:#F2C94C;">●</span></div>
+  <h2 style="color:white; margin:16px 0 4px;">Create Account</h2>
+  <p style="color:#F2C94C; margin:0; font-size:13px;">Join ZIRO in 30 seconds</p>
+</div>
+<div style="background:#F2F4F2; border-radius:24px 24px 0 0; margin-top:16px; padding:22px 18px 30px; flex:1;">
+  <div style="background:white; border-radius:16px; padding:20px;">
+    <label style="font-size:13px; font-weight:800;">I want to...</label>
+    <div style="display:flex; gap:10px; margin:8px 0 14px;">
+      <button id="roleCustomer" onclick="setRole('customer')" style="flex:1; background:#0B6E4F; color:white; border:none; padding:13px; border-radius:12px; font-size:13px; font-weight:800;">🙋 Hire Workers</button>
+      <button id="roleWorker" onclick="setRole('worker')" style="flex:1; background:white; color:#0B3D2E; border:1px solid #ddd; padding:13px; border-radius:12px; font-size:13px; font-weight:800;">👷 Find Work</button>
+    </div>
+    <label style="font-size:13px; font-weight:800;">Full Name</label>
+    <input id="name" placeholder="Example: Udoka Eze" style="width:100%; box-sizing:border-box; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 14px; font-size:14px;">
+    <label style="font-size:13px; font-weight:800;">Phone Number</label>
+    <div style="display:flex; gap:8px; margin:8px 0 14px;">
+      <span style="background:#F2F4F2; border:1px solid #ddd; border-radius:12px; padding:12px 10px; font-size:14px; font-weight:800;">+234</span>
+      <input id="phone" type="tel" placeholder="803 123 4567" style="flex:1; min-width:0; padding:12px; border:1px solid #ddd; border-radius:12px; font-size:15px;">
+    </div>
+    <div id="workerFields" style="display:none;">
+      <label style="font-size:13px; font-weight:800;">Your Skill</label>
+      <select id="skill" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 14px; font-size:14px;">
+        <option>Plumber</option><option>Electrician</option><option>Cleaner</option><option>Brick Layer</option><option>Carpenter</option><option>Painter</option><option>Welder</option><option>Gardener</option><option>Barber</option><option>Cook / Chef</option>
+      </select>
+      <label style="font-size:13px; font-weight:800;">Your Location</label>
+      <input id="city" placeholder="Example: Apo, Abuja" style="width:100%; box-sizing:border-box; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 14px; font-size:14px;">
+    </div>
+    <label style="font-size:13px; font-weight:800;">Create Password</label>
+    <input id="password" type="password" placeholder="Min 4 characters" style="width:100%; box-sizing:border-box; padding:12px; border:1px solid #ddd; border-radius:12px; margin:8px 0 14px; font-size:14px;">
+    <label style="display:flex; gap:8px; align-items:flex-start; font-size:12px; color:#555; margin-bottom:14px;"><input type="checkbox" id="agree" checked style="margin-top:2px;"> I agree to ZIRO Terms, Privacy & Refund Policy. ZIRO does NOT hold job money.</label>
+    <button class="btn-primary" onclick="doSignup()">Create Account</button>
+  </div>
+  <p style="text-align:center; font-size:13px; color:#555; margin-top:18px;">Already have account? <b onclick="window.location.href='login.html'" style="color:#0B6E4F;">Login →</b></p>
+  <button onclick="window.location.href='index.html'" style="width:100%; background:none; border:none; color:#888; padding:12px; font-size:12px;">Skip for now → Continue as Guest</button>
+</div>
+<script src="js/notify.js"></script>
+<script src="js/auth.js"></script>
+<script>
+let selectedRole='customer';
+function setRole(r){
+  selectedRole=r;
+  document.getElementById('roleCustomer').style.background = r==='customer' ? '#0B6E4F' : 'white';
+  document.getElementById('roleCustomer').style.color = r==='customer' ? 'white' : '#0B3D2E';
+  document.getElementById('roleCustomer').style.border = r==='customer' ? 'none' : '1px solid #ddd';
+  document.getElementById('roleWorker').style.background = r==='worker' ? '#0B6E4F' : 'white';
+  document.getElementById('roleWorker').style.color = r==='worker' ? 'white' : '#0B3D2E';
+  document.getElementById('roleWorker').style.border = r==='worker' ? 'none' : '1px solid #ddd';
+  document.getElementById('workerFields').style.display = r==='worker' ? 'block' : 'none';
+}
+function doSignup(){
+  const name=document.getElementById('name').value.trim();
+  const phone=document.getElementById('phone').value.trim().replace(/\s/g,'');
+  const pass=document.getElementById('password').value.trim();
+  const skill=document.getElementById('skill') ? document.getElementById('skill').value : '';
+  const city=document.getElementById('city') ? document.getElementById('city').value.trim() : '';
+  if(!name){ ziroNotify('Name Needed','Please enter your full name.'); return; }
+  if(phone.length < 10){ ziroNotify('Phone Needed','Please enter a valid phone number.'); return; }
+  if(pass.length < 4){ ziroNotify('Password Needed','Password must be at least 4 characters.'); return; }
+  if(!document.getElementById('agree').checked){ ziroNotify('Agree Needed','Please agree to ZIRO Terms to continue.'); return; }
+  if(selectedRole==='worker' && !city){ ziroNotify('Location Needed','Workers must enter their location.'); return; }
+  const users=JSON.parse(localStorage.getItem('ziro_users')||'[]');
+  if(users.find(u=>u.phone.replace(/\s/g,'').endsWith(phone.slice(-10)))){ ziroNotify('Already Exists','An account already exists for this phone.<br>Please login instead.','Login'); const b=document.querySelector('#ziroModal button'); if(b) b.onclick=function(){ closeZiroModal(); window.location.href='login.html'; }; return; }
+  const user={name, phone, password:pass, role:selectedRole, skill: selectedRole==='worker' ? skill : '', city: selectedRole==='worker' ? city : '', icoin:50, wallet:0, created:Date.now()};
+  users.push(user); localStorage.setItem('ziro_users', JSON.stringify(users));
+  ziroLogin(user);
+  ziroNotify('Welcome to ZIRO! 🎉','Account created for '+name+'.<br>You got <b>50 free iCoin</b> to start!','Go to Home');
+  const b=document.querySelector('#ziroModal button'); if(b) b.onclick=function(){ closeZiroModal(); window.location.href='index.html'; };
+}
+</script>
+</body>
+  </html>
