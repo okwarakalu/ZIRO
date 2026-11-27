@@ -2,73 +2,70 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZIRO - Work. Hustle. Get Paid.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>ZIRO - Find Workers Near You</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-<div style="background:var(--green); padding:20px 16px; border-radius:0 0 20px 20px; color:white;">
+<body style="padding-bottom:75px;">
+<div style="background:linear-gradient(180deg,#0B6E4F 0%, #0B3D2E 100%); padding:18px 16px 20px; border-radius:0 0 22px 22px; color:white;">
   <div style="display:flex; justify-content:space-between; align-items:center;">
-    <div><h2 style="margin:0; color:white;">ZIRO</h2><p style="margin:0; color:var(--gold); font-size:12px;">Work. Hustle. Get Paid.</p></div>
-    <span style="background:rgba(255,255,255,0.15); padding:6px 12px; border-radius:999px; font-size:13px;">🪙 <span data-coin>120 iCoin</span></span>
+    <div style="background:white; color:#0B3D2E; padding:6px 12px; border-radius:10px; font-weight:900; font-size:18px;">ZIRO <span style="color:#F2C94C;">●</span></div>
+    <span onclick="window.location.href='office.html'" style="background:rgba(255,255,255,0.2); width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px;">👤</span>
   </div>
-  <input id="searchInput" placeholder="Search any skill, name, or city..." oninput="searchJobs()" autocomplete="off" style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:none; margin-top:14px;">
-  <div style="display:flex; gap:6px; flex-wrap:nowrap; overflow-x:auto; margin-top:10px; padding-bottom:4px;">
-    <button class="filter-btn" data-filter="" onclick="quickSearch('', this)" style="padding:6px 12px; border-radius:999px; border:none; background:var(--gold); font-weight:700; white-space:nowrap;">All</button>
-    <button class="filter-btn" data-filter="plumber" onclick="quickSearch('Plumber', this)" style="padding:6px 12px; border-radius:999px; border:none; background:white; white-space:nowrap;">Plumber</button>
-    <button class="filter-btn" data-filter="cleaner" onclick="quickSearch('Cleaner', this)" style="padding:6px 12px; border-radius:999px; border:none; background:white; white-space:nowrap;">Cleaner</button>
-    <button class="filter-btn" data-filter="electrician" onclick="quickSearch('Electrician', this)" style="padding:6px 12px; border-radius:999px; border:none; background:white; white-space:nowrap;">Electrician</button>
-    <button class="filter-btn" data-filter="driver" onclick="quickSearch('Driver', this)" style="padding:6px 12px; border-radius:999px; border:none; background:white; white-space:nowrap;">Driver</button>
-    <button class="filter-btn" data-filter="carpenter" onclick="quickSearch('Carpenter', this)" style="padding:6px 12px; border-radius:999px; border:none; background:white; white-space:nowrap;">Carpenter</button>
-    <button class="filter-btn" data-filter="painter" onclick="quickSearch('Painter', this)" style="padding:6px 12px; border-radius:999px; border:none; background:white; white-space:nowrap;">Painter</button>
-    <button class="filter-btn" data-filter="mechanic" onclick="quickSearch('Mechanic', this)" style="padding:6px 12px; border-radius:999px; border:none; background:white; white-space:nowrap;">Mechanic</button>
-    <button class="filter-btn" data-filter="tailor" onclick="quickSearch('Tailor', this)" style="padding:6px 12px; border-radius:999px; border:none; background:white; white-space:nowrap;">Tailor</button>
-    <button class="filter-btn" data-filter="barber" onclick="quickSearch('Barber', this)" style="padding:6px 12px; border-radius:999px; border:none; background:white; white-space:nowrap;">Barber</button>
-    <button class="filter-btn" data-filter="cook" onclick="quickSearch('Cook', this)" style="padding:6px 12px; border-radius:999px; border:none; background:white; white-space:nowrap;">Cook</button>
-    <button class="filter-btn" data-filter="welder" onclick="quickSearch('Welder', this)" style="padding:6px 12px; border-radius:999px; border:none; background:white; white-space:nowrap;">Welder</button>
+  <h2 style="margin:14px 0 4px; color:white;">Find Workers Near You</h2>
+  <p style="margin:0; color:#F2C94C; font-size:13px;">Plumber • Electrician • Cleaner • Brick Layer</p>
+  <input id="homeSearch" placeholder="🔍 Search worker, skill, area..." oninput="filterHome(this.value)" style="width:100%; box-sizing:border-box; padding:12px 14px; border-radius:999px; border:none; margin-top:14px; font-size:14px;">
+  <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
+    <button onclick="filterBySkill('All')" style="background:#F2C94C; color:#0B3D2E; border:none; padding:8px 14px; border-radius:999px; font-size:12px; font-weight:800;">All</button>
+    <button onclick="filterBySkill('Plumber')" style="background:rgba(255,255,255,0.2); color:white; border:1px solid rgba(255,255,255,0.3); padding:8px 14px; border-radius:999px; font-size:12px; font-weight:700;">Plumber</button>
+    <button onclick="filterBySkill('Electrician')" style="background:rgba(255,255,255,0.2); color:white; border:1px solid rgba(255,255,255,0.3); padding:8px 14px; border-radius:999px; font-size:12px; font-weight:700;">Electrician</button>
+    <button onclick="filterBySkill('Cleaner')" style="background:rgba(255,255,255,0.2); color:white; border:1px solid rgba(255,255,255,0.3); padding:8px 14px; border-radius:999px; font-size:12px; font-weight:700;">Cleaner</button>
+    <button onclick="filterBySkill('Brick Layer')" style="background:rgba(255,255,255,0.2); color:white; border:1px solid rgba(255,255,255,0.3); padding:8px 14px; border-radius:999px; font-size:12px; font-weight:700;">Brick Layer</button>
   </div>
 </div>
-<div style="padding:16px; padding-bottom:120px;">
-  <h3>Labour Market <span id="resultCount" style="font-size:13px; color:var(--muted); font-weight:400;">• 12 workers</span></h3>
-  <div id="workerList" style="display:flex; flex-direction:column; gap:12px;">
-    <div class="worker-card" data-search="musa plumber wuse abuja leak tap" style="background:white; border-radius:16px; padding:16px;"><span style="background:var(--gold); padding:4px 8px; border-radius:999px; font-size:11px; font-weight:700;">★ BOOSTED</span><h3 style="margin:10px 0 4px;">Musa A. ✓ Verified • Trusted</h3><p style="margin:0; color:var(--muted); font-size:13px;">Plumber • Wuse 2, Abuja</p><p style="font-size:13px;">⭐ 4.9 • Available Now • ₦8,000 / job</p><button class="btn-primary" onclick="hireNow('Musa A.')">Hire Now</button><button class="btn-secondary" style="margin-top:8px;" onclick="unlockContact()">Unlock Contact • 5 iCoin</button></div>
-    <div class="worker-card" data-search="ada cleaner lekki lagos house cleaning" style="background:white; border-radius:16px; padding:16px;"><h3 style="margin:10px 0 4px;">Ada O. ✓ Verified</h3><p style="margin:0; color:var(--muted); font-size:13px;">Cleaner • Lekki, Lagos</p><p style="font-size:13px;">⭐ 4.8 • Available Now • ₦6,000 / job</p><button class="btn-primary" onclick="hireNow('Ada O.')">Hire Now</button><button class="btn-secondary" style="margin-top:8px;" onclick="unlockContact()">Unlock Contact • 5 iCoin</button></div>
-    <div class="worker-card" data-search="tunde electrician ikeja lagos wiring" style="background:white; border-radius:16px; padding:16px;"><h3 style="margin:10px 0 4px;">Tunde B. ✓ Verified</h3><p style="margin:0; color:var(--muted); font-size:13px;">Electrician • Ikeja, Lagos</p><p style="font-size:13px;">⭐ 4.9 • Available Now • ₦10,000 / job</p><button class="btn-primary" onclick="hireNow('Tunde B.')">Hire Now</button><button class="btn-secondary" style="margin-top:8px;" onclick="unlockContact()">Unlock Contact • 5 iCoin</button></div>
-    <div class="worker-card" data-search="chidi driver errand garki abuja delivery" style="background:white; border-radius:16px; padding:16px;"><h3 style="margin:10px 0 4px;">Chidi N. ✓ Verified</h3><p style="margin:0; color:var(--muted); font-size:13px;">Driver / Errand • Garki, Abuja</p><p style="font-size:13px;">⭐ 4.7 • Available Now • ₦5,000 / job</p><button class="btn-primary" onclick="hireNow('Chidi N.')">Hire Now</button><button class="btn-secondary" style="margin-top:8px;" onclick="unlockContact()">Unlock Contact • 5 iCoin</button></div>
-    <div class="worker-card" data-search="ibrahim carpenter kubwa abuja wood furniture" style="background:white; border-radius:16px; padding:16px;"><h3 style="margin:10px 0 4px;">Ibrahim S. ✓ Verified</h3><p style="margin:0; color:var(--muted); font-size:13px;">Carpenter • Kubwa, Abuja</p><p style="font-size:13px;">⭐ 4.8 • Available Now • ₦9,000 / job</p><button class="btn-primary" onclick="hireNow('Ibrahim S.')">Hire Now</button><button class="btn-secondary" style="margin-top:8px;" onclick="unlockContact()">Unlock Contact • 5 iCoin</button></div>
-    <div class="worker-card" data-search="funke painter surulere lagos painting" style="background:white; border-radius:16px; padding:16px;"><h3 style="margin:10px 0 4px;">Funke K. ✓ Verified</h3><p style="margin:0; color:var(--muted); font-size:13px;">Painter • Surulere, Lagos</p><p style="font-size:13px;">⭐ 4.9 • Available Now • ₦7,500 / job</p><button class="btn-primary" onclick="hireNow('Funke K.')">Hire Now</button><button class="btn-secondary" style="margin-top:8px;" onclick="unlockContact()">Unlock Contact • 5 iCoin</button></div>
-    <div class="worker-card" data-search="emeka mechanic port harcourt car repair" style="background:white; border-radius:16px; padding:16px;"><h3 style="margin:10px 0 4px;">Emeka E. ✓ Verified</h3><p style="margin:0; color:var(--muted); font-size:13px;">Mechanic • Port Harcourt</p><p style="font-size:13px;">⭐ 4.7 • Available Now • ₦12,000 / job</p><button class="btn-primary" onclick="hireNow('Emeka E.')">Hire Now</button><button class="btn-secondary" style="margin-top:8px;" onclick="unlockContact()">Unlock Contact • 5 iCoin</button></div>
-    <div class="worker-card" data-search="amina tailor kano sewing fashion" style="background:white; border-radius:16px; padding:16px;"><h3 style="margin:10px 0 4px;">Amina Y. ✓ Verified</h3><p style="margin:0; color:var(--muted); font-size:13px;">Tailor • Kano</p><p style="font-size:13px;">⭐ 5.0 • Available Now • ₦5,500 / job</p><button class="btn-primary" onclick="hireNow('Amina Y.')">Hire Now</button><button class="btn-secondary" style="margin-top:8px;" onclick="unlockContact()">Unlock Contact • 5 iCoin</button></div>
-    <div class="worker-card" data-search="segun barber enugu haircut" style="background:white; border-radius:16px; padding:16px;"><h3 style="margin:10px 0 4px;">Segun O. ✓ Verified</h3><p style="margin:0; color:var(--muted); font-size:13px;">Barber • Enugu</p><p style="font-size:13px;">⭐ 4.8 • Available Now • ₦3,000 / job</p><button class="btn-primary" onclick="hireNow('Segun O.')">Hire Now</button><button class="btn-secondary" style="margin-top:8px;" onclick="unlockContact()">Unlock Contact • 5 iCoin</button></div>
-    <div class="worker-card" data-search="grace cook chef wuse abuja food" style="background:white; border-radius:16px; padding:16px;"><h3 style="margin:10px 0 4px;">Grace M. ✓ Verified</h3><p style="margin:0; color:var(--muted); font-size:13px;">Cook / Chef • Wuse, Abuja</p><p style="font-size:13px;">⭐ 4.9 • Available Now • ₦8,500 / job</p><button class="btn-primary" onclick="hireNow('Grace M.')">Hire Now</button><button class="btn-secondary" style="margin-top:8px;" onclick="unlockContact()">Unlock Contact • 5 iCoin</button></div>
-    <div class="worker-card" data-search="yusuf welder kaduna metal gate" style="background:white; border-radius:16px; padding:16px;"><h3 style="margin:10px 0 4px;">Yusuf A. ✓ Verified</h3><p style="margin:0; color:var(--muted); font-size:13px;">Welder • Kaduna</p><p style="font-size:13px;">⭐ 4.6 • Available Now • ₦11,000 / job</p><button class="btn-primary" onclick="hireNow('Yusuf A.')">Hire Now</button><button class="btn-secondary" style="margin-top:8px;" onclick="unlockContact()">Unlock Contact • 5 iCoin</button></div>
-    <div class="worker-card" data-search="blessing gardener lekki lagos garden" style="background:white; border-radius:16px; padding:16px;"><h3 style="margin:10px 0 4px;">Blessing I. ✓ Verified</h3><p style="margin:0; color:var(--muted); font-size:13px;">Gardener • Lekki, Lagos</p><p style="font-size:13px;">⭐ 4.7 • Available Now • ₦4,500 / job</p><button class="btn-primary" onclick="hireNow('Blessing I.')">Hire Now</button><button class="btn-secondary" style="margin-top:8px;" onclick="unlockContact()">Unlock Contact • 5 iCoin</button></div>
-  </div>
-  <div id="noResult" style="display:none; background:white; border-radius:16px; padding:20px; text-align:center; margin-top:12px;"><b>No worker found 😔</b><p style="font-size:13px; color:var(--muted);">Try another skill or city.<br>Or Post a Job and workers will find you.</p><button class="btn-primary" onclick="openPost()">Post a Job • FREE</button></div>
-  <h3 style="margin-top:24px;">📝 Recent Jobs</h3>
-  <div id="homeJobList" style="display:flex; flex-direction:column; gap:12px;"></div>
-  <button class="btn-sos" style="margin-top:16px;" onclick="sosEmergency()">! SOS • Emergency</button>
-  <p style="text-align:center; font-size:12px; color:var(--muted);">ZIRO does NOT hold job money. You pay workers directly.<br>Terms • Privacy • iCoin Policy • Refund Policy</p>
+<div style="padding:14px 16px 0;"><h3 style="margin:0 0 10px;">👷 Available Workers</h3><div id="workerList"></div></div>
+<div style="padding:6px 16px 0;">
+  <h3 style="margin:14px 0 10px;">📋 Recent Jobs</h3><div id="jobList"></div>
+  <button onclick="window.location.href='post.html'" style="width:100%; background:#0B6E4F; color:white; border:none; padding:14px; border-radius:12px; font-size:14px; font-weight:800; margin-top:10px;">+ Post a Job</button>
+  <button onclick="window.location.href='sos.html'" style="width:100%; background:#D32F2F; color:white; border:none; padding:14px; border-radius:12px; font-size:14px; font-weight:800; margin-top:10px;">! SOS • Emergency</button>
+  <p style="text-align:center; font-size:12px; color:#888; margin:12px 0 0;">ZIRO does NOT hold job money. You pay workers directly.<br>Terms • Privacy • iCoin Policy • Refund Policy</p>
 </div>
-<div style="position:fixed; bottom:0; left:0; right:0; background:white; border-top:1px solid #eee; display:flex; justify-content:space-around; padding:10px 0; font-size:11px; text-align:center;"><span><b>🏠<br>Home</b></span><span onclick="navTo('Search')">🔍<br>Search</span><span onclick="openPost()" style="background:var(--gold); width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:900; margin-top:-24px;">+</span><span onclick="navTo('Chat')">💬<br>Chat</span><span onclick="navTo('My Office')">👤<br>My Office</span></div>
-<button class="chioma-float" onclick="toggleChioma()">◉ CHIOMA</button>
-<div id="chioma-box" style="display:none; position:fixed; bottom:150px; right:16px; left:16px; background:white; border-radius:16px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,0.2); z-index:60;"><b>CHIOMA 🤖</b><div id="chioma-chat"><p style="font-size:13px; color:var(--muted);">Hello! I can show you how to Boost, Buy iCoin, Post a Job, or Accept an Errand.</p></div><div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;"><button onclick="setChiomaLang('English')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">English</button><button onclick="setChiomaLang('Hausa')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Hausa</button><button onclick="setChiomaLang('Yoruba')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Yoruba</button><button onclick="setChiomaLang('Igbo')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Igbo</button><button onclick="setChiomaLang('Pidgin')" style="padding:6px 10px; border-radius:999px; border:1px solid #ddd;">Pidgin</button></div><input id="chiomaInput" placeholder="Ask CHIOMA... she understands slang" onkeyup="if(event.key==='Enter') chiomaAsk(this.value)" style="width:100%; box-sizing:border-box; padding:10px; border-radius:12px; border:1px solid #ddd; margin-top:8px;"><button class="btn-primary" onclick="chiomaHelp('boost')" style="margin-top:8px;">How to Boost</button><button class="btn-secondary" onclick="chiomaHelp('icoin')" style="margin-top:8px;">How to Buy iCoin</button><button onclick="toggleChioma()" style="width:100%; margin-top:8px; border:none; background:none;">Close</button></div>
-<script src="js/chioma.js"></script>
-<script src="js/app.js"></script>
+<div class="ziro-nav">
+  <button class="ziro-nav-item active" onclick="window.location.href='index.html'"><span class="nav-icon">🏠</span>Home</button>
+  <button class="ziro-nav-item" onclick="document.getElementById('homeSearch').focus()"><span class="nav-icon">🔍</span>Search</button>
+  <button class="ziro-nav-center" onclick="window.location.href='post.html'">+</button>
+  <button class="ziro-nav-item" onclick="window.location.href='chat.html'"><span class="nav-icon">💬</span>Chat</button>
+  <button class="ziro-nav-item" onclick="window.location.href='office.html'"><span class="nav-icon">👤</span>My Office</button>
+</div>
 <script src="js/notify.js"></script>
-<script src="js/office.js"></script>
 <script>
-function loadHomeJobs(){
-  const list = document.getElementById('homeJobList');
-  if(!list) return;
-  const jobs = JSON.parse(localStorage.getItem('ziro_jobs') || '[]');
-  if(!jobs.length){ list.innerHTML = '<p style="font-size:13px; color:var(--muted); text-align:center;">No jobs posted yet. Tap + to post the first job.</p>'; return; }
-  list.innerHTML = jobs.slice().reverse().map((j, idx) => {
-    const realIdx = jobs.length - 1 - idx;
-    return '<div style="background:white; border-radius:16px; padding:16px;"><b>' + j.skill + ' needed</b><p style="margin:6px 0; font-size:13px; color:var(--muted);">' + j.desc + '</p><p style="margin:0; font-size:13px;">📍 ' + j.city + ' • 💰 ₦' + Number(j.budget).toLocaleString() + '</p><button class="btn-primary" style="margin-top:10px;" onclick="window.location.href=\'job.html?id=' + realIdx + '\'">View Job Details</button></div>';
-  }).slice(0,5).join('');
+function makeStableId(j){ const s=(j.skill||'')+'|'+(j.desc||'')+'|'+(j.budget||'')+'|'+(j.city||'')+'|'+(j.name||''); let h=0; for(let i=0;i<s.length;i++){ h=(h*31 + s.charCodeAt(i)) >>> 0; } return 'job_'+h; }
+function goToJobDetails(job){ window.location.href='job.html?id='+makeStableId(job); }
+let WORKERS=[
+  {name:'Segun O.', skill:'Barber', city:'Enugu', rating:'4.8', price:3000, color:'#0B6E4F'},
+  {name:'Grace M.', skill:'Cook / Chef', city:'Wuse, Abuja', rating:'4.9', price:8500, color:'#E67E22'},
+  {name:'Yusuf A.', skill:'Welder', city:'Kaduna', rating:'4.6', price:11000, color:'#2980B9'},
+  {name:'Blessing I.', skill:'Gardener', city:'Lekki, Lagos', rating:'4.7', price:4500, color:'#8E44AD'},
+  {name:'Musa A.', skill:'Plumber', city:'Wuse 2, Abuja', rating:'4.8', price:8000, color:'#0B6E4F'},
+  {name:'Udoka', skill:'Brick Layer', city:'Apo, Abuja', rating:'4.7', price:12000, color:'#E67E22'},
+];
+let currentFilter='All', currentSearch='';
+function renderWorkers(){
+  const list=document.getElementById('workerList');
+  const rows=WORKERS.filter(w=>{ const okSkill=currentFilter==='All'||w.skill.toLowerCase().includes(currentFilter.toLowerCase()); const q=currentSearch.toLowerCase(); const okSearch=!q||w.name.toLowerCase().includes(q)||w.skill.toLowerCase().includes(q)||w.city.toLowerCase().includes(q); return okSkill&&okSearch; });
+  if(!rows.length){ list.innerHTML='<p style="background:white; padding:16px; border-radius:14px; text-align:center; color:#888;">No workers found.</p>'; return; }
+  list.innerHTML=rows.map(w=>'<div style="background:white; border-radius:16px; padding:16px; margin-bottom:12px; box-shadow:0 1px 4px rgba(0,0,0,0.06);"><b style="font-size:16px;">'+w.name+' ✓ Verified</b><p style="margin:4px 0; font-size:13px; color:#666;">'+w.skill+' • '+w.city+'</p><p style="margin:4px 0; font-size:13px;">⭐ '+w.rating+' • Available Now • ₦'+w.price.toLocaleString()+' / job</p><button onclick="hireWorker(\''+w.name+'\',\''+w.skill+'\','+w.price+')" style="width:100%; background:#0B6E4F; color:white; border:none; padding:13px; border-radius:12px; font-size:14px; font-weight:800; margin-top:8px;">Hire Now</button><button onclick="unlockContact(\''+w.name+'\')" style="width:100%; background:white; color:#0B3D2E; border:1px solid #ddd; padding:12px; border-radius:12px; font-size:13px; font-weight:700; margin-top:8px;">Unlock Contact • 5 iCoin</button></div>').join('');
 }
-document.addEventListener('DOMContentLoaded', loadHomeJobs);
+function filterHome(v){ currentSearch=v; renderWorkers(); }
+function filterBySkill(s){ currentFilter=s; renderWorkers(); }
+function hireWorker(name,skill,price){ ziroConfirm('Hire '+name+'?', skill+' • ₦'+Number(price).toLocaleString()+'<br><br>Chat with '+name+' to agree time and price.', function(){ localStorage.setItem('ziro_chat_with', name); window.location.href='chat-room.html?with='+encodeURIComponent(name); }); }
+function unlockContact(name){ ziroConfirm('Unlock Contact?', 'Unlock '+name+' contact for 5 iCoin?', function(){ ziroNotify('Contact Unlocked', 'You can now chat with '+name+'.', 'Go to Chat'); const b=document.querySelector('#ziroModal button'); if(b) b.onclick=function(){ closeZiroModal(); localStorage.setItem('ziro_chat_with', name); window.location.href='chat-room.html?with='+encodeURIComponent(name); }; }); }
+function renderJobs(){
+  const list=document.getElementById('jobList'); let jobs=JSON.parse(localStorage.getItem('ziro_jobs')||'[]');
+  if(!jobs.length){ jobs=[{skill:'Brick Layer', desc:'Mend my fence', city:'Apo NEPA, Fct Abuja', budget:12000, name:'Udoka/0814638963'}]; localStorage.setItem('ziro_jobs', JSON.stringify(jobs)); }
+  list.innerHTML=jobs.slice().reverse().map((j)=>{ const sid=makeStableId(j); const accepted=localStorage.getItem('ziro_accepted_'+sid)==='yes'; return '<div style="background:white; border-radius:16px; padding:16px; margin-bottom:12px; box-shadow:0 1px 4px rgba(0,0,0,0.06);"><div style="display:flex; justify-content:space-between; align-items:center; gap:8px;"><b style="font-size:15px;">'+j.skill+' needed</b><span style="background:#FFF8E1; border:1px solid #F2C94C; padding:3px 10px; border-radius:999px; font-size:11px; font-weight:700;">'+(accepted?'✓ ACCEPTED':'OPEN')+'</span></div><p style="margin:6px 0; font-size:13px; color:#555; word-break:break-word;">'+j.desc+'</p><p style="margin:4px 0; font-size:13px;">📍 '+j.city+' • 💰 ₦'+Number(j.budget).toLocaleString()+'</p><button onclick=\'goToJobDetails('+JSON.stringify(j).replace(/'/g,"&#39;")+')\' style="width:100%; background:#0B6E4F; color:white; border:none; padding:13px; border-radius:12px; font-size:14px; font-weight:800; margin-top:8px;">'+(accepted?'View Job Details • Accepted':'View Job Details')+'</button></div>'; }).join('');
+}
+document.addEventListener('DOMContentLoaded', ()=>{ renderWorkers(); renderJobs(); });
 </script>
 </body>
-                                                                                                                                              </html>
+</html>
