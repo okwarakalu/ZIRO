@@ -6,22 +6,14 @@
 <title>ZIRO - My Chat</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body style="background:#0F766E; margin:0; padding-bottom:75px;">
+<body style="background:#0F766E; margin:0;">
 <div style="background:linear-gradient(180deg,#14B8A6 0%, #0F766E 100%); padding:18px 16px; border-radius:0 0 22px 22px; color:white;">
-  <div style="display:flex; justify-content:space-between; align-items:center;">
-    <div><h2 style="margin:0; color:white;">💬 My Chat</h2><p style="margin:2px 0 0; color:#CCFBF1; font-size:12px;">Talk • Agree • Work • Get Paid</p></div>
-    <span onclick="window.location.href='index.html'" style="background:rgba(255,255,255,0.2); width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px;">✕</span>
-  </div>
+  <div onclick="window.location.href='index.html'" style="font-size:14px;">← Back to Home</div>
+  <h2 style="margin:12px 0 2px; color:white;">💬 My Chat</h2>
+  <p style="margin:0; color:#CCFBF1; font-size:12px;">Talk • Agree • Work • Get Paid</p>
   <input placeholder="🔍 Search chats..." oninput="filterChats(this.value)" style="width:100%; box-sizing:border-box; padding:12px 14px; border-radius:999px; border:none; margin-top:14px; font-size:14px;">
 </div>
 <div style="background:#0F766E; padding:10px 0 20px; min-height:60vh;"><div id="chatList"></div></div>
-<div class="ziro-nav">
-  <button class="ziro-nav-item" onclick="window.location.href='index.html'"><span class="nav-icon">🏠</span>Home</button>
-  <button class="ziro-nav-item" onclick="window.location.href='search.html'"><span class="nav-icon">🔍</span>Search</button>
-  <button class="ziro-nav-center" onclick="window.location.href='post.html'">+</button>
-  <button class="ziro-nav-item active" onclick="window.location.href='chat.html'"><span class="nav-icon">💬</span>Chat</button>
-  <button class="ziro-nav-item" onclick="window.location.href='office.html'"><span class="nav-icon">👤</span>My Office</button>
-</div>
 <script>
 const PEOPLE=[
   {name:'Musa A.', skill:'Plumber • ₦8,000', last:'Hello, I can fix your tap today.', time:'12:19', unread:2, color:'#0B6E4F'},
