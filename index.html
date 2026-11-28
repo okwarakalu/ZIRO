@@ -2,68 +2,66 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ZIRO - Work. Hustle. Get Paid.</title>
-<meta name="description" content="Find Trusted Workers Near You, Fast. Nigeria - 36 States + FCT. No Escrow.">
-<meta name="theme-color" content="#0A3D2A">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ZIRO - Find Trusted Workers</title>
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/home.css">
-<link rel="stylesheet" href="css/wallet.css">
-<link rel="stylesheet" href="css/office.css">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#F6F7F5;color:#111;padding-bottom:80px}
+  header{position:sticky;top:0;z-index:50;background:#0A3D2A;color:#fff;padding:12px 14px;display:flex;align-items:center;gap:8px}
+  header .logo{display:flex;align-items:center;gap:6px;font-weight:900;font-size:20px}
+  header .logo span{background:#FFC107;color:#111;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px}
+  .pill{background:#fff;color:#111;border-radius:999px;padding:6px 10px;font-size:13px;font-weight:700;border:none;cursor:pointer;white-space:nowrap}
+  .pill.sos{background:#E11D48;color:#fff}
+  .pill.avatar{background:#FFC107;width:32px;height:32px;padding:0;border-radius:50%;display:flex;align-items:center;justify-content:center}
+  .spacer{flex:1}
+  main{padding:14px;max-width:520px;margin:0 auto;min-height:60vh}
+  .card{background:#fff;border-radius:14px;padding:14px;margin:12px 0;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+  .btn-green{background:#0A3D2A;color:#fff;border:none;padding:10px 14px;border-radius:999px;font-weight:700;cursor:pointer}
+  .btn-white{background:#fff;color:#111;border:1px solid #ddd;padding:10px 14px;border-radius:999px;font-weight:700;cursor:pointer}
+  input{width:100%;padding:12px;border:1px solid #ddd;border-radius:12px;font-size:15px}
+  .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+  .grid button{background:#fff;border:1px solid #eee;border-radius:14px;padding:14px 6px;cursor:pointer;font-size:14px}
+  nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #eee;display:flex;justify-content:space-around;align-items:center;padding:6px 0 8px;z-index:50}
+  nav button{background:none;border:none;font-size:12px;cursor:pointer;color:#333;display:flex;flex-direction:column;align-items:center;gap:2px}
+  nav button.active{color:#0A3D2A;font-weight:800}
+  nav .plus{background:#FFC107;width:52px;height:52px;border-radius:50%;font-size:26px;font-weight:900;margin-top:-28px;box-shadow:0 4px 12px rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center}
+  #chiomaFab{position:fixed;right:14px;bottom:90px;background:#FFC107;width:52px;height:52px;border-radius:50%;border:none;font-size:20px;font-weight:900;box-shadow:0 4px 12px rgba(0,0,0,.2);cursor:pointer;z-index:60}
+</style>
 </head>
 <body>
 
-<!-- HEADER - LOCKED: Forest Green, SOS INLINE ONLY -->
-<header class="top">
-  <div class="logo"><b>Z</b> ZIRO</div>
-  <div class="search">
-    <input id="globalSearch" placeholder="Search Plumber, Driver, Cleaner...">
-    <button onclick="ZIRO.go('search')">🔍</button>
-  </div>
-  <button class="icoin" onclick="ZIRO.go('wallet')">🪙 <span data-bal>120</span> iCoin</button>
-  <button class="sos-inline" onclick="ZIRO.sos()">SOS</button>
-  <button class="avatar" onclick="ZIRO.go('office')">A</button>
+<header>
+  <div class="logo"><span>Z</span> ZIRO</div>
+  <div class="spacer"></div>
+  <button class="pill" onclick="ZIRO.go('wallet')">🪙 <span data-bal>120</span> iCoin</button>
+  <button class="pill sos" onclick="ZIRO.sos()">SOS</button>
+  <button class="pill avatar" onclick="ZIRO.go('office')">A</button>
 </header>
 
-<!-- PAGES LOAD HERE - From /pages/ folder -->
 <main id="app">
-  <div id="p-home" class="page on">
-    <p style="text-align:center;padding:30px">Loading ZIRO...</p>
-  </div>
-  <div id="p-search" class="page"></div>
-  <div id="p-post" class="page"></div>
-  <div id="p-wallet" class="page"></div>
-  <div id="p-office" class="page"></div>
-  <div id="p-chat" class="page"></div>
+  <p style="text-align:center;color:#666">Loading ZIRO...</p>
 </main>
 
-<!-- BOTTOM NAV - LOCKED -->
-<nav class="bottom">
-  <button onclick="ZIRO.go('home')">🏠<br>Home</button>
-  <button onclick="ZIRO.go('search')">🔍<br>Search</button>
-  <button onclick="ZIRO.go('post')" class="plus">+</button>
-  <button onclick="ZIRO.go('chat')">💬<br>Chat</button>
-  <button onclick="ZIRO.go('office')">👤<br>My Office</button>
+<button id="chiomaFab" onclick="ZIRO.chioma()" title="Chat with CHIOMA">C</button>
+
+<nav>
+  <button onclick="ZIRO.go('home')" id="nav-home">🏠<br>Home</button>
+  <button onclick="ZIRO.go('search')" id="nav-search">🔍<br>Search</button>
+  <button class="plus" onclick="ZIRO.go('post')">+</button>
+  <button onclick="ZIRO.go('chat')" id="nav-chat">💬<br>Chat</button>
+  <button onclick="ZIRO.go('office')" id="nav-office">👤<br>My Office</button>
 </nav>
 
-<!-- ONLY FLOATING BUTTON IN WHOLE APP - CHIOMA -->
-<button id="chiomaFloat" onclick="ZIRO.chioma()">C</button>
-
-<!-- MODULAR JS - ORDER MATTERS, DO NOT REORDER -->
+<!-- ZIRO CORE - ORDER MATTERS -->
 <script src="js/config.js"></script>
 <script src="js/core.js"></script>
-<script src="js/wallet.js"></script>
 <script src="js/jobs.js"></script>
-<script src="js/chat.js"></script>
+<script src="js/wallet.js"></script>
 <script src="js/sos.js"></script>
 <script src="js/chioma.js"></script>
-<script src="js/admin.js"></script>
-<script>
-  // Register PWA Service Worker for App conversion later
-  if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
-  // Load pages on start
-  window.addEventListener('DOMContentLoaded', ()=> ZIRO.init());
-</script>
+<script src="js/chat.js"></script>
+
 </body>
 </html>
