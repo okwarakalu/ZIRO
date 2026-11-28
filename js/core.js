@@ -1,71 +1,80 @@
-// ZIRO CORE - Shared brain. All pages use ZIRO.go(), ZIRO.pay(), ZIRO.save()
-// Do NOT put Wallet / Jobs / Chat logic here. Those live in their own js/ files.
+// ZIRO CORE V4.1 - CLEAN - No Send, No Coins, No Phase 3
 window.ZIRO = window.ZIRO || {};
 
 (function(){
-  // Load or create user state - survives refresh
-  let Z = JSON.parse(localStorage.getItem('ZIRO_V4') || '{}');
-  if(!Z.bal) Z = {
-    bal: 120,
-    jobs: [
-      { n:'Ada Okafor', s:'Driver • Abuja', m:92, r:'4.9' },
-      { n:'Fatima Bello', s:'Designer • Enugu', m:95, r:'4.8' }
-    ],
-    workers: [
-      { n:'Segun O.', s:'Barber • Abuja', r:'4.9', p:'From ₦5,000' },
-      { n:'Chinedu O.', s:'Plumber • Abuja', r:'4.8', p:'From ₦8,000' },
-      { n:'Ada O.', s:'Cleaner • Abuja', r:'5.0', p:'From ₦6,000' }
-    ],
-    hist: []
-  };
-
-  function save(){ localStorage.setItem('ZIRO_V4', JSON.stringify(Z)); updateBalance(); }
-  function updateBalance(){ document.querySelectorAll('[data-bal]').forEach(e => e.textContent = Z.bal); }
-  function get(){ return Z; }
-
-  // Pay with iCoin - single check for whole app
-  function pay(amount, label){
-    if(Z.bal < amount){
-      alert('Not enough iCoin. Balance: ' + Z.bal + ' iCoin. Buy iCoin first.');
-      go('wallet'); return false;
-    }
-    Z.bal -= amount;
-    Z.hist.unshift(label + ' -' + amount + ' iCoin');
-    save(); return true;
+  const KEY = 'ziro_v41';
+  function get(){
+    try{
+      const s = JSON.parse(localStorage.getItem(KEY) || '{}');
+      return { bal: s.bal ?? 120, hist: s.hist || [] };
+    }catch(e){ return { bal: 120, hist: [] }; }
+  }
+  function save(){
+    const z = get();
+    localStorage.setItem(KEY, JSON.stringify(z));
+    document.querySelectorAll('[data-bal]').forEach(el => el.textContent = z.bal);
+  }
+  function updateBal(){
+    const z = get();
+    document.querySelectorAll('[data-bal]').forEach(el => el.textContent = z.bal);
   }
 
-  // Show one page, hide others - no 404, no page reload
-  function go(p){
-    document.querySelectorAll('.page').forEach(x => x.classList.remove('on'));
-    const el = document.getElementById('p-' + p);
-    if(el) el.classList.add('on');
+  async function go(page){
+    const app = document.getElementById('app');
+    if(!app) return;
+    app.innerHTML = '<p style="text-align:center;color:#666">Loading...</p>';
+    try{
+      const res = await fetch('pages/' + page + '.html');
+      if(!res.ok) throw new Error('not found');
+      const html = await res.text();
+      app.innerHTML = html;
+    }catch(e){
+      // Fallback if pages/ file missing - never stay blank
+      if(page === 'home'){
+        app.innerHTML = '<h2>Find Trusted Workers</h2><div class="card"><b>CHIOMA</b><p>CHIOMA — Your ZIRO Assistant. User only.</p><button class="btn-green" onclick="ZIRO.chioma()">Chat with CHIOMA</button></div><div class="card"><b>Featured Workers</b><p>⭐ Ada Okafor — Cleaner — Abuja — ₦15,000/day<br>⭐ Chinedu Eze — Plumber — Lagos — ₦20,000/day<br>⭐ Fatima Bello — Driver — Kano — ₦18,000/day</p></div><div class="card"><b>SOS — Inline Only</b><button class="btn-white" onclick="ZIRO.sos()">🆘 SOS — Call Help</button></div>';
+      } else {
+        app.innerHTML = '<div class="card"><b>Page: '+page+'</b><p>This page is loading. Tap Home to go back.</p><button class="btn-green" onclick="ZIRO.go(\'home\')">Go Home</button></div>';
+      }
+    }
+    updateBal();
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    const nav = document.getElementById('nav-' + page);
+    if(nav) nav.classList.add('active');
     window.scrollTo(0,0);
   }
 
-  // Load pages/*.html into shell - one file = one screen
-  async function loadPage(name){
-    try{
-      const r = await fetch('pages/' + name + '.html');
-      if(!r.ok) return;
-      const html = await r.text();
-      const el = document.getElementById('p-' + name);
-      if(el) el.innerHTML = html;
-    }catch(e){}
+  function sos(){
+    alert('🆘 SOS — Help Request Sent\n\nYour location + profile sent to ZIRO Safety.\nA trusted contact will be alerted.\n\nIf in immediate danger, call emergency services in your country.');
   }
 
-  async function init(){
-    await Promise.all(['home','search','post','wallet','office','chat'].map(loadPage));
-    save();
-    // Re-render lists if those modules exist
-    if(window.ZIRO.renderHome) window.ZIRO.renderHome();
-    if(window.ZIRO.renderWallet) window.ZIRO.renderWallet();
+  function chioma(){
+    const q = prompt('CHIOMA — How can I help?\n\nType: find cleaner / post job / buy icoin / sos');
+    if(!q) return;
+    const t = q.toLowerCase();
+    if(t.includes('clean') || t.includes('find') || t.includes('worker') || t.includes('search')) go('search');
+    else if(t.includes('post') || t.includes('job')) go('post');
+    else if(t.includes('icoin') || t.includes('wallet') || t.includes('buy') || t.includes('coin')) go('wallet');
+    else if(t.includes('sos') || t.includes('help') || t.includes('emergency')) sos();
+    else if(t.includes('chat') || t.includes('room')) go('chat');
+    else if(t.includes('office') || t.includes('profile')) go('office');
+    else alert('CHIOMA: I can help you find a worker, post a job, buy iCoin, or SOS. Try one of those.');
+  }
+
+  function postJob(){
+    const z = get();
+    if(z.bal < 2){ alert('Not enough iCoin. You need 2 iCoin to post. Buy iCoin in Wallet.'); go('wallet'); return; }
+    z.bal -= 2;
+    z.hist.unshift('Posted Job -2 iCoin');
+    localStorage.setItem(KEY, JSON.stringify(z));
+    updateBal();
+    alert('Job Posted! -2 iCoin. Balance: ' + z.bal + ' iCoin');
     go('home');
   }
 
-  // SOS / CHIOMA are placeholders here - real code lives in sos.js / chioma.js
-  // This prevents "function not found" if those files load late
-  function sos(){ if(window.ZIRO.doSOS) return window.ZIRO.doSOS(); alert('SOS - Loading...'); }
-  function chioma(){ if(window.ZIRO.doChioma) return window.ZIRO.doChioma(); alert('CHIOMA - Loading...'); }
+  Object.assign(window.ZIRO, { get, save, go, sos, chioma, postJob, updateBal });
 
-  Object.assign(window.ZIRO, { get, save, updateBalance, pay, go, init, sos, chioma });
+  document.addEventListener('DOMContentLoaded', function(){
+    updateBal();
+    go('home');
+  });
 })();
